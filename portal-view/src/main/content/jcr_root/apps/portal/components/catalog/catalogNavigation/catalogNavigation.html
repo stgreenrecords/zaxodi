@@ -2,7 +2,7 @@
 <div id="catalogNavigation">
     <nav class="catalog_navigation">
         <sly data-sly-list="${catalogNavigationModel.catalogMap}">
-            <div class="mainMenuItem"><a href="${entrySuperCategory.key.path}.html">${entrySuperCategory.key.title}</a>
+            <div class="mainMenuItem"><a href="${item.pagePath}.html">${item.pageTitle}</a>
                 <div class="subMenu">
                         <c:forEach var="entrySubcategory" items="${entrySuperCategory.value}">
                             <div class="sub_nav_block">

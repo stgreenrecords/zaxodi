@@ -67,4 +67,12 @@ public class BaseModel{
        return resourceResolver.getResource(Constants.CATALOG_ROOT_PAGE_PATH).adaptTo(Page.class);
     }
 
+    public String getPagePath(){
+        return getOwnPage().getPath();
+    }
+
+    public String getPageTitle(){
+        return getOwnPage().getPageTitle();
+    }
+
 }
