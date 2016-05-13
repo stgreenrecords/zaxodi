@@ -6,5 +6,7 @@ public class Constants {
 
     public static final String RESOURCE_TYPE__NAVIGATION = "portal/components/structure/topnav";
 
+    public static final String CATALOG_ROOT_PAGE_PATH = "/content/portal/catalog";
+
 
 }

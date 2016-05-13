@@ -70,12 +70,12 @@
                                 </embedded>
                                 <embedded>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>portal-ui-beans</artifactId>
+                                    <artifactId>portal-models</artifactId>
                                     <filter>true</filter>
                                 </embedded>
                                 <embedded>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>portal-taglib</artifactId>
+                                    <artifactId>portal-cms</artifactId>
                                     <filter>true</filter>
                                 </embedded>
                             </embeddeds>
@@ -87,17 +87,7 @@
                                 </subPackage>
                                 <subPackage>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>portal-config</artifactId>
-                                    <filter>true</filter>
-                                </subPackage>
-                                <subPackage>
-                                    <groupId>com.cqblueprints.taglib</groupId>
-                                    <artifactId>cqblueprints-taglib-all</artifactId>
-                                    <filter>true</filter>
-                                </subPackage>
-                                <subPackage>
-                                    <groupId>com.adobe.acs</groupId>
-                                    <artifactId>acs-aem-commons-content</artifactId>
+                                    <artifactId>portal-content</artifactId>
                                     <filter>true</filter>
                                 </subPackage>
                             </subPackages>

@@ -14,22 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Model(adaptables=Resource.class)
-public class NavigationModel{
-
-    @Self
-    protected Resource selfResource;
-
-    private Page rootContentPage;
-
-    @PostConstruct
-    protected void init() {
-        Page currentPage = selfResource.getParent().getParent().adaptTo(Page.class);
-        rootContentPage = currentPage.getAbsoluteParent(1);
-    }
-
-    public String getHomePath(){
-        return rootContentPage.getPath();
-    }
+public class NavigationModel extends BaseModel{
 
     public String getImagePath(){
         Iterator<Resource> resourceIterator = rootContentPage.getContentResource().getChildren().iterator();
@@ -41,9 +26,6 @@ public class NavigationModel{
         }
         return null;
     }
-
-    @Inject
-    protected ResourceResolver resourceResolver;
 
     public List<Page> getChildPages(){
         List<Page> pageList = new ArrayList();

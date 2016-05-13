@@ -40,7 +40,8 @@ public class PortalReplicationServlet extends SlingAllMethodsServlet {
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException, ServletException {
         cqSession = request.getResourceResolver().adaptTo(Session.class);
         try {
-            applyRecursiveReplication("/content/potal");
+            loginInCustomRepository();
+            applyRecursiveReplication("/content/portal/catalog");
         } catch (RepositoryException e) {
             throw (new UnhandledException("something exceptional occurred", e));
         } catch (NotBoundException e) {
@@ -56,9 +57,14 @@ public class PortalReplicationServlet extends SlingAllMethodsServlet {
         cqSession = cqRepository.login(new SimpleCredentials("admin", "admin".toCharArray()));
     }
 
+    private static void loginInCustomRepository() throws RepositoryException {
+        customRepository = JcrUtils.getRepository("http://localhost:8080/server");
+        customSession = customRepository.login(new SimpleCredentials("admin", "admin".toCharArray()));
+    }
+
     private static void applyRecursiveReplication(String path) throws RepositoryException, RemoteException, NotBoundException, MalformedURLException {
-        Node rootPortalNode = cqSession.getNode(path);
-        replicateRecursiveNode(rootPortalNode, customSession.getNode(path.substring(0, path.lastIndexOf("/"))));
+        Node rootPortalNode = customSession.getNode(path);
+        replicateRecursiveNode(rootPortalNode, cqSession.getNode(path.substring(0, path.lastIndexOf("/"))));
     }
 
     private static void replicateRecursiveNode(Node nodeForReplication, Node parentNode) throws RepositoryException {

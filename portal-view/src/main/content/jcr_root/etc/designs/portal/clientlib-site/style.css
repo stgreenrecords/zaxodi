@@ -1,3 +1,8 @@
+@font-face {
+    font-family: UniSansHeavy;
+    src: url("/etc/designs/portal/clientlib-site/fonts/Uni Sans Heavy.otf");
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -14,8 +19,8 @@ footer {
 }
 
 footer p{
+    font-family: UniSansHeavy;
     text-align: center;
     color: white;
-    font-family: initial;
     font-size: 20px;
 }
