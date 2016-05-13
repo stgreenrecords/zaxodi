@@ -1,0 +1,94 @@
+/***************** FONTS ********************/
+@font-face {
+    font-family: UniSansHeavy;
+    src: url("/etc/designs/portal/clientlib-site/fonts/Uni Sans Heavy.otf");
+}
+
+/***************** NAVIGATION ********************/
+nav {
+    border-bottom: 1px solid #e6e6e6;
+}
+nav ul{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: white;
+    list-style: none;
+}
+nav ul,
+nav li{
+    flex: 1;
+}
+
+nav li.logo_nav {
+    height: 67px;
+
+}
+nav li.logo_nav a{
+    padding:0px;
+}
+
+nav li:last-child{border-bottom: none;}
+nav a{
+    font-family: 'UniSansHeavy';
+    text-decoration: none;
+    color: rgb(0, 164, 183);
+    display: block;
+    font-size: 20px;
+    padding-top:7px;
+}
+nav a:hover{
+    color: #6D5959;
+}
+nav li{
+    position: relative;
+    line-height: 50px;
+    color: rgb(0, 164, 183);
+    text-align: center;
+}
+nav input,
+nav label{
+    display: none;
+    width: 36px;
+    height: 36px;
+    background: #555;
+    color: white;
+    text-align: center;
+    line-height: 36px;
+    font-size: 1.6rem;
+    border-radius: 4px;
+}
+nav label{position: absolute; top: 8px; right: 8px; transition: .4s;}
+nav label:hover{cursor:pointer;}
+nav label:before{
+    font-family: FontAwesome;
+    font-size: 24px;
+    content: "\f0c9";
+    text-align: center;
+}
+
+/*************** MEDIA QUERIES *******************/
+@media only screen and (max-width: 1080px){
+    nav ul{
+        transform: translateY(0);
+        box-shadow: 0 0 5px rgba(0,0,0, .7);
+        transition: all .5s;
+    }
+    nav li{
+        flex: none;
+        width: 100%;
+        border-bottom: solid 1px #777;
+    }
+    nav input[type="checkbox"]:checked + ul{
+        transform: translateY(-100%);
+        width: 100%;
+        background: #999;
+        transition: all .5s;
+    }
+    nav label{display: block;}
+    nav input[type="checkbox"]:checked + ul li:nth-child(1){
+        background: #777;
+        color: #fff;
+    }
+}

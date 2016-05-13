@@ -1,0 +1,13 @@
+<sly data-sly-use.navigationModel="portal.models.pages.NavigationModel">
+    <nav id="cd-main-nav-wrapper">
+        <input type="checkbox" id="css-toggle-menu" name="css-toggle-menu">
+        <ul class="main">
+            <li class="logo_nav"><a href="${navigationModel.homePath}.html">
+                <img src="${navigationModel.imagePath}" alt="Logo" width="105" height="67"></a></li>
+            <sly data-sly-list="${navigationModel.childPages}">
+                <li class="main_nav_item"><a href="${item.path}.html">${item.title}</a></li>
+            </sly>
+        </ul>
+        <label for="css-toggle-menu" id="css-toggle-menu"></label>
+    </nav>
+</sly>
