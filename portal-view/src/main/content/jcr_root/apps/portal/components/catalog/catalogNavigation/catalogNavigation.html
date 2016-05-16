@@ -1,28 +1,35 @@
 <sly data-sly-use.catalogNavigationModel="portal.models.pages.CatalogNavigationModel">
-<div id="catalogNavigation">
-    <nav class="catalog_navigation">
-        <sly data-sly-list="${catalogNavigationModel.catalogMap}">
-            <div class="mainMenuItem"><a href="${item.pagePath}.html">${item.pageTitle}</a>
-                <div class="subMenu">
-                        <c:forEach var="entrySubcategory" items="${entrySuperCategory.value}">
-                            <div class="sub_nav_block">
-                                <span class="subCategoryTitle_span">${entrySubcategory.key}</span>
-                                <table class="innerSubcategoryNavigation">
-                                    <c:forEach var="innerPage" items="${entrySubcategory.value}">
-                                        <tr>
-                                            <a href="${innerPage.path}.html">${innerPage.title}</a>
-                                        </tr>
-                                    </c:forEach>
-                                </table>
-
-                            </div>
-                        </c:forEach>
-                </div>
-            </div>
-        </sly>
-    </nav>
-</div>
+    <aside id="catalog_navigation_block">
+        <nav class="catalog_super_categories_nav">
+            <ul class="catalog_super_categories_nav_list">
+                <sly data-sly-list.supercategory="${catalogNavigationModel.catalogMap}">
+                    <li class="catalog_super_categories_nav_item">
+                        <a href="${supercategory.pagePath}.html" class="catalog_super_categories_nav_item_link">${supercategory.pageTitle}</a>
+                        <ul class="catalog_sub_categories_list">
+                            <sly data-sly-list.subcategoryMap="${supercategory.catalogCategoryPageModelMap.entrySet}">
+                                <li class="catalog_sub_categories_topic">
+                                    <a class="subCategoryTitle_span">${subcategoryMap.key}</a>
+                                    <ul class="catalog_sub_categories_inner_list">
+                                        <sly data-sly-list.subercategoryitem="${subcategoryMap.value}">
+                                            <li class="catalog_sub_categories_inner_item">
+                                                <a href="${subercategoryitem.pagePath}.html">${subercategoryitem.pageTitle}</a>
+                                            </li>
+                                        </sly>
+                                    </ul>
+                                </li>
+                            </sly>
+                        </ul>
+                    </li>
+                </sly>
+            </ul>
+        </nav>
+    </aside>
 </sly>
+
+
+
+
+
 
 
 

@@ -4,4 +4,4 @@
           jcr:primaryType="cq:Component"
           jcr:title="Catalog Navigation"
           sling:resourceSuperType="cq:Component"
-          componentGroup="portal-components"/>
+          componentGroup=".hidden"/>

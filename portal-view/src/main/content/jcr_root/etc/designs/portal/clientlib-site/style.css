@@ -3,14 +3,27 @@
     src: url("/etc/designs/portal/clientlib-site/fonts/Uni Sans Heavy.otf");
 }
 
+@font-face {
+    font-family: TabarraBlack;
+    src: url("/etc/designs/portal/clientlib-site/fonts/Tabarra Black.otf");
+}
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
+ul{
+    list-style: none;
+}
+
+ul li a {
+    text-decoration: none;
+}
+
 footer {
-    position: absolute;
+    position: inherit;
     left: 0;
     bottom: 0;
     width: 100%;

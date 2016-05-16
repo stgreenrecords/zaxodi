@@ -9,6 +9,7 @@
     <header class="page__header">
         <sly data-sly-resource="topnav"></sly>
     </header>
+    <sly data-sly-resource="${ @path='catalogNavigation',resourceType='portal/components/catalog/catalogNavigation'}"></sly>
     <sly data-sly-include="content.html" data-sly-unwrap/>
     <footer class="page__footer">
         <p class="page__copyright">${"&copy; {0} zaxodi.by Все права защищены." @ i18n, format=main.year,

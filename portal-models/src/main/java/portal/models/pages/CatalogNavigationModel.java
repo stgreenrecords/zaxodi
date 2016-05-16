@@ -13,7 +13,6 @@ public class CatalogNavigationModel extends BaseModel{
 
     List<CatalogSuperCategoriesPageModel> catalogSuperCategoriesPageModelList = new ArrayList();
 
-
     public List<CatalogSuperCategoriesPageModel> getCatalogMap(){
        Iterator<Page> pageIterator = getCatalogRootPage().listChildren();
         while (pageIterator.hasNext()){

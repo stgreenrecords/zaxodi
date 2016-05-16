@@ -1,0 +1,18 @@
+
+.catalog_super_categories_nav_item_link {
+    font-family: sans-serif;
+    font-size: 20px;
+    color: #6F6E6E;
+    font-weight: 700;
+}
+
+.catalog_super_categories_nav_item_link:hover {
+    color: #443E3E;
+}
+
+.catalog_sub_categories_list{
+    margin-left: 220px;
+    position: absolute;
+    display: inline-flex;
+    visibility: hidden;
+}
