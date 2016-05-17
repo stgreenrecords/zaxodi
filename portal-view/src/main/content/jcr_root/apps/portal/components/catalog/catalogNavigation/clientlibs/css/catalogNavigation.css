@@ -1,7 +1,7 @@
 
 .catalog_super_categories_nav_item_link {
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 14px;
     color: #6F6E6E;
     font-weight: 700;
 }
@@ -10,9 +10,50 @@
     color: #443E3E;
 }
 
+.catalog_super_categories_nav_list{
+    width: 200px;
+}
+
+.catalog_super_categories_nav_list .catalog_sub_categories_list{
+    margin: 0;
+    padding: 0;
+}
+
+
+.catalog_super_categories_nav_list li.catalog_sub_categories_topic{
+    border-right: 1px solid #e6e6e6;
+}
+
 .catalog_sub_categories_list{
-    margin-left: 220px;
     position: absolute;
+    top:84px;
+    left:200px;
+    z-index:10;
+    width: 100%;
+    display:none;
+
+}
+
+.catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
     display: inline-flex;
-    visibility: hidden;
+    width: 85%;
+
+}
+
+.catalog_sub_categories_inner_list{
+    padding: 0;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.subCategoryTitle_span{
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #8A8989;
+    text-align: center;
+}
+
+.catalog_sub_categories_inner_item a{
+    color: rgb(121, 130, 5);
+    font-size: 13px;
 }
