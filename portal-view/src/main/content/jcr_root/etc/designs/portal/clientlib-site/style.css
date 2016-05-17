@@ -12,6 +12,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 ul{
@@ -23,6 +24,7 @@ ul li a {
 }
 
 footer {
+    clear:both;
     position: absolute;
     left: 0;
     bottom: 0;

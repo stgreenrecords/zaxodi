@@ -1,4 +1,5 @@
 script.js
 
-#base=external
+#base=external/js
 jquery-2.2.3.min.js
+bootstrap.js
