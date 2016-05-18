@@ -1,45 +1,672 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
           jcr:primaryType="cq:Dialog"
-          activeTab="{Long}0"
-          title="Multi Image"
-          xtype="tabpanel">
-    <items jcr:primaryType="cq:WidgetCollection">
-        <basic
-                jcr:primaryType="cq:Widget"
-                title="Images"
-                xtype="panel">
-            <items jcr:primaryType="cq:WidgetCollection">
-                <images
-                        jcr:primaryType="cq:Widget"
-                        border="false"
-                        hideLabel="true"
-                        name="./images"
-                        xtype="imagemultifield">
-                    <fieldConfig
+          xtype="dialog">
+    <items
+            jcr:primaryType="cq:Widget"
+            xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <slide1
+                    jcr:primaryType="cq:Panel"
+                    title="slide1">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
                             jcr:primaryType="cq:Widget"
-                            border="false"
-                            hideLabel="true"
-                            layout="form"
-                            padding="10px 0 0 100px"
-                            xtype="imagemultifieldpanel">
-                        <items jcr:primaryType="cq:WidgetCollection">
-                            <image
-                                    jcr:primaryType="cq:Widget"
-                                    cropParameter="./imageCrop"
-                                    ddGroups="[media]"
-                                    fileNameParameter="./imageName"
-                                    fileReferenceParameter="./imageReference"
-                                    height="250"
-                                    mapParameter="./imageMap"
-                                    name="./image"
-                                    rotateParameter="./imageRotate"
-                                    sizeLimit="100"
-                                    xtype="imagemultifieldsmartimage"/>
-                        </items>
-                    </fieldConfig>
-                </images>
-            </items>
-        </basic>
+                            fieldLabel="Путь к картинке"
+                            name="./slide1/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide1/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide1/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide1/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide1/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide1>
+            <slide2
+                    jcr:primaryType="cq:Panel"
+                    title="slide2">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide2/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide2/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide2/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide2/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide2/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide2>
+            <slide3
+                    jcr:primaryType="cq:Panel"
+                    title="slide3">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide3/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide3/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide3/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide3/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide3/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide3>
+            <slide4
+                    jcr:primaryType="cq:Panel"
+                    title="slide4">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide4/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide4/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide4/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide4/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide4/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide4>
+            <slide5
+                    jcr:primaryType="cq:Panel"
+                    title="slide5">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide5/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide5/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide5/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide5/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide5/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide5>
+            <slide6
+                    jcr:primaryType="cq:Panel"
+                    title="slide6">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide6/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide6/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide6/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide6/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide6/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide6>
+            <slide7
+                    jcr:primaryType="cq:Panel"
+                    title="slide7">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide7/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide7/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide7/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide7/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide7/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide7>
+            <slide8
+                    jcr:primaryType="cq:Panel"
+                    title="slide8">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide8/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide8/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide8/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide8/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide8/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide8>
+            <slide9
+                    jcr:primaryType="cq:Panel"
+                    title="slide9">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide9/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide9/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide9/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide9/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide9/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide9>
+            <slide10
+                    jcr:primaryType="cq:Panel"
+                    title="slide10">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pathToImage
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к картинке"
+                            name="./slide10/fileReference"
+                            rootPath="/content/dam/portal"
+                            xtype="pathfield"/>
+                    <checkButton
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Добавить кнопку"
+                            name="./slide10/buttonPresent"
+                            xtype="checkbox"/>
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Надпись на кнопке"
+                            name="./slide10/buttonTitle"
+                            xtype="textfield"/>
+                    <pathToAction
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к событию"
+                            name="./slide10/pathToAction"
+                            rootPath="/content/portal"
+                            xtype="pathfield"/>
+                    <align
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="center"
+                            fieldLabel="Расположение кнопки"
+                            name="./slide10/align"
+                            type="select"
+                            xtype="selection">
+                        <options jcr:primaryType="cq:WidgetCollection">
+                            <center
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Center"
+                                    value="center"/>
+                            <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                            <left-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-bottom"
+                                    value="left-bottom"/>
+                            <left-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left-top"
+                                    value="left-top"/>
+                            <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                            <right-bottom
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-bottom"
+                                    value="right-bottom"/>
+                            <right-top
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right-top"
+                                    value="right-top"/>
+                        </options>
+                    </align>
+                </items>
+            </slide10>
+        </items>
     </items>
 </jcr:root>

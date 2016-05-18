@@ -1,5 +1,64 @@
-#myCarousel{
+#portalCarousel{
     float: left;
     margin-left: 50px;
     margin-top: 20px;
 }
+
+#portalCarousel .left-bottom {
+    position: absolute;
+    padding-left: 120px;
+    bottom: 60px;
+
+}
+
+#portalCarousel .left-top {
+    position: absolute;
+    padding-left: 120px;
+    top: 60px;
+
+}
+
+#portalCarousel .right-top {
+    position: absolute;
+    padding-right: 120px;
+    top: 60px;
+    right: 0px;
+}
+
+#portalCarousel .right-bottom {
+    position: absolute;
+    padding-right: 120px;
+    bottom: 60px;
+    right: 0px;
+    background: rgba(105, 255, 67, 0.76);
+}
+
+#portalCarousel .carousel_item_button {
+    background-color: #a3c644;
+    height: 40px;
+}
+
+#portalCarousel .carousel_item_button .left-bottom {
+
+}
+
+#portalCarousel .carousel_item_button .carousel_item_button_link {
+    font-size: 20px;
+    font-family: open-sans, sans-serif;
+    font-weight: 700;
+    color: #675F5F;
+    margin-left: 40px;
+    margin-right: 20px;
+    top:5px;
+}
+
+#portalCarousel .carousel_item_button_link {
+    padding-left: 20px;
+    position: relative;
+}
+
+#portalCarousel .carousel_item_button_link:hover {
+    text-decoration: none;
+}
+
+
