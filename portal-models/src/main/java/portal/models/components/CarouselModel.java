@@ -1,8 +1,9 @@
-package portal.models.pages;
+package portal.models.components;
 
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
+import portal.models.BaseModel;
 import portal.models.Constants;
 import portal.models.beans.SlideBean;
 

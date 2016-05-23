@@ -86,3 +86,11 @@ nav#cd-main-nav-wrapper label:before{
         color: #fff;
     }
 }
+
+.main_nav_item a{
+    border-top: 10px solid #00A4B7;
+}
+
+.main_nav_item a.is_active_page{
+    border-bottom: 10px solid #00A4B7;
+}

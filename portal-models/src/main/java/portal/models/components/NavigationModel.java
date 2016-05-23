@@ -1,20 +1,17 @@
-package portal.models.pages;
+package portal.models.components;
 
 import com.day.cq.wcm.api.Page;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.Self;
+import portal.models.BaseModel;
 import portal.models.Constants;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Model(adaptables=Resource.class)
-public class NavigationModel extends BaseModel{
+public class NavigationModel extends BaseModel {
 
     public String getImagePath(){
         Iterator<Resource> resourceIterator = rootContentPage.getContentResource().getChildren().iterator();
@@ -38,4 +35,6 @@ public class NavigationModel extends BaseModel{
         }
         return pageList;
     }
+
+
 }

@@ -3,12 +3,13 @@ package portal.models.pages;
 import com.day.cq.wcm.api.Page;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import portal.models.BaseModel;
 import portal.models.Constants;
 
 import java.util.*;
 
 @Model(adaptables=Resource.class)
-public class CatalogSuperCategoriesPageModel extends BaseModel{
+public class CatalogSuperCategoriesPageModel extends BaseModel {
 
     Map<String,List<CatalogCategoryPageModel>> catalogCategoryPageModelMap = new LinkedHashMap();
 

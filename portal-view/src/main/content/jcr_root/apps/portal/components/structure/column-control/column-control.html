@@ -1,0 +1,10 @@
+<sly data-sly-use.columns="portal.models.components.ColumnModel">
+    <sly data-sly-test="${!properties.columns}">
+        <h3>Please add Columns</h3>>
+    </sly>
+    <div class="column_control_block" data-sly-list="${properties.columns}">
+        <div class="item_column" style="width:${item @ context='styleString'}%">
+            <div data-sly-resource="${ @path=columns.uniqueName ,resourceType='wcm/foundation/components/parsys'}"></div>
+        </div>
+    </div>
+</sly>

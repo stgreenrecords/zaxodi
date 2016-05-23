@@ -10,13 +10,18 @@
 
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 ul{
     list-style: none;
+}
+
+.page__main{
+    height: 100%;
+    width: 100%;
 }
 
 ul li a {
@@ -24,13 +29,13 @@ ul li a {
 }
 
 footer {
-    clear:both;
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     height: 80px;
     background: #C14646;
+    padding-top:25px;
 }
 
 footer p{
@@ -38,5 +43,4 @@ footer p{
     text-align: center;
     color: white;
     font-size: 20px;
-    padding-top: 25px;
 }

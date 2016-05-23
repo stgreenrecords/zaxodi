@@ -1,0 +1,7 @@
+.column_control_block{
+    font-size: 0;
+}
+
+.column_control_block .item_column{
+    display:inline-block;
+}
