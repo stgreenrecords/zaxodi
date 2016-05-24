@@ -8,18 +8,15 @@
     <jcr:content
         jcr:primaryType="cq:PageContent"
         sling:resourceType="portal/pages/basepage">
-        <logo
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="portal/components/structure/logo"/>
-        <title
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="portal/components/content/title"/>
         <topnav
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="portal/components/structure/topnav"/>
-        <par
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="wcm/foundation/components/parsys">
-        </par>
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="portal/components/structure/topnav"/>
+        <parsys
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/foundation/components/parsys">
+        </parsys>
+        <footer
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="portal/components/structure/footer"/>
     </jcr:content>
 </jcr:root>

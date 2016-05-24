@@ -5,18 +5,13 @@
     <sly data-sly-include="partials/headlibs.html" data-sly-unwrap/>
 </head>
 <body class="page ${currentPage.template.name}">
-<div class="page__main" data-sly-use.main="partials/main.js">
+<div class="page__main">
     <header class="page__header">
         <sly data-sly-resource="topnav"></sly>
     </header>
-    <sly data-sly-resource="${ @path='catalogNavigation',resourceType='portal/components/catalog/catalogNavigation'}"></sly>
     <sly data-sly-include="content.html" data-sly-unwrap/>
-    <footer class="page__footer">
-        <p class="page__copyright">${"&copy; {0} zaxodi.by Все права защищены." @ i18n, format=main.year,
-            context='html'}</p>
-    </footer>
+    <sly data-sly-resource="footer"></sly>
 </div>
-
 <sly data-sly-include="partials/footlibs.html" data-sly-unwrap/>
 </body>
 </html>

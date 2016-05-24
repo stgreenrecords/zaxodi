@@ -78,7 +78,8 @@ public class BaseModel {
     }
 
     public Page getCatalogRootPage() {
-        return resourceResolver.getResource(Constants.CATALOG_ROOT_PAGE_PATH).adaptTo(Page.class);
+        Resource catalogRootPageResource = resourceResolver.getResource(Constants.CATALOG_ROOT_PAGE_PATH);
+        return catalogRootPageResource == null ? null : catalogRootPageResource.adaptTo(Page.class);
     }
 
     public String getPagePath() {

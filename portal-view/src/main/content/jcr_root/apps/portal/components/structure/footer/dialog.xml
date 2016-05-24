@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:Dialog"
+          title="Edit Footer"
+          xtype="dialog">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <panel
+                jcr:primaryType="cq:Widget"
+                xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <text
+                        jcr:primaryType="cq:Widget"
+                        hideLabel="{Boolean}true"
+                        name="./text"
+                        xtype="richtext"/>
+                <isRichTextFlag
+                        jcr:primaryType="cq:Widget"
+                        ignoreData="{Boolean}true"
+                        name="./textIsRich"
+                        value="true"
+                        xtype="hidden"/>
+            </items>
+        </panel>
+    </items>
+</jcr:root>
