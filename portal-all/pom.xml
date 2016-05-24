@@ -85,11 +85,6 @@
                                     <artifactId>portal-view</artifactId>
                                     <filter>true</filter>
                                 </subPackage>
-                                <subPackage>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>portal-content</artifactId>
-                                    <filter>true</filter>
-                                </subPackage>
                             </subPackages>
                         </configuration>
                     </execution>

@@ -25,15 +25,15 @@
 
         <cq.author.host>localhost</cq.author.host>
         <cq.author.port>4502</cq.author.port>
-        <cq.author2.host>author-portal.gomel.epam.com</cq.author2.host>
+        <cq.author2.host>localhost</cq.author2.host>
         <cq.author2.port>4502</cq.author2.port>
-        <cq.author3.host>192.168.0.104</cq.author3.host>
+        <cq.author3.host>localhost</cq.author3.host>
         <cq.author3.port>4502</cq.author3.port>
         <cq.publish.host>localhost</cq.publish.host>
         <cq.publish.port>4503</cq.publish.port>
-        <cq.publish2.host>publish-portal.gomel.epam.com</cq.publish2.host>
+        <cq.publish2.host>localhost</cq.publish2.host>
         <cq.publish2.port>80</cq.publish2.port>
-        <cq.publish3.host>192.168.0.104</cq.publish3.host>
+        <cq.publish3.host>localhost</cq.publish3.host>
         <cq.publish3.port>4503</cq.publish3.port>
         <cq.user>admin</cq.user>
         <cq.password>admin</cq.password>
@@ -45,7 +45,6 @@
         <module>portal-cms</module>
         <module>portal-models</module>
         <module>portal-view</module>
-        <module>portal-content</module>
         <module>portal-all</module>
     </modules>
 
