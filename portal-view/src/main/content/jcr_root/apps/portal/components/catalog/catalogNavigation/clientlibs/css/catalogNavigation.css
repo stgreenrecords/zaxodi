@@ -1,5 +1,5 @@
-#catalog_navigation_block nav{
-    display: inline-block;
+#catalog_navigation_block{
+    float:left;
     width: 191px;
 }
 

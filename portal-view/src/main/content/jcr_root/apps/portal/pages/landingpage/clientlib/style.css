@@ -1,0 +1,4 @@
+.column_control_block{
+    display:inline-flex;
+    width: calc(100% - 191px);
+}
