@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:Dialog"
+          activeTab="{Long}0"
+          height="500"
+          title="Promo Product"
+          xtype="dialog">
+    <items jcr:primaryType="cq:TabPanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <image1
+                    jcr:primaryType="cq:Panel"
+                    title="Image 1">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <image
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="true"
+                            allowUpload="{Boolean}false"
+                            border="{Boolean}true"
+                            cropParameter=""
+                            ddGroups="[media]"
+                            disableInfo="false"
+                            disableZoom="true"
+                            fileNameParameter="./image1/fileName"
+                            fileReferenceParameter="./image1/fileReference"
+                            height="240"
+                            name="./image1/file"
+                            requestSuffix="/image1.img.png"
+                            sizeLimit="100"
+                            uploadUrl="/tmp/upload/*"
+                            width="720"
+                            xtype="html5smartimage">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <resType
+                                    jcr:primaryType="cq:Widget"
+                                    name="./image1/sling:resourceType"
+                                    value="foundation/components/image"
+                                    xtype="hidden"/>
+                        </items>
+                    </image>
+                    <titleTop
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Верхний текст"
+                            name="./image1/titleTop"
+                            xtype="textfield"/>
+                    <titleBottom
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Нижний текст"
+                            name="./image1/titleBottom"
+                            xtype="textfield"/>
+                    <path
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к продукту"
+                            name="./image1/path"
+                            rootPath="/content/portal/catalog"
+                            xtype="pathfield"/>
+                </items>
+            </image1>
+            <image2
+                    jcr:primaryType="cq:Panel"
+                    title="Image 2">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <image
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="true"
+                            allowUpload="{Boolean}false"
+                            border="{Boolean}true"
+                            cropParameter=""
+                            ddGroups="[media]"
+                            disableInfo="false"
+                            disableZoom="true"
+                            fileNameParameter="./image2/fileName"
+                            fileReferenceParameter="./image2/fileReference"
+                            height="240"
+                            name="./image2/file"
+                            requestSuffix="/image2.img.png"
+                            sizeLimit="100"
+                            uploadUrl="/tmp/upload/*"
+                            width="720"
+                            xtype="html5smartimage">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <resType
+                                    jcr:primaryType="cq:Widget"
+                                    name="./image2/sling:resourceType"
+                                    value="foundation/components/image"
+                                    xtype="hidden"/>
+                        </items>
+                    </image>
+                    <titleTop
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Верхний текст"
+                            name="./image2/titleTop"
+                            xtype="textfield"/>
+                    <titleBottom
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Нижний текст"
+                            name="./image2/titleBottom"
+                            xtype="textfield"/>
+                    <path
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к продукту"
+                            name="./image2/path"
+                            rootPath="/content/portal/catalog"
+                            xtype="pathfield"/>
+                </items>
+            </image2>
+            <image3
+                    jcr:primaryType="cq:Panel"
+                    title="Image 3">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <image
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="true"
+                            allowUpload="{Boolean}false"
+                            border="{Boolean}true"
+                            cropParameter=""
+                            ddGroups="[media]"
+                            disableInfo="false"
+                            disableZoom="true"
+                            fileNameParameter="./image3/fileName"
+                            fileReferenceParameter="./image3/fileReference"
+                            height="240"
+                            name="./image3/file"
+                            requestSuffix="/image3.img.png"
+                            sizeLimit="100"
+                            uploadUrl="/tmp/upload/*"
+                            width="720"
+                            xtype="html5smartimage">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <resType
+                                    jcr:primaryType="cq:Widget"
+                                    name="./image3/sling:resourceType"
+                                    value="foundation/components/image"
+                                    xtype="hidden"/>
+                        </items>
+                    </image>
+                    <titleTop
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Верхний текст"
+                            name="./image3/titleTop"
+                            xtype="textfield"/>
+                    <titleBottom
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Нижний текст"
+                            name="./image3/titleBottom"
+                            xtype="textfield"/>
+                    <path
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к продукту"
+                            name="./image3/path"
+                            rootPath="/content/portal/catalog"
+                            xtype="pathfield"/>
+                </items>
+            </image3>
+            <image4
+                    jcr:primaryType="cq:Panel"
+                    title="Image 4">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <image
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="true"
+                            allowUpload="{Boolean}false"
+                            border="{Boolean}true"
+                            cropParameter=""
+                            ddGroups="[media]"
+                            disableInfo="false"
+                            disableZoom="true"
+                            fileNameParameter="./image4/fileName"
+                            fileReferenceParameter="./image4/fileReference"
+                            height="240"
+                            name="./image4/file"
+                            requestSuffix="/image4.img.png"
+                            sizeLimit="100"
+                            uploadUrl="/tmp/upload/*"
+                            width="720"
+                            xtype="html5smartimage">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <resType
+                                    jcr:primaryType="cq:Widget"
+                                    name="./image4/sling:resourceType"
+                                    value="foundation/components/image"
+                                    xtype="hidden"/>
+                        </items>
+                    </image>
+                    <titleTop
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Верхний текст"
+                            name="./image4/titleTop"
+                            xtype="textfield"/>
+                    <titleBottom
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Нижний текст"
+                            name="./image4/titleBottom"
+                            xtype="textfield"/>
+                    <path
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Путь к продукту"
+                            name="./image4/path"
+                            rootPath="/content/portal/catalog"
+                            xtype="pathfield"/>
+                </items>
+            </image4>
+        </items>
+    </items>
+</jcr:root>

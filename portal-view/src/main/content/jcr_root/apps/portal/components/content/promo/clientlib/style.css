@@ -1,0 +1,19 @@
+.promoProductItem{
+    display: inline-block;
+    position: relative;
+    padding: 6px;
+}
+
+.promoProductItem img{
+    width: 460px;
+}
+
+.promoProductItem h3{
+    position: absolute;
+    text-decoration: none;
+    color: white;
+    font-family: fantasy;
+    left: 30%;
+    top: 30%;
+    font-size: 30px;
+}

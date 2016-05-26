@@ -1,0 +1,21 @@
+<sly data-sly-use.promo="portal.models.components.PromoModel">
+    <div class="promoProduct">
+        <sly data-sly-test="${promo.promoBeanMap.isEmpty}">
+            <h3>Please edit dialog</h3>>
+        </sly>
+        <sly data-sly-list.promoMap="${promo.promoBeanMap.entrySet}">
+            <div class="promoProductItem">
+                <a href="${promoMap.value.path}.html" class="promoProductTitle">
+                    <div class="titleTopWrapper">
+                        <h3 class="promoProductItemTitile">${promoMap.value.titleTop}</h3>
+                    </div>
+                    <img src="${promoMap.key}" class="promoProductIMG"/>
+
+                    <div class="titleBottomWrapper">
+                        <span class="promoProductItemTitile">${promoMap.value.titleBottom}</span>
+                    </div>
+                </a>
+            </div>
+        </sly>
+    </div>
+</sly>

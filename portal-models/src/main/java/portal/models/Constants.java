@@ -10,6 +10,12 @@ public class Constants {
 
     public static final String COMPONENT_SLIDER_TITLE_PROPERTY = "buttonTitle";
 
+    public static final String COMPONENT_PROMO_PATH_PROPERTY = "path";
+
+    public static final String COMPONENT_PROMO_TITLE_TOP_PROPERTY = "titleTop";
+
+    public static final String COMPONENT_PROMO_TITLE__BOTTOM_PROPERTY = "titleBottom";
+
     public static final String RICH_TEXT_PROPERTY = "text";
 
     public static final String RESOURCE_TYPE__NAVIGATION = "portal/components/structure/topnav";

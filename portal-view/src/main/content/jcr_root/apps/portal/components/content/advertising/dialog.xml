@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
-    jcr:primaryType="cq:Dialog"
-    activeTab="{Long}0"
-    helpPath="en/cq/current/wcm/default_components.html#Image"
-    xtype="tabpanel">
-    <items jcr:primaryType="cq:WidgetCollection">
-        <image
+          jcr:primaryType="cq:Dialog"
+          xtype="dialog">
+    <items
             jcr:primaryType="cq:Widget"
-            cropParameter="./imageCrop"
-            ddGroups="[media]"
-            fileNameParameter="./fileName"
-            fileReferenceParameter="./fileReference"
-            mapParameter="./imageMap"
-            name="./file"
-            requestSuffix=".img.png"
-            rotateParameter="./imageRotate"
-            title="Image"
-            xtype="html5smartimage"/>
-        <advanced
-            jcr:primaryType="cq:Widget"
-            title="Информация о рекламодателе"
-            xtype="panel">
-            <items jcr:primaryType="cq:WidgetCollection">
-                <link
+            xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <image
+                    jcr:primaryType="cq:Panel"
+                    title="Image">
+                <image
+                        jcr:primaryType="cq:Widget"
+                        cropParameter="./imageCrop"
+                        ddGroups="[media]"
+                        fileNameParameter="./fileName"
+                        fileReferenceParameter="./fileReference"
+                        mapParameter="./imageMap"
+                        name="./file"
+                        requestSuffix=".img.png"
+                        rotateParameter="./imageRotate"
+                        title="Image"
+                        xtype="html5smartimage"/>
+            </image>
+            <advanced
                     jcr:primaryType="cq:Widget"
-                    fieldLabel="Ссылка на сайт"
-                    name="./link"
-                    xtype="textfield"/>
-            </items>
-        </advanced>
+                    title="Информация о рекламодателе"
+                    xtype="panel">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <link
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Ссылка на сайт"
+                            name="./link"
+                            xtype="textfield"/>
+                </items>
+            </advanced>
+        </items>
     </items>
 </jcr:root>

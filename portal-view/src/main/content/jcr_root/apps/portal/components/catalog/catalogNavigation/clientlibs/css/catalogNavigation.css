@@ -1,6 +1,7 @@
 #catalog_navigation_block{
     float:left;
     width: 191px;
+    border-right: 1px solid #C7C0C0;
 }
 
 #catalog_navigation_block a{
@@ -19,7 +20,7 @@
 }
 
 .catalog_super_categories_nav_list{
-    border-right: 1px solid #C7C0C0;
+    padding-top: 20px;
 }
 
 .catalog_super_categories_nav_list .catalog_sub_categories_list{
@@ -35,10 +36,10 @@
 .catalog_sub_categories_list{
     position: absolute;
     top:70px;
-    left:191px;
+    left:190px;
     z-index:1000;
     visibility: hidden;
-
+    border-left: 1px solid #C7C0C0;
 }
 
 .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
@@ -89,4 +90,21 @@
     color: rgb(107, 107, 107);
     font-size: 13px;
     font-family: sans-serif;
+}
+
+
+.catalog_super_categories_nav_item{
+    height: 35px;
+}
+
+.catalog_super_categories_nav_item_link{
+    vertical-align: -webkit-baseline-middle;
+}
+
+.catalog_super_categories_nav_item:hover{
+    background: rgba(35, 98, 177, 0.58);
+}
+
+.catalog_super_categories_nav_item_link:hover{
+    color:white;
 }
