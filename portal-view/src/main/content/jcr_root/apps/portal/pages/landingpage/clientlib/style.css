@@ -1,4 +1,9 @@
 .column_control_block{
-    display:inline-flex;
-    width: calc(100% - 191px);
+    display:flex;
+    justify-content: space-around;
+}
+
+.first_level_content{
+    display: flex;
+    justify-content: space-around;
 }
