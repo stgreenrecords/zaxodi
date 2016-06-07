@@ -5,10 +5,10 @@
     <sly data-sly-include="partials/headlibs.html" data-sly-unwrap/>
 </head>
 <body>
+<header class="page__header">
+    <sly data-sly-resource="topnav"></sly>
+</header>
 <div class="container-fluid">
-    <header class="page__header">
-        <sly data-sly-resource="topnav"></sly>
-    </header>
     <sly data-sly-include="content.html" data-sly-unwrap/>
 </div>
 <sly data-sly-resource="footer"></sly>

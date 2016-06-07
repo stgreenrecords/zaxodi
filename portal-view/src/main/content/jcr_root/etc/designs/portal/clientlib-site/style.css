@@ -17,6 +17,9 @@ ul li a {
 }
 
 footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     height: 80px;
     background: #C14646;
     padding-top:18px;

@@ -1,5 +1,6 @@
-script.js
-
 #base=external/js
 jquery-2.2.3.min.js
 bootstrap.js
+
+#base=site/js
+main.js
