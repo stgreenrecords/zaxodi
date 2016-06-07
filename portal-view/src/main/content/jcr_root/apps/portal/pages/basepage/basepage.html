@@ -4,14 +4,14 @@
     <sly data-sly-include="partials/head.html" data-sly-unwrap/>
     <sly data-sly-include="partials/headlibs.html" data-sly-unwrap/>
 </head>
-<body class="page ${currentPage.template.name}">
-<div class="page__main">
+<body>
+<div class="container-fluid">
     <header class="page__header">
         <sly data-sly-resource="topnav"></sly>
     </header>
     <sly data-sly-include="content.html" data-sly-unwrap/>
-    <sly data-sly-resource="footer"></sly>
 </div>
+<sly data-sly-resource="footer"></sly>
 <sly data-sly-include="partials/footlibs.html" data-sly-unwrap/>
 </body>
 </html>

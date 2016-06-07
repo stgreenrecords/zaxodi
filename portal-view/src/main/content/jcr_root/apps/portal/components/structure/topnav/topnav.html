@@ -1,11 +1,10 @@
 <sly data-sly-use.navigationModel="portal.models.components.NavigationModel">
-    <nav id="cd-main-nav-wrapper">
-        <input type="checkbox" id="css-toggle-menu" name="css-toggle-menu">
-        <ul class="main">
-            <li class="logo_nav"><a href="${navigationModel.homePath}.html">
+    <nav class="main_top_nav">
+        <ul class="main_top_nav_list">
+            <li class="logo_nav main_top_nav_list_item"><a href="${navigationModel.homePath}.html">
                 <img src="${navigationModel.imagePath}" alt="Logo" width="105" height="67"></a></li>
             <sly data-sly-list="${navigationModel.childPages}">
-                <li class="main_nav_item"><a href="${item.path}.html" class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a></li>
+                <li class="main_top_nav_list_item"><a href="${item.path}.html" class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a></li>
             </sly>
         </ul>
         <label for="css-toggle-menu"></label>

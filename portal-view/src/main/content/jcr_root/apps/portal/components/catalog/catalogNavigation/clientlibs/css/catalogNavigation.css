@@ -35,8 +35,8 @@
 
 .catalog_sub_categories_list{
     position: absolute;
-    top:70px;
-    left:190px;
+    top:98px;
+    left:216px;
     z-index:1000;
     visibility: hidden;
     border-left: 1px solid #C7C0C0;

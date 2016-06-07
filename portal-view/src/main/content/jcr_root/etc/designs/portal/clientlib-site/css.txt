@@ -1,4 +1,5 @@
 
 style.css
 #base=external/css
-bootstrap.min.css
+bootstrap.css
+bootstrap-theme.css

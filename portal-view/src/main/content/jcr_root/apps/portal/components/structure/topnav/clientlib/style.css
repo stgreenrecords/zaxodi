@@ -1,30 +1,22 @@
 /***************** NAVIGATION ********************/
-nav#cd-main-nav-wrapper {
+.main_top_nav {
     border-bottom: 1px solid #e6e6e6;
 }
-nav#cd-main-nav-wrapper ul{
+.main_top_nav .main_top_nav_list{
     display: flex;
-    flex-wrap: wrap;
-    max-width: 1080px;
-    margin: 0 auto;
-    background: white;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
 }
-nav#cd-main-nav-wrapper ul,
-nav#cd-main-nav-wrapper li{
-    flex: 1;
-}
 
-nav#cd-main-nav-wrapper li.logo_nav {
-    height: 67px;
+.main_top_nav li.logo_nav {
 
 }
-nav#cd-main-nav-wrapper li.logo_nav a{
+.main_top_nav li.logo_nav a{
     padding:0px;
 }
 
-nav#cd-main-nav-wrapper li:last-child{border-bottom: none;}
-nav#cd-main-nav-wrapper a{
+.main_top_nav a{
     font-family: 'UniSansHeavy';
     text-decoration: none;
     color: rgb(0, 164, 183);
@@ -32,65 +24,20 @@ nav#cd-main-nav-wrapper a{
     font-size: 20px;
     padding-top:7px;
 }
-nav#cd-main-nav-wrapper a:hover{
+.main_top_nav a:hover{
     color: #6D5959;
 }
-nav#cd-main-nav-wrapper li{
-    position: relative;
-    line-height: 50px;
+.main_top_nav .main_top_nav_list_item{
+    width: 200px;
     color: rgb(0, 164, 183);
-    text-align: center;
-}
-nav#cd-main-nav-wrapper input,
-nav#cd-main-nav-wrapper label{
-    display: none;
-    width: 36px;
-    height: 36px;
-    background: #555;
-    color: white;
-    text-align: center;
-    line-height: 36px;
-    font-size: 1.6rem;
-    border-radius: 4px;
-}
-nav#cd-main-nav-wrapper label{position: absolute; top: 8px; right: 8px; transition: .4s;}
-nav#cd-main-nav-wrapper label:hover{cursor:pointer;}
-nav#cd-main-nav-wrapper label:before{
-    font-family: FontAwesome;
-    font-size: 24px;
-    content: "\f0c9";
     text-align: center;
 }
 
 /*************** MEDIA QUERIES *******************/
-@media only screen and (max-width: 1080px){
-    nav#cd-main-nav-wrapper ul{
-        transform: translateY(0);
-        box-shadow: 0 0 5px rgba(0,0,0, .7);
-        transition: all .5s;
-    }
-    nav#cd-main-nav-wrapper li{
-        flex: none;
-        width: 100%;
-        border-bottom: solid 1px #777;
-    }
-    nav#cd-main-nav-wrapper input[type="checkbox"]:checked + ul{
-        transform: translateY(-100%);
-        width: 100%;
-        background: #999;
-        transition: all .5s;
-    }
-    nav#cd-main-nav-wrapper label{display: block;}
-    nav#cd-main-nav-wrapper input[type="checkbox"]:checked + ul li:nth-child(1){
-        background: #777;
-        color: #fff;
+@media all and (min-width: 992px){
+    .main_top_nav .main_top_nav_list{
+        flex-direction: row;
+        justify-content: center;
     }
 }
 
-.main_nav_item a{
-    border-top: 10px solid #00A4B7;
-}
-
-.main_nav_item a.is_active_page{
-    border-bottom: 10px solid #00A4B7;
-}
