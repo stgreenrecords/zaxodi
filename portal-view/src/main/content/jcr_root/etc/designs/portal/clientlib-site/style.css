@@ -31,3 +31,28 @@ footer p{
     color: white;
     font-size: 18px;
 }
+
+.media-type-placeholder {
+    display: block;
+    position: absolute;
+    left: -1000em;
+    top: -1000em;
+}
+
+@media screen and (min-width: 1200px){
+    .media-type-placeholder{
+        z-index: 3;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .media-type-placeholder{
+        z-index: 2;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .media-type-placeholder{
+        z-index: 1;
+    }
+}
