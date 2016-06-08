@@ -1,9 +1,9 @@
 #catalog_navigation_block{
-    width: 191px;
     border-right: 1px solid #C7C0C0;
 }
 
 .catalog_super_categories_nav{
+    width: 191px;
     display: flex;
     flex-direction: row;
 }
@@ -36,7 +36,7 @@
 .catalog_sub_categories_list{
     position: absolute;
     top:98px;
-    left:173px;
+    left:191px;
     z-index:1000;
     visibility: hidden;
     border-left: 1px solid #C7C0C0;
@@ -47,6 +47,7 @@
     visibility: visible;
     display: table;
     width: 89%;
+    max-width: 1000px;
 }
 
 .catalog_sub_categories_topic:hover{
@@ -110,3 +111,28 @@
 .catalog_super_categories_nav_item_link:hover{
     color:white;
 }
+
+
+@media screen and (max-width: 776px){
+    .first_level_content {
+        flex-direction: column;
+    }
+
+    .catalog_super_categories_nav{
+        margin: 0 auto;
+        width: 300px;
+        padding-left: 20px;
+        text-align: center;
+    }
+
+    .catalog_super_categories_nav_item_link {
+        font-family: sans-serif;
+        font-size: 17px;
+        font-weight: 900;
+    }
+
+    .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
+        display: none;
+    }
+}
+
