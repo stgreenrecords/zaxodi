@@ -8,11 +8,19 @@
     src: url("/etc/designs/portal/clientlib-site/fonts/Tabarra Black.otf");
 }
 
-ul{
+body {
+    overflow: hidden;
+}
+
+ul {
     list-style: none;
 }
 
-ul li a {
+a {
+    text-decoration: none;
+}
+
+a:hover {
     text-decoration: none;
 }
 
@@ -22,10 +30,10 @@ footer {
     bottom: 0;
     height: 80px;
     background: #C14646;
-    padding-top:18px;
+    padding-top: 18px;
 }
 
-footer p{
+footer p {
     font-family: UniSansHeavy;
     text-align: center;
     color: white;
@@ -39,26 +47,26 @@ footer p{
     top: -1000em;
 }
 
-.flex-component-centered{
+.flex-component-centered {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-@media screen and (min-width: 1200px){
-    .media-type-placeholder{
+@media screen and (min-width: 1200px) {
+    .media-type-placeholder {
         z-index: 3;
     }
 }
 
-@media screen and (max-width: 1200px){
-    .media-type-placeholder{
+@media screen and (max-width: 1200px) {
+    .media-type-placeholder {
         z-index: 2;
     }
 }
 
-@media screen and (max-width: 768px){
-    .media-type-placeholder{
+@media screen and (max-width: 768px) {
+    .media-type-placeholder {
         z-index: 1;
     }
 }

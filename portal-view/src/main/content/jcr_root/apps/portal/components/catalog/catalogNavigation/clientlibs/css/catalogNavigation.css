@@ -3,8 +3,14 @@
     border-right: 1px solid #C7C0C0;
 }
 
-#catalog_navigation_block a{
-    text-decoration: none;
+.catalog_super_categories_nav{
+    display: flex;
+    flex-direction: row;
+}
+
+.catalog_super_categories_nav_list{
+    padding: 20px 0 0 20px;
+    width: 100%;
 }
 
 .catalog_super_categories_nav_item_link {
@@ -18,15 +24,10 @@
     color: #443E3E;
 }
 
-.catalog_super_categories_nav_list{
-    padding-top: 20px;
-}
-
 .catalog_super_categories_nav_list .catalog_sub_categories_list{
     margin: 0;
     padding: 0;
 }
-
 
 .catalog_sub_categories_inner_list{
     border-right: 0.5px solid #E0C2C2;
@@ -35,17 +36,16 @@
 .catalog_sub_categories_list{
     position: absolute;
     top:98px;
-    left:216px;
+    left:173px;
     z-index:1000;
     visibility: hidden;
     border-left: 1px solid #C7C0C0;
+    display: table;
 }
 
 .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
     visibility: visible;
-    display: inline-flex;
-    width: 85%;
-
+    display: inline-block;
 }
 
 .catalog_sub_categories_topic:hover{
@@ -70,6 +70,8 @@
 
 .catalog_sub_categories_topic{
     text-align: center;
+    display: table-cell;
+    vertical-align: top;
 }
 
 .subCategoryTitle_span{
