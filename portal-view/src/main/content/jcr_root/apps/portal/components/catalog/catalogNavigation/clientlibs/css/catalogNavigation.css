@@ -40,12 +40,13 @@
     z-index:1000;
     visibility: hidden;
     border-left: 1px solid #C7C0C0;
-    display: table;
+    display: none;
 }
 
 .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
     visibility: visible;
-    display: inline-block;
+    display: table;
+    width: 89%;
 }
 
 .catalog_sub_categories_topic:hover{

@@ -8,8 +8,9 @@
     src: url("/etc/designs/portal/clientlib-site/fonts/Tabarra Black.otf");
 }
 
-body {
-    overflow: hidden;
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 ul {
@@ -24,10 +25,16 @@ a:hover {
     text-decoration: none;
 }
 
+.main-content-block{
+    margin-bottom: 80px;
+}
+
 footer {
     width: 100%;
     position: absolute;
+    right: 0;
     bottom: 0;
+    left: 0;
     height: 80px;
     background: #C14646;
     padding-top: 18px;
