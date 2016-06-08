@@ -1,1 +1,9 @@
+.first_level_content{
+    display: flex;
+}
 
+@media screen and (max-width: 768px){
+    .first_level_content{
+        display: block;
+    }
+}

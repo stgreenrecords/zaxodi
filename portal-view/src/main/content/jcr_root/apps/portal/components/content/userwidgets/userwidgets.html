@@ -1,10 +1,14 @@
 <sly data-sly-test="${!properties.weather && !properties.exchange}">
     <h3>Please edit dialog</h3>>
 </sly>
-<div class="weather_block" data-sly-test="${properties.weather}">
+<div class="user-widget-block">
+    <div class="flex-component-centered">
+        <div class="weather_block" data-sly-test="${properties.weather}">
 
-</div>
-<div class="exchange_block" data-sly-test="${properties.exchange}">
-    <iframe frameborder="0" height="131" marginheight="0" marginwidth="0" scrolling="no"
-            src="http://myfin.by/scripts/informer/informer.php" width="240"></iframe>
+        </div>
+        <div class="exchange_block" data-sly-test="${properties.exchange}">
+            <iframe frameborder="0" height="131" marginheight="0" marginwidth="0" scrolling="no"
+                    src="http://myfin.by/scripts/informer/informer.php" width="240"></iframe>
+        </div>
+    </div>
 </div>

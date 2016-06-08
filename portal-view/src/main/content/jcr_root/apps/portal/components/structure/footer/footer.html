@@ -1,7 +1,6 @@
 <sly data-sly-use.footer="portal.models.components.FooterModel">
-    <footer class="footer">
-        <sly data-sly-use.main="main.js">
-            <p class="page__copyright">${"&copy; {0} " @ format=main.year, context='html'}${footer.footerText @ context='html'}</p>
-        </sly>
-    </footer>
+    <sly data-sly-use.main="main.js">
+        <p class="page__copyright">${"&copy; {0} " @ format=main.year, context='html'}${footer.footerText @
+            context='html'}</p>
+    </sly>
 </sly>

@@ -1,10 +1,10 @@
 <sly data-sly-test="${!properties.columns}">
     <h3>Please add Columns</h3>>
 </sly>
-<div class="container-fluid column_control_block">
-    <div class="row">
+<div class="column_control_block">
+    <div class="column_wrapper">
         <sly data-sly-list="${properties.columns}">
-            <div class="item_column col-sm-12 col-xs-12" style="width:${item @ context='styleString'}%">
+            <div class="item_column" style="width:${item @ context='styleString'}%">
                 <sly data-sly-test.parname="${['parsys', itemList.index] @ join=''}"></sly>
                 <div data-sly-resource="${ @ path=parname ,resourceType='wcm/foundation/components/parsys'}"></div>
             </div>

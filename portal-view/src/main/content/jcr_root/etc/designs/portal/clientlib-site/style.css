@@ -39,6 +39,12 @@ footer p{
     top: -1000em;
 }
 
+.flex-component-centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (min-width: 1200px){
     .media-type-placeholder{
         z-index: 3;

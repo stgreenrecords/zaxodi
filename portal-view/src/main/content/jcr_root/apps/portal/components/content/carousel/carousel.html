@@ -1,35 +1,40 @@
 <sly data-sly-use.carousel="portal.models.components.CarouselModel">
-    <div id="portalCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <sly data-sly-list="${carousel.slideBeanList}">
-                <li data-target="#portalCarousel" data-slide-to="${itemList.index}"
-                    class="${itemList.first ? 'active' : ''}"></li>
-            </sly>
-        </ol>
+    <div class="flex-component-centered">
+        <div class="carousel-block">
+            <div id="portalCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <sly data-sly-list="${carousel.slideBeanList}">
+                        <li data-target="#portalCarousel" data-slide-to="${itemList.index}"
+                            class="${itemList.first ? 'active' : ''}"></li>
+                    </sly>
+                </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <sly data-sly-list="${carousel.slideBeanList}">
-                <div class="item ${itemList.first ? 'active' : ''}">
-                    <img src="${item.pathToImage}">
-                    <sly data-sly-test="${item.pathToEvent}">
-                        <div class="carousel_item_button ${item.buttonAlign}">
-                            <a class="carousel_item_button_link" href="${item.pathToEvent}.html">${item.buttonTitle}</a>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <sly data-sly-list="${carousel.slideBeanList}">
+                        <div class="item ${itemList.first ? 'active' : ''}">
+                            <img src="${item.pathToImage}">
+                            <sly data-sly-test="${item.pathToEvent}">
+                                <div class="carousel_item_button ${item.buttonAlign}">
+                                    <a class="carousel_item_button_link"
+                                       href="${item.pathToEvent}.html">${item.buttonTitle}</a>
+                                </div>
+                            </sly>
                         </div>
                     </sly>
                 </div>
-            </sly>
-        </div>
 
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#portalCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#portalCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#portalCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#portalCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
     </div>
 </sly>
