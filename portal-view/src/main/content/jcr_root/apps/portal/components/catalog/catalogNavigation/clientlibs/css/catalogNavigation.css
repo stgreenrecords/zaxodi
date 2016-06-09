@@ -1,14 +1,14 @@
-#catalog_navigation_block{
+#catalog_navigation_block {
     border-right: 1px solid #C7C0C0;
 }
 
-.catalog_super_categories_nav{
+.catalog_super_categories_nav {
     width: 191px;
     display: flex;
     flex-direction: row;
 }
 
-.catalog_super_categories_nav_list{
+.catalog_super_categories_nav_list {
     padding: 20px 0 0 20px;
     width: 100%;
 }
@@ -24,45 +24,43 @@
     color: #443E3E;
 }
 
-.catalog_super_categories_nav_list .catalog_sub_categories_list{
+.catalog_super_categories_nav_list .catalog_sub_categories_list {
     margin: 0;
     padding: 0;
 }
 
-.catalog_sub_categories_inner_list{
-    border-right: 0.5px solid #E0C2C2;
+.catalog_sub_categories_inner_list {
 }
 
-.catalog_sub_categories_list{
+.catalog_sub_categories_list {
     position: absolute;
-    top:98px;
-    left:191px;
-    z-index:1000;
+    top: 98px;
+    left: 191px;
+    z-index: 1000;
     visibility: hidden;
-    border-left: 1px solid #C7C0C0;
     display: none;
 }
 
-.catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
+.catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
     visibility: visible;
-    display: table;
+    display: flex;
     width: 89%;
-    max-width: 1000px;
+    max-width: 80%;
 }
 
-.catalog_sub_categories_topic:hover{
+.catalog_sub_categories_topic:hover {
     background: rgba(239, 239, 239, 0.15);
 }
 
-.catalog_sub_categories_inner_item:hover{
+.catalog_sub_categories_inner_item:hover {
     background: rgba(35, 98, 177, 0.58);
 }
 
-.catalog_sub_categories_inner_item:hover a{
-    color:white;
+.catalog_sub_categories_inner_item:hover a {
+    color: white;
 }
 
-.catalog_sub_categories_inner_list{
+.catalog_sub_categories_inner_list {
     padding: 0;
     padding-top: 10px;
     text-align: center;
@@ -70,13 +68,14 @@
     padding-right: 10px;
 }
 
-.catalog_sub_categories_topic{
+.catalog_sub_categories_topic {
     text-align: center;
-    display: table-cell;
     vertical-align: top;
+    border-left: 1px solid #C7C0C0;
+    background: white;
 }
 
-.subCategoryTitle_span{
+.subCategoryTitle_span {
     font-family: sans-serif;
     font-weight: 700;
     font-size: 14px;
@@ -85,40 +84,65 @@
 
 }
 
-.catalog_sub_categories_list{
-    background:white;
+.catalog_sub_categories_list {
+    background: white;
 }
 
-.catalog_sub_categories_inner_item a{
+.catalog_sub_categories_inner_item a {
     color: rgb(107, 107, 107);
     font-size: 13px;
     font-family: sans-serif;
 }
 
-
-.catalog_super_categories_nav_item{
+.catalog_super_categories_nav_item {
     height: 35px;
 }
 
-.catalog_super_categories_nav_item_link{
+.catalog_super_categories_nav_item_link {
     vertical-align: -webkit-baseline-middle;
 }
 
-.catalog_super_categories_nav_item:hover{
+.catalog_super_categories_nav_item:hover {
     background: rgba(35, 98, 177, 0.58);
 }
 
-.catalog_super_categories_nav_item_link:hover{
-    color:white;
+.catalog_super_categories_nav_item_link:hover {
+    color: white;
 }
 
+@media screen and (max-width: 1260px) {
 
-@media screen and (max-width: 776px){
+    .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
+        visibility: visible;
+        display: flex;
+        max-width: 800px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .catalog_sub_categories_topic {
+        text-align: center;
+        vertical-align: top;
+        border-bottom: 0.5px solid #E0C2C2;
+        width: 190px;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+
+    .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 776px) {
     .first_level_content {
         flex-direction: column;
     }
 
-    .catalog_super_categories_nav{
+    .catalog_super_categories_nav {
         margin: 0 auto;
         width: 300px;
         padding-left: 20px;
@@ -131,7 +155,7 @@
         font-weight: 900;
     }
 
-    .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list{
+    .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
         display: none;
     }
 }
