@@ -1,0 +1,32 @@
+<sly data-sly-use.catalogNavigationModel="portal.models.components.CatalogNavigationModel">
+    <div id="main-list-block">
+        <div class="main-list-block-wrapper">
+            <ul class="main-list">
+                <sly data-sly-list.supercategory="${catalogNavigationModel.catalogMap}">
+                    <li class="item-of-main-list">
+                        <a href="${supercategory.pagePath}.html" class="link-of-item-of-main-list">${supercategory.pageTitle}</a>
+                        <ul class="sub-list">
+                            <sly data-sly-list.subcategoryMap="${supercategory.catalogCategoryPageModelMap.entrySet}">
+                                <li class="item-of-sublist">
+                                    <a class="link-of-item-of-sublist">${subcategoryMap.key}</a>
+                                    <ul class="categories-list">
+                                        <sly data-sly-list.subercategoryitem="${subcategoryMap.value}">
+                                            <li class="item-of-categories-list">
+                                                <a href="${subercategoryitem.pagePath}.html">${subercategoryitem.pageTitle}</a>
+                                            </li>
+                                        </sly>
+                                    </ul>
+                                </li>
+                            </sly>
+                        </ul>
+                    </li>
+                </sly>
+            </ul>
+        </div>
+    </div>
+</sly>
+
+
+
+
+

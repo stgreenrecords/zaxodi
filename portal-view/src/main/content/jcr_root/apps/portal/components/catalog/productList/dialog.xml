@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Dialog"
+          height="600"
+          title="Edit Catalog Categories List"
+          width="1700"
+          xtype="dialog">
+    <items
+            jcr:primaryType="cq:Widget"
+            xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <general
+                    jcr:primaryType="cq:Panel"
+                    title="General">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <properties
+                            jcr:primaryType="cq:Widget"
+                            name="./properties"
+                            orderable="{Boolean}true"
+                            xtype="multifield">
+                        <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                layout="hbox"
+                                xtype="multifieldpanel">
+                            <items jcr:primaryType="cq:WidgetCollection">
+                                <typeLabel
+                                        jcr:primaryType="cq:Widget"
+                                        text="Выберите тип свойства"
+                                        xtype="label"/>
+                                <type
+                                        jcr:primaryType="cq:Widget"
+                                        defaultValue="simpletext"
+                                        key="typeSelection"
+                                        type="select"
+                                        xtype="selection">
+                                    <options jcr:primaryType="cq:WidgetCollection">
+                                        <simpleText
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Просто Текст"
+                                                value="simpletext"/>
+                                        <numbers
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Числовое значение"
+                                                value="number"/>
+                                        <boolean
+                                                jcr:primaryType="cq:Widget"
+                                                text="Логическое/Числовое"
+                                                value="numberBoolean"/>
+                                        <float
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Число с плавающей точкой"
+                                                value="float"/>
+                                        <size
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Размеры"
+                                                value="size"/>
+                                        <intervav
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Интервал"
+                                                value="interval"/>
+                                        <enum
+                                                jcr:primaryType="cq:Widget"
+                                                text="Перечисления"
+                                                value="enum"/>
+                                        <attitude
+                                                jcr:primaryType="cq:Widget"
+                                                text="Отношение"
+                                                value="attitude"/>
+                                    </options>
+                                </type>
+                                <valueLabel
+                                        jcr:primaryType="cq:Widget"
+                                        text="Название свойства"
+                                        xtype="label"/>
+                                <value
+                                        jcr:primaryType="cq:Widget"
+                                        key="valueSelection"
+                                        width="300"
+                                        xtype="textfield"/>
+                                <unitsLabel
+                                        jcr:primaryType="cq:Widget"
+                                        text="Единицы измерения"
+                                        xtype="label"/>
+                                <units
+                                        jcr:primaryType="cq:Widget"
+                                        key="units"
+                                        width="50"
+                                        xtype="textfield"/>
+                            </items>
+                        </fieldConfig>
+                    </properties>
+                </items>
+            </general>
+            <subCategory
+                    jcr:primaryType="cq:Panel"
+                    title="Под категория">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Названия подкатегории"
+                            name="./subCategory"
+                            xtype="textfield"/>
+                </items>
+            </subCategory>
+        </items>
+    </items>
+</jcr:root>

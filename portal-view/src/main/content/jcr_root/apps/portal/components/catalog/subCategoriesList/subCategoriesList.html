@@ -1,0 +1,13 @@
+<sly data-sly-use.subCategoriesModel="portal.models.BaseModel">
+    <div id="sub-categories-list-block">
+        <div class="sub-categories-list-block-wrapper">
+            <ul class="list-of-subcategories">
+                <sly data-sly-list.categoriesList="${subCategoriesModel.ownPage.listChildren}">
+                    <li class="item-of-list-of-subcategories">
+                        <a href="${categoriesList.path}.html" class="link-of-item-of-main-list">${categoriesList.title}</a>
+                    </li>
+                </sly>
+            </ul>
+        </div>
+    </div>
+</sly>

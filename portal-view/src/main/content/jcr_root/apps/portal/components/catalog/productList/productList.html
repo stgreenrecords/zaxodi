@@ -1,0 +1,41 @@
+<div class="сatalogItemsList" data-category="${currentPage.name}">
+    <div id="countOfProducts">
+    </div>
+    <table id="сatalogItemsList_table">
+        <tr>
+            <th id="sortProperties_list">
+                <div class="sortProperties_wrapper">
+                    <div class="sortPropertiesFilter">
+                        <div class="sortItem" id="filterPrice">
+                            <span class="sortAttrName" data-type="price">Цена</span>
+                            <br>
+                                <input class="inputFilter numberStartInput" id="startPrice" type="number" placeholder="от">
+                                    <input
+                    class="inputFilter numberEndInput"
+                    id="endPrice"
+                    type="number"
+                    placeholder="до">
+                        </div>
+                        <div class="sortItem" id="filterBrand">
+                            <span class="sortAttrName" data-type="simpletext">Марка(Бренд)</span>
+                            <br/>
+                            <select>
+                                <option>Выбрать</option>
+                            </select>
+                         </div>
+                            <div class="sortItem" id="filterModel">
+                                <span class="sortAttrName" data-type="simpletext">Модель</span>
+                                <br/>
+                                <select>
+                                    <option>Выбрать</option>
+                                </select>
+                         </div>
+                        </div>
+                </div>
+            </th>
+            <th id="itemProductList_th">
+                <div class="itemProductList"></div>
+            </th>
+        </tr>
+    </table>
+</div>
