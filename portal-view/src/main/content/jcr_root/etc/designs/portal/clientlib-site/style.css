@@ -76,4 +76,12 @@ footer p {
     .media-type-placeholder {
         z-index: 1;
     }
+
+    .first_level_content{
+        display: block;
+    }
+}
+
+.first_level_content{
+    display: flex;
 }
