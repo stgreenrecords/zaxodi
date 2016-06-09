@@ -2,13 +2,14 @@
     <h3>Please edit dialog</h3>>
 </sly>
 <div class="user-widget-block">
-    <div class="flex-component-centered">
+    <div class="flex-component-centered user-wigdet-wrapper">
         <div class="weather_block" data-sly-test="${properties.weather}">
-
+            <iframe scrolling="no" src="//weather.rambler.ru/get_informer/?h=1&t=2&p1=1&p2=1&geo_id=&rmd="
+                    style="width:150px;height:140px;border:0px;"></iframe>
         </div>
         <div class="exchange_block" data-sly-test="${properties.exchange}">
-            <iframe frameborder="0" height="131" marginheight="0" marginwidth="0" scrolling="no"
-                    src="http://myfin.by/scripts/informer/informer.php" width="240"></iframe>
+            <iframe src="http://benefit.by/jk/kurs/googolecom/" width="240" height="140" frameborder="0"
+                    style="overflow: hidden"></iframe>
         </div>
     </div>
 </div>

@@ -1,3 +1,26 @@
 .user-widget-block {
     padding: 5px;
 }
+
+.user-wigdet-wrapper {
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .user-wigdet-wrapper {
+        flex-direction: row;
+    }
+
+}
+
+@media screen and (min-width: 1025px) {
+    .user-wigdet-wrapper {
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        align-items: flex-start;
+        overflow: auto;
+    }
+
+}
