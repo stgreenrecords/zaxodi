@@ -11,6 +11,8 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import portal.models.Constants;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +28,8 @@ import java.util.Map;
 @Model(adaptables = Resource.class)
 public class BaseModel {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BaseModel.class);
+
     @Self
     protected Resource selfResource;
 
@@ -33,7 +37,7 @@ public class BaseModel {
     protected ResourceResolver resourceResolver;
 
     @Inject
-    QueryBuilder queryBuilder;
+    private QueryBuilder queryBuilder;
 
     protected Page rootContentPage;
 
@@ -123,7 +127,7 @@ public class BaseModel {
                     propertiesList.add(searchNode.getProperty(propertyName).getString());
                 }
             } catch (RepositoryException e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage());
             }
         }
         return propertiesList;

@@ -4,7 +4,7 @@
     jcr:primaryType="cq:Template"
     jcr:title="PORTAL Landing Page"
     allowedPaths="[/content(/.*)?]"
-    ranking="{Long}100">
+    ranking="{Long}50">
     <jcr:content
         jcr:primaryType="cq:PageContent"
         sling:resourceType="portal/pages/landingpage">

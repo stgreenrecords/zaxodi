@@ -4,7 +4,7 @@
     jcr:primaryType="cq:Template"
     jcr:title="PORTAL Blank Page"
     allowedPaths="[/content/portal(/.*)?]"
-    ranking="{Long}100">
+    ranking="{Long}70">
     <jcr:content
         jcr:primaryType="cq:PageContent"
         sling:resourceType="portal/pages/simplepage">

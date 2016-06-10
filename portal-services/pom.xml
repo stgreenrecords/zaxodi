@@ -26,64 +26,26 @@
 
     <dependencies>
         <!-- OSGi Dependencies -->
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>biz.aQute</groupId>
-            <artifactId>bndlib</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-        </dependency>
         <!-- Other Dependencies -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.jcr</groupId>
-            <artifactId>jcr</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.aem</groupId>
-            <artifactId>aem-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.models.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit-addons</groupId>
-            <artifactId>junit-addons</artifactId>
-        </dependency>
+
 
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -93,27 +55,13 @@
                         <Export-Package>
                            portal.core.*;
                         </Export-Package>
-                        <Private-Package>
-                        </Private-Package>
                         <Import-Package>
                             *;resolution:=optional
                         </Import-Package>
-                        <Embed-Dependency>*;scope=compile|runtime;</Embed-Dependency>
-                        <Embed-Transitive>true</Embed-Transitive>
                     </instructions>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-            </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
     <profiles>
@@ -138,7 +86,7 @@
                                 </goals>
                                 <configuration>
                                     <slingUrl>http://${cq.host}:${cq.port}</slingUrl>
-                                    <!-- 
+                                    <!--
                                         IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
                                         parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
                                         auto-deploy profile. See this link for further information:
@@ -172,7 +120,7 @@
                                 </goals>
                                 <configuration>
                                     <slingUrl>http://${cq.author.host}:${cq.author.port}</slingUrl>
-                                    <!-- 
+                                    <!--
                                         IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
                                         parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
                                         auto-deploy profile. See this link for further information:
@@ -206,7 +154,7 @@
                                 </goals>
                                 <configuration>
                                     <slingUrl>http://${cq.publish.host}:${cq.publish.port}</slingUrl>
-                                    <!-- 
+                                    <!--
                                         IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
                                         parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
                                         auto-deploy profile. See this link for further information:
@@ -254,7 +202,7 @@
                                 </goals>
                                 <configuration>
                                     <slingUrl>http://${cq.publish.host}:${cq.publish.port}</slingUrl>
-                                    <!-- 
+                                    <!--
                                         IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
                                         parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
                                         auto-deploy profile. See this link for further information:
