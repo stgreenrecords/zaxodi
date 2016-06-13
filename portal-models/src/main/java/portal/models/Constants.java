@@ -24,7 +24,7 @@ public class Constants {
 
     public static final String CATALOG_ROOT_PAGE_PATH = "/content/portal/catalog";
 
-    public static final String CATALOG_ITEM_LIST_PATH = "portal/components/general/catalog/catalogItemsList";
+    public static final String CATALOG_ITEM_LIST_PATH = "portal/components/catalog/productList";
 
     public static final String RESOURCE_TYPE_CQ_PAGE = "cq:Page";
 
