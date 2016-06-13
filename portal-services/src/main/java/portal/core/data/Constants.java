@@ -35,7 +35,7 @@ public class Constants {
 
     public static final String JCR_PRIMARY_TYPE = "jcr:primaryType";
 
-    public static final String PATH_TO_COMPONENT_CATALOG_ITEM_INFO = "jcr:content/content_container/section/section-par/catalogItemInfo";
+    public static final String PATH_TO_COMPONENT_CATALOG_ITEM_INFO = "jcr:content/columns/parsys0/productinfo";
 
     public static final String PROPERTY_RESULTS = "results";
     public static final String PROPERTY_TRUE = "true";
