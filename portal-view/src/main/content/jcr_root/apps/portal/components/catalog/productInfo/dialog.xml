@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Dialog"
+          height="500"
+          title="Edit Catalog Item Info"
+          width="800"
+          xtype="dialog">
+    <listeners
+            jcr:primaryType="nt:unstructured"
+            beforeshow="function(dialog){PORTAL.modules.CatalogItemInfo.loadDialogComponents(dialog);}"
+            beforesubmit="function(dialog){PORTAL.modules.CatalogItemInfo.submitDialog(dialog);}"/>
+    <items
+            jcr:primaryType="cq:Widget"
+            xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <generalProperties
+                    jcr:primaryType="cq:Panel"
+                    title="General properties">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <brand
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Марка(Бренд)"
+                            itemID="property"
+                            name="./brand"
+                            propertyType="simpletext"
+                            xtype="textfield"/>
+                    <model
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Модель"
+                            itemID="property"
+                            name="./model"
+                            propertyType="simpletext"
+                            xtype="textfield"/>
+                    <discription
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Описание"
+                            name="./discription"
+                            propertyType="simpletext"
+                            xtype="textarea"/>
+                </items>
+            </generalProperties>
+            <img
+                    jcr:primaryType="cq:Widget"
+                    cropParameter="./image/imageCrop"
+                    ddGroups="[media]"
+                    fileNameParameter="./image/fileName"
+                    fileReferenceParameter="./image/fileReference"
+                    mapParameter="./image/imageMap"
+                    name="./image/file"
+                    requestSuffix="/image.img.png"
+                    rotateParameter="./image/imageRotate"
+                    sizeLimit="100"
+                    title="Image"
+                    xtype="html5smartimage"/>
+            <imgadvance
+                    jcr:primaryType="cq:Widget"
+                    title="Advanced Image Properties"
+                    xtype="panel">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <title
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Title"
+                            name="./image/jcr:title"
+                            xtype="textfield"/>
+                    <alt
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="(leave empty to use the title defined above)"
+                            fieldLabel="Alt Text"
+                            name="./image/alt"
+                            xtype="textfield"/>
+                    <linkURL
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="Drop files or pages from the Content Finder"
+                            fieldLabel="Link to"
+                            name="./image/linkURL"
+                            xtype="pathfield"/>
+                    <description
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Description"
+                            name="./image/jcr:description"
+                            xtype="textarea"/>
+                    <size
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Size"
+                            heightParameter="./image/height"
+                            widthParameter="./image/width"
+                            xtype="sizefield"/>
+                    <resType
+                            jcr:primaryType="cq:Widget"
+                            ignoreData="{Boolean}true"
+                            name="./image/sling:resourceType"
+                            value="foundation/components/image"
+                            xtype="hidden"/>
+                </items>
+            </imgadvance>
+            <seller
+                    jcr:primaryType="cq:Widget"
+                    title="Информация о продавце"
+                    xtype="panel">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <properties
+                            jcr:primaryType="cq:Widget"
+                            name="./seller"
+                            orderable="{Boolean}true"
+                            xtype="multifield">
+                        <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                layout="hbox"
+                                xtype="multifieldpanel">
+                            <items jcr:primaryType="cq:WidgetCollection">
+                                <labelSellerID
+                                        jcr:primaryType="cq:Widget"
+                                        text="ID Продавца"
+                                        xtype="label"/>
+                                <sellerID
+                                        jcr:primaryType="cq:Widget"
+                                        key="sellerID"
+                                        width="200"
+                                        xtype="textfield"/>
+                                <priceLabel
+                                        jcr:primaryType="cq:Widget"
+                                        text="Цена"
+                                        xtype="label"/>
+                                <units
+                                        jcr:primaryType="cq:Widget"
+                                        key="price"
+                                        width="100"
+                                        xtype="textfield"/>
+                            </items>
+                        </fieldConfig>
+                    </properties>
+                </items>
+            </seller>
+        </items>
+    </items>
+</jcr:root>

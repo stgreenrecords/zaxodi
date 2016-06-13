@@ -1,0 +1,136 @@
+<ec:initBean type="com.portal.beans.CatalogItemInfoBean" name="catalogItemInfoBean"/>
+
+<div class="catalogiteminfo-ui">
+
+    <div class="comeBack">
+        <c:forEach var="parent" items="${catalogItemInfoBean.parentList}">
+            <a class="comeBackLink" href="${parent.path}.html">${parent.title} → </a>
+        </c:forEach>
+        <a class="comeBackLink" href="${currentPage.path}.html">${currentPage.title}</a>
+    </div>
+    <c:set var="sellerInfoList" value="${catalogItemInfoBean.sellerInfo}"/>
+
+    <aside class="product-aside">
+        <div class="product-aside__main">
+            <div class="product-aside__group">
+                <c:if test="${not empty sellerInfoList}">
+                    <c:forEach var="itemSeller" items="${sellerInfoList}">
+                        <div class="product-aside__item product-aside__item--highlighted product-aside__item--byr">
+                            <div class="product-aside__item-i">
+                                <div class="product-aside__box">
+                              <span class="product-aside__price--primary">
+                                  ${itemSeller.price} руб.
+                              </span>
+
+                                    <div class="product-aside__box product-aside__box--2">
+                                        <a href="#" class="product-aside__logo">
+                                            ${itemSeller.sellerID}
+                                        </a>
+                                        <a class="product-aside__review-link"
+                                           href="http://964.shop.onliner.by/#reviews">
+                                            <div class="product-aside__stars">
+                                                <span class="product-aside__stars-i product-aside__stars-i--50"></span>
+                                            </div>
+                                            <div class="product-aside__review">
+                                                ${itemSeller.rating} отзыв(а)
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+            </div>
+        </div>
+    </aside>
+
+
+    <div class="itemsInfo">
+        <span class="productTitle">
+            <h4>${currentPage.title}</h4>
+    </span>
+        <img alt="image" id="device-header-image" src="${catalogItemInfoBean.imgPath}" heigth="121" width="170">
+
+        <div>
+            <cq:include path="gallery" resourceType="/apps/portal/components/general/gallery"/>
+        </div>
+        <table class="product-specs__table">
+            <colgroup>
+                <col width="50%">
+                <col width="50%">
+            </colgroup>
+            <tbody>
+            <c:if test="${not empty properties.discription}">
+                <tr>
+                    <td>
+                        Описание
+                        <div class="product-tip-wrapper">
+                            <span class="product-tip__trigger i-qmark js-tip-trigger"></span>
+
+                            <div class="product-tip js-product-tip">
+                                <span class="product-tip__arrow js-tip-arr"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                    <span class="value__text">
+                            ${properties.discription}
+                    </span>
+                    </td>
+                </tr>
+            </c:if>
+            <c:forEach var="itemProperties" items="${catalogItemInfoBean.itemProperties}">
+                <tr>
+                    <td>
+                        ${itemProperties.propertyName}
+                        <div class="product-tip-wrapper">
+                            <span class="product-tip__trigger i-qmark js-tip-trigger"></span>
+
+                            <div class="product-tip js-product-tip">
+                                <span class="product-tip__arrow js-tip-arr"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                    <span class="value__text">
+                        <c:choose>
+                            <c:when test="${itemProperties.propertyType eq 'numberBoolean' && !(itemProperties.propertyValue eq 'Off')}">
+                                <img alt="image" id="device-header-image" src="/content/dam/portal/catalog/galochka.png"
+                                     heigth="30" width="30">
+                                <c:if test="${itemProperties.count > 1}">
+                                    ${itemProperties.count}
+                                </c:if>
+                            </c:when>
+                            <c:when test="${itemProperties.propertyType eq 'numberBoolean' && itemProperties.propertyValue eq 'Off'}">
+                                <img alt="image" id="device-header-image"
+                                     src="/content/dam/portal/catalog/w128h1281338911594close.png" heigth="30"
+                                     width="30">
+                            </c:when>
+                            <c:when test="${itemProperties.propertyType eq 'interval'}">
+                                ${fn:replace (itemProperties.propertyValue,',',' - ')}
+                            </c:when>
+                            <c:when test="${itemProperties.propertyType eq 'size'}">
+                                ${fn:replace (itemProperties.propertyValue,',',' x ')}
+                            </c:when>
+                            <c:when test="${itemProperties.propertyType eq 'attitude'}">
+                                ${fn:replace (itemProperties.propertyValue,',',' / ')}
+                            </c:when>
+                            <c:when test="${itemProperties.propertyType eq 'enum'}">
+                                ${fn:replace (itemProperties.propertyValue,',',', ')}
+                            </c:when>
+                            <c:otherwise>
+                                ${itemProperties.propertyValue}
+                            </c:otherwise>
+                        </c:choose>
+                        ${itemProperties.propertyUnits}
+                    </span>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

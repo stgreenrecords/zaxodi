@@ -1,10 +1,12 @@
 var PORTAL = (function (PORTAL, $) {
-    PORTAL.modules = PORTAL.modules || {};
 
-    function СatalogItemsList(opts) {
-        console.log('Component: "СatalogItemsList"');
+    PORTAL.modules.ProductList = {};
 
-        var $self = opts.$elem;
+    PORTAL.modules.ProductList.init = function () {
+
+        console.log('Component: "ProductList"');
+
+        var $self = $(".сatalogItemsList");
         var $filterPrice = $self.find("div#filterPrice").change(function () {
             doFilter({
                 filterType: "number",
@@ -519,15 +521,6 @@ var PORTAL = (function (PORTAL, $) {
         };
 
     }
-
-    СatalogItemsList.prototype = {
-        defaults: {
-            selector: '.сatalogItemsList'
-        }
-    };
-
-    $.plugin('СatalogItemsList', СatalogItemsList);
-    PORTAL.modules.СatalogItemsList = СatalogItemsList;
 
     return PORTAL;
 

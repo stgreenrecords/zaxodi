@@ -15,6 +15,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.servlet.ServletException;
+
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
 import java.io.IOException;
@@ -37,17 +38,60 @@ public class HelperServlet extends SlingAllMethodsServlet {
             NodeIterator catalogNode = request.getResourceResolver().getResource("/content/portal/catalog").adaptTo(Node.class).getNodes();
             Node topNavNode = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/topnav").adaptTo(Node.class);
             Node catalogNavigation = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/catalognavigation").adaptTo(Node.class);
-            Node columns = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/columns").adaptTo(Node.class);
+            Node columns = request.getResourceResolver().getResource("/apps/portal/templates/catalogproducttemplate/jcr:content/columns").adaptTo(Node.class);
+            Node video = request.getResourceResolver().getResource("/apps/portal/templates/catalogproducttemplate/jcr:content/video").adaptTo(Node.class);
             Node parsys = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/parsys").adaptTo(Node.class);
             Node footer = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/footer").adaptTo(Node.class);
 
-            while (catalogNode.hasNext()){
+            while (catalogNode.hasNext()) {
                 Node superCategoryNode = catalogNode.nextNode();
-                if (!superCategoryNode.getName().equals("jcr:content")){
+                if (!superCategoryNode.getName().equals("jcr:content")) {
                     NodeIterator subCategoryIterator = superCategoryNode.getNodes();
-                    while (subCategoryIterator.hasNext()){
+                    while (subCategoryIterator.hasNext()) {
                         Node subCategoryNode = subCategoryIterator.nextNode();
                         if (!subCategoryNode.getName().equals("jcr:content")){
+                            NodeIterator subCategoryNodeIterator = subCategoryNode.getNodes();
+                            while (subCategoryNodeIterator.hasNext()) {
+                                Node productNode = subCategoryNodeIterator.nextNode();
+                                if (!productNode.getName().equals("jcr:content")) {
+                                    Node jcrContent = productNode.getNode("jcr:content");
+                                    jcrContent.setProperty("cq:template","/apps/portal/templates/catalogproducttemplate");
+                                    jcrContent.setProperty("sling:resourceType","portal/pages/catalogproductpage");
+                                    JcrUtil.copy(topNavNode, jcrContent, topNavNode.getName());
+                                    JcrUtil.copy(catalogNavigation, jcrContent, catalogNavigation.getName());
+                                    Node column = JcrUtil.copy(columns, jcrContent, columns.getName());
+                                    Node videoNodeNew = JcrUtil.copy(video, jcrContent, video.getName());
+                                    JcrUtil.copy(parsys, jcrContent, parsys.getName());
+                                    JcrUtil.copy(footer, jcrContent, footer.getName());
+                                    Node itemInfo = null;
+                                    if (jcrContent.hasNode("content_container/section/section-par/catalogItemInfo")) {
+                                        itemInfo = jcrContent.getNode("content_container/section/section-par/catalogItemInfo");
+                                    }
+                                    Node videoNode = null;
+                                    if (jcrContent.hasNode("content_container/section/section-par/video")){
+                                        videoNode = jcrContent.getNode("content_container/section/section-par/video");
+                                    }
+                                    if (itemInfo != null){
+                                        Node newProductInfo = JcrUtil.copy(itemInfo, column.getNode("parsys0"), "productinfo");
+                                        newProductInfo.setProperty("sling:resourceType","portal/components/catalog/productInfo");
+                                        if (newProductInfo.hasNode("gallery")){
+                                            Node galleryNode = newProductInfo.getNode("gallery");
+                                            galleryNode.setProperty("sling:resourceType","portal/components/content/video");
+                                        }
+                                    }
+                                    if (videoNode != null){
+                                        if (videoNode.hasProperty("link")){
+                                            videoNodeNew.setProperty("link",videoNode.getProperty("link").getString());
+                                        }
+                                    }
+                                    if (jcrContent.hasNode("content_container")){
+                                        jcrContent.getNode("content_container").remove();
+                                    }
+                                }
+                            }
+                        }
+
+ /*                       if (!subCategoryNode.getName().equals("jcr:content")){
                             Node jcrContent = subCategoryNode.getNode("jcr:content");
                             stringArrayList.add(subCategoryNode.getPath());
                             jcrContent.setProperty("cq:template","/apps/portal/templates/catalogcategorytemplate");
@@ -70,17 +114,16 @@ public class HelperServlet extends SlingAllMethodsServlet {
                                 old.remove();
                             }
 
-                        }
+                        }*/
                     }
                 }
             }
             request.getResourceResolver().commit();
             PrintWriter printWriter = response.getWriter();
-            for (String path : stringArrayList){
+            for (String path : stringArrayList) {
                 printWriter.println(path);
             }
-        }
-        catch (RepositoryException e) {
+        } catch (RepositoryException e) {
             e.printStackTrace();
         } catch (PersistenceException e) {
             e.printStackTrace();

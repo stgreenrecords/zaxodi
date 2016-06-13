@@ -94,7 +94,7 @@ public class BaseModel {
         return getOwnPage().getTitle();
     }
 
-    private Page getPageFromResource(Resource resource) {
+    public Page getPageFromResource(Resource resource) {
         return resource.getResourceType().equals(Constants.RESOURCE_TYPE_CQ_PAGE) ? resource.adaptTo(Page.class) : getPageFromResource(resource.getParent());
     }
 
@@ -143,5 +143,17 @@ public class BaseModel {
 
     public void setSelfResource(Resource selfResource) {
         this.selfResource = selfResource;
+    }
+
+    public void setRootContentPage(Page rootContentPage) {
+        this.rootContentPage = rootContentPage;
+    }
+
+    public void setCurrentPage(Page currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Page getCurrentPage() {
+        return currentPage;
     }
 }
