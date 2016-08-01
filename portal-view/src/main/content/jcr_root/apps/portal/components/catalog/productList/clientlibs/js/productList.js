@@ -339,11 +339,14 @@ var PORTAL = (function (PORTAL, $) {
               priceMessage = "Цена не указана.";
             }
             $itemProductList.append($("" +
-                "<div class='itemBlock'><table><tr><th>" +
-                "<img class='itemImage' src='" + item.image + "' alt='img'></th>" +
-                "<th><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></th>" +
-                "<th><div class='itemDiscription'>" + discription + "</div></th>" +
-                "<th><div class='itemPriceBlock'>" + priceMessage + "</th></tr></table></div>" +
+                "<div class='itemBlock'>" +
+                "   <div class='item-image'>" +
+                        "<div><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></div>" +
+                        "<img class='itemImage' src='" + item.image + "' alt='img'>" +
+                "   </div>" +
+                "   <div class='itemDiscription'>" + discription + "</div>" +
+                "   <div class='itemPriceBlock'>" + priceMessage + "</div>" +
+                "   </div>" +
                 "</div>"));
         };
 
