@@ -89,6 +89,7 @@ var PORTAL = (function (PORTAL, $) {
                     var $inputEndParam = $("<input>").addClass("inputFilter numberEndInput").attr("type", "number").attr("placeholder", "до");
                     var $inputStartParamFloat = $("<input>").addClass("inputFilter numberStartInput").attr("type", "text").attr("placeholder", "от");
                     var $inputEndParamFloat = $("<input>").addClass("inputFilter numberEndInput").attr("type", "text").attr("placeholder", "до");
+                    var $inputsStorage = $("<div>").addClass("inputs-storage");
                     var $checkbox = $("<input>").attr("type", "checkbox").addClass("filterCheckbox").change(function () {
                         var countInput = $(this).siblings(".countInput");
                         if (!$(this).prop('checked')) {
@@ -138,7 +139,7 @@ var PORTAL = (function (PORTAL, $) {
                                         filterItem.endParamArray = sortArrays.endParamArray;
                                         var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
                                         var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($startSelect).append(" x ").append($endSelect));
+                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($inputsStorage.append($startSelect).append(" x ").append($endSelect)));
                                         sortArrays.startParamArray.forEach(function (startItem) {
                                             $startSelect.append($("<option>" + startItem + "</option>"));
                                         });
@@ -149,7 +150,7 @@ var PORTAL = (function (PORTAL, $) {
                                     break;
                                 case 'simpletext':
                                     if (valueArray.length > 0) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($select.append($defaultSelectOption)));
+                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($select.append($defaultSelectOption)));
                                         valueArray.forEach(function (valueItem) {
                                             var $enumOption = $("<option>").text(valueItem.value);
                                             $($select).append($enumOption);
@@ -163,7 +164,7 @@ var PORTAL = (function (PORTAL, $) {
                                         filterItem.endParamArray = sortArrays.endParamArray;
                                         var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
                                         var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($startSelect).append(" - ").append($endSelect));
+                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($startSelect).append(" - ").append($endSelect)));
                                         sortArrays.startParamArray.forEach(function (startItem) {
                                             $startSelect.append($("<option>" + startItem + "</option>"));
                                         });
@@ -179,7 +180,7 @@ var PORTAL = (function (PORTAL, $) {
                                         filterItem.endParamArray = sortArrays.endParamArray;
                                         var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
                                         var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($startSelect).append(" / ").append($endSelect));
+                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($startSelect).append(" / ").append($endSelect)));
                                         sortArrays.startParamArray.forEach(function (startItem) {
                                             $startSelect.append($("<option>" + startItem + "</option>"));
                                         });
@@ -190,7 +191,7 @@ var PORTAL = (function (PORTAL, $) {
                                     break;
                                 case 'enum':
                                     if (valueArray.length > 0) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($select.append($defaultSelectOption)));
+                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($select.append($defaultSelectOption)));
                                         valueArray.forEach(function (valueItem) {
                                             var $enumOption = $("<option>").text(valueItem.value);
                                             $($select).append($enumOption);
@@ -198,17 +199,17 @@ var PORTAL = (function (PORTAL, $) {
                                     }
                                     break;
                                 case 'number':
-                                    $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($inputStartParam).append($inputEndParam));
+                                    $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($inputStartParam).append($inputEndParam)));
                                     break;
                                 case 'float':
-                                    $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($inputStartParamFloat).append($inputEndParamFloat));
+                                    $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($inputStartParamFloat).append($inputEndParamFloat)));
                                     break;
                                 case 'numberBoolean':
                                     if (filterItem.count && filterItem.count == 1) {
                                         $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($checkbox));
                                     }
                                     if (filterItem.count && filterItem.count > 1) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($br).append($checkbox).append($inputCount));
+                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($checkbox).append($inputCount));
                                     }
                                     break;
                             }
