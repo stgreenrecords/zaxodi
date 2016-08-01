@@ -1,0 +1,19 @@
+.product-list-content{
+    display: flex;
+}
+.sortPropertiesFilter{
+    width: 250px;
+}
+
+.sortPropertiesFilter select{
+    width: 120px;
+}
+
+.sortItem{
+    margin: 5px;
+    margin-bottom: 20px;
+}
+
+.sortPropertiesFilter input[type='number']{
+    width: 120px;
+}

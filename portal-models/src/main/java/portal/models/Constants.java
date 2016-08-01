@@ -2,6 +2,8 @@ package portal.models;
 
 public class Constants {
 
+    public static final String COMPONENT_IMAGE_NODE_NAME = "image";
+
     public static final String COMPONENT_IMAGE_REFERENCE_PROPERTY = "fileReference";
 
     public static final String COMPONENT_SLIDER_EVENT_PROPERTY = "pathToAction";
@@ -25,6 +27,14 @@ public class Constants {
     public static final String CATALOG_ROOT_PAGE_PATH = "/content/portal/catalog";
 
     public static final String CATALOG_ITEM_LIST_PATH = "portal/components/catalog/productList";
+
+    public static final String CATALOG_PRODUCT_INFO_PROPERTY_RESULTS = "results";
+    public static final String CATALOG_PRODUCT_INFO_PROPERTY_SELLER = "seller";
+
+    public static final String CATALOG_PRODUCT_INFO_PROPERTY_NAME = "propertyName";
+    public static final String CATALOG_PRODUCT_INFO_PROPERTY_VALUE = "propertyValue";
+    public static final String CATALOG_PRODUCT_INFO_PROPERTY_TYPE = "propertyType";
+    public static final String CATALOG_PRODUCT_INFO_PROPERTY_INITS = "units";
 
     public static final String RESOURCE_TYPE_CQ_PAGE = "cq:Page";
 

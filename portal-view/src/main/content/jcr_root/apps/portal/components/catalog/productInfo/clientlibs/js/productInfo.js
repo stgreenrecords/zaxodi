@@ -4,7 +4,7 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.ProductInfo.init = function () {
 
-        CatalogItemInfo.submitDialog = function (dialog) {
+        var submitDialog = function (dialog) {
             var properties = dialog.findBy(function (comp) {
                 return comp["itemID"] == 'property';
             }, dialog);
@@ -24,10 +24,10 @@ var PORTAL = (function (PORTAL, $) {
                     var propertyType = itemArray.propertyType;
                     if (propertyType == 'numberBoolean') {
                         var value;
-                        if (itemValue.match("true")){
-                            value = itemValue.substring(5,itemValue.length);
+                        if (itemValue.match("true")) {
+                            value = itemValue.substring(5, itemValue.length);
                         } else {
-                            value = itemValue.substring(1,itemValue.length);
+                            value = itemValue.substring(1, itemValue.length);
                         }
 
                         if (value == '') {
@@ -50,10 +50,10 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        CatalogItemInfo.loadDialogComponents = function (dialog) {
+        var loadDialogComponents = function (dialog) {
             var currentPagePath = location.href;
             var parrentPath = currentPagePath.substring(0, currentPagePath.lastIndexOf("/"));
-            var requestedURL = parrentPath + "/jcr:content/content_container/section/section-par/catalogitemslist.json";
+            var requestedURL = parrentPath + "/jcr:content/columns/parsys0/productlist.json";
             $.ajax({
                 url: requestedURL,
                 dataType: 'json',
@@ -196,6 +196,7 @@ var PORTAL = (function (PORTAL, $) {
                 }
             });
 
+        }
     }
 
     return PORTAL;

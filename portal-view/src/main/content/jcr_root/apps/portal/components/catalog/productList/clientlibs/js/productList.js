@@ -6,7 +6,7 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "ProductList"');
 
-        var $self = $(".сatalogItemsList");
+        var $self = $(".product-list-block");
         var $filterPrice = $self.find("div#filterPrice").change(function () {
             doFilter({
                 filterType: "number",
@@ -31,7 +31,7 @@ var PORTAL = (function (PORTAL, $) {
         var currentPagePosition;
         var countOfPage;
 
-        var $countOfProducts = $self.find("#countOfProducts");
+        var $countOfProducts = $self.find(".number-of-product");
 
         var pathWithExtension = window.location.pathname;
         var pathWithOutExtension = pathWithExtension.substring(0, pathWithExtension.indexOf(".html"));
@@ -75,7 +75,7 @@ var PORTAL = (function (PORTAL, $) {
                     $sortItemDiv.change(function () {
                         doFilter(filterItem, this);
                     });
-                    var $spanSortAttrName = $("<span>").attr("filterType", filterItem.filterType).text(filterItem.filterName).addClass("sortAttrName");
+                    var $spanSortAttrName = $("<div>").attr("filterType", filterItem.filterType).text(filterItem.filterName).addClass("sortAttrName");
                     var $spanUnits = $("<span>").addClass("units");
                     if (filterItem.units) {
                         $spanUnits.text(" (" + filterItem.units + ")");
