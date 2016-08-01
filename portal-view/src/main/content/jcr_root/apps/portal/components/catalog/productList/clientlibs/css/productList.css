@@ -9,6 +9,13 @@
     width: 97px;
 }
 
+.sortAttrName{
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Montserrat';
+}
+
 .inputs-storage{
     display: flex;
 }
@@ -20,4 +27,8 @@
 
 .sortPropertiesFilter input{
     width: 100px;
+}
+
+.sortPropertiesFilter .filterCheckbox{
+    width: 15px;
 }

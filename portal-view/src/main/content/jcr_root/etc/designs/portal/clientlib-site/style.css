@@ -1,13 +1,3 @@
-@font-face {
-    font-family: UniSansHeavy;
-    src: url("/etc/designs/portal/clientlib-site/fonts/Uni Sans Heavy.otf");
-}
-
-@font-face {
-    font-family: TabarraBlack;
-    src: url("/etc/designs/portal/clientlib-site/fonts/Tabarra Black.otf");
-}
-
 html {
     position: relative;
     min-height: 100%;
