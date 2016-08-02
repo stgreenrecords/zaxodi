@@ -325,7 +325,7 @@ var PORTAL = (function (PORTAL, $) {
             if (item.properties && item.properties.length > 10) {
                 for (var i = 0; i < 10; i++) {
                     if (i != 9) {
-                        discription += "<span class='discriptionName'>" + item.properties[i].propertyName + "</span> <span class='discriptionValue'>" + item.properties[i].propertyValue + "</span>, ";
+                        discription += "<span class='discriptionName'>" + item.properties[i].propertyName + "</span> <span class='discriptionValue'>" + item.properties[i].propertyValue + "</span>&nbsp;|&nbsp; ";
                     } else {
                         discription += "<span class='discriptionName'>" + item.properties[i].propertyName + "</span> <span class='discriptionValue'>" + item.properties[i].propertyValue + "</span>.";
                     }
@@ -341,7 +341,7 @@ var PORTAL = (function (PORTAL, $) {
             $itemProductList.append($("" +
                 "<div class='itemBlock'>" +
                 "   <div class='item-image'>" +
-                        "<div><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></div>" +
+                        "<div class='item-product-title'><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></div>" +
                         "<img class='itemImage' src='" + item.image + "' alt='img'>" +
                 "   </div>" +
                 "   <div class='itemDiscription'>" + discription + "</div>" +

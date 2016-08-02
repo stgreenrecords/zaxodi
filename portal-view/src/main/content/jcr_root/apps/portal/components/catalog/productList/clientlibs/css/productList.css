@@ -13,7 +13,7 @@
     font-weight: 700;
     font-size: 16px;
     color: #000;
-    font-family: 'Montserrat';
+    font-family: Montserrat;
 }
 
 .inputs-storage{
@@ -21,15 +21,70 @@
 }
 
 .itemProductList{
+    width: 1200px;
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .itemPriceBlock{
-    border: 1px solid #C7C0C0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #C7C0C0;
 }
 
 .itemBlock{
-    border-top: 1px solid #C7C0C0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 370px;
+    margin: 1px;
+    margin-bottom: 50px;
+    -webkit-box-shadow: 4px 6px 24px -2px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 6px 24px -2px rgba(0,0,0,0.4);
+    box-shadow: 4px 6px 24px -2px rgba(0,0,0,0.4);
+}
+
+.item-product-title{
+    width: 70%;
+    background-color: rgba(210, 158, 42, 0.85);
+    text-align: center;
+}
+
+.item-product-title a{
+    text-decoration: none;
+    font-family: Reem Kufi;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.item-image{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.itemBlock img{
+    margin-top: 20px;
+}
+
+.itemDiscription{
+    margin-top: 12px;
+    padding-left: 12px;
+}
+
+.itemDiscription span:nth-child(even){
+    font-family: Noto Sans K;
+    font-size: 12px;
+    font-weight: 700;
+    color: #84540c;
+}
+
+.itemDiscription span:nth-child(odd){
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .sortItem{
