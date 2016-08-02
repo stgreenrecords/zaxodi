@@ -1,8 +1,19 @@
 .product-list-content{
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-left: 50px;
 }
 .sortPropertiesFilter{
     width: 250px;
+}
+
+.number-of-product{
+    font-weight: 700;
+    font-size: 18px;
+    color: #d64f4f;
+    font-family: Reem Kufi;
+    text-align: end;
 }
 
 .sortPropertiesFilter select{
@@ -98,4 +109,80 @@
 
 .sortPropertiesFilter .filterCheckbox{
     width: 15px;
+}
+
+#paggination{
+    display: flex;
+}
+
+#paggination .pagginationForward{
+    margin: 15px;
+}
+
+#paggination .pagginationBack{
+    margin: 15px;
+}
+
+#paggination .pagginationForward img{
+    height: 35px;
+    width: 35px;
+}
+
+#paggination .pagginationBack img{
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
+}
+
+
+
+#paggination .currentPage{
+    margin: 10px;
+    padding-top: 10px;
+}
+
+#paggination .showAllPages{
+    height: 40px;
+    margin-top: 10px;
+    background-color: rgba(160, 12, 12, 0.8);
+    color: white;
+    border-radius: 10%;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#paggination .onFirstPage{
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: rgba(42, 21, 218, 0.8);
+    color: white;
+    border-radius: 10%;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+
+@media screen and (max-width: 1400px){
+    .itemProductList{
+        width: 900px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .itemProductList{
+        width: 700px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .itemBlock{
+        width: 300px;
+    }
+
 }
