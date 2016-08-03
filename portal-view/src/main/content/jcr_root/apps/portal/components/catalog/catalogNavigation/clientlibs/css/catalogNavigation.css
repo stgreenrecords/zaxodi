@@ -14,9 +14,9 @@
 }
 
 .catalog_super_categories_nav_item_link {
-    font-family: sans-serif;
-    font-size: 14px;
-    color: #6F6E6E;
+    font-family: Montserrat;
+    font-size: 16px;
+    color: #736f69;
     font-weight: 700;
 }
 
@@ -95,7 +95,8 @@
 }
 
 .catalog_super_categories_nav_item {
-    height: 35px;
+    height: 40px;
+    border-bottom: 1px solid #d0cccc;
 }
 
 .catalog_super_categories_nav_item_link {
