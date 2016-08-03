@@ -45,7 +45,6 @@
         <module>portal-cms</module>
         <module>portal-models</module>
         <module>portal-view</module>
-        <module>portal-all</module>
     </modules>
 
     <dependencyManagement>
