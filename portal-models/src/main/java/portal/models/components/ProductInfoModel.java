@@ -12,16 +12,14 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import portal.models.beans.SellerInfo;
+import portal.models.beans.SimplePageBean;
 
 @Model(adaptables = Resource.class)
 public class ProductInfoModel extends BaseModel {
@@ -51,14 +49,14 @@ public class ProductInfoModel extends BaseModel {
         return image != null ? image.getValueMap().get(Constants.COMPONENT_IMAGE_REFERENCE_PROPERTY, String.class) : StringUtils.EMPTY;
     }
 
-    public Map<String, String> getParentList() {
-        Map<String, String> parentListMap = new LinkedHashMap<String, String>();
+    public Iterator<SimplePageBean> getParentList() {
+        Deque<SimplePageBean> simplePageBeanStack = new ArrayDeque<SimplePageBean>();
         Page parent = getOwnPage().getParent();
         while (!parent.getPath().equals(Constants.CATALOG_ROOT_PAGE_PATH)) {
-            parentListMap.put(parent.getPath(), parent.getTitle());
+            simplePageBeanStack.add(new SimplePageBean(parent.getPath(), parent.getTitle()));
             parent = parent.getParent();
         }
-        return parentListMap;
+        return simplePageBeanStack.descendingIterator();
     }
 
 

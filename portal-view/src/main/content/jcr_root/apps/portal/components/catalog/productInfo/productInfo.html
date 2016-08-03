@@ -3,96 +3,90 @@
     <div class="product-info-model">
 
         <div class="comeBack">
-            <sly data-sly-list.parent="${productInfoModel.parentList.entrySet}">
-                <a class="comeBackLink" href="${parent.path}.html">${parent.title} → </a>
+            <sly data-sly-list.parentItem="${productInfoModel.parentList}">
+                <a class="comeBackLink" href="${parentItem.path}.html">${parentItem.title} - </a>
             </sly>
             <a class="comeBackLink" href="${currentPage.path}.html">${currentPage.title}</a>
         </div>
 
-        <div class="product-aside__group">
-            <sly data-sly-list.itemSeller="${productInfoModel.sellerInfo}">
-                <div class="seller-item">
-                    <div class="seller-price">
+        <div class="product-general-info">
+
+            <div class="general-info">
+               <span class="productTitle">
+                <h4>${currentPage.title}</h4>
+            </span>
+                <img alt="image" id="device-header-image" src="${productInfoModel.imgPath}" heigth="121" width="170">
+            </div>
+
+            <div class="seller-info">
+                <sly data-sly-list.itemSeller="${productInfoModel.sellerInfo}">
+                    <div class="seller-item">
+                        <div class="seller-price">
                               <span class="product-aside__price--primary">
                                   ${itemSeller.price} руб.
                               </span>
-                    </div>
-                    <div class="seller-id">
-                        <a href="#" class="product-aside__logo">
-                            ${itemSeller.sellerID}
-                        </a>
-                    </div>
-                    <div class="seller-rating">
-                        <a class="product-aside__review-link"
-                           href="http://964.shop.onliner.by/#reviews">
-                            <div class="product-aside__stars">
-                                <span class="product-aside__stars-i product-aside__stars-i--50"></span>
-                            </div>
-                            <div class="product-aside__review">
-                                ${itemSeller.rating} отзыв(а)
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-            </sly>
-        </div>
-    </div>
-
-
-    <div class="itemsInfo">
-        <span class="productTitle">
-            <h4>${currentPage.title}</h4>
-        </span>
-        <img alt="image" id="device-header-image" src="${productInfoModel.imgPath}" heigth="121" width="170">
-
-        <table class="product-specs__table">
-            <colgroup>
-                <col width="50%">
-                <col width="50%">
-            </colgroup>
-            <tbody>
-            <tr>
-                <td>
-                    Описание
-                    <div class="product-tip-wrapper">
-                        <span class="product-tip__trigger i-qmark js-tip-trigger"></span>
-
-                        <div class="product-tip js-product-tip">
-                            <span class="product-tip__arrow js-tip-arr"></span>
                         </div>
+                        <div class="seller-id">
+                            <a href="#" class="product-aside__logo">
+                                ${itemSeller.sellerID}
+                            </a>
+                        </div>
+                        <div class="seller-rating">
+                            <a class="product-aside__review-link"
+                               href="http://964.shop.onliner.by/#reviews">
+                                <div class="product-aside__stars">
+                                    <span class="product-aside__stars-i product-aside__stars-i--50"></span>
+                                </div>
+                                <div class="product-aside__review">
+                                    ${itemSeller.rating} отзыв(а)
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
-                </td>
-                <td>
-                    <span class="value__text">
-                            ${properties.discription}
-                    </span>
-                </td>
-            </tr>
-            <sly data-sly-list.itemProperties="${productInfoModel.itemProperties}">
+                </sly>
+            </div>
+
+        </div>
+
+        <div class="itemsInfo">
+            <table class="product-specs__table">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tbody>
                 <tr>
                     <td>
-                        ${itemProperties.propertyName}
-                        <div class="product-tip-wrapper">
-                            <span class="product-tip__trigger i-qmark js-tip-trigger"></span>
-
-                            <div class="product-tip js-product-tip">
-                                <span class="product-tip__arrow js-tip-arr"></span>
-                            </div>
-                        </div>
+                        <span class="product-info-property-name">
+                            Описание
+                        </span>
                     </td>
                     <td>
-                    <span class="value__text">
-                             ${itemProperties.count}
-                             ${itemProperties.propertyValue}
-                        ${itemProperties.propertyUnits}
-                    </span>
+                        <span class="product-info-description">
+                                ${properties.discription}
+                        </span>
                     </td>
                 </tr>
+                <sly data-sly-list.itemProperties="${productInfoModel.itemProperties}">
+                    <tr class="property-table-row">
+                        <td>
+                                <span class="product-info-property-name">
+                                    ${itemProperties.propertyName}
+                                </span>
+                        </td>
+                        <td>
+                            <span  class="product-info-property-value">
+                                ${itemProperties.propertyValue}
+<!--                                ${itemProperties.count}
+                                ${itemProperties.propertyUnits}-->
+                            </span>
+                        </td>
+                    </tr>
 
-            </sly>
-            </tbody>
-        </table>
-    </div>
+                </sly>
+                </tbody>
+            </table>
+        </div>
 
 </sly>>

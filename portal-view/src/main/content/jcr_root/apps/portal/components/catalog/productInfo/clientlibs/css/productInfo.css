@@ -1,0 +1,80 @@
+.product-info-model{
+    margin-left: 100px;
+}
+
+.comeBack{
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 20px;
+    font-family: Montserrat;
+}
+
+.comeBack a{
+    color: rgb(125, 102, 102);
+    text-decoration: none;
+}
+
+.product-general-info{
+    margin:40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.productTitle h4{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    font-family: Reem Kufi;
+    color: #565050;
+}
+
+.seller-info{
+    margin-left: 300px;
+    color : rgba(210, 158, 42, 0.85);
+    font-size: 18px;
+    font-family: Reem Kufi;
+    font-weight: 700;
+    margin-top: 17px;
+}
+
+.seller-item{
+    border-bottom: 1px solid #b3b3b3;
+    border-left: 1px solid #b3b3b3;
+    padding: 5px;
+}
+
+.itemsInfo{
+    margin-top: 100px;
+    border-top: 3px solid #6d6767;
+}
+
+.product-specs__table {
+    border-collapse: collapse;
+}
+
+.product-specs__table td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.property-table-row{
+    border-bottom: 1px solid #b3b3b3;
+}
+
+.product-info-property-name , .product-info-property-value{
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Montserrat;
+}
+
+.product-info-property-value{
+    font-weight: 700;
+    color: #5e614e;
+}
+
+.product-info-description{
+    font-size: 13px;
+    font-weight: 200;
+    font-family: inherit;
+    color: #5e614e;
+}
