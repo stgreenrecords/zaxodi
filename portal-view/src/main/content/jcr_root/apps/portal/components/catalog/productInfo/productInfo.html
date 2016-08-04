@@ -76,17 +76,20 @@
                                 </span>
                         </td>
                         <td>
-                            <span  class="product-info-property-value">
-                                ${itemProperties.propertyValue}
-<!--                                ${itemProperties.count}
-                                ${itemProperties.propertyUnits}-->
+                            <span class="product-info-property-value">
+         						<sly data-sly-use.helper="${'helper.js' @ type=itemProperties.propertyType, value=itemProperties.propertyValue, count=itemProperties.count}">
+                                    <div data-sly-test="${helper.isNumberBoolean}">
+                                        <img alt="image" src="${helper.path}" heigth="30" width="30">
+                                        <span data-sly-test="${helper.isMultiply}">helper.count</span>
+                                    </div>
+                                    ${helper.value}
+                                </sly>
                             </span>
                         </td>
                     </tr>
-
                 </sly>
                 </tbody>
             </table>
         </div>
-
-</sly>>
+    </div>
+</sly>
