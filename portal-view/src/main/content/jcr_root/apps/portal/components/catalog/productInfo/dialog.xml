@@ -8,8 +8,8 @@
           xtype="dialog">
     <listeners
             jcr:primaryType="nt:unstructured"
-            beforeshow="function(dialog){PORTAL.modules.CatalogItemInfo.loadDialogComponents(dialog);}"
-            beforesubmit="function(dialog){PORTAL.modules.CatalogItemInfo.submitDialog(dialog);}"/>
+            beforeshow="function(dialog){PORTAL.modules.ProductInfo.loadDialogComponents(dialog);}"
+            beforesubmit="function(dialog){PORTAL.modules.ProductInfo.submitDialog(dialog);}"/>
     <items
             jcr:primaryType="cq:Widget"
             xtype="tabpanel">

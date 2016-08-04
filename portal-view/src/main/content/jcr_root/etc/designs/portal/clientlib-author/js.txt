@@ -1,0 +1,2 @@
+#base=widgets/js
+multipanel.js
