@@ -53,7 +53,6 @@ var PORTAL = (function (PORTAL, $) {
     }
 
     PORTAL.modules.ProductInfo.loadDialogComponents = function (dialog) {
-        console.log("HELLO");
         var currentPagePath = location.href;
         var parrentPath = currentPagePath.substring(0, currentPagePath.lastIndexOf("/"));
         var requestedURL = parrentPath + "/jcr:content/columns/parsys0/productlist.json";
