@@ -33,333 +33,150 @@
     </description>
 
     <build>
+        <resources>
+            <!-- define the resources that will go into the package -->
+            <resource>
+                <!--
+                    we want to keep some of the META-INF files and not configure
+                    everything in the plugin.
+                -->
+                <directory>${basedir}/src/main/content/META-INF</directory>
+                <targetPath>../vault-work/META-INF</targetPath>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/content/jcr_root</directory>
+                <excludes>
+                    <!-- exclude .vlt control files in the package -->
+                    <exclude>**/.vlt</exclude>
+                    <exclude>**/.vltignore</exclude>
+                    <exclude>**/.gitignore</exclude>
+                    <exclude>**/*.iml</exclude>
+                    <exclude>**/.classpath</exclude>
+                    <exclude>**/.project</exclude>
+                    <exclude>**/.settings</exclude>
+                    <exclude>**/.DS_Store</exclude>
+                    <exclude>**/target/**</exclude>
+                    <exclude>**/pom.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
+            <!--
+                we want to keep some of the META-INF files and not configure
+                everything in the plugin (mainly the filters).
+
+                copy the resource explicitly instead of attaching it to the default resources
+            -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <!-- ensure that the empty directories are copied -->
+                <configuration>
+                    <includeEmptyDirs>true</includeEmptyDirs>
+                </configuration>
+
                 <executions>
                     <execution>
-                        <id>copy-content-resources</id>
-                        <phase>process-resources</phase>
+                        <id>copy-metainf-vault-resources</id>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/vault-work</outputDirectory>
-                            <nonFilteredFileExtensions>
-                                <nonFilteredFileExtension>ico</nonFilteredFileExtension>
-                                <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                                <nonFilteredFileExtension>eot</nonFilteredFileExtension>
-                                <nonFilteredFileExtension>svg</nonFilteredFileExtension>
-                                <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                                <nonFilteredFileExtension>otf</nonFilteredFileExtension>
-                                <nonFilteredFileExtension>mp4</nonFilteredFileExtension>
-                            </nonFilteredFileExtensions>
+                            <outputDirectory>${project.build.directory}/vault-work/META-INF</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/content</directory>
-                                    <filtering>true</filtering>
-                                    <excludes>
-                                        <exclude>**/.svn</exclude>
-                                        <exclude>**/.vlt</exclude>
-                                        <exclude>**/.vltignore</exclude>
-                                        <exclude>**/.DS_Store</exclude>
-                                    </excludes>
-                                </resource>
-                                <resource>
-                                    <directory>
-                                        ${project.generated-resources.directory}/cq-dust-maven-plugin
-                                    </directory>
+                                    <directory>${basedir}/META-INF</directory>
+                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- ====================================================================== -->
+            <!-- V A U L T   P A C K A G E   P L U G I N                                -->
+            <!-- ====================================================================== -->
             <plugin>
                 <groupId>com.day.jcr.vault</groupId>
-                <artifactId>maven-vault-plugin</artifactId>
+                <artifactId>content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
+                <configuration>
+                    <filterSource>${basedir}/META-INF/vault/filter.xml</filterSource>
+                    <verbose>true</verbose>
+                    <failOnError>true</failOnError>
+                    <group>portal</group>
+                    <embeddeds>
+                        <embedded>
+                            <groupId>com.portal</groupId>
+                            <artifactId>portal-cms</artifactId>
+                            <target>/apps/portal/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.portal</groupId>
+                            <artifactId>portal-models</artifactId>
+                            <target>/apps/portal/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.portal</groupId>
+                            <artifactId>portal-services</artifactId>
+                            <target>/apps/portal/install</target>
+                        </embedded>
+                    </embeddeds>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <!-- ====================================================================== -->
+    <!-- P R O F I L E S                                                        -->
+    <!-- ====================================================================== -->
     <profiles>
         <profile>
             <id>auto-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
+                        <artifactId>content-package-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>install-package</id>
                                 <goals>
                                     <goal>install</goal>
                                 </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.host}:${cq.port}/crx/packmgr/service.jsp</targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
                             </execution>
                         </executions>
+                        <configuration>
+                            <targetURL>http://${cq.host}:${cq.port}/crx/packmgr/service.jsp</targetURL>
+                            <failOnError>true</failOnError>
+                            <failOnMissingEmbed>true</failOnMissingEmbed>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>author-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-author</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.author.host}:${cq.author.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>dev-publish-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish.host}:${cq.publish.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-package-publish2</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish2.host}:${cq.publish2.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>prod-publish-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish.host}:${cq.publish.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-package-publish2</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish2.host}:${cq.publish2.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-package-publish3</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish3.host}:${cq.publish3.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-work-publish-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish2.host}:${cq.publish2.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-work-author-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.author2.host}:${cq.author2.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-home-publish-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.publish3.host}:${cq.publish3.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-home-author-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>maven-vault-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-package-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <packageFile>${project.build.directory}/${project.build.finalName}.zip</packageFile>
-                                    <targetURL>http://${cq.author3.host}:${cq.author3.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <userId>${cq.user}</userId>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
     </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.portal</groupId>
+            <artifactId>portal-cms</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.portal</groupId>
+            <artifactId>portal-models</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.portal</groupId>
+            <artifactId>portal-services</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

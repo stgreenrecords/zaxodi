@@ -10,7 +10,11 @@ import java.util.Iterator;
 @Model(adaptables = Resource.class)
 public class FooterModel extends BaseModel {
 
-public String getFooterText(){
+    public FooterModel(Resource resource) {
+        super(resource);
+    }
+
+    public String getFooterText(){
     Iterator<Resource> resourceIterator = rootContentPage.getContentResource().getChildren().iterator();
     while (resourceIterator.hasNext()){
         Resource resource = resourceIterator.next();

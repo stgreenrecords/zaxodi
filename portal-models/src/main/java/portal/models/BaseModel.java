@@ -10,10 +10,8 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import portal.models.Constants;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -30,7 +28,6 @@ public class BaseModel {
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseModel.class);
 
-    @Self
     protected Resource selfResource;
 
     @Inject
@@ -42,6 +39,10 @@ public class BaseModel {
     protected Page rootContentPage;
 
     private Page currentPage;
+
+    public BaseModel(Resource resource) {
+        this.selfResource = resource;
+    }
 
     @PostConstruct
     protected void init() {

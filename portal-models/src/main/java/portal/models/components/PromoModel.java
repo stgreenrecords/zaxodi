@@ -16,6 +16,10 @@ public class PromoModel extends BaseModel {
 
     Map<String, PromoBean> promoBeanMap;
 
+    public PromoModel(Resource resource) {
+        super(resource);
+    }
+
     public Map<String, PromoBean> getPromoBeanMap() {
         if (promoBeanMap == null){
             setPromoBeanMap(collectInfo());

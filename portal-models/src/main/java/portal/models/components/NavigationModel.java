@@ -13,6 +13,10 @@ import java.util.List;
 @Model(adaptables=Resource.class)
 public class NavigationModel extends BaseModel {
 
+    public NavigationModel(Resource resource) {
+        super(resource);
+    }
+
     public String getImagePath(){
         Iterator<Resource> resourceIterator = rootContentPage.getContentResource().getChildren().iterator();
         while (resourceIterator.hasNext()){

@@ -24,6 +24,10 @@ import portal.models.beans.SimplePageBean;
 @Model(adaptables = Resource.class)
 public class ProductInfoModel extends BaseModel {
 
+    public ProductInfoModel(Resource resource) {
+        super(resource);
+    }
+
     public List<ProductInfoProperty> getItemProperties() {
         String resultProperty = getComponentProperties().get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_RESULTS, String.class);
         return parseResult(resultProperty);

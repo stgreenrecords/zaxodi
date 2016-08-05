@@ -1,7 +1,6 @@
 package portal.cms.pipeline;
 
 import com.day.cq.commons.jcr.JcrUtil;
-import org.apache.commons.lang.UnhandledException;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
@@ -43,7 +42,6 @@ public class PortalReplicationServlet extends SlingAllMethodsServlet {
             loginInCustomRepository();
             applyRecursiveReplication("/content/portal/catalog");
         } catch (RepositoryException e) {
-            throw (new UnhandledException("something exceptional occurred", e));
         } catch (NotBoundException e) {
             e.printStackTrace();
         }

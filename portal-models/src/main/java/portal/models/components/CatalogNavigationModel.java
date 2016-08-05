@@ -15,6 +15,10 @@ public class CatalogNavigationModel extends BaseModel {
 
     List<CatalogSuperCategoriesPageModel> catalogSuperCategoriesPageModelList = new ArrayList();
 
+    public CatalogNavigationModel(Resource resource) {
+        super(resource);
+    }
+
     public List<CatalogSuperCategoriesPageModel> getCatalogMap(){
         if (getCatalogRootPage() != null) {
             Iterator<Page> pageIterator = getCatalogRootPage().listChildren();

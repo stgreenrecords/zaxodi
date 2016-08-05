@@ -15,6 +15,10 @@ public class CarouselModel extends BaseModel {
 
     List<SlideBean> slideBeanList;
 
+    public CarouselModel(Resource resource) {
+        super(resource);
+    }
+
     public List<SlideBean> getSlideBeanList() {
         return slideBeanList == null ? collectSlides() : slideBeanList;
     }

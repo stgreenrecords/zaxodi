@@ -6,4 +6,8 @@ import portal.models.BaseModel;
 
 @Model(adaptables=Resource.class)
 public class ProductModel extends BaseModel {
+
+    public ProductModel(Resource resource) {
+        super(resource);
+    }
 }

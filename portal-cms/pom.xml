@@ -25,57 +25,74 @@
     </description>
 
     <dependencies>
-        <!-- DAY CQ -->
+        <!-- OSGi Dependencies -->
         <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-search</artifactId>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-commons</artifactId>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-api</artifactId>
+            <groupId>biz.aQute</groupId>
+            <artifactId>bndlib</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.day.cq.dam</groupId>
-            <artifactId>cq-dam-api</artifactId>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-content-sync</artifactId>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.engine</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.jcr</groupId>
-            <artifactId>jcr</artifactId>
-        </dependency>
+        <!-- Other Dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>aem-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.models.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit-addons</groupId>
+            <artifactId>junit-addons</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
@@ -84,35 +101,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-jcr2dav</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.squeakysand.osgi</groupId>
-            <artifactId>squeakysand-osgi</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.settings</artifactId>
-        </dependency>
-
     </dependencies>
 
 
@@ -150,327 +138,6 @@
         </resources>
     </build>
 
-    <profiles>
-        <profile>
-            <id>auto-deploy</id>
-            <!--
-                when activated, this profile will deploy and install the built CQ package to the target server.
-            -->
-            <build>
-                <plugins>
-                    <!--
-                        Use the sling plugin to automatically deploy the bundle to the JCR tree
-                    -->
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.host}:${cq.port}</slingUrl>
-                                    <!-- 
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
-        <profile>
-            <id>author-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-author</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.author.host}:${cq.author.port}</slingUrl>
-                                    <!-- 
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>dev-publish-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish.host}:${cq.publish.port}</slingUrl>
-                                    <!-- 
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-bundle-publish2</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish2.host}:${cq.publish2.port}</slingUrl>
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>prod-publish-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish.host}:${cq.publish.port}</slingUrl>
-                                    <!-- 
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-bundle-publish2</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish2.host}:${cq.publish2.port}</slingUrl>
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-bundle-publish3</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish3.host}:${cq.publish3.port}</slingUrl>
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-work-publish-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish2.host}:${cq.publish2.port}</slingUrl>
-                                    <!--
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-work-author-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.author2.host}:${cq.author2.port}</slingUrl>
-                                    <!--
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-home-publish-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.publish3.host}:${cq.publish3.port}</slingUrl>
-                                    <!--
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>portal-home-author-deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-bundle-publish</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${cq.author3.host}:${cq.author3.port}</slingUrl>
-                                    <!--
-                                        IMPORTANT: due to an issue with the 2.1.0 version of the maven-sling-plugin, the path specified by the slingUrlSuffix
-                                        parameter below will not be created automatically and so must already exist in your CQ instance BEFORE trying to use the
-                                        auto-deploy profile. See this link for further information:
-                                        http://mail-archives.apache.org/mod_mbox/sling-users/201204.mbox/%3CBD6ED82C-3223-41C2-BF15-C987D7AAFCE3@craigsdickson.com%3E
-                                    -->
-                                    <slingUrlSuffix>/apps/portal/install</slingUrlSuffix>
-                                    <user>${cq.user}</user>
-                                    <password>${cq.password}</password>
-                                    <usePut>true</usePut>
-                                    <failOnError>true</failOnError>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
 
 </project>

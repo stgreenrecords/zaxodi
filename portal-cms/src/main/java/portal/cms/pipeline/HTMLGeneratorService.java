@@ -10,7 +10,6 @@ import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
 import com.day.cq.wcm.api.WCMMode;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.UnhandledException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -207,11 +206,11 @@ public class HTMLGeneratorService extends SlingAllMethodsServlet {
         try {
             requestProcessor.processRequest(request, response, resolver);
         } catch (ServletException e) {
-            throw (new UnhandledException("something exceptional occurred", e));
+
         } catch (IOException e) {
             LOG.error("FAIL TO PROCESS REQUEST WITH PATH : " + path);
             LOG.error(e.getMessage());
-            throw (new UnhandledException("something exceptional occurred", e));
+
         }
 
         System.err.println("Parse " + path + " complete.");
@@ -220,8 +219,9 @@ public class HTMLGeneratorService extends SlingAllMethodsServlet {
             return out.toString("UTF-8");
         } catch (UnsupportedEncodingException e) {
             LOG.error(e.getMessage());
-            throw (new UnhandledException("something exceptional occurred", e));
+
         }
+        return null;
     }
 
     public String getPathToFileStore() {
@@ -245,15 +245,12 @@ public class HTMLGeneratorService extends SlingAllMethodsServlet {
         } catch (UnsupportedEncodingException e) {
             LOG.error("WRITE FILE FAIL : " + path);
             LOG.error(e.getMessage());
-            throw (new UnhandledException("something exceptional occurred", e));
         } catch (FileNotFoundException e) {
             LOG.error("WRITE FILE FAIL : " + path);
             LOG.error(e.getMessage());
-            throw (new UnhandledException("something exceptional occurred", e));
         } catch (IOException e) {
             LOG.error("WRITE FILE FAIL : " + path);
             LOG.error(e.getMessage());
-            throw (new UnhandledException("something exceptional occurred", e));
         }
 
         LOG.info("WRITE FILE : " + path + " - COMPLETE");
@@ -272,7 +269,6 @@ public class HTMLGeneratorService extends SlingAllMethodsServlet {
         } catch (IOException e) {
             LOG.error("WRITE FILE FAIL : " + path);
             LOG.error(e.getMessage());
-            throw (new UnhandledException("something exceptional occurred", e));
         }
     }
 

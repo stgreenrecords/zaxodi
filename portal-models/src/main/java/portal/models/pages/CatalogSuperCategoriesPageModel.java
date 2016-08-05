@@ -13,6 +13,10 @@ public class CatalogSuperCategoriesPageModel extends BaseModel {
 
     Map<String,List<CatalogCategoryPageModel>> catalogCategoryPageModelMap = new LinkedHashMap();
 
+    public CatalogSuperCategoriesPageModel(Resource resource) {
+        super(resource);
+    }
+
     public Map<String,List<CatalogCategoryPageModel>> getCatalogCategoryPageModelMap(){
         Iterator<Page> superCategoryPageIterator = getOwnPage().listChildren();
         while (superCategoryPageIterator.hasNext()){

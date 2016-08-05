@@ -7,7 +7,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.commons.lang.UnhandledException;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
@@ -43,7 +42,6 @@ public class UploadFromExternalResource extends SlingAllMethodsServlet {
         try {
             fillCatalogFromFile();
         } catch (RepositoryException e) {
-            throw (new UnhandledException("something exceptional occurred", e));
         }
     }
 
