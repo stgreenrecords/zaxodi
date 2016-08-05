@@ -6,7 +6,7 @@ var PORTAL = (function (PORTAL, $) {
         console.log('Component: "ProductInfo"');
     }
 
-    var submitDialog = function (dialog) {
+    PORTAL.modules.ProductInfo.submitDialog = function (dialog) {
         var properties = dialog.findBy(function (comp) {
             return comp["itemID"] == 'property';
         }, dialog);
@@ -52,7 +52,8 @@ var PORTAL = (function (PORTAL, $) {
 
     }
 
-    var loadDialogComponents = function (dialog) {
+    PORTAL.modules.ProductInfo.loadDialogComponents = function (dialog) {
+        console.log("HELLO");
         var currentPagePath = location.href;
         var parrentPath = currentPagePath.substring(0, currentPagePath.lastIndexOf("/"));
         var requestedURL = parrentPath + "/jcr:content/columns/parsys0/productlist.json";

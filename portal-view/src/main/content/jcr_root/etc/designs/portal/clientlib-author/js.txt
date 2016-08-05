@@ -1,2 +1,4 @@
-#base=widgets/js
+#base=widgets
 multipanel.js
+CatalogBooleanNumberField.js
+CatalogSizeField.js
