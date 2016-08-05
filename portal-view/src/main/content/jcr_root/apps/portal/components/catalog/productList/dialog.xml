@@ -33,6 +33,7 @@
                                         defaultValue="simpletext"
                                         key="typeSelection"
                                         type="select"
+                                        baseCls="multipanel-selection"
                                         xtype="selection">
                                     <options jcr:primaryType="cq:WidgetCollection">
                                         <simpleText
