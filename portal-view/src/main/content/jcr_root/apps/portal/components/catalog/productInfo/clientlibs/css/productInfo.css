@@ -44,7 +44,7 @@
 }
 
 .itemsInfo{
-    margin-top: 100px;
+    margin-top: 50px;
     border-top: 3px solid #6d6767;
 }
 
@@ -78,3 +78,15 @@
     font-family: inherit;
     color: #5e614e;
 }
+
+.photo-item img{
+    width: 200px;
+    height: 90px;
+}
+
+#photo-grid-gallery{
+    padding-top: 50px;
+    border-top: 3px solid #6d6767;
+    display: flex;
+}
+

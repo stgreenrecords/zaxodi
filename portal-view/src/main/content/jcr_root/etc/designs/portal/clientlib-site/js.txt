@@ -6,3 +6,6 @@ bootstrap.js
 main.js
 media.js
 common.js
+
+#base=external/js/photoGallery
+jquery.magnific-popup.min.js

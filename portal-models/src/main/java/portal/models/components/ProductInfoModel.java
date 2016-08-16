@@ -1,5 +1,6 @@
 package portal.models.components;
 
+import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -141,6 +142,18 @@ public class ProductInfoModel extends BaseModel {
             return null;
         }
         return mainPropertyList;
+    }
+
+    public List<String> getPhotosList(){
+        List<String> photosList = new ArrayList<String>();
+        String associatedDAMPath = getCurrentPage().getPath().replace("/content","/content/dam");
+        Resource associatedDAMResource = getResourceResolver().getResource(associatedDAMPath);
+        for (Resource resource : associatedDAMResource.getChildren()){
+            if (!resource.getName().equals(JcrConstants.JCR_CONTENT)) {
+                photosList.add(resource.getPath());
+            }
+        }
+        return photosList;
     }
 
 }

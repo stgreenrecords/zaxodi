@@ -46,7 +46,18 @@
                     </div>
                 </sly>
             </div>
+        </div>
 
+        <div id="photo-grid-gallery">
+            <sly data-sly-list.fileName="${ProductInfoModel.photosList}">
+                <div class="photo-item" data-mfp-src="${fileName}">
+                    <div class="wrapper-img">
+                        <a href='${fileName}'>
+                            <img src='${fileName}' alt="">
+                        </a>
+                    </div>
+                </div>
+            </sly>
         </div>
 
         <div class="itemsInfo">

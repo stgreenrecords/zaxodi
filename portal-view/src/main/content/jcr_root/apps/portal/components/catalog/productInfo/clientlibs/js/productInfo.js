@@ -4,7 +4,44 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.ProductInfo.init = function () {
         console.log('Component: "ProductInfo"');
+
+        var $self = $("#photo-grid-gallery");
+
+
+        $($self).find('img').each(function () {
+            $(this).load(function () {
+                if ($(this).height() <= $(this).width()) {
+                    $(this).addClass('landscape');
+                }
+            });
+        });
+
+        $self.magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            closeOnContentClick: false,
+            closeBtnInside: false,
+            mainClass: 'mfp-with-zoom mfp-img-mobile',
+            image: {
+                verticalFit: true
+            },
+            gallery: {
+                enabled: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300, // don't foget to change the duration also in CSS
+                opener: function (element) {
+                    return element.find('img');
+                }
+            }
+        });
+
     }
+
+
+
+
 
     PORTAL.modules.ProductInfo.submitDialog = function (dialog) {
         var properties = dialog.findBy(function (comp) {
@@ -53,6 +90,7 @@ var PORTAL = (function (PORTAL, $) {
     }
 
     PORTAL.modules.ProductInfo.loadDialogComponents = function (dialog) {
+
         var currentPagePath = location.href;
         var parrentPath = currentPagePath.substring(0, currentPagePath.lastIndexOf("/"));
         var requestedURL = parrentPath + "/jcr:content/columns/parsys0/productlist.json";

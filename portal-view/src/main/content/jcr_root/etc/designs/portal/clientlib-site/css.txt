@@ -3,3 +3,6 @@ style.css
 #base=external/css
 bootstrap.css
 bootstrap-theme.css
+
+#base=external/css/photoGallery
+magnific-popup.less
