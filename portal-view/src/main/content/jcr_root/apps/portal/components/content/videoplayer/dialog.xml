@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Video Player"
+    xtype="tabpanel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <tab1
+            jcr:primaryType="cq:Widget"
+            title="Edit Video Player"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <url
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Provide the URL of a video"
+                    fieldLabel="YouTube link"
+                    name="./videourl"
+                    xtype="textfield"/>
+                <videosize
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Input the desired size of the embedded video (width x height)"
+                    fieldLabel="Video size"
+                    heightParameter="./videoHeight"
+                    widthParameter="./videoWidth"
+                    xtype="sizefield"/>
+            </items>
+        </tab1>
+    </items>
+</jcr:root>

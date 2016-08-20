@@ -40,6 +40,19 @@ var PORTAL = function (PORTAL, $) {
         document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString() + "; path=" + path;
     }
 
+    PORTAL.utils.getQueryParameterFromUrl = function (url, queryParameter) {
+        var resultParameter;
+        if (url.indexOf('?' != -1)) {
+            var allParametersArray = url.split('?')[1].split('&');
+            allParametersArray.forEach(function (itemArray) {
+                if (itemArray.indexOf(queryParameter + "=" != -1)) {
+                    resultParameter = itemArray.split(queryParameter + "=")[1];
+                }
+            });
+        }
+        return resultParameter;
+    }
+
     return PORTAL;
 
 }(PORTAL || {}, jQuery);
