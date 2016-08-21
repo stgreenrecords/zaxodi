@@ -9,3 +9,6 @@ common.js
 
 #base=external/js/photoGallery
 jquery.magnific-popup.min.js
+
+#base=external/js/google
+recaptcha.js
