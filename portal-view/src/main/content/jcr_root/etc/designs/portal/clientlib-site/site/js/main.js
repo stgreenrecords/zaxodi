@@ -5,17 +5,22 @@ var PORTAL = (function (PORTAL, $) {
     // Augmenting shared objects and arrays
     PORTAL.modules = PORTAL.modules || {};
 
-    PORTAL.initMods = function() {
-        // Run required modules with default selector
-        if (typeof PORTAL.modules === 'undefined') {
-            console.log("No PORTAL modules found for page.");
-            return;
-        }
+    PORTAL.initMods = function () {
         for (var mod in PORTAL.modules) {
             try {
-                PORTAL.modules[mod].init();
-            } catch(e) {
-                console.log("Can't init mod: "+PORTAL.modules[mod].name);
+                var $self = $(PORTAL.modules[mod].selfSelector);
+                // Run required modules with default selector
+                if (typeof PORTAL.modules === 'undefined') {
+                    console.log("No PORTAL modules found for page.");
+                    return;
+                }
+                if ($self.length) {
+                    PORTAL.modules[mod].init($self);
+                }
+            } catch (e) {
+                if (PORTAL.utils.isAuthMode()) {
+                    console.log(e);
+                }
             }
         }
     };
@@ -25,6 +30,6 @@ var PORTAL = (function (PORTAL, $) {
 })(PORTAL || {}, jQuery);
 
 
-jQuery(function() {
+jQuery(function () {
     PORTAL.initMods();
 });

@@ -1,0 +1,27 @@
+<sly data-sly-use.loginPageModel="portal.models.pages.LoginPageModel">
+    <div class="registration-ui">
+        <div id="registrationReferrer" data-referer="${loginPageModel.referrer}"></div>
+        <div class="registrationWrap">
+            <div class="messageBlock"></div>
+            <div class="registrationBlock">
+                <h3>Регистрация</h3>
+                <input id="emailRegistrationInput" type="text" placeholder="e-mail" class="registrationBlock_input">
+                <input id="passRegistrationInput" type="password" placeholder="Пароль" class="registrationBlock_input">
+                <input id="passRegistrationAgainInput" type="password" placeholder="Пароль ещё раз"
+                       class="registrationBlock_input">
+
+                <div class="g-recaptcha" data-sitekey="6LdaLRMTAAAAAAyEspeVXxacyg4sWiwWSNJJTJvo"></div>
+                <input id="submitRegistrationInput" data-type="registration" type="submit" value="Зарегистрироваться"
+                       class="registrationBlock_input">
+            </div>
+            <div class="loginBlock">
+                <h3>Вход</h3>
+                <input id="emailLoginInput" type="text" placeholder="e-mail" class="registrationBlock_input">
+                <input id="passLoginInput" type="password" placeholder="Пароль" class="registrationBlock_input">
+                <input id="submitLoginInput" type="submit" data-type="login" value="Войти"
+                       class="registrationBlock_input">
+            </div>
+        </div>
+    </div>
+</sly>
+<div data-sly-resource="parsys"></div>

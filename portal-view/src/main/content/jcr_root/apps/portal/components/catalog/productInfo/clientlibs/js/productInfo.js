@@ -2,11 +2,11 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.ProductInfo = {};
 
-    PORTAL.modules.ProductInfo.init = function () {
+    PORTAL.modules.ProductInfo.selfSelector = "#photo-grid-gallery";
+
+    PORTAL.modules.ProductInfo.init = function ($self) {
+
         console.log('Component: "ProductInfo"');
-
-        var $self = $("#photo-grid-gallery");
-
 
         $($self).find('img').each(function () {
             $(this).load(function () {

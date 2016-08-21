@@ -2,11 +2,12 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.ProductList = {};
 
-    PORTAL.modules.ProductList.init = function () {
+    PORTAL.modules.ProductList.selfSelector = ".product-list-block";
+
+    PORTAL.modules.ProductList.init = function ($self) {
 
         console.log('Component: "ProductList"');
 
-        var $self = $(".product-list-block");
         var $filterPrice = $self.find("div#filterPrice").change(function () {
             doFilter({
                 filterType: "number",

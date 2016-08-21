@@ -1,0 +1,60 @@
+.registration-ui {
+  margin-top: 70px;
+}
+
+.registrationWrap {
+  display: table;
+  margin: 0 auto;
+}
+
+.registrationBlock {
+  float: left;
+  padding-right: 250px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.messageBlock {
+  text-align: center;
+  padding-bottom: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: sans-serif;
+  color: rgb(214, 83, 83);
+}
+
+.loginBlock {
+  padding-left: 250px;
+  float: left;
+}
+
+.registrationWrap h3 {
+  font-weight: 600;
+}
+
+.registrationBlock_input {
+  width: 100%;
+  padding: 14px 20px 12px;
+  margin: 0 0 -1px;
+  position: relative;
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  box-sizing: border-box;
+  font-size: 19px;
+  transition: border-color .1s linear;
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+  font-family: Arial, Helvetica, sans-serif;
+  border-color: #b4b4b4;
+  z-index: 2;
+}
+
+#submitRegistrationInput:active, #submitLoginInput:active {
+  background-color: #909090;
+}
+
+#submitRegistrationInput, #submitLoginInput {
+  background-color: #40403C;
+  color: white;
+  cursor: pointer;
+}
