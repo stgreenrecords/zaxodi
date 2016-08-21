@@ -148,9 +148,11 @@ public class ProductInfoModel extends BaseModel {
         List<String> photosList = new ArrayList<String>();
         String associatedDAMPath = getCurrentPage().getPath().replace("/content","/content/dam");
         Resource associatedDAMResource = getResourceResolver().getResource(associatedDAMPath);
-        for (Resource resource : associatedDAMResource.getChildren()){
-            if (!resource.getName().equals(JcrConstants.JCR_CONTENT)) {
-                photosList.add(resource.getPath());
+        if (associatedDAMResource != null){
+            for (Resource resource : associatedDAMResource.getChildren()){
+                if (!resource.getName().equals(JcrConstants.JCR_CONTENT)) {
+                    photosList.add(resource.getPath());
+                }
             }
         }
         return photosList;

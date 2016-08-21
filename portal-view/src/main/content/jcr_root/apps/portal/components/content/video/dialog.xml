@@ -13,7 +13,7 @@
                     jcr:primaryType="cq:Widget"
                     fieldDescription="Provide the URL of a video"
                     fieldLabel="YouTube link"
-                    name="./videourl"
+                    name="./link"
                     xtype="textfield"/>
                 <videosize
                     jcr:primaryType="cq:Widget"

@@ -1,0 +1,6 @@
+<sly data-sly-test="${!properties.videourl  && (wcmmode.edit || wcmmode.design)}">
+    <h3>Please edit video player dialog</h3>
+</sly>
+<div class="video-player" data-url="${properties.link}">
+    <iframe width="${properties.videoWidth ? properties.videoWidth : '700'}" height="${properties.videoHeight ? properties.videoHeight : 400}" frameborder="0" allowfullscreen></iframe>
+</div>
