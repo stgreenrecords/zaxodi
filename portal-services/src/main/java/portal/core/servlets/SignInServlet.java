@@ -32,9 +32,6 @@ public class SignInServlet extends SlingAllMethodsServlet {
     private static final Logger LOG = LoggerFactory.getLogger(SignInServlet.class);
 
     @Reference
-    private MailService mailService;
-
-    @Reference
     ServiceUtils serviceUtils;
 
     @Override
@@ -69,7 +66,7 @@ public class SignInServlet extends SlingAllMethodsServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         if (userDAO.addNewUser(email, pass)) {
-            if (mailService.sendRegistrationMail(request)) {
+            if (true/*mailService.sendRegistrationMail(request)*/) {
                 return "registrationLetterSuccessSend";
             } else {
                 return "registrationLetterFailSend";

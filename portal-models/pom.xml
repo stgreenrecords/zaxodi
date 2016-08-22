@@ -112,6 +112,9 @@
                 <configuration>
                     <instructions>
                         <Sling-Model-Packages>portal.models</Sling-Model-Packages>
+                        <Export-Package>
+                            portal.models.*;
+                        </Export-Package>
                         <Import-Package>
                             *;resolution:=optional
                         </Import-Package>

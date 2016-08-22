@@ -10,12 +10,17 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.services.users.UserDAO;
+import portal.core.services.users.beans.Comment;
+import portal.core.services.users.beans.Seller;
 import portal.core.utils.ServiceUtils;
+import portal.models.components.ProductInfoModel;
 
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import java.security.Principal;
+import java.util.Date;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -61,6 +66,22 @@ public class UserDAOImpl implements UserDAO {
         return false;
     }
 
+    public boolean updateSeller(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber, String sex, List<ProductInfoModel> productInfoModels) {
+        return false;
+    }
+
+    public boolean updateUser(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber, String sex, List<ProductInfoModel> productInfoModels, List<Comment> commentList) {
+        return false;
+    }
+
+    public boolean deleteUser(String email) {
+        return false;
+    }
+
+    public boolean addNewSeller(String email, String pass) {
+        return false;
+    }
+
     public void addVerifyStatus(String email) {
         try {
             PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
@@ -94,6 +115,14 @@ public class UserDAOImpl implements UserDAO {
             LOG.error(e.getMessage());
         }
         return false;
+    }
+
+    public Seller getSeller(String email) {
+        return null;
+    }
+
+    public portal.core.services.users.beans.User getUser(String email) {
+        return null;
     }
 
 
