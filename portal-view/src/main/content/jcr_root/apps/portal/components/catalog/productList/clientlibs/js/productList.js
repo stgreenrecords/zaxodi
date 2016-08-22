@@ -132,119 +132,14 @@ var PORTAL = (function (PORTAL, $) {
                                 });
                             }
                         } else {
-                            switch (filterItem.filterType) {
-                                case 'size':
-                                    var sortArrays = splitOnTwoArrayAndSort(valueArray);
-                                    if (sortArrays.startParamArray && sortArrays.endParamArray) {
-                                        filterItem.startParamArray = sortArrays.startParamArray;
-                                        filterItem.endParamArray = sortArrays.endParamArray;
-                                        var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
-                                        var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($inputsStorage.append($startSelect).append(" x ").append($endSelect)));
-                                        sortArrays.startParamArray.forEach(function (startItem) {
-                                            $startSelect.append($("<option>" + startItem + "</option>"));
-                                        });
-                                        sortArrays.endParamArray.forEach(function (endItem) {
-                                            $endSelect.append($("<option>" + endItem + "</option>"));
-                                        });
-                                    }
-                                    break;
-                                case 'simpletext':
-                                    if (valueArray.length > 0) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($select.append($defaultSelectOption)));
-                                        valueArray.forEach(function (valueItem) {
-                                            var $enumOption = $("<option>").text(valueItem.value);
-                                            $($select).append($enumOption);
-                                        });
-                                    }
-                                    break;
-                                case 'interval':
-                                    var sortArrays = splitOnTwoArrayAndSort(valueArray);
-                                    if (sortArrays.startParamArray && sortArrays.endParamArray) {
-                                        filterItem.startParamArray = sortArrays.startParamArray;
-                                        filterItem.endParamArray = sortArrays.endParamArray;
-                                        var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
-                                        var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($startSelect).append(" - ").append($endSelect)));
-                                        sortArrays.startParamArray.forEach(function (startItem) {
-                                            $startSelect.append($("<option>" + startItem + "</option>"));
-                                        });
-                                        sortArrays.endParamArray.forEach(function (endItem) {
-                                            $endSelect.append($("<option>" + endItem + "</option>"));
-                                        });
-                                    }
-                                    break;
-                                case 'attitude':
-                                    var sortArrays = splitOnTwoArrayAndSort(valueArray);
-                                    if (sortArrays.startParamArray && sortArrays.endParamArray) {
-                                        filterItem.startParamArray = sortArrays.startParamArray;
-                                        filterItem.endParamArray = sortArrays.endParamArray;
-                                        var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
-                                        var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($startSelect).append(" / ").append($endSelect)));
-                                        sortArrays.startParamArray.forEach(function (startItem) {
-                                            $startSelect.append($("<option>" + startItem + "</option>"));
-                                        });
-                                        sortArrays.endParamArray.forEach(function (endItem) {
-                                            $endSelect.append($("<option>" + endItem + "</option>"));
-                                        });
-                                    }
-                                    break;
-                                case 'enum':
-                                    if (valueArray.length > 0) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($select.append($defaultSelectOption)));
-                                        valueArray.forEach(function (valueItem) {
-                                            var $enumOption = $("<option>").text(valueItem.value);
-                                            $($select).append($enumOption);
-                                        });
-                                    }
-                                    break;
-                                case 'number':
-                                    $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($inputStartParam).append($inputEndParam)));
-                                    break;
-                                case 'float':
-                                    $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($inputStartParamFloat).append($inputEndParamFloat)));
-                                    break;
-                                case 'numberBoolean':
-                                    if (filterItem.count && filterItem.count == 1) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($checkbox));
-                                    }
-                                    if (filterItem.count && filterItem.count > 1) {
-                                        $sortPropertiesFilter.append($sortItemDiv.append($spanSortAttrName).append($spanUnits).append($checkbox).append($inputCount));
-                                    }
-                                    break;
-                            }
-
+                            var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
+                            $sortPropertiesFilter.append(PORTAL.catalogStorage.properties[filterItem.filterType].
+                                filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount));
                         }
                     }
                 });
             }
         };
-
-        var splitOnTwoArrayAndSort = function (filterValueArray) {
-            var startParamArray = [];
-            var endParamArray = [];
-            filterValueArray.forEach(function (valueItem) {
-                var splitValue = valueItem.value.split(",");
-                var parseValueFirst = parseFloat(splitValue[0]);
-                var parseValueSecond = parseFloat(splitValue[1]);
-                if (splitValue[0] && startParamArray.indexOf(parseValueFirst) == -1) {
-                    startParamArray.push(parseFloat(parseValueFirst));
-                }
-                if (splitValue[1] && endParamArray.indexOf(parseValueSecond) == -1) {
-                    endParamArray.push(parseFloat(parseValueSecond));
-                }
-            });
-            function compareNumbers(firstValue, secondValue) {
-                return firstValue - secondValue;
-            }
-
-            var resultSortArrays = {
-                'startParamArray': startParamArray.sort(compareNumbers),
-                'endParamArray': endParamArray.sort(compareNumbers)
-            };
-            return resultSortArrays;
-        }
 
         var drawProductList = function () {
             currentPagePosition = 1;
@@ -335,15 +230,15 @@ var PORTAL = (function (PORTAL, $) {
 
             var priceMessage;
             if (item.price) {
-               priceMessage = item.price + " рублей.";
+                priceMessage = item.price + " рублей.";
             } else {
-              priceMessage = "Цена не указана.";
+                priceMessage = "Цена не указана.";
             }
             $itemProductList.append($("" +
                 "<div class='itemBlock'>" +
                 "   <div class='item-image'>" +
-                        "<div class='item-product-title'><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></div>" +
-                        "<img class='itemImage' src='" + item.image + "' alt='img'>" +
+                "<div class='item-product-title'><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></div>" +
+                "<img class='itemImage' src='" + item.image + "' alt='img'>" +
                 "   </div>" +
                 "   <div class='itemDiscription'>" + discription + "</div>" +
                 "   <div class='itemPriceBlock'>" + priceMessage + "</div>" +
@@ -525,6 +420,31 @@ var PORTAL = (function (PORTAL, $) {
             drawProductList();
         };
 
+    }
+
+    PORTAL.modules.ProductList.splitOnTwoArrayAndSort = function (filterValueArray) {
+        var startParamArray = [];
+        var endParamArray = [];
+        filterValueArray.forEach(function (valueItem) {
+            var splitValue = valueItem.value.split(",");
+            var parseValueFirst = parseFloat(splitValue[0]);
+            var parseValueSecond = parseFloat(splitValue[1]);
+            if (splitValue[0] && startParamArray.indexOf(parseValueFirst) == -1) {
+                startParamArray.push(parseFloat(parseValueFirst));
+            }
+            if (splitValue[1] && endParamArray.indexOf(parseValueSecond) == -1) {
+                endParamArray.push(parseFloat(parseValueSecond));
+            }
+        });
+        function compareNumbers(firstValue, secondValue) {
+            return firstValue - secondValue;
+        }
+
+        var resultSortArrays = {
+            'startParamArray': startParamArray.sort(compareNumbers),
+            'endParamArray': endParamArray.sort(compareNumbers)
+        };
+        return resultSortArrays;
     }
 
     return PORTAL;

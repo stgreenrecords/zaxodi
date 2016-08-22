@@ -1,1 +1,11 @@
 js/productInfo.js
+
+#base=js/properties
+attitude.js
+enum.js
+float.js
+interval.js
+number.js
+numberBoolean.js
+simpletext.js
+size.js

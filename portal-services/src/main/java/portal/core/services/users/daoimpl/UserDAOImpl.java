@@ -13,7 +13,6 @@ import portal.core.services.users.UserDAO;
 import portal.core.services.users.beans.Comment;
 import portal.core.services.users.beans.Seller;
 import portal.core.utils.ServiceUtils;
-import portal.models.components.ProductInfoModel;
 
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
@@ -66,11 +65,11 @@ public class UserDAOImpl implements UserDAO {
         return false;
     }
 
-    public boolean updateSeller(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber, String sex, List<ProductInfoModel> productInfoModels) {
+    public boolean updateSeller(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber, String sex) {
         return false;
     }
 
-    public boolean updateUser(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber, String sex, List<ProductInfoModel> productInfoModels, List<Comment> commentList) {
+    public boolean updateUser(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber) {
         return false;
     }
 
