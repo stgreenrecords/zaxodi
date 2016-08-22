@@ -17,11 +17,19 @@ var PORTAL = (function (PORTAL, $) {
         },
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            var $simpleFilter = $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($select.append($defaultSelectOption));
-            valueArray.forEach(function (valueItem) {
-                var $enumOption = $("<option>").text(valueItem.value);
-                $($select).append($enumOption);
+            var $shortList = $("<ul class='filter-list-ul'>");
+            var $filterWrapper = $("<div class='filter-list-wrapper'></div>").append($shortList);
+            valueArray.forEach(function (valueItem, counter) {
+                if (counter < 4 ){
+                    var $listItem = $("<li class='filter-list-item'><input type='checkbox'/><span class='short-list-item-title'>"+valueItem.value+"</span></li>");
+                    $shortList.append($listItem);
+                }
             });
+            var $simpleFilter = $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($filterWrapper);
+            var $fullListButton = $("<div class='full-list-container'><span class='full-list-count'>Всего "+valueArray.length+" варианта &#9654;</span></div>");
+            if (valueArray.length > 4) {
+                $filterWrapper.append($fullListButton);
+            }
             return $simpleFilter;
         }
 
