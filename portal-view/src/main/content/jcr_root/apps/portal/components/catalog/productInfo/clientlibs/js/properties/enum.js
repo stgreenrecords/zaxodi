@@ -23,6 +23,8 @@ var PORTAL = (function (PORTAL, $) {
             $enumBlock.find(".filter-list-item").remove();
             $innerListItem = $enumBlock.find(".full-list-item").clone();
             $enumBlock.find(".full-list-item").remove();
+            var $buttonContainer = $enumBlock.find(".button-count-all");
+            var $fullListContainer = $enumBlock.find(".full-list-container");
             valueArray.forEach(function (valueItem, counter) {
                 if (counter < 4 ){
                     $mainListItem.find(".short-list-item-title").text(valueItem.value);
@@ -33,10 +35,21 @@ var PORTAL = (function (PORTAL, $) {
 
             });
             if (valueArray.length > 4) {
-                $enumBlock.find(".button-count-all-insert").text(valueArray.length);
+                $buttonContainer.find(".button-count-all-insert").text(valueArray.length);
+                $buttonContainer.click(function() {
+                    $fullListContainer.css("display","block");
+                });
+                $(document).click(function(event){
+                    var target = $(event.target);
+                    var parentOfTarget = target.parent();
+                    if (!target.hasClass("full-list-container") && !target.hasClass("full-list-item")
+                        && !parentOfTarget.hasClass("full-list-item") && !parentOfTarget.hasClass("button-count-all")){
+                        $fullListContainer.css("display","none");
+                    }
+                });
             } else {
-                $enumBlock.find(".button-count-all").remove();
-                $enumBlock.find(".full-list-container").remove();
+                $buttonContainer.remove();
+                $fullListContainer.remove();
             }
 
             return $enumBlock;

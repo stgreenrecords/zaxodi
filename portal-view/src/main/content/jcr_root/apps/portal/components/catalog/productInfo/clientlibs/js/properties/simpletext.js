@@ -36,13 +36,17 @@ var PORTAL = (function (PORTAL, $) {
             if (valueArray.length > 4) {
                 $buttonContainer.find(".button-count-all-insert").text(valueArray.length);
                 $buttonContainer.click(function() {
-                    $fullListContainer.attr('tabindex',-1).focus(function(){
-                    });
+                    $simpletextBlock.addClass("active-popup-filter");
                     $fullListContainer.css("display","block");
-                    $fullListContainer.focus();
                 });
-                $fullListContainer.focusout(function() {
-                    $(this).css("display","none");
+                $(document).click(function(event){
+                    var target = $(event.target);
+                    var isActive;
+                    var parentOfTarget = target.parents(".active-popup-filter");
+                    console.log(parentOfTarget);
+                    if (parentOfTarget.length){
+                        $fullListContainer.css("display","none");
+                    }
                 });
             } else {
                 $buttonContainer.remove();
