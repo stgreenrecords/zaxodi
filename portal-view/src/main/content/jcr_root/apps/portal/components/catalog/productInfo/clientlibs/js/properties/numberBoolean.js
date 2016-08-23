@@ -20,13 +20,35 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $numberBooleanBlock.find(".sortAttrName").text(filterItem.filterName);
             if (filterItem.count && filterItem.count == 1) {
-                return $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($checkbox);
+                $numberBooleanBlock.find(".inputFilter").remove();
             }
-            if (filterItem.count && filterItem.count > 1) {
-                return $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($checkbox).append($inputCount);
-            }
+            var $checkbox = $numberBooleanBlock.find(".filterCheckbox").change(function () {
+                var countInput = $(this).siblings(".countInput");
+                if (!$(this).prop('checked')) {
+                    if (countInput && (countInput.val() > 0)) {
+                        countInput.val('');
+                    }
+                } else {
+                    if (countInput && (countInput.val() < 1)) {
+                        countInput.val(1);
+                    }
+                }
+            });
+            var $inputCount = $numberBooleanBlock.find(".countInput").change(function () {
+                var checkbox = $(this).siblings(".filterCheckbox");
+                if ($(this).val() < 1) {
+                    $(this).val('1');
+                }
+                if (!isNaN($(this).val())) {
+                    checkbox.prop('checked', true);
+                } else {
+                    checkbox.prop('checked', false);
+                }
+            });
+            return $numberBooleanBlock;
         }
 
 
@@ -36,3 +58,9 @@ var PORTAL = (function (PORTAL, $) {
 
 })(PORTAL || {}, jQuery);
 
+/*
+<div class="sortItem portal-field-numberBoolean">
+    <div class="sortAttrName"></div>
+    <input type="checkbox" class="filterCheckbox">
+    <input class="inputFilter countInput" type="number" placeholder="количество">
+    </div>*/

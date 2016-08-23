@@ -21,20 +21,16 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            filterItem.startParamArray = sortArrays.startParamArray;
-            filterItem.endParamArray = sortArrays.endParamArray;
-            var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
-            var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-            var $interval = $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($startSelect).append(" - ").append($endSelect));
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $intervalBlock.find(".sortAttrName").text(filterItem.filterName);
+            $intervalBlock.find(".units").text(filterItem.units);
             sortArrays.startParamArray.forEach(function (startItem) {
-                $startSelect.append($("<option>" + startItem + "</option>"));
+                $intervalBlock.find(".startSelectFilter").append("<option>"+startItem+"</option>");
             });
             sortArrays.endParamArray.forEach(function (endItem) {
-                $endSelect.append($("<option>" + endItem + "</option>"));
+                $intervalBlock.find(".endSelectFilter").append("<option>"+endItem+"</option>");
             });
-
-            return $interval;
+            return $intervalBlock;
         }
 
     }

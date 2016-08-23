@@ -165,7 +165,44 @@
     font-weight: 700;
 }
 
+.templates-properties-storage{
+    display: none;
+}
 
+.button-count-all{
+    border: 1px solid #b7aaaa;
+    border-radius: 5%;
+    margin-top: 5px;
+    text-align: center;
+    height: 25px;
+}
+
+.button-count-all:hover{
+    cursor: pointer;
+}
+
+.full-list-container{
+    position: absolute;
+    right: 350px;
+    border: 2px solid #a09b9b;
+    background: #fff;
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,.3),0 0 0 1px rgba(0,0,0,.05);
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 15;
+}
+
+.full-list-container .full-list-item{
+    margin: 5px;
+}
+
+.button-count-all span{
+    vertical-align: middle;
+}
+
+.button-count-all-arrow{
+    padding-left: 30px;
+}
 
 @media screen and (max-width: 1400px){
     .itemProductList{

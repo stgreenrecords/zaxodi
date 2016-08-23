@@ -14,18 +14,7 @@ var PORTAL = (function (PORTAL, $) {
                 filterName: "Цена"
             }, this);
         });
-        var $filterBrand = $self.find("div#filterBrand").change(function () {
-            doFilter({
-                filterType: "simpletext",
-                filterName: "Марка(Бренд)"
-            }, this);
-        });
-        var $filterModel = $self.find("div#filterModel").change(function () {
-            doFilter({
-                filterType: "simpletext",
-                filterName: "Модель"
-            }, this);
-        });
+
         var $itemProductList = $self.find("div.itemProductList");
         var $sortPropertiesFilter = $self.find("div.sortPropertiesFilter");
 
@@ -72,71 +61,26 @@ var PORTAL = (function (PORTAL, $) {
 
             if (filterProperties) {
                 filterProperties.forEach(function (filterItem) {
-                    var $sortItemDiv = $("<div>").addClass("sortItem");
-                    $sortItemDiv.change(function () {
-                        doFilter(filterItem, this);
-                    });
-                    var $spanSortAttrName = $("<div>").attr("filterType", filterItem.filterType).text(filterItem.filterName).addClass("sortAttrName");
-                    var $spanUnits = $("<span>").addClass("units");
-                    if (filterItem.units) {
-                        $spanUnits.text(" (" + filterItem.units + ")");
-                    }
-                    var $br = $("</br>");
-                    var $select = $("<select>");
-                    var $endSelect = $("<select class='startSelectFilter'><options>Выбрать</option></select>");
-                    var $option = $("<option>");
-                    var $defaultSelectOption = $("<option>").text("Выбрать");
-                    var $inputStartParam = $("<input>").addClass("inputFilter numberStartInput").attr("type", "number").attr("placeholder", "от");
-                    var $inputEndParam = $("<input>").addClass("inputFilter numberEndInput").attr("type", "number").attr("placeholder", "до");
-                    var $inputStartParamFloat = $("<input>").addClass("inputFilter numberStartInput").attr("type", "text").attr("placeholder", "от");
-                    var $inputEndParamFloat = $("<input>").addClass("inputFilter numberEndInput").attr("type", "text").attr("placeholder", "до");
-                    var $inputsStorage = $("<div>").addClass("inputs-storage");
-                    var $checkbox = $("<input>").attr("type", "checkbox").addClass("filterCheckbox").change(function () {
-                        var countInput = $(this).siblings(".countInput");
-                        if (!$(this).prop('checked')) {
-                            if (countInput && (countInput.val() > 0)) {
-                                countInput.val('');
-                            }
-                        } else {
-                            if (countInput && (countInput.val() < 1)) {
-                                countInput.val(1);
-                            }
-                        }
-                    });
-                    var $inputCount = $("<input>").addClass("inputFilter countInput").attr("type", "number").attr("placeholder", "количество").change(function () {
-                        var checkbox = $(this).siblings(".filterCheckbox");
-                        if ($(this).val() < 1) {
-                            $(this).val('1');
-                        }
-                        if (!isNaN($(this).val())) {
-                            checkbox.prop('checked', true);
-                        } else {
-                            checkbox.prop('checked', false);
-                        }
-                    });
+                    var $simpletextBlock = $(".templates-properties-storage .portal-field-simpletext").clone();
+                    var $enumBlock = $(".templates-properties-storage .portal-field-enum").clone();
+                    var $numberBooleanBlock = $(".templates-properties-storage .portal-field-numberBoolean").clone();
+                    var $numberBlock = $(".templates-properties-storage .portal-field-number").clone();
+                    var $floatBlock = $(".templates-properties-storage .portal-field-float").clone();
+                    var $attitudeBlock = $(".templates-properties-storage .portal-field-attitude").clone();
+                    var $intervalBlock = $(".templates-properties-storage .portal-field-interval").clone();
+                    var $sizeBlock = $(".templates-properties-storage .portal-field-size").clone();
 
                     var valueArray = filterItem.values || [];
-                    if (filterItem.filterName == 'Марка(Бренд)') {
-                        if (valueArray.length > 0) {
-                            valueArray.forEach(function (valueItem) {
-                                var optionBrand = $("<option>").text(valueItem.value);
-                                $($filterBrand).find("select").append(optionBrand);
-                            });
-                        }
-                    } else {
-                        if (filterItem.filterName == 'Модель') {
-                            if (valueArray.length > 0) {
-                                valueArray.forEach(function (valueItem) {
-                                    var optionBrand = $("<option>").text(valueItem.value);
-                                    $($filterModel).find("select").append(optionBrand);
-                                });
-                            }
-                        } else {
-                            var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
-                            $sortPropertiesFilter.append(PORTAL.catalogStorage.properties[filterItem.filterType].
-                                filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount));
-                        }
-                    }
+
+                    var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
+
+                    var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.filterType].
+                        filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock);
+
+                    $sortPropertiesFilter.append(fieldFromStorage);
+                    fieldFromStorage.change(function () {
+                        doFilter(filterItem, this);
+                    });
                 });
             }
         };

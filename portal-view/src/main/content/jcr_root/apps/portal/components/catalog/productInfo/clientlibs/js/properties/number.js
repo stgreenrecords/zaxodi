@@ -16,8 +16,10 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            return $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($inputStartParam).append($inputEndParam));
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $numberBlock.find(".sortAttrName").text(filterItem.filterName);
+            $numberBlock.find(".units").text(filterItem.units);
+            return $numberBlock;
         }
 
     }
@@ -25,4 +27,13 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+/*<div class="sortItem portal-field-number">
+ <div class="sortAttrName"></div>
+ <span class="units"></span>
+ <div class="inputs-storage">
+ <input class="inputFilter numberStartInput" type="number" placeholder="от">
+ <input class="inputFilter numberEndInput" type="number" placeholder="до">
+ </div>
+ </div>*/
 

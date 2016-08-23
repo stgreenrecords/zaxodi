@@ -16,21 +16,40 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            var $shortList = $("<ul class='filter-list-ul'>");
-            var $filterWrapper = $("<div class='filter-list-wrapper'></div>").append($shortList);
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $simpletextBlock.find(".sortAttrName").text(filterItem.filterName);
+            $mainListItem = $simpletextBlock.find(".filter-list-item").clone();
+            $simpletextBlock.find(".filter-list-item").remove();
+            $innerListItem = $simpletextBlock.find(".full-list-item").clone();
+            $simpletextBlock.find(".full-list-item").remove();
+            var $buttonContainer = $simpletextBlock.find(".button-count-all");
+            var $fullListContainer = $simpletextBlock.find(".full-list-container");
             valueArray.forEach(function (valueItem, counter) {
                 if (counter < 4 ){
-                    var $listItem = $("<li class='filter-list-item'><input type='checkbox'/><span class='short-list-item-title'>"+valueItem.value+"</span></li>");
-                    $shortList.append($listItem);
+                    $mainListItem.find(".short-list-item-title").text(valueItem.value);
+                    $simpletextBlock.find(".filter-list").append($mainListItem.clone());
                 }
+                $innerListItem.find(".full-list-item-title").text(valueItem.value);
+                $simpletextBlock.find(".full-list-container").append($innerListItem.clone());
+
             });
-            var $simpleFilter = $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($filterWrapper);
-            var $fullListButton = $("<div class='full-list-container'><span class='full-list-count'>Всего "+valueArray.length+" варианта &#9654;</span></div>");
             if (valueArray.length > 4) {
-                $filterWrapper.append($fullListButton);
+                $buttonContainer.find(".button-count-all-insert").text(valueArray.length);
+                $buttonContainer.click(function() {
+                    $fullListContainer.attr('tabindex',-1).focus(function(){
+                    });
+                    $fullListContainer.css("display","block");
+                    $fullListContainer.focus();
+                });
+                $fullListContainer.focusout(function() {
+                    $(this).css("display","none");
+                });
+            } else {
+                $buttonContainer.remove();
+                $fullListContainer.remove();
             }
-            return $simpleFilter;
+
+            return $simpletextBlock;
         }
 
     }
@@ -38,3 +57,29 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+
+/*<div class="sortItem portal-field-simpletext">
+    <div class="sortAttrName"></div>
+
+    <div class="filter-list-wrapper">
+    <ul class="filter-list">
+    <li class="filter-list-item">
+    <input type="checkbox" class="filterCheckbox">
+    <span class="short-list-item-title"></span>
+    </li>
+    </ul>
+    <div class="button-count-all">
+    <span>Всего&nbsp;</span>
+<span class="button-count-all-insert"></span>
+    <span>&nbsp;вариантов</span>
+<span class="button-count-all-arrow">&#9654;</span>
+</div>
+<div class="full-list-container">
+    <div class="full-list-item">
+    <input type="checkbox" class="filterCheckbox">
+    <span class="full-list-item-title"></span>
+    </div>
+    </div>
+    </div>
+    </div>*/

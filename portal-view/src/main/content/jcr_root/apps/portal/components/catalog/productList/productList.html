@@ -15,21 +15,129 @@
                             placeholder="до">
                 </div>
             </div>
-            <div class="sortItem" id="filterBrand">
-                <div class="sortAttrName" data-type="simpletext">Марка(Бренд)</div>
-                <select>
-                    <option>Выбрать</option>
-                </select>
-            </div>
-            <div class="sortItem" id="filterModel">
-                <div class="sortAttrName" data-type="simpletext">Модель</div>
-                <select>
-                    <option>Выбрать</option>
-                </select>
-            </div>
         </div>
         <div id="itemProductList_th">
             <div class="itemProductList"></div>
         </div>
     </div>
+
+    <div class="templates-properties-storage">
+
+        <div class="sortItem portal-field-simpletext">
+            <div class="sortAttrName"></div>
+
+            <div class="filter-list-wrapper">
+                <div class="filter-list">
+                    <div class="filter-list-item">
+                        <input type="checkbox" class="filterCheckbox">
+                        <span class="short-list-item-title"></span>
+                    </div>
+                </div>
+                <div class="button-count-all">
+                    <span>Всего&nbsp;</span>
+                    <span class="button-count-all-insert"></span>
+                    <span>&nbsp;вариантов</span>
+                    <span class="button-count-all-arrow">&#9654;</span>
+                </div>
+                <div class="full-list-container" style="display: none;">
+                    <div class="full-list-item">
+                        <input type="checkbox" class="filterCheckbox">
+                        <span class="full-list-item-title"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sortItem portal-field-enum">
+            <div class="sortAttrName"></div>
+
+            <div class="filter-list-wrapper">
+                <div class="filter-list">
+                    <div class="filter-list-item">
+                        <input type="checkbox" class="filterCheckbox">
+                        <span class="short-list-item-title"></span>
+                    </div>
+                </div>
+                <div class="button-count-all">
+                    <span>Всего&nbsp;</span>
+                    <span class="button-count-all-insert"></span>
+                    <span>&nbsp;вариантов</span>
+                    <span class="button-count-all-arrow">&#9654;</span>
+                </div>
+                <div class="full-list-container"  style="display: none;">
+                    <div class="full-list-item">
+                        <input type="checkbox" class="filterCheckbox">
+                        <span class="full-list-item-title"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sortItem portal-field-numberBoolean">
+            <div class="sortAttrName"></div>
+            <input type="checkbox" class="filterCheckbox">
+            <input class="inputFilter countInput" type="number" placeholder="количество">
+        </div>
+
+        <div class="sortItem portal-field-number">
+            <div class="sortAttrName"></div>
+            <span class="units"></span>
+            <div class="inputs-storage">
+                <input class="inputFilter numberStartInput" type="number" placeholder="от">
+                <input class="inputFilter numberEndInput" type="number" placeholder="до">
+            </div>
+        </div>
+
+        <div class="sortItem portal-field-float">
+            <div class="sortAttrName"></div>
+            <span class="units"></span>
+            <div class="inputs-storage">
+                <input class="inputFilter numberStartInput" type="text" placeholder="от">
+                <input class="inputFilter numberEndInput" type="text" placeholder="до">
+            </div>
+        </div>
+
+        <div class="sortItem portal-field-attitude">
+            <div class="sortAttrName"></div>
+            <span class="units"></span>
+            <div class="inputs-storage">
+                <select class="startSelectFilter">
+                    <option>Выбрать</option>
+                </select>
+                /
+                <select class="endSelectFilter">
+                    <option>Выбрать</option>
+                   </select>
+            </div>
+        </div>
+
+        <div class="sortItem portal-field-interval">
+            <div class="sortAttrName"></div>
+            <span class="units"></span>
+            <div class="inputs-storage">
+                <select class="startSelectFilter">
+                    <option>Выбрать</option>
+                </select>
+                -
+                <select class="endSelectFilter">
+                    <option>Выбрать</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="sortItem portal-field-size">
+            <div class="sortAttrName"></div>
+            <div class="inputs-storage">
+                <select class="startSelectFilter">
+                    <option>Выбрать</option>
+                </select>
+                x
+                <select class="endSelectFilter">
+                    <option>Выбрать</option>
+                    </select>
+            </div>
+        </div>
+
+    </div>
+
 </div>

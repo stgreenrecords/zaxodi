@@ -17,14 +17,29 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            var $enumFilter = $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($select.append($defaultSelectOption));
-            valueArray.forEach(function (valueItem) {
-                var $enumOption = $("<option>").text(valueItem.value);
-                $($select).append($enumOption);
-            });
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $enumBlock.find(".sortAttrName").text(filterItem.filterName);
+            $mainListItem = $enumBlock.find(".filter-list-item").clone();
+            $enumBlock.find(".filter-list-item").remove();
+            $innerListItem = $enumBlock.find(".full-list-item").clone();
+            $enumBlock.find(".full-list-item").remove();
+            valueArray.forEach(function (valueItem, counter) {
+                if (counter < 4 ){
+                    $mainListItem.find(".short-list-item-title").text(valueItem.value);
+                    $enumBlock.find(".filter-list").append($mainListItem.clone());
+                }
+                $innerListItem.find(".full-list-item-title").text(valueItem.value);
+                $enumBlock.find(".full-list-container").append($innerListItem.clone());
 
-            return $enumFilter;
+            });
+            if (valueArray.length > 4) {
+                $enumBlock.find(".button-count-all-insert").text(valueArray.length);
+            } else {
+                $enumBlock.find(".button-count-all").remove();
+                $enumBlock.find(".full-list-container").remove();
+            }
+
+            return $enumBlock;
         }
 
     }
@@ -32,3 +47,29 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+/*
+<div class="sortItem portal-field-enum">
+    <div class="sortAttrName"></div>
+
+    <div class="filter-list-wrapper">
+    <ul class="filter-list">
+    <li class="filter-list-item">
+    <input type="checkbox" class="filterCheckbox">
+    <span class="short-list-item-title"></span>
+    </li>
+    </ul>
+    <div class="button-count-all">
+    <span>Всего&nbsp;</span>
+<span class="button-count-all-insert"></span>
+    <span>&nbsp;вариантов</span>
+<span class="button-count-all-arrow">&#9654;</span>
+</div>
+<div class="full-list-container">
+    <div class="full-list-item">
+    <input type="checkbox" class="filterCheckbox">
+    <span class="full-list-item-title"></span>
+    </div>
+    </div>
+    </div>
+    </div>*/

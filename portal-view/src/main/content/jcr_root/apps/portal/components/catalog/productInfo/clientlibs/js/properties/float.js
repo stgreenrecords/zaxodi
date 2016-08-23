@@ -6,7 +6,7 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.catalogStorage.properties.float = {
 
-        'loadDialog' : function(fieldOpions) {
+        'loadDialog': function (fieldOpions) {
             return new CQ.Ext.form.TextField({
                 name: './' + encodeURI(fieldOpions.valueSelection).replace(/\%/g, ''),
                 fieldLabel: fieldOpions.valueSelection,
@@ -16,8 +16,10 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            return $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($inputStartParamFloat).append($inputEndParamFloat));
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $floatBlock.find(".sortAttrName").text(filterItem.filterName);
+            $floatBlock.find(".units").text(filterItem.units);
+            return $floatBlock;
         }
 
     }
@@ -25,3 +27,12 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+/*<div class="sortItem portal-field-float">
+ <div class="sortAttrName"></div>
+ <span class="units"></span>
+ <div class="inputs-storage">
+ <input class="inputFilter numberStartInput" type="text" placeholder="от">
+ <input class="inputFilter numberEndInput" type="text" placeholder="до">
+ </div>
+ </div>*/

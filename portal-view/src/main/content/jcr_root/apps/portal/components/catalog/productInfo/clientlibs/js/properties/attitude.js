@@ -21,20 +21,16 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $sortItemDiv, $spanSortAttrName, $inputsStorage, $endSelect, $spanUnits, $defaultSelectOption, $select, $inputStartParam, $inputEndParam, $inputStartParamFloat, $inputEndParamFloat, $checkbox, $inputCount) {
-            filterItem.startParamArray = sortArrays.startParamArray;
-            filterItem.endParamArray = sortArrays.endParamArray;
-            var $startSelect = $("<select>").addClass("startSelectFilter").append("<option>Выбрать</option>");
-            var $endSelect = $("<select>").addClass("endSelectFilter").append("<option>Выбрать</option>");
-            var $attitudeFilter = $sortItemDiv.append($spanSortAttrName).append($spanUnits).append($inputsStorage.append($startSelect).append(" / ").append($endSelect));
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+            $attitudeBlock.find(".sortAttrName").text(filterItem.filterName);
+            $attitudeBlock.find(".units").text(filterItem.units);
             sortArrays.startParamArray.forEach(function (startItem) {
-                $startSelect.append($("<option>" + startItem + "</option>"));
+                $attitudeBlock.find(".startSelectFilter").append("<option>"+startItem+"</option>");
             });
             sortArrays.endParamArray.forEach(function (endItem) {
-                $endSelect.append($("<option>" + endItem + "</option>"));
+                $attitudeBlock.find(".endSelectFilter").append("<option>"+endItem+"</option>");
             });
-
-            return $attitudeFilter;
+            return $attitudeBlock;
         }
 
     }
@@ -42,3 +38,18 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+
+/*<div class="sortItem portal-field-attitude">
+    <div class="sortAttrName"></div>
+    <span class="units"></span>
+    <div class="inputs-storage">
+    <select class="startSelectFilter">
+    <option>Выбрать</option>
+    </select>
+    /
+    <select class="endSelectFilter">
+    <option>Выбрать</option>
+    </select>
+    </div>
+    </div>*/
