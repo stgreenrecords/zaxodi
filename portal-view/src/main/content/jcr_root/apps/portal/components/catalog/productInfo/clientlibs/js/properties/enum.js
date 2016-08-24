@@ -41,9 +41,7 @@ var PORTAL = (function (PORTAL, $) {
                 });
                 $(document).click(function(event){
                     var target = $(event.target);
-                    var parentOfTarget = target.parent();
-                    if (!target.hasClass("full-list-container") && !target.hasClass("full-list-item")
-                        && !parentOfTarget.hasClass("full-list-item") && !parentOfTarget.hasClass("button-count-all")){
+                    if (!target.hasClass("enum")){
                         $fullListContainer.css("display","none");
                     }
                 });

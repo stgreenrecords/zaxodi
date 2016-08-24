@@ -36,15 +36,11 @@ var PORTAL = (function (PORTAL, $) {
             if (valueArray.length > 4) {
                 $buttonContainer.find(".button-count-all-insert").text(valueArray.length);
                 $buttonContainer.click(function() {
-                    $simpletextBlock.addClass("active-popup-filter");
                     $fullListContainer.css("display","block");
                 });
                 $(document).click(function(event){
                     var target = $(event.target);
-                    var isActive;
-                    var parentOfTarget = target.parents(".active-popup-filter");
-                    console.log(parentOfTarget);
-                    if (parentOfTarget.length){
+                    if (!target.hasClass("simpletext")){
                         $fullListContainer.css("display","none");
                     }
                 });
