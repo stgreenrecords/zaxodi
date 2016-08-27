@@ -80,6 +80,7 @@ var PORTAL = (function (PORTAL, $) {
 
         var applyFilter = function (filterItem, fieldFromStorage) {
             filteriedData = [];
+            var storageForEachReturnedData = [];
             if (PORTAL.catalogStorage.properties[filterItem.filterType].isFilterEmpty(fieldFromStorage)) {
                 delete currentFilterItems[filterItem.filterName];
             } else{
@@ -89,7 +90,20 @@ var PORTAL = (function (PORTAL, $) {
             for (filter in currentFilterItems) {
                 currentFilterStorageIsEmpty = false;
                 var filterType = currentFilterItems[filter].attr('class').split(" ")[2];
-                filteriedData = PORTAL.catalogStorage.properties[filterType].doFilter(currentFilterItems[filter], productItems);
+                storageForEachReturnedData.push(PORTAL.catalogStorage.properties[filterType].doFilter(currentFilterItems[filter], productItems));
+            }
+            if (storageForEachReturnedData.length != 0){
+              storageForEachReturnedData[0].forEach(function(product){
+                  var allMatches = true;
+                  for (var index = 1 ; index < storageForEachReturnedData.length ; index++){
+                      if (!storageForEachReturnedData[index].includes(product)){
+                          allMatches = false;
+                      }
+                  }
+                  if (allMatches){
+                      filteriedData.push(product);
+                  }
+              });
             }
             filteriedData = currentFilterStorageIsEmpty ? productItems : filteriedData;
             drawProductList();
