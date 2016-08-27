@@ -165,7 +165,7 @@
     font-weight: 700;
 }
 
-.templates-properties-storage{
+.templates-properties-storage, .template-product-item{
     display: none;
 }
 

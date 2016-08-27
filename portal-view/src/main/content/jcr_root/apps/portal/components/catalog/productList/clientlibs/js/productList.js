@@ -47,7 +47,7 @@ var PORTAL = (function (PORTAL, $) {
                 categoryData = data;
                 filterProperties = categoryData.filterProperties || [];
                 productItems = categoryData.items || [];
-                filteriedData = productItems.slice();
+                filteriedData = productItems;
                 changeCountOfProducts(productItems.length);
                 drawFilters();
                 drawProductList();
@@ -61,29 +61,39 @@ var PORTAL = (function (PORTAL, $) {
 
             if (filterProperties) {
                 filterProperties.forEach(function (filterItem) {
-                    var $simpletextBlock = $(".templates-properties-storage .portal-field-simpletext").clone();
-                    var $enumBlock = $(".templates-properties-storage .portal-field-enum").clone();
-                    var $numberBooleanBlock = $(".templates-properties-storage .portal-field-numberBoolean").clone();
-                    var $numberBlock = $(".templates-properties-storage .portal-field-number").clone();
-                    var $floatBlock = $(".templates-properties-storage .portal-field-float").clone();
-                    var $attitudeBlock = $(".templates-properties-storage .portal-field-attitude").clone();
-                    var $intervalBlock = $(".templates-properties-storage .portal-field-interval").clone();
-                    var $sizeBlock = $(".templates-properties-storage .portal-field-size").clone();
-
                     var valueArray = filterItem.values || [];
 
                     var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
 
                     var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.filterType].
-                        filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock);
+                        filterDraw(filterItem, valueArray, sortArrays);
 
                     $sortPropertiesFilter.append(fieldFromStorage);
                     fieldFromStorage.change(function () {
-                        doFilter(filterItem, this);
+                        if (filterItem.filterType == 'simpletext') {
+                            applyFilter(filterItem, fieldFromStorage);
+                        }
                     });
                 });
             }
         };
+
+        var applyFilter = function (filterItem, fieldFromStorage) {
+            filteriedData = [];
+            if (PORTAL.catalogStorage.properties[filterItem.filterType].isFilterEmpty(fieldFromStorage)) {
+                delete currentFilterItems[filterItem.filterName];
+            } else{
+                currentFilterItems[filterItem.filterName] = fieldFromStorage;
+            }
+            var currentFilterStorageIsEmpty = true;
+            for (filter in currentFilterItems) {
+                currentFilterStorageIsEmpty = false;
+                var filterType = currentFilterItems[filter].attr('class').split(" ")[2];
+                filteriedData = PORTAL.catalogStorage.properties[filterType].doFilter(currentFilterItems[filter], productItems);
+            }
+            filteriedData = currentFilterStorageIsEmpty ? productItems : filteriedData;
+            drawProductList();
+        }
 
         var drawProductList = function () {
             currentPagePosition = 1;
@@ -178,16 +188,12 @@ var PORTAL = (function (PORTAL, $) {
             } else {
                 priceMessage = "Цена не указана.";
             }
-            $itemProductList.append($("" +
-                "<div class='itemBlock'>" +
-                "   <div class='item-image'>" +
-                "<div class='item-product-title'><a href='" + item.path + ".html" + "' class='itemTitle'>" + item.brand + " " + item.model + "</a></div>" +
-                "<img class='itemImage' src='" + item.image + "' alt='img'>" +
-                "   </div>" +
-                "   <div class='itemDiscription'>" + discription + "</div>" +
-                "   <div class='itemPriceBlock'>" + priceMessage + "</div>" +
-                "   </div>" +
-                "</div>"));
+            var $itemProduct = $(".template-product-item .itemBlock").clone();
+            $itemProduct.find(".item-product-title a").attr("href", item.path + ".html").text(item.brand + " " + item.model);
+            $itemProduct.find(".itemImage").attr("src", item.image);
+            $itemProduct.find(".itemDiscription").append(discription);
+            $itemProduct.find(".itemPriceBlock").text(priceMessage);
+            $itemProductList.append($itemProduct);
         };
 
         var changeCountOfProducts = function (count) {
@@ -229,141 +235,6 @@ var PORTAL = (function (PORTAL, $) {
                 scrollTop: 0
             }, "slow");
         };
-
-        var doFilter = function (filter, element) {
-            filteriedData = [];
-            if (filter.filterType == "simpletext" || filter.filterType == "enum") {
-                var selectedValue = $(element).find("select option:selected").text();
-                if (selectedValue != "Выбрать") {
-                    currentFilterItems[filter.filterName] = selectedValue;
-                } else {
-                    delete currentFilterItems[filter.filterName];
-                }
-            }
-            if (filter.filterType == "numberBoolean") {
-                currentFilterItems[filter.filterName] = {};
-                var checkboxVal = $(element).find(".filterCheckbox").prop("checked");
-                var countInputVal = $(element).find(".countInput").val();
-                if (checkboxVal && countInputVal) {
-                    currentFilterItems[filter.filterName].state = true;
-                    currentFilterItems[filter.filterName].count = countInputVal;
-                }
-                if (checkboxVal && !countInputVal) {
-                    currentFilterItems[filter.filterName].state = true;
-                }
-                if (!checkboxVal) {
-                    delete currentFilterItems[filter.filterName];
-                }
-            }
-            if (filter.filterType == "number" || filter.filterType == "float") {
-                var startNumberValue = parseFloat($(element).find(".numberStartInput").val());
-                var endNumberValue = parseFloat($(element).find(".numberEndInput").val());
-                currentFilterItems[filter.filterName] = {};
-                if (!isNaN(startNumberValue)) {
-                    currentFilterItems[filter.filterName].startNumberValue = startNumberValue;
-                } else {
-                    if (currentFilterItems[filter.filterName].startNumberValue && !isNaN(endNumberValue)) {
-                        delete currentFilterItems[filter.filterName].startNumberValue;
-                    }
-                }
-                if (!isNaN(endNumberValue)) {
-                    currentFilterItems[filter.filterName].endNumberValue = endNumberValue;
-                } else {
-                    if (currentFilterItems[filter.filterName].endNumberValue && !isNaN(startNumberValue)) {
-                        delete currentFilterItems[filter.filterName].endNumberValue;
-                    }
-                }
-                if (isNaN(startNumberValue) && isNaN(endNumberValue)) {
-                    delete currentFilterItems[filter.filterName];
-                }
-            }
-            if (filter.filterType == "size" || filter.filterType == "interval" || filter.filterType == "interval" || filter.filterType == "attitude") {
-                var startSelectedValue = $(element).find("select.startSelectFilter option:selected").text();
-                var endSelectedValue = $(element).find("select.endSelectFilter option:selected").text();
-                currentFilterItems[filter.filterName] = {};
-                if (startSelectedValue != "Выбрать") {
-                    currentFilterItems[filter.filterName].startSelectedValue = startSelectedValue;
-                } else {
-                    if (currentFilterItems[filter.filterName].startSelectedValue && endSelectedValue != "Выбрать") {
-                        delete currentFilterItems[filter.filterName].startSelectedValue;
-                    }
-
-                }
-                if (endSelectedValue != "Выбрать") {
-                    currentFilterItems[filter.filterName].endSelectedValue = endSelectedValue;
-                } else {
-                    if (currentFilterItems[filter.filterName].endSelectedValue && startSelectedValue != "Выбрать") {
-                        delete currentFilterItems[filter.filterName].endSelectedValue;
-                    }
-                }
-                if (endSelectedValue == "Выбрать" && startSelectedValue == "Выбрать") {
-                    delete currentFilterItems[filter.filterName];
-                }
-
-            }
-            productItems.forEach(function (item) {
-                var matches = true;
-                var containAll = true;
-
-                for (var keyFilter in currentFilterItems) {
-                    var contain = false;
-                    if (keyFilter == 'Цена') {
-                        contain = true;
-                        if (
-                            (!isNaN(currentFilterItems[keyFilter].startNumberValue) && isNaN(currentFilterItems[keyFilter].endNumberValue) && (currentFilterItems[keyFilter].startNumberValue > item.price)) ||
-                            (!isNaN(currentFilterItems[keyFilter].endNumberValue) && isNaN(currentFilterItems[keyFilter].startNumberValue) && (currentFilterItems[keyFilter].endNumberValue < item.price)) ||
-                            (!isNaN(currentFilterItems[keyFilter].startNumberValue) && !isNaN(currentFilterItems[keyFilter].endNumberValue) && !(!(currentFilterItems[keyFilter].startNumberValue > item.price) && !(currentFilterItems[keyFilter].endNumberValue < item.price)))
-                        ) {
-                            matches = false;
-                        }
-                    }
-                    item.properties.forEach(function (filterItem) {
-                        if (filterItem.propertyName == keyFilter) {
-                            contain = true;
-                        }
-                        if ((filterItem.propertyType == 'simpletext') && (filterItem.propertyName == keyFilter) && (filterItem.propertyValue != currentFilterItems[keyFilter])) {
-                            matches = false;
-                        }
-                        if ((filterItem.propertyType == 'numberBoolean') && (filterItem.propertyName == keyFilter)) {
-                            var checked = filterItem.propertyValue.split(",")[0];
-                            var count = filterItem.propertyValue.split(",")[1];
-                            if (!(currentFilterItems[keyFilter].state && checked == 'true') || (currentFilterItems[keyFilter].count && (currentFilterItems[keyFilter].count != count)))
-                                matches = false;
-                        }
-                        if ((filterItem.propertyType == 'enum') && (filterItem.propertyName == keyFilter) && (filterItem.propertyValue.split(",").indexOf(currentFilterItems[keyFilter]) == -1 )) {
-                            matches = false;
-                        }
-                        if ((keyFilter != 'Цена' && (filterItem.propertyType == 'number' || filterItem.propertyType == 'float')) && (filterItem.propertyName == keyFilter)
-                            && (
-                            (!isNaN(currentFilterItems[keyFilter].startNumberValue) && isNaN(currentFilterItems[keyFilter].endNumberValue) && (currentFilterItems[keyFilter].startNumberValue > filterItem.propertyValue)) ||
-                            (!isNaN(currentFilterItems[keyFilter].endNumberValue) && isNaN(currentFilterItems[keyFilter].startNumberValue) && (currentFilterItems[keyFilter].endNumberValue < filterItem.propertyValue)) ||
-                            (!isNaN(currentFilterItems[keyFilter].startNumberValue) && !isNaN(currentFilterItems[keyFilter].endNumberValue) && !(!(currentFilterItems[keyFilter].startNumberValue > filterItem.propertyValue) && !(currentFilterItems[keyFilter].endNumberValue < filterItem.propertyValue))))
-                        ) {
-                            matches = false;
-                        }
-                        if ((filter.filterType == "size" || filter.filterType == "interval" || filter.filterType == "interval" || filter.filterType == "attitude")
-                            && (filterItem.propertyName == keyFilter)
-                            && (
-                            (currentFilterItems[keyFilter].startSelectedValue && !currentFilterItems[keyFilter].endSelectedValue && (parseFloat(currentFilterItems[keyFilter].startSelectedValue) > parseFloat(filterItem.propertyValue.split(",")[0]))) ||
-                            (currentFilterItems[keyFilter].endSelectedValue && !currentFilterItems[keyFilter].startSelectedValue && (parseFloat(currentFilterItems[keyFilter].endSelectedValue) < parseFloat(filterItem.propertyValue.split(",")[1]))) ||
-                            (currentFilterItems[keyFilter].startSelectedValue && currentFilterItems[keyFilter].endSelectedValue && !(!(parseFloat(currentFilterItems[keyFilter].startSelectedValue) > parseFloat(filterItem.propertyValue.split(",")[0])) && !(parseFloat(currentFilterItems[keyFilter].endSelectedValue) < parseFloat(filterItem.propertyValue.split(",")[1])))))) {
-                            matches = false;
-                        }
-
-                    });
-                    if (!contain) {
-                        containAll = false;
-                    }
-
-                }
-                if (matches && containAll) {
-                    filteriedData.push(item);
-                }
-            });
-
-            drawProductList();
-        };
-
     }
 
     PORTAL.modules.ProductList.splitOnTwoArrayAndSort = function (filterValueArray) {

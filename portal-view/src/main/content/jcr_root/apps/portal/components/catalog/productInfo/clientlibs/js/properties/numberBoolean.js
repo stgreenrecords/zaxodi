@@ -20,7 +20,8 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
+            var $numberBooleanBlock = $(".templates-properties-storage .portal-field-numberBoolean").clone();
             $numberBooleanBlock.find(".sortAttrName").text(filterItem.filterName);
             if (filterItem.count && filterItem.count == 1) {
                 $numberBooleanBlock.find(".inputFilter").remove();

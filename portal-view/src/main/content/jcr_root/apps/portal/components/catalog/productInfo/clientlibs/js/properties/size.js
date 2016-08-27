@@ -19,7 +19,8 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
+            var $sizeBlock = $(".templates-properties-storage .portal-field-size").clone();
             $sizeBlock.find(".sortAttrName").text(filterItem.filterName);
             $sizeBlock.find(".units").text(filterItem.units);
             sortArrays.startParamArray.forEach(function (startItem) {

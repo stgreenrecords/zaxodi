@@ -16,7 +16,8 @@ var PORTAL = (function (PORTAL, $) {
             });
         },
 
-        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays, $simpletextBlock, $enumBlock, $numberBooleanBlock, $numberBlock, $floatBlock, $intervalBlock, $attitudeBlock, $sizeBlock) {
+        'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
+            var $numberBlock = $(".templates-properties-storage .portal-field-number").clone();
             $numberBlock.find(".sortAttrName").text(filterItem.filterName);
             $numberBlock.find(".units").text(filterItem.units);
             return $numberBlock;
