@@ -52,7 +52,35 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             return $enumBlock;
+        },
+
+        'doFilter': function (selectedFilter, productList) {
+            var selectedValue = selectedFilter.find(".filterCheckbox:checked");
+            var propertyName = selectedFilter.find(".sortAttrName").text();
+            var resultProductList = [];
+            selectedValue.each(function () {
+                var value = $(this).parent().find(".short-list-item-title").text();
+                var matches = false;
+                var productForPush;
+                productList.forEach(function (item, index) {
+                    item.properties.forEach(function (proterty) {
+                        if (proterty.propertyName == propertyName && proterty.propertyValue.split(",").includes(value)) {
+                            resultProductList.push(item);
+                        }
+                    });
+                });
+                if (matches && productForPush) {
+
+                }
+            });
+            return resultProductList;
+        },
+
+        'isFilterEmpty': function (selectedFilter) {
+            var selectedValue = selectedFilter.find(".filterCheckbox:checked");
+            return selectedValue.length == 0;
         }
+
 
     }
 

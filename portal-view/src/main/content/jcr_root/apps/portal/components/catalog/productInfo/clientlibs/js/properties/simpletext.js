@@ -75,7 +75,6 @@ var PORTAL = (function (PORTAL, $) {
 
                 }
             });
-         //   console.log(resultProductList);
             return resultProductList;
         },
 
