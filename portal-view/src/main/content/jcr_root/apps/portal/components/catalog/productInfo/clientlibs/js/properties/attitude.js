@@ -35,7 +35,8 @@ var PORTAL = (function (PORTAL, $) {
         },
 
         'doFilter': function (selectedFilter, productList) {
-            var selectedValue = selectedFilter.find(".filterCheckbox:checked");
+            var startSelectedValue = parseFloat($(element).find("select.startSelectFilter option:selected").text());
+            var endSelectedValue = parseFloat($(element).find("select.endSelectFilter option:selected").text());
             var propertyName = selectedFilter.find(".sortAttrName").text();
             var resultProductList = [];
             selectedValue.each(function () {
@@ -57,8 +58,9 @@ var PORTAL = (function (PORTAL, $) {
         },
 
         'isFilterEmpty': function (selectedFilter) {
-            var selectedValue = selectedFilter.find(".filterCheckbox:checked");
-            return selectedValue.length == 0;
+            var startSelectedValue = $(element).find("select.startSelectFilter option:selected").text();
+            var endSelectedValue = $(element).find("select.endSelectFilter option:selected").text();
+            return (endSelectedValue == "Выбрать" && startSelectedValue == "Выбрать")
         }
 
     }
