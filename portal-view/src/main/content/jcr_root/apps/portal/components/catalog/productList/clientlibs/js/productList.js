@@ -70,9 +70,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     $sortPropertiesFilter.append(fieldFromStorage);
                     fieldFromStorage.change(function () {
-                        if (filterItem.filterType == 'simpletext' || filterItem.filterType == 'enum') {
-                            applyFilter(filterItem, fieldFromStorage);
-                        }
+                       applyFilter(filterItem, fieldFromStorage);
                     });
                 });
             }

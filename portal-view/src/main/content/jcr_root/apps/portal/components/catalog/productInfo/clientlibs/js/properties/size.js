@@ -30,6 +30,36 @@ var PORTAL = (function (PORTAL, $) {
                 $sizeBlock.find(".endSelectFilter").append("<option>"+endItem+"</option>");
             });
             return $sizeBlock;
+        },
+
+        'doFilter': function (selectedFilter, productList) {
+            var startSelectedValue = parseFloat($(selectedFilter).find("select.startSelectFilter option:selected").text());
+            var endSelectedValue = parseFloat($(selectedFilter).find("select.endSelectFilter option:selected").text());
+            var propertyName = selectedFilter.find(".sortAttrName").text();
+            var resultProductList = [];
+            if (startSelectedValue || endSelectedValue) {
+                var value = $(this).parent().find(".short-list-item-title").text();
+                var matches = false;
+                var productForPush;
+                productList.forEach(function (item, index) {
+                    item.properties.forEach(function (proterty) {
+                        if (proterty.propertyName == propertyName) {
+                            var startValue = parseFloat(proterty.propertyValue.split(",")[0]);
+                            var endValue = parseFloat(proterty.propertyValue.split(",")[1]);
+                            if ( (!startSelectedValue || startValue >= startSelectedValue) && ( !endSelectedValue || endValue <= endSelectedValue) ){
+                                resultProductList.push(item);
+                            }
+                        }
+                    });
+                });
+            }
+            return resultProductList;
+        },
+
+        'isFilterEmpty': function (selectedFilter) {
+            var startSelectedValue = $(selectedFilter).find("select.startSelectFilter option:selected").text();
+            var endSelectedValue = $(selectedFilter).find("select.endSelectFilter option:selected").text();
+            return (endSelectedValue == "Выбрать" && startSelectedValue == "Выбрать")
         }
 
     }

@@ -21,6 +21,35 @@ var PORTAL = (function (PORTAL, $) {
             $numberBlock.find(".sortAttrName").text(filterItem.filterName);
             $numberBlock.find(".units").text(filterItem.units);
             return $numberBlock;
+        },
+
+        'doFilter': function (selectedFilter, productList) {
+            var startSelectedValue = $(selectedFilter).find(".numberStartInput").val();
+            var endSelectedValue = $(selectedFilter).find(".numberEndInput").val();
+            var propertyName = selectedFilter.find(".sortAttrName").text();
+            var resultProductList = [];
+            if (startSelectedValue || endSelectedValue) {
+                var value = $(this).parent().find(".short-list-item-title").text();
+                var matches = false;
+                var productForPush;
+                productList.forEach(function (item, index) {
+                    item.properties.forEach(function (proterty) {
+                        if (proterty.propertyName == propertyName) {
+                            var value = parseInt(proterty.propertyValue);
+                            if ( (!startSelectedValue || value >= startSelectedValue) && ( !endSelectedValue || value <= endSelectedValue) ){
+                                resultProductList.push(item);
+                            }
+                        }
+                    });
+                });
+            }
+            return resultProductList;
+        },
+
+        'isFilterEmpty': function (selectedFilter) {
+            var startSelectedValue = $(selectedFilter).find(".numberStartInput").val();
+            var endSelectedValue = $(selectedFilter).find(".numberEndInput").val();
+            return (!endSelectedValue && !startSelectedValue)
         }
 
     }

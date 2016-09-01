@@ -69,9 +69,6 @@ var PORTAL = (function (PORTAL, $) {
                         }
                     });
                 });
-                if (matches && productForPush) {
-
-                }
             });
             return resultProductList;
         },
