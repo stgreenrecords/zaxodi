@@ -41,8 +41,6 @@ var PORTAL = (function (PORTAL, $) {
             var resultProductList = [];
             if (startSelectedValue || endSelectedValue) {
                     var value = $(this).parent().find(".short-list-item-title").text();
-                    var matches = false;
-                    var productForPush;
                     productList.forEach(function (item, index) {
                         item.properties.forEach(function (proterty) {
                             if (proterty.propertyName == propertyName) {
@@ -61,7 +59,7 @@ var PORTAL = (function (PORTAL, $) {
         'isFilterEmpty': function (selectedFilter) {
             var startSelectedValue = $(selectedFilter).find("select.startSelectFilter option:selected").text();
             var endSelectedValue = $(selectedFilter).find("select.endSelectFilter option:selected").text();
-            return (endSelectedValue == "Выбрать" && startSelectedValue == "Выбрать")
+            return (endSelectedValue == "Выбрать" && startSelectedValue == "Выбрать");
         }
 
     }

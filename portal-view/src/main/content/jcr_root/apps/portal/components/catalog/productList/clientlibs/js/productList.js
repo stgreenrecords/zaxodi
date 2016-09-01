@@ -70,7 +70,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     $sortPropertiesFilter.append(fieldFromStorage);
                     fieldFromStorage.change(function () {
-                       applyFilter(filterItem, fieldFromStorage);
+                        applyFilter(filterItem, fieldFromStorage);
                     });
                 });
             }
@@ -81,7 +81,7 @@ var PORTAL = (function (PORTAL, $) {
             var storageForEachReturnedData = [];
             if (PORTAL.catalogStorage.properties[filterItem.filterType].isFilterEmpty(fieldFromStorage)) {
                 delete currentFilterItems[filterItem.filterName];
-            } else{
+            } else {
                 currentFilterItems[filterItem.filterName] = fieldFromStorage;
             }
             var currentFilterStorageIsEmpty = true;
@@ -90,18 +90,18 @@ var PORTAL = (function (PORTAL, $) {
                 var filterType = currentFilterItems[filter].attr('class').split(" ")[2];
                 storageForEachReturnedData.push(PORTAL.catalogStorage.properties[filterType].doFilter(currentFilterItems[filter], productItems));
             }
-            if (storageForEachReturnedData.length != 0){
-              storageForEachReturnedData[0].forEach(function(product){
-                  var allMatches = true;
-                  for (var index = 1 ; index < storageForEachReturnedData.length ; index++){
-                      if (!storageForEachReturnedData[index].includes(product)){
-                          allMatches = false;
-                      }
-                  }
-                  if (allMatches){
-                      filteriedData.push(product);
-                  }
-              });
+            if (storageForEachReturnedData.length != 0) {
+                storageForEachReturnedData[0].forEach(function (product) {
+                    var allMatches = true;
+                    for (var index = 1; index < storageForEachReturnedData.length; index++) {
+                        if (!storageForEachReturnedData[index].includes(product)) {
+                            allMatches = false;
+                        }
+                    }
+                    if (allMatches) {
+                        filteriedData.push(product);
+                    }
+                });
             }
             filteriedData = currentFilterStorageIsEmpty ? productItems : filteriedData;
             drawProductList();

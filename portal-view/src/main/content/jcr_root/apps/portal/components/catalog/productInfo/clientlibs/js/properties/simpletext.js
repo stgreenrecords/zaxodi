@@ -62,8 +62,6 @@ var PORTAL = (function (PORTAL, $) {
             var resultProductList = [];
             selectedValue.each(function () {
                 var value = $(this).parent().find(".short-list-item-title").text();
-                var matches = false;
-                var productForPush;
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
                         if (proterty.propertyName == propertyName && value == proterty.propertyValue) {

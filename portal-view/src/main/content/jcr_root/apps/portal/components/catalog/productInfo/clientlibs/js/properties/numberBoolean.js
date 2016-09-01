@@ -53,19 +53,18 @@ var PORTAL = (function (PORTAL, $) {
         },
 
         'doFilter': function (selectedFilter, productList) {
-            var startSelectedValue = parseFloat($(selectedFilter).find(".numberStartInput").val());
-            var endSelectedValue = parseFloat($(selectedFilter).find(".numberEndInput").val());
+            var isChecked = $(selectedFilter).find(".filterCheckbox").prop("checked");
+            var count = parseInt($(selectedFilter).find(".countInput").val());
             var propertyName = selectedFilter.find(".sortAttrName").text();
             var resultProductList = [];
-            if (startSelectedValue || endSelectedValue) {
+            if (isChecked) {
+                count = count || 1;
                 var value = $(this).parent().find(".short-list-item-title").text();
-                var matches = false;
-                var productForPush;
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
                         if (proterty.propertyName == propertyName) {
-                            var value = parseFloat(proterty.propertyValue);
-                            if ( (!startSelectedValue || value >= startSelectedValue) && ( !endSelectedValue || value <= endSelectedValue) ){
+                            var propValue = proterty.propertyValue.indexOf("true") !=-1 ? proterty.propertyValue.split(",")[1] : 0;
+                            if (count <=  propValue) {
                                 resultProductList.push(item);
                             }
                         }
@@ -76,9 +75,8 @@ var PORTAL = (function (PORTAL, $) {
         },
 
         'isFilterEmpty': function (selectedFilter) {
-            var startSelectedValue = $(selectedFilter).find(".numberStartInput").val();
-            var endSelectedValue = $(selectedFilter).find(".numberEndInput").val();
-            return (!endSelectedValue && !startSelectedValue)
+            var isChecked = $(selectedFilter).find(".filterCheckbox").prop("checked");
+            return !isChecked;
         }
 
 
