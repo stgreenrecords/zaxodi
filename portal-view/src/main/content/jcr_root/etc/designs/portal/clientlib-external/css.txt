@@ -1,0 +1,6 @@
+#base=css
+bootstrap.css
+bootstrap-theme.css
+
+#base=css/photoGallery
+magnific-popup.less

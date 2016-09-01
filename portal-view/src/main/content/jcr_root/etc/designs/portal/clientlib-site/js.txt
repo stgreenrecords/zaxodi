@@ -1,14 +1,5 @@
-#base=external/js
-jquery-2.2.3.min.js
-bootstrap.js
-
 #base=site/js
 main.js
 media.js
 common.js
 
-#base=external/js/photoGallery
-jquery.magnific-popup.min.js
-
-#base=external/js/google
-recaptcha.js

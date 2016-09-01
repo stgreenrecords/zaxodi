@@ -1,0 +1,9 @@
+#base=js
+jquery-2.2.3.min.js
+bootstrap.js
+
+#base=js/photoGallery
+jquery.magnific-popup.min.js
+
+#base=js/google
+recaptcha.js
