@@ -88,6 +88,15 @@
                                         key="units"
                                         width="50"
                                         xtype="textfield"/>
+                                <groupLabel
+                                        jcr:primaryType="cq:Widget"
+                                        text="Group"
+                                        xtype="label"/>
+                                <group
+                                        jcr:primaryType="cq:Widget"
+                                        key="group"
+                                        width="200"
+                                        xtype="textfield"/>
                             </items>
                         </fieldConfig>
                     </properties>
