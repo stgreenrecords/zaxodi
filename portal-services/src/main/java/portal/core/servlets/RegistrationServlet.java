@@ -1,7 +1,5 @@
 package portal.core.servlets;
 
-import net.tanesha.recaptcha.ReCaptchaImpl;
-import net.tanesha.recaptcha.ReCaptchaResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -15,8 +13,10 @@ import portal.core.data.Constants;
 import portal.core.services.mail.PortalMailService;
 import portal.core.services.users.PortalUserManager;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.ServletException;
 import java.io.*;
+import java.net.URL;
 
 @Component(metatype = true, immediate = true)
 @Service
@@ -60,15 +60,25 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
             return false;
         }
         LOG.info("TRY SEND REQUEST TO GOOGLE : " + Constants.RE_CAPTCHA_URL);
-        String remoteAddr = request.getRemoteAddr();
-        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-        reCaptcha.setPrivateKey(googleSecret);
+        URL url = new URL(Constants.RE_CAPTCHA_URL);
+        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+        httpsURLConnection.setRequestMethod("POST");
+        httpsURLConnection.setDoOutput(true);
+        OutputStream httpsURLConnectionOutputStream = httpsURLConnection.getOutputStream();
+        httpsURLConnectionOutputStream.write(("secret=" + googleSecret + "&response=" + responseCaptcha).getBytes());
+        httpsURLConnectionOutputStream.flush();
+        httpsURLConnectionOutputStream.close();
+        BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(httpsURLConnection.getInputStream()));
+        String inputLine;
+        StringBuffer responseString = new StringBuffer();
 
-        String challenge = request.getParameter("recaptcha_challenge_field");
-        String uresponse = request.getParameter(Constants.RE_CAPTCHA_REQUEST_PARAMETER);
-        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-
-        return reCaptchaResponse.isValid();
+        while ((inputLine = bufferedReader.readLine()) != null) {
+            responseString.append(inputLine);
+        }
+        bufferedReader.close();
+        LOG.info("RESPONSE FROM GOOGLE : " + responseString.toString());
+        return responseString.toString().contains("\"success\": true");
     }
 
     private boolean doRegistration(SlingHttpServletRequest request, SlingHttpServletResponse response) {

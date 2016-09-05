@@ -199,12 +199,6 @@
                 <version>1.2</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>net.tanesha.recaptcha4j</groupId>
-                <artifactId>recaptcha4j</artifactId>
-                <version>0.0.7</version>
-                <scope>provided</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
