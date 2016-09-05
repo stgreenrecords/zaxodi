@@ -46,6 +46,7 @@ public class PortalUserManagerImpl implements PortalUserManager {
                 }, pathToNewUserFolder);
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
                 user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(false));
+                getJackrabbitSession().save();
                 LOG.info("USER SUCCESS CREATE");
                 return true;
             } else {

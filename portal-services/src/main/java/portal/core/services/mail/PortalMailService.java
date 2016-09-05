@@ -1,10 +1,18 @@
 package portal.core.services.mail;
 
+import com.day.cq.mailer.MailService;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import portal.core.utils.ServiceUtils;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 
 @Component(metatype = true, immediate = true)
@@ -13,18 +21,22 @@ public class PortalMailService {
 
     private static final Logger LOG = LoggerFactory.getLogger(PortalMailService.class);
 
+    @Reference
+    ServiceUtils serviceUtils;
+
+    @Reference
+    MailService mailService;
+
     public boolean sendRegistrationMail(String userName) {
-        return true;
-/*        try {
-            JackrabbitSession jackrabbitSession = ServiceUtils.getAdminSession(request.getResourceResolver());
-            Node registrationNode = jackrabbitSession.getNode("/content/campaigns/portal/notifications/userValidation/jcr:content/text");
+        try {
+            Node registrationNode = serviceUtils.getAdminSession().getNode("/content/campaigns/portal/notifications/userValidation/jcr:content/text");
             if (registrationNode.hasProperty("text")) {
                 HtmlEmail email = new HtmlEmail();
                 email.setCharset("UTF-8");
                 email.setSubject("Письмо проверки пользователя");
                 String html = registrationNode.getProperty("text").getString();
-                String userEmail = request.getParameter("email");
-                String link = "<a href='" + ServiceUtils.getPublishName(request) + "/services/verifying.registration/" + userEmail + "'>Ссылка для подтверждения регистрации</a>";
+                String userEmail = "viachaslau.karnaushanka@axamit.com";
+                String link = "<a href='" + "http://localhost:4502" + "/services/verifying.registration/" + userEmail + "'>Ссылка для подтверждения регистрации</a>";
                 LOG.info("SEND REGISTRATION EMAIL TO : " + userEmail);
                 LOG.info("LINK TO VERIFICATION : " + link);
                 String repairHtml = html.replace("${user}", userEmail).replace("${linkToVerification}", link);
@@ -41,7 +53,7 @@ public class PortalMailService {
         } catch (EmailException e) {
             LOG.error(e.getMessage());
         }
-        return false;*/
+        return false;
     }
 
     public boolean sendNewsLetter(SlingHttpServletRequest request) {
