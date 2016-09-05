@@ -78,6 +78,12 @@ public class Constants {
 
     public static final String RE_CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify";
 
+    public static final String RE_CAPTCHA_REQUEST_PARAMETER = "responseFromCaptcha";
+
+    public static final String STATUS_REGISTRATION_SUCCESS = "registrationSuccess";
+
+    public static final String STATUS_REGISTRATION_FAIL = "registrationFail";
+
 
 
 

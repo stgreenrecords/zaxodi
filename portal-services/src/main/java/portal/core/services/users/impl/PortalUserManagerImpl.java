@@ -1,50 +1,45 @@
-package portal.core.services.users.daoimpl;
+package portal.core.services.users.impl;
 
+import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.principal.PrincipalManager;
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.value.ValueFactoryImpl;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import portal.core.services.users.UserDAO;
-import portal.core.services.users.beans.Comment;
+import portal.core.services.users.PortalUserManager;
+import portal.core.services.users.beans.PortalUser;
 import portal.core.services.users.beans.Seller;
 import portal.core.utils.ServiceUtils;
 
-import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import java.security.Principal;
 import java.util.Date;
-import java.util.List;
 
-public class UserDAOImpl implements UserDAO {
+@Component
+@Service(PortalUserManager.class)
+public class PortalUserManagerImpl implements PortalUserManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserDAOImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PortalUserManagerImpl.class);
 
     private JackrabbitSession jackrabbitSession;
 
     @Reference
-    private Repository repository;
-    private ResourceResolver resourceResolver;
+    private ServiceUtils serviceUtils;
 
-    public UserDAOImpl(ResourceResolver resourceResolver) {
-        this.resourceResolver = resourceResolver;
-        jackrabbitSession = ServiceUtils.getAdminSession(resourceResolver);
-    }
-
-    public boolean addNewUser(final String email, String pass) {
+    public boolean addPortalUser(final String email, String pass) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
         User user = null;
         try {
             String pathToNewUserFolder = "/home/users/portal/users" + "/" + email.substring(0, 1);
-            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
+            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal == null) {
-                user = jackrabbitSession.getUserManager().createUser(email, pass, new Principal() {
+                user = getJackrabbitSession().getUserManager().createUser(email, pass, new Principal() {
                     public String getName() {
                         return email;
                     }
@@ -57,7 +52,6 @@ public class UserDAOImpl implements UserDAO {
                 LOG.info("USER WITH THAT NAME ALREADY EXIST : " + email);
                 return false;
             }
-
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
         }
@@ -83,10 +77,10 @@ public class UserDAOImpl implements UserDAO {
 
     public void addVerifyStatus(String email) {
         try {
-            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
+            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal != null) {
-                Authorizable authorizable = (User) jackrabbitSession.getUserManager().getAuthorizable(principal);
+                Authorizable authorizable = (User) getJackrabbitSession().getUserManager().getAuthorizable(principal);
                 authorizable.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
                 LOG.info("USER SUCCESS VERIFY ON JCR LAYER");
             } else {
@@ -120,9 +114,11 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
-    public portal.core.services.users.beans.User getUser(String email) {
+    public PortalUser getPortalUser(String email) {
         return null;
     }
 
-
+    public JackrabbitSession getJackrabbitSession() {
+        return jackrabbitSession == null ? serviceUtils.getAdminSession() : jackrabbitSession;
+    }
 }

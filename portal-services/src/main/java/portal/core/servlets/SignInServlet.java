@@ -1,26 +1,7 @@
 package portal.core.servlets;
 
 import org.apache.felix.scr.annotations.*;
-import org.apache.jackrabbit.api.JackrabbitSession;
-import org.apache.jackrabbit.api.security.principal.PrincipalManager;
-import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import portal.core.data.Constants;
-import portal.core.services.mail.MailService;
-import portal.core.services.users.UserDAO;
-import portal.core.services.users.daoimpl.UserDAOImpl;
-import portal.core.utils.ServiceUtils;
-
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.SimpleCredentials;
-import javax.net.ssl.HttpsURLConnection;
-import java.io.*;
-import java.net.URL;
-import java.security.Principal;
 
 @Component(metatype = true, immediate = true)
 @Service
@@ -29,7 +10,7 @@ import java.security.Principal;
 })
 public class SignInServlet extends SlingAllMethodsServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SignInServlet.class);
+  /*  private static final Logger LOG = LoggerFactory.getLogger(SignInServlet.class);
 
     @Reference
     ServiceUtils serviceUtils;
@@ -62,11 +43,11 @@ public class SignInServlet extends SlingAllMethodsServlet {
     }
 
     private String doRegistration(SlingHttpServletRequest request, SlingHttpServletResponse response) {
-        UserDAO userDAO = new UserDAOImpl(request.getResourceResolver());
+        PortalUserManager portalUserManager = new PortalUserManagerImpl(request.getResourceResolver());
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
-        if (userDAO.addNewUser(email, pass)) {
-            if (true/*mailService.sendRegistrationMail(request)*/) {
+        if (portalUserManager.addPortalUser(email, pass)) {
+            if (true*//*mailService.sendRegistrationMail(request)*//*) {
                 return "registrationLetterSuccessSend";
             } else {
                 return "registrationLetterFailSend";
@@ -109,12 +90,12 @@ public class SignInServlet extends SlingAllMethodsServlet {
         try {
             principalManager = jackrabbitSession.getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
-            UserDAO userDAO = new UserDAOImpl(request.getResourceResolver());
+            PortalUserManager portalUserManager = new PortalUserManagerImpl(request.getResourceResolver());
             if (principal == null) {
                 LOG.info("USER WITH THAT NAME - "+email+" DOESN't EXIST");
                 return "fail";
             }
-            if (!userDAO.isVerify(email)) {
+            if (!portalUserManager.isVerify(email)) {
                 LOG.info("USER WITH THAT NAME - "+email+" EXIST BUT NOT VERIFY");
                 return "notVerified";
             }
@@ -128,6 +109,6 @@ public class SignInServlet extends SlingAllMethodsServlet {
             LOG.error("ERROR WITH LOGIN "+e.getMessage());
             return "fail";
         }
-    }
+    }*/
 
 }

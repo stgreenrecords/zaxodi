@@ -1,16 +1,14 @@
 package portal.core.services.users;
 
-import portal.core.services.users.beans.Comment;
 import portal.core.services.users.beans.Seller;
-import portal.core.services.users.beans.User;
+import portal.core.services.users.beans.PortalUser;
 
 
 import java.util.Date;
-import java.util.List;
 
-public interface UserDAO {
+public interface PortalUserManager {
 
-    boolean addNewUser(String email, String pass);
+    boolean addPortalUser(String email, String pass);
 
     boolean updateSeller(String email, Date birthday, int age , String firstName, String lastName, String phoneNumber, String sex);
 
@@ -26,6 +24,6 @@ public interface UserDAO {
 
     Seller getSeller(String email);
 
-    User getUser(String email);
+    PortalUser getPortalUser(String email);
 
 }

@@ -1,62 +1,52 @@
 package portal.core.utils;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.felix.scr.annotations.*;
 import org.apache.jackrabbit.api.JackrabbitSession;
-import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.scripting.SlingBindings;
+import org.apache.sling.commons.osgi.PropertiesUtil;
+import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+
 import javax.jcr.SimpleCredentials;
 
-
+@Component
+@Service(ServiceUtils.class)
 public class ServiceUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServiceUtils.class);
 
-    public static JackrabbitSession getAdminSession(ResourceResolver resourceResolver) {
-        JackrabbitSession jackrabbitSession = (JackrabbitSession) resourceResolver.adaptTo(Session.class);
-        Repository repository = jackrabbitSession.getRepository();
-        if (jackrabbitSession != null && jackrabbitSession.isLive()) jackrabbitSession.logout();
-        try {
-            return jackrabbitSession = (JackrabbitSession) repository.login(new SimpleCredentials("admin", "admin".toCharArray()));
-        } catch (RepositoryException e) {
-            LOG.error(e.getMessage());
-        }
-        return null;
+    @Reference
+    private Repository repository;
+
+    private ComponentContext componentContext;
+
+    @Property
+    public static final String PROPERTY_LOGIN = "admin_login";
+
+    @Property
+    public static final String PROPERTY_PASS = "admin_pass";
+
+
+    @Activate
+    protected void activate(ComponentContext componentContext) {
+        this.componentContext = componentContext;
     }
 
-    public static String getPublishName(SlingHttpServletRequest request) {
-        final SlingBindings bindings = (SlingBindings) request.getAttribute(SlingBindings.class.getName());
-        ConstantProviderService constantProviderService = bindings != null ? bindings.getSling().getService(ConstantProviderService.class) : null;
-        if (constantProviderService == null){
-            LOG.error("CAN'T GET SLING BINDING OR ConstantProviderService");
+    public JackrabbitSession getAdminSession() {
+            try {
+                return  (JackrabbitSession) repository.login(new SimpleCredentials(
+                        PropertiesUtil.toString(componentContext.getProperties().get(PROPERTY_LOGIN), StringUtils.EMPTY),
+                        PropertiesUtil.toString(componentContext.getProperties().get(PROPERTY_PASS), StringUtils.EMPTY).toCharArray()));
+            } catch (RepositoryException e) {
+                LOG.error("CAN'T LOGIN AS ADMIN. "+ e.getMessage());
+            }
             return null;
-        }
-        return constantProviderService.getPublishName();
     }
 
-    public static String getDispatcherName(SlingHttpServletRequest request) {
-        final SlingBindings bindings = (SlingBindings) request.getAttribute(SlingBindings.class.getName());
-        ConstantProviderService constantProviderService = bindings != null ? bindings.getSling().getService(ConstantProviderService.class) : null;
-        if (constantProviderService == null){
-            LOG.error("CAN'T GET SLING BINDING OR ConstantProviderService");
-            return null;
-        }
-        return constantProviderService.getDispatcherName();
-    }
-
-    public static String getAuthorName(SlingHttpServletRequest request) {
-        final SlingBindings bindings = (SlingBindings) request.getAttribute(SlingBindings.class.getName());
-        ConstantProviderService constantProviderService = bindings != null ? bindings.getSling().getService(ConstantProviderService.class) : null;
-        if (constantProviderService == null){
-            LOG.error("CAN'T GET SLING BINDING OR ConstantProviderService");
-            return null;
-        }
-        return constantProviderService.getAuthorName();
-    }
 
 }
