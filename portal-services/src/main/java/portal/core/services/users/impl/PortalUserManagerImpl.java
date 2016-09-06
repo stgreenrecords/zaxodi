@@ -15,6 +15,7 @@ import portal.core.services.users.beans.PortalUser;
 import portal.core.services.users.beans.Seller;
 import portal.core.utils.ServiceUtils;
 
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import java.security.Principal;
@@ -46,6 +47,7 @@ public class PortalUserManagerImpl implements PortalUserManager {
                 }, pathToNewUserFolder);
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
                 user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(false));
+                getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
                 getJackrabbitSession().save();
                 LOG.info("USER SUCCESS CREATE");
                 return true;
