@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <cq.host>localhost</cq.host>
-        <cq.port>4502</cq.port>
+        <cq.port>4503</cq.port>
 
         <cq.author.host>localhost</cq.author.host>
         <cq.author.port>4502</cq.author.port>
@@ -29,8 +29,8 @@
         <cq.author2.port>4502</cq.author2.port>
         <cq.author3.host>localhost</cq.author3.host>
         <cq.author3.port>4502</cq.author3.port>
-        <cq.publish.host>localhost</cq.publish.host>
-        <cq.publish.port>4503</cq.publish.port>
+        <cq.prodaction.publish.host>192.168.100.39</cq.prodaction.publish.host>
+        <cq.prodaction.publish.port>4503</cq.prodaction.publish.port>
         <cq.publish2.host>localhost</cq.publish2.host>
         <cq.publish2.port>80</cq.publish2.port>
         <cq.publish3.host>localhost</cq.publish3.host>

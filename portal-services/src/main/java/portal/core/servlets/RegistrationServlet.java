@@ -37,8 +37,6 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     @Reference
     RepatchaService repatchaService;
 
-    private ComponentContext componentContext;
-
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         String responseCaptcha = request.getParameter(Constants.RE_CAPTCHA_REQUEST_PARAMETER);
@@ -47,11 +45,6 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
             PrintWriter writer = response.getWriter();
             writer.print(registrationStatus ? Constants.STATUS_REGISTRATION_SUCCESS : Constants.STATUS_REGISTRATION_FAIL);
         }
-    }
-
-    @Activate
-    protected void activate(ComponentContext componentContext) {
-        this.componentContext = componentContext;
     }
 
     private boolean getResponseFromCaptcha(SlingHttpServletRequest request, SlingHttpServletResponse response, String responseCaptcha) throws IOException {

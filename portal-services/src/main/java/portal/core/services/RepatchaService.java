@@ -9,7 +9,7 @@ import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.osgi.service.component.ComponentContext;
 
 @Component(metatype = true, immediate = true)
-@Service
+@Service(RepatchaService.class)
 public class RepatchaService {
 
     private ComponentContext componentContext;
