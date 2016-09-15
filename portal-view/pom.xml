@@ -159,9 +159,6 @@
                 </plugins>
             </build>
         </profile>
-    </profiles>
-
-    <profiles>
         <profile>
             <id>publish-prodaction</id>
             <activation>
