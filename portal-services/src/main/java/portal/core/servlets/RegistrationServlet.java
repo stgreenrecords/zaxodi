@@ -10,6 +10,7 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.data.Constants;
+import portal.core.services.RepatchaService;
 import portal.core.services.mail.PortalMailService;
 import portal.core.services.users.PortalUserManager;
 
@@ -33,8 +34,8 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     @Reference
     PortalMailService portalMailService;
 
-    @Property
-    static final String GOOGLE_SECRET = "google_secret";
+    @Reference
+    RepatchaService repatchaService;
 
     private ComponentContext componentContext;
 
@@ -54,7 +55,7 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     }
 
     private boolean getResponseFromCaptcha(SlingHttpServletRequest request, SlingHttpServletResponse response, String responseCaptcha) throws IOException {
-        String googleSecret = PropertiesUtil.toString(componentContext.getProperties().get(GOOGLE_SECRET), StringUtils.EMPTY);
+        String googleSecret = repatchaService.getSecret();
         if (StringUtils.EMPTY.equals(googleSecret)) {
             LOG.info("CONFIG FOR GOOGLE RECAPTCHA IS EMPTY");
             return false;

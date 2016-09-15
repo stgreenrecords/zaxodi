@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="sling:OsgiConfig"
+          smtp.host="in-v3.mailjet.com"
+          smtp.password="552d800f296e9ab9771be06fecda761d"
+          smtp.port="{Long}25"
+          smtp.ssl="{Boolean}false"
+          smtp.user="e1bc144435b70562cabcf5355021c9b6"/>

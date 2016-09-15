@@ -101,6 +101,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.portal</groupId>
+            <artifactId>portal-services</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
