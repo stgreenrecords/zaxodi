@@ -2,7 +2,6 @@ package portal.models.pages;
 
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
-import portal.core.services.RepatchaService;
 import portal.models.BaseModel;
 
 import javax.inject.Inject;
@@ -14,8 +13,7 @@ public class LoginPageModel extends BaseModel {
         super(resource);
     }
 
-    @Inject
-    RepatchaService repatchaService;
+
 
     public String getReferrer() {
         String fullReferrer = null/*getRequest().getHeader("referer")*/;
@@ -29,7 +27,7 @@ public class LoginPageModel extends BaseModel {
     }
 
     public String getRecaptchKey(){
-     return repatchaService.getKeyHtml();
+     return "";
     }
 
 }

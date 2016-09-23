@@ -1,7 +1,7 @@
 package portal.core.services.users;
 
-import portal.core.services.users.beans.Seller;
 import portal.core.services.users.beans.PortalUser;
+import portal.core.services.users.beans.Seller;
 
 
 import java.util.Date;

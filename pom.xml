@@ -7,7 +7,7 @@
 
     <groupId>com.portal</groupId>
     <artifactId>portal</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId} - ${project.artifactId}</name>
@@ -19,9 +19,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.version>1.0.1</project.version>
 
         <cq.host>localhost</cq.host>
-        <cq.port>4503</cq.port>
+        <cq.port>4502</cq.port>
 
         <cq.author.host>localhost</cq.author.host>
         <cq.author.port>4502</cq.author.port>

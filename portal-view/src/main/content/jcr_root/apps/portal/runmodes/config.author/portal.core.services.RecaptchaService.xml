@@ -2,5 +2,5 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
           xmlns:jcr="http://www.jcp.org/jcr/1.0"
           jcr:primaryType="sling:OsgiConfig"
-          google_secret="6LdaLRMTAAAAAE4MjTuwCus5UJse93HxIaST_FWC"
-          google_key_html="6LdaLRMTAAAAAAyEspeVXxacyg4sWiwWSNJJTJvo"/>
+          google_secret="6LfDTQcUAAAAAMqTtPPvnlSxd6EG_1v1bV-9TeK1"
+          google_key_html="6LfDTQcUAAAAAFYoULDNQXWs0zuU073m_zLv6-f9"/>

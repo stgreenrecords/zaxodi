@@ -5,12 +5,10 @@ import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.osgi.PropertiesUtil;
-import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.data.Constants;
-import portal.core.services.RepatchaService;
+import portal.core.services.RecaptchaService;
 import portal.core.services.mail.PortalMailService;
 import portal.core.services.users.PortalUserManager;
 
@@ -29,13 +27,13 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     private static final Logger LOG = LoggerFactory.getLogger(RegistrationServlet.class);
 
     @Reference
-    PortalUserManager portalUserManager;
+    private PortalUserManager portalUserManager;
 
     @Reference
-    PortalMailService portalMailService;
+    private PortalMailService portalMailService;
 
     @Reference
-    RepatchaService repatchaService;
+    private RecaptchaService repatchaService;
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {

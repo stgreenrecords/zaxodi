@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.portal</groupId>
         <artifactId>portal</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>${project.version}</version>
     </parent>
 
     <properties>
@@ -192,17 +192,17 @@
         <dependency>
             <groupId>com.portal</groupId>
             <artifactId>portal-cms</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.portal</groupId>
             <artifactId>portal-models</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.portal</groupId>
             <artifactId>portal-services</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
