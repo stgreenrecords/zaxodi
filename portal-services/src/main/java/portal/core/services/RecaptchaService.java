@@ -8,7 +8,7 @@ import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.osgi.service.component.ComponentContext;
 
 @Component(immediate = true, metatype = true)
-@Service({RecaptchaService.class})
+@Service(RecaptchaService.class)
 public class RecaptchaService {
 
     private ComponentContext componentContext;
