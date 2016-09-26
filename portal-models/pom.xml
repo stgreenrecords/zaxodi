@@ -127,7 +127,7 @@
                             portal.models.*;
                         </Export-Package>
                         <Import-Package>
-                            portal.core.services.RecaptchaService;resolution:=optional,*
+                            portal.core.*; resolution:=optional,*
                         </Import-Package>
                     </instructions>
                 </configuration>

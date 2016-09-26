@@ -38,14 +38,14 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         String responseCaptcha = request.getParameter(Constants.RE_CAPTCHA_REQUEST_PARAMETER);
-        if (getResponseFromCaptcha(request, response, responseCaptcha)) {
-            boolean registrationStatus = doRegistration(request, response);
+        if (getResponseFromCaptcha(responseCaptcha)) {
+            boolean registrationStatus = doRegistration(request);
             PrintWriter writer = response.getWriter();
             writer.print(registrationStatus ? Constants.STATUS_REGISTRATION_SUCCESS : Constants.STATUS_REGISTRATION_FAIL);
         }
     }
 
-    private boolean getResponseFromCaptcha(SlingHttpServletRequest request, SlingHttpServletResponse response, String responseCaptcha) throws IOException {
+    private boolean getResponseFromCaptcha(String responseCaptcha) throws IOException {
         String googleSecret = repatchaService.getSecret();
         if (StringUtils.EMPTY.equals(googleSecret)) {
             LOG.info("CONFIG FOR GOOGLE RECAPTCHA IS EMPTY");
@@ -73,7 +73,7 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
         return responseString.toString().contains("\"success\": true");
     }
 
-    private boolean doRegistration(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+    private boolean doRegistration(SlingHttpServletRequest request) {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         boolean statusRegistration = portalUserManager.addPortalUser(email, pass);

@@ -112,7 +112,7 @@
                            portal.core.services.*;
                         </Export-Package>
                         <Import-Package>
-                            *;resolution:=optional
+                           resolution:=optional,*
                         </Import-Package>
                     </instructions>
                 </configuration>

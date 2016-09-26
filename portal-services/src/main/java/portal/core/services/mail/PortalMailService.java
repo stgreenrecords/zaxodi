@@ -22,10 +22,10 @@ public class PortalMailService {
     private static final Logger LOG = LoggerFactory.getLogger(PortalMailService.class);
 
     @Reference
-    ServiceUtils serviceUtils;
+    private ServiceUtils serviceUtils;
 
     @Reference
-    MailService mailService;
+    private MailService mailService;
 
     public boolean sendRegistrationMail(String userName) {
         try {

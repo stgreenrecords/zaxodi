@@ -117,7 +117,7 @@
                         <Private-Package>
                         </Private-Package>
                         <Import-Package>
-                            *;resolution:=optional
+                            resolution:=optional,*
                         </Import-Package>
                         <Embed-Dependency>*;scope=compile|runtime;</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
