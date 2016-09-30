@@ -50,7 +50,6 @@ var PORTAL = (function (PORTAL, $) {
                 url: "/services/login",
                 type: "POST",
                 data: {
-                    'responseFromCaptcha': grecaptcha.getResponse(),
                     'email': email,
                     'pass': pass
                 },

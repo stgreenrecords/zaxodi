@@ -31,17 +31,10 @@ public class ServiceUtils {
 
     private ComponentContext componentContext;
 
-    @Property
-    public static final String PROPERTY_LOGIN = "admin_login";
-
-    @Property
-    public static final String PROPERTY_PASS = "admin_pass";
-
     @Reference
     private ResourceResolverFactory resolverFactory;
 
     private ResourceResolver resourceResolver;
-
 
     @Activate
     private void activate(ComponentContext context) throws LoginException {

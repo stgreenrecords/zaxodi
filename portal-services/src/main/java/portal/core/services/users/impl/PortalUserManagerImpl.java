@@ -26,8 +26,6 @@ public class PortalUserManagerImpl implements PortalUserManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(PortalUserManagerImpl.class);
 
-    private JackrabbitSession jackrabbitSession;
-
     @Reference
     private ServiceUtils serviceUtils;
 
@@ -84,6 +82,7 @@ public class PortalUserManagerImpl implements PortalUserManager {
             if (principal != null) {
                 Authorizable authorizable = (User) getJackrabbitSession().getUserManager().getAuthorizable(principal);
                 authorizable.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
+                getJackrabbitSession().save();
                 LOG.info("USER SUCCESS VERIFY ON JCR LAYER");
             } else {
                 LOG.info("FAIL VERIFY USER. THAT NAME DOESN'T EXIST : " + email);
@@ -95,10 +94,10 @@ public class PortalUserManagerImpl implements PortalUserManager {
 
     public boolean isVerify(String email) {
         try {
-            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
+            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal != null) {
-                Authorizable authorizable = (User) jackrabbitSession.getUserManager().getAuthorizable(principal);
+                Authorizable authorizable = (User) getJackrabbitSession().getUserManager().getAuthorizable(principal);
                 Value[] verifiedStatus = authorizable.getProperty("verifiedStatus");
                 if (verifiedStatus.length > 0 && verifiedStatus[0].getBoolean()) {
                     return true;
@@ -121,6 +120,6 @@ public class PortalUserManagerImpl implements PortalUserManager {
     }
 
     public JackrabbitSession getJackrabbitSession() {
-        return jackrabbitSession == null ? serviceUtils.getAdminSession() : jackrabbitSession;
+        return serviceUtils.getAdminSession();
     }
 }

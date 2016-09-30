@@ -1,6 +1,7 @@
 package portal.core.servlets;
 
 import org.apache.felix.scr.annotations.*;
+import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -12,11 +13,7 @@ import portal.core.services.users.impl.PortalUserManagerImpl;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-@Component(metatype = true, immediate = true)
-@Service
-@Properties({
-        @Property(name = "sling.servlet.paths", value = "/services/verifying")
-})
+@SlingServlet(paths = {"/services/verifying"})
 public class VerifyingServlet extends SlingAllMethodsServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(VerifyingServlet.class);
@@ -29,7 +26,7 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
         String email = request.getRequestPathInfo().getSuffix().replace("/", "");
         LOG.info("TRY VERIFY USER : " + email);
         portalUserManager.addVerifyStatus(email);
-        String pathForRedirect = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/content/portal/registration.html?verifyStatus=true";
+        String pathForRedirect = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/content/portal/login.html?verifyStatus=true";
         LOG.info("VERIFY USER SUCCESS. TRY REDIRECT TO :" + pathForRedirect);
         response.sendRedirect(pathForRedirect);
     }

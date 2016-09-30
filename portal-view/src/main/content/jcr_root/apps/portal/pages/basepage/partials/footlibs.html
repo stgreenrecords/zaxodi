@@ -1,8 +1,10 @@
 <!--/* Include the site client libraries (loading only the JS in the footer, CSS was loaded in the header) */-->
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='portal.external,portal.site,portal.components,portal.pages'}" data-sly-unwrap/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='portal.external,portal.site,portal.components,portal.pages'}"/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='granite.csrf.standalone'}"/>
+
 
 <sly data-sly-test="${wcmmode.edit || wcmmode.design}">
-    <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='portal.author'}" data-sly-unwrap/>
+    <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='portal.author'}"/>
 </sly>
 <!--/* Include Adobe Dynamic Tag Management libraries for the footer */-->
-<sly data-sly-resource="${@ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}" data-sly-unwrap/>
+<sly data-sly-resource="${@ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}"/>

@@ -1,11 +1,13 @@
 package portal.core.servlets;
 
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import portal.core.services.users.PortalUserManager;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -15,8 +17,13 @@ public class LoginServlet extends SlingAllMethodsServlet{
 
     private static final Logger LOG = LoggerFactory.getLogger(LoginServlet.class);
 
+    @Reference
+    private PortalUserManager portalUserManager;
+
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
 
     }
 }
