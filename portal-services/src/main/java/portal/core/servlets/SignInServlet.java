@@ -13,7 +13,7 @@ public class SignInServlet extends SlingAllMethodsServlet {
   /*  private static final Logger LOG = LoggerFactory.getLogger(SignInServlet.class);
 
     @Reference
-    ServiceUtils serviceUtils;
+    PortalUtils serviceUtils;
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {

@@ -6,6 +6,7 @@ import org.apache.felix.scr.annotations.Service;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.principal.PrincipalManager;
 import org.apache.jackrabbit.api.security.user.Authorizable;
+import org.apache.jackrabbit.api.security.user.Group;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.value.ValueFactoryImpl;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import portal.core.services.users.PortalUserManager;
 import portal.core.services.users.beans.PortalUser;
 import portal.core.services.users.beans.Seller;
-import portal.core.utils.ServiceUtils;
+import portal.core.utils.PortalUtils;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
@@ -27,7 +28,7 @@ public class PortalUserManagerImpl implements PortalUserManager {
     private static final Logger LOG = LoggerFactory.getLogger(PortalUserManagerImpl.class);
 
     @Reference
-    private ServiceUtils serviceUtils;
+    private PortalUtils portalUtils;
 
     public boolean addPortalUser(final String email, String pass) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
@@ -44,6 +45,9 @@ public class PortalUserManagerImpl implements PortalUserManager {
                 }, pathToNewUserFolder);
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
                 user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(false));
+                Group portalUsers = (Group) getJackrabbitSession().getUserManager().getAuthorizable("portal-users");
+                Authorizable authorizable = getJackrabbitSession().getUserManager().getAuthorizable(user.getPrincipal());
+                portalUsers.addMember(authorizable);
                 getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
                 getJackrabbitSession().save();
                 LOG.info("USER SUCCESS CREATE");
@@ -120,6 +124,6 @@ public class PortalUserManagerImpl implements PortalUserManager {
     }
 
     public JackrabbitSession getJackrabbitSession() {
-        return serviceUtils.getAdminSession();
+        return portalUtils.getAdminSession();
     }
 }

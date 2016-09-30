@@ -82,6 +82,12 @@ public class Constants {
 
     public static final String STATUS_REGISTRATION_SUCCESS = "registrationSuccess";
 
+    public static final String STATUS_USER_DOESNOT_EXIST = "user with that name doesn't exist";
+
+    public static final String STATUS_USER_IS_INVALID = "please see you mail and follow to the instructions";
+
+    public static final String STATUS_WRONG_PASS = "wrong password";
+
     public static final String STATUS_REGISTRATION_FAIL = "registrationFail";
 
 

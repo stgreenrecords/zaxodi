@@ -8,7 +8,7 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.services.users.PortalUserManager;
-import portal.core.services.users.impl.PortalUserManagerImpl;
+import portal.core.utils.PortalUtils;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
         String email = request.getRequestPathInfo().getSuffix().replace("/", "");
         LOG.info("TRY VERIFY USER : " + email);
         portalUserManager.addVerifyStatus(email);
-        String pathForRedirect = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/content/portal/login.html?verifyStatus=true";
+        String pathForRedirect = PortalUtils.getServerInfo(request) + "/content/portal/login.html?verifyStatus=true";
         LOG.info("VERIFY USER SUCCESS. TRY REDIRECT TO :" + pathForRedirect);
         response.sendRedirect(pathForRedirect);
     }

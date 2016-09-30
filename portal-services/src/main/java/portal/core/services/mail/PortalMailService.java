@@ -9,7 +9,7 @@ import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import portal.core.utils.ServiceUtils;
+import portal.core.utils.PortalUtils;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -22,14 +22,14 @@ public class PortalMailService {
     private static final Logger LOG = LoggerFactory.getLogger(PortalMailService.class);
 
     @Reference
-    private ServiceUtils serviceUtils;
+    private PortalUtils portalUtils;
 
     @Reference
     private MailService mailService;
 
     public boolean sendRegistrationMail(String userName) {
         try {
-            Node registrationNode = serviceUtils.getAdminSession().getNode("/content/campaigns/portal/notifications/userValidation/jcr:content/text");
+            Node registrationNode = portalUtils.getAdminSession().getNode("/content/campaigns/portal/notifications/userValidation/jcr:content/text");
             if (registrationNode.hasProperty("text")) {
                 HtmlEmail email = new HtmlEmail();
                 email.setCharset("UTF-8");

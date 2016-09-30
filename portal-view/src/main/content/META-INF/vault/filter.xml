@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/portal">
-    </filter>
-    <filter root="/apps/sling" />
+    <filter root="/apps/portal"/>
+    <filter root="/apps/sling"/>
+    <filter root="/home" mode="merge"/>
     <filter root="/etc/designs/portal"/>
 </workspaceFilter>
