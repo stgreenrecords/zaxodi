@@ -25,11 +25,11 @@ public class RecaptchaService {
     }
 
     public String getSecret() {
-        return PropertiesUtil.toString(this.componentContext.getProperties().get("google_secret"), "");
+        return PropertiesUtil.toString(this.componentContext.getProperties().get(GOOGLE_SECRET), "");
     }
 
     public String getKeyHtml() {
-        return PropertiesUtil.toString(this.componentContext.getProperties().get("google_key_html"), "");
+        return PropertiesUtil.toString(this.componentContext.getProperties().get(GOOGLE_KYE_HTML), "");
     }
 
 }
