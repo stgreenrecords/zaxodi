@@ -53,12 +53,6 @@
         <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="${pageBean.faviconHref}">
     </c:if>
     <title>${pageBean.title}</title>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <%@taglib prefix="ec" uri="http://core.portal.com/taglibs/portal-taglib" %>
-    <ec:initBean type="com.portal.beans.PageBean" name="pageBean"/>
-    <jsp:setProperty name="pageBean" property="design" value="${currentDesign}"/>
-    <jsp:setProperty name="pageBean" property="page" value="${currentPage}"/>
-    <jsp:setProperty name="pageBean" property="request" value="${slingRequest}"/>
 
     <style type="text/css">
         /* Based on The MailChimp Reset INLINE: Yes. */

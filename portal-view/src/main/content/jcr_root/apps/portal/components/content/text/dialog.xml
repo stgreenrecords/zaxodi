@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Edit Text"
+    xtype="panel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <text
+            jcr:primaryType="cq:Widget"
+            hideLabel="{Boolean}true"
+            name="./text"
+            xtype="richtext"
+            externalStyleSheets="[/apps/epam-core/components/epm.rte.plugins/css/lineheight.css]">
+            <rtePlugins jcr:primaryType="nt:unstructured">
+                <edit
+                        jcr:primaryType="nt:unstructured"
+                        features="[paste-plaintext,paste-wordhtml]"/>
+                <findreplace
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <fontcolor
+                        jcr:primaryType="nt:unstructured"
+                        features="*">
+                    <styles jcr:primaryType="cq:WidgetCollection">
+                        <graphite
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#464547"
+                                text="Graphite"/>
+                        <mediumGray
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#666"
+                                text="Medium Gray"/>
+                        <gray
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#999"
+                                text="Gray"/>
+                        <lightGray
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#ccc"
+                                text="Light Gray"/>
+                        <darkGreen
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#7f993a"
+                                text="Dark Green"/>
+                        <limeGreen
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#a3c644"
+                                text="Lime Green"/>
+                        <sharpBlue
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#39c2d7"
+                                text="Sharp Blue"/>
+                        <darkBlue
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#1a9cb0"
+                                text="Dark Blue"/>
+                        <raspberry
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#b22746"
+                                text="Raspberry"/>
+                        <plum
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#8e244d"
+                                text="Plum"/>
+                        <black
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#000"
+                                text="Black"/>
+                        <white
+                                jcr:primaryType="nt:unstructured"
+                                cssName="#fff"
+                                text="White"/>
+                    </styles>
+                </fontcolor>
+                <format
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <image
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <justify
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <keys
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <links
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <lists
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <misctools
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <spellcheck
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <styles
+                        jcr:primaryType="nt:unstructured"
+                        features="*">
+                    <styles jcr:primaryType="cq:WidgetCollection">
+                        <pagetitle
+                                jcr:primaryType="nt:unstructured"
+                                cssName="pagetitle"
+                                text="Page Title"/>
+                        <albumtitle
+                                jcr:primaryType="nt:unstructured"
+                                cssName="albumtitle"
+                                text="Album Title"/>
+                        <subtitle
+                                jcr:primaryType="nt:unstructured"
+                                cssName="subtitle"
+                                text="Sub Title"/>
+                        <dateformat
+                                jcr:primaryType="nt:unstructured"
+                                cssName="dateformat"
+                                text="Date format"/>
+                    </styles>
+                </styles>
+                <subsuperscript
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <table
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <undo
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <video
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+                <quote
+                        jcr:primaryType="nt:unstructured"
+                        features="*"/>
+            </rtePlugins>
+        </text>
+        <isRichTextFlag
+            jcr:primaryType="cq:Widget"
+            ignoreData="{Boolean}true"
+            name="./textIsRich"
+            value="true"
+            xtype="hidden"/>
+    </items>
+</jcr:root>

@@ -3,5 +3,5 @@
           xmlns:jcr="http://www.jcp.org/jcr/1.0"
           cq:isContainer="{Boolean}false"
           jcr:primaryType="cq:Component"
-          jcr:title="Registration"
+          jcr:title="Base"
           sling:resourceSuperType="mcm/components/newsletter/page"/>

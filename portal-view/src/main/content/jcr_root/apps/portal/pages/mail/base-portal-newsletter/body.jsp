@@ -33,7 +33,7 @@
             <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
                 <tr>
                     <td style="background-color:#3D3D3D;text-align: center;">
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size:11px; color: #B3B3B3;">Добро пожаловать на gomel-portal.by</span>
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size:11px; color: #B3B3B3;">Добро пожаловать на zaxodi.by</span>
                         <a href="#" title="View in a browser"
                            style="text-decoration: none; font-family: Arial, Helvetica, sans-serif; font-size:11px; color: #EE5A29; padding:0; margin:0;">Посмотреть
                             в браузере &rsaquo;</a>
@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <td valign="top">
-            <table cellpadding="0" cellspacing="0" border="0" align="center" width="700"
+            <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%"
                    style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;margin: 0 auto;">
                 <tr>
                     <td valign="top" colspan="3" style="background-color: #F2F2F2">
