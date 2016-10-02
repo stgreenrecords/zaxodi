@@ -56,9 +56,9 @@ public class LoginServlet extends SlingAllMethodsServlet {
                 writer.print(Constants.STATUS_WRONG_PASS);
             }
             if (session != null) {
-                String pathForRedirect = ServerUtil.getServerInfo(request) + "/content/portal.html";
                 LOG.info("USER " + session.getUserID() + " success login.");
-                response.sendRedirect(pathForRedirect);
+                writer = response.getWriter();
+                writer.print(Constants.STATUS_SUCCESS_LOGIN);
             }
             } else {
                 writer = response.getWriter();

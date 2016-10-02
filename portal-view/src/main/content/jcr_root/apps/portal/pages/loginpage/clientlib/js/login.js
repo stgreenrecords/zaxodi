@@ -39,7 +39,11 @@ var PORTAL = (function (PORTAL, $) {
                 },
                 success: function (data) {
                     if (data) {
-                        $messageBlock.text(data);
+                        if (data == "successLogin"){
+                            location.href  = "/content/portal.html"
+                        } else{
+                            $messageBlock.text(data);
+                        }
                     }
                 }
             });

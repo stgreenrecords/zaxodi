@@ -88,6 +88,8 @@ public class Constants {
 
     public static final String STATUS_WRONG_PASS = "wrong password";
 
+    public static final String STATUS_SUCCESS_LOGIN = "successLogin";
+
     public static final String STATUS_REGISTRATION_FAIL = "registrationFail";
 
 
