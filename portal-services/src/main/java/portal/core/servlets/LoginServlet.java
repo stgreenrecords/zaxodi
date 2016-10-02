@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import portal.core.data.Constants;
 import portal.core.services.users.PortalUserManager;
 import portal.core.utils.PortalUtils;
+import portal.core.utils.ServerUtil;
 
 import javax.jcr.*;
 import javax.servlet.ServletException;
@@ -55,7 +56,7 @@ public class LoginServlet extends SlingAllMethodsServlet {
                 writer.print(Constants.STATUS_WRONG_PASS);
             }
             if (session != null) {
-                String pathForRedirect = PortalUtils.getServerInfo(request) + "/content/portal.html";
+                String pathForRedirect = ServerUtil.getServerInfo(request) + "/content/portal.html";
                 LOG.info("USER " + session.getUserID() + " success login.");
                 response.sendRedirect(pathForRedirect);
             }

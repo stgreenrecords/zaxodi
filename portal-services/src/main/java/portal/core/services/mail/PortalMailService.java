@@ -1,20 +1,25 @@
 package portal.core.services.mail;
 
-import com.day.cq.commons.Externalizer;
 import com.day.cq.mailer.MailService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.felix.scr.annotations.*;
+import org.apache.jackrabbit.util.Base64;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.commons.osgi.PropertiesUtil;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.utils.PortalUtils;
+import portal.core.utils.ServerUtil;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import org.jsoup.nodes.Element;
 
 
 @Component(metatype = true, immediate = true)
@@ -35,10 +40,7 @@ public class PortalMailService {
     private MailService mailService;
 
     @Reference
-    private Externalizer externalizer;
-
-    @Reference
-    private ResourceResolver resourceResolver;
+    private ServerUtil serverUtil;
 
     @Activate
     public void activate(ComponentContext componentContext) {
@@ -47,17 +49,23 @@ public class PortalMailService {
 
     public boolean sendRegistrationMail(String userName) {
         try {
-            Node registrationNode = portalUtils.getAdminSession().getNode(PropertiesUtil.toString(componentContext.getProperties().get(PATH_TO_REGISTRATION_MAIL),"")+"/jcr:content/par/text");
+            Node registrationNode = portalUtils.getAdminSession().getNode(PropertiesUtil.toString(componentContext.getProperties().get(PATH_TO_REGISTRATION_MAIL), StringUtils.EMPTY)+"/jcr:content/par/text");
             if (registrationNode.hasProperty("text")) {
                 HtmlEmail email = new HtmlEmail();
                 email.setCharset("UTF-8");
                 email.setSubject("Проверка адреса электронной почты");
                 String html = registrationNode.getProperty("text").getString();
-                String link = "" + "/services/verifying.registration/" + userName;
+                String link = serverUtil.getDispatcherLink() + "/services/verifying.registration/" + Base64.encode(userName);
                 LOG.info("SEND REGISTRATION EMAIL TO : " + userName);
                 LOG.info("LINK TO VERIFICATION : " + link);
-                String repairHtml = html.replace("${user}", userName).replace("${link}", link);
-                email.setHtmlMsg(repairHtml);
+                String repairHtml = html.replace("${user}", userName).replace("${link}", serverUtil.getDispatcherLink()+link);
+                Document document = Jsoup.parse(html);
+                Elements images = document.getElementsByTag("img");
+                for (Element element : images) {
+                   String imgLink =  images.attr("scr");
+                    images.attr(imgLink,serverUtil.getDispatcherLink()+imgLink);
+                }
+                email.setHtmlMsg(document.outerHtml());
                 email.setFrom("stgreenrecords@gmail.com");
                 email.addTo(userName);
                 mailService.send(email);

@@ -41,8 +41,4 @@ public class PortalUtils {
          return (JackrabbitSession) resourceResolver.adaptTo(Session.class);
     }
 
-    public static String getServerInfo(SlingHttpServletRequest request){
-        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-    }
-
 }

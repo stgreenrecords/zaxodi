@@ -1,5 +1,6 @@
 package portal.core.services;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
@@ -25,11 +26,11 @@ public class RecaptchaService {
     }
 
     public String getSecret() {
-        return PropertiesUtil.toString(this.componentContext.getProperties().get(GOOGLE_SECRET), "");
+        return PropertiesUtil.toString(this.componentContext.getProperties().get(GOOGLE_SECRET), StringUtils.EMPTY);
     }
 
     public String getKeyHtml() {
-        return PropertiesUtil.toString(this.componentContext.getProperties().get(GOOGLE_KYE_HTML), "");
+        return PropertiesUtil.toString(this.componentContext.getProperties().get(GOOGLE_KYE_HTML), StringUtils.EMPTY);
     }
 
 }
