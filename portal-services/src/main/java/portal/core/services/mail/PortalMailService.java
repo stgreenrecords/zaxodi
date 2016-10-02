@@ -58,12 +58,12 @@ public class PortalMailService {
                 String link = serverUtil.getDispatcherLink() + "/services/verifying.registration/" + Base64.encode(userName);
                 LOG.info("SEND REGISTRATION EMAIL TO : " + userName);
                 LOG.info("LINK TO VERIFICATION : " + link);
-                String repairHtml = html.replace("${user}", userName).replace("${link}", serverUtil.getDispatcherLink()+link);
-                Document document = Jsoup.parse(html);
+                String repairHtml = html.replace("${user}", userName).replace("${link}", link);
+                Document document = Jsoup.parse(repairHtml);
                 Elements images = document.getElementsByTag("img");
                 for (Element element : images) {
-                   String imgLink =  images.attr("scr");
-                    images.attr(imgLink,serverUtil.getDispatcherLink()+imgLink);
+                   String imgLink = element.attr("src");
+                    element.attr("src",serverUtil.getDispatcherLink()+imgLink);
                 }
                 email.setHtmlMsg(document.outerHtml());
                 email.setFrom("stgreenrecords@gmail.com");

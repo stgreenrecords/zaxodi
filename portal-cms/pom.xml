@@ -119,7 +119,7 @@
                         <Import-Package>
                             *;resolution:=optional
                         </Import-Package>
-                        <Embed-Dependency>*;scope=compile|runtime;</Embed-Dependency>
+                        <Embed-Dependency>jsoup</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                     </instructions>
                 </configuration>
