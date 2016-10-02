@@ -33,6 +33,9 @@ public class PortalMailService {
     @Property
     private static final String PATH_TO_REGISTRATION_MAIL = "path_to_registration_mail";
 
+    @Property
+    private static final String ADDRESS_FROM  = "address_from";
+
     @Reference
     private PortalUtils portalUtils;
 
@@ -66,7 +69,7 @@ public class PortalMailService {
                     element.attr("src",serverUtil.getDispatcherLink()+imgLink);
                 }
                 email.setHtmlMsg(document.outerHtml());
-                email.setFrom("stgreenrecords@gmail.com");
+                email.setFrom(PropertiesUtil.toString(componentContext.getProperties().get(ADDRESS_FROM), StringUtils.EMPTY));
                 email.addTo(userName);
                 mailService.send(email);
                 LOG.info("REGISTRATION LETTER SUCCESS SEND");

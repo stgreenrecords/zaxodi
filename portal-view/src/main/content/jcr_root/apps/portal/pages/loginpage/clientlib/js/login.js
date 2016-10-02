@@ -11,6 +11,10 @@ var PORTAL = (function (PORTAL, $) {
         var typeAction;
         var validationStatus = true;
 
+        if (PORTAL.utils.getQueryParameterFromUrl(location.href,"verifyStatus")){
+            $messageBlock.text("Validation succeed. Try to login.");
+        }
+
         $self.find("#submitRegistrationInput, #submitLoginInput").click(function () {
             var email = $self.find("#emailRegistrationInput").val();
             var emailLogin = $self.find("#emailLoginInput").val();
@@ -19,7 +23,7 @@ var PORTAL = (function (PORTAL, $) {
             var passAgain = $self.find("#passRegistrationAgainInput").val();
             typeAction = $(this).data("type");
             if (isFormValid(email, pass, passAgain, emailLogin, passLogin)) {
-                if (typeAction == 'registration'){
+                if (typeAction == 'registration') {
                     sendRequestToRegistration(email, pass);
                 } else {
                     sendRequestToLogin(emailLogin, passLogin);
@@ -39,11 +43,7 @@ var PORTAL = (function (PORTAL, $) {
                 },
                 success: function (data) {
                     if (data) {
-                        if (data == "successLogin"){
-                            location.href  = "/content/portal.html"
-                        } else{
-                            $messageBlock.text(data);
-                        }
+                        $messageBlock.text(data);
                     }
                 }
             });
@@ -58,7 +58,9 @@ var PORTAL = (function (PORTAL, $) {
                     'pass': pass
                 },
                 success: function (data) {
-                    if (data) {
+                    if (data == "successLogin") {
+                        location.href = "/content/portal.html"
+                    } else {
                         $messageBlock.text(data);
                     }
                 }

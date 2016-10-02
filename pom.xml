@@ -19,7 +19,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.version>1.0.2-SNAPSHOT</project.version>
+        <project.version>1.0.1-SNAPSHOT</project.version>
 
         <cq.host>localhost</cq.host>
         <cq.port>4503</cq.port>

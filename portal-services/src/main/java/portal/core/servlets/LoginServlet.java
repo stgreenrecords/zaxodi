@@ -42,7 +42,7 @@ public class LoginServlet extends SlingAllMethodsServlet {
         boolean validationStatus = false;
         try {
             authorizable = portalUtils.getAdminSession().getUserManager().getAuthorizable(email);
-            validationStatus  = authorizable.getProperty("verifiedStatus")[0].getBoolean();
+            validationStatus  = authorizable != null ? authorizable.getProperty("verifiedStatus")[0].getBoolean() : false;
         } catch (RepositoryException e) {
           LOG.error(e.getMessage());
         }
