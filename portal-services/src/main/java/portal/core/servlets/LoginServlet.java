@@ -61,7 +61,7 @@ public class LoginServlet extends SlingAllMethodsServlet {
             if (session != null) {
                 LOG.info("USER " + session.getUserID() + " success login.");
                 writer = response.getWriter();
-                CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME,cookieService.getCookieValue(),Constants.LOGIN_COOKIE_AGE);
+                CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME,cookieService.getCookieValue(email),Constants.LOGIN_COOKIE_AGE);
                 writer.print(Constants.STATUS_SUCCESS_LOGIN);
             }
             } else {
