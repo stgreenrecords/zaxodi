@@ -22,7 +22,7 @@
         <project.version>1.0.1-SNAPSHOT</project.version>
 
         <cq.host>localhost</cq.host>
-        <cq.port>4503</cq.port>
+        <cq.port>4502</cq.port>
 
         <cq.author.host>localhost</cq.author.host>
         <cq.author.port>4502</cq.author.port>

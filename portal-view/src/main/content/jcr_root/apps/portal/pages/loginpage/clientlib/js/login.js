@@ -11,7 +11,7 @@ var PORTAL = (function (PORTAL, $) {
         var typeAction;
         var validationStatus = true;
 
-        if (PORTAL.utils.getQueryParameterFromUrl(location.href,"verifyStatus")){
+        if (location.href.indexOf("?verifyStatus=true") != -1){
             $messageBlock.text("Validation succeed. Try to login.");
         }
 
