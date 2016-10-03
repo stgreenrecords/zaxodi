@@ -6,6 +6,9 @@
             <sly data-sly-list="${navigationModel.childPages}">
                 <li class="main_top_nav_list_item"><a href="${item.path}.html" class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a></li>
             </sly>
+            <sly data-sly-use.authenticationModel="portal.models.AuthenticationModel">
+                <div data-authentication="${authenticationModel.cookie}"></div>
+            </sly>
         </ul>
         <label for="css-toggle-menu"></label>
     </nav>

@@ -9,9 +9,9 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.data.Constants;
+import portal.core.services.CookieService;
 import portal.core.services.users.PortalUserManager;
 import portal.core.utils.PortalUtils;
-import portal.core.utils.ServerUtil;
 
 import javax.jcr.*;
 import javax.servlet.ServletException;
@@ -31,6 +31,9 @@ public class LoginServlet extends SlingAllMethodsServlet {
 
     @Reference
     private PortalUtils portalUtils;
+
+    @Reference
+    private CookieService cookieService;
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
@@ -58,6 +61,7 @@ public class LoginServlet extends SlingAllMethodsServlet {
             if (session != null) {
                 LOG.info("USER " + session.getUserID() + " success login.");
                 writer = response.getWriter();
+                CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME,cookieService.getCookieValue(),Constants.LOGIN_COOKIE_AGE);
                 writer.print(Constants.STATUS_SUCCESS_LOGIN);
             }
             } else {
