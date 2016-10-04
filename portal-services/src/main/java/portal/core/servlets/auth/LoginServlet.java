@@ -1,8 +1,9 @@
-package portal.core.servlets;
+package portal.core.servlets.auth;
 
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.api.security.user.Authorizable;
+import org.apache.jackrabbit.value.ValueFactoryImpl;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -17,6 +18,7 @@ import javax.jcr.*;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 
 @SlingServlet(paths = {"/services/login"})
 public class LoginServlet extends SlingAllMethodsServlet {
@@ -57,11 +59,19 @@ public class LoginServlet extends SlingAllMethodsServlet {
             } catch (RepositoryException e) {
                 writer = response.getWriter();
                 writer.print(Constants.STATUS_WRONG_PASS);
+                LOG.info("LOGIN FAIL");
             }
             if (session != null) {
                 LOG.info("USER " + session.getUserID() + " success login.");
                 writer = response.getWriter();
-                CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME,cookieService.getCookieValue(email),Constants.LOGIN_COOKIE_AGE);
+                String uuid = UUID.randomUUID().toString();
+                try {
+                    authorizable.setProperty(Constants.AUTH_COOKIE_NAME, ValueFactoryImpl.getInstance().createValue(uuid));
+                    CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME,cookieService.getCookieValue(uuid),Constants.LOGIN_COOKIE_AGE);
+                    CookieService.addCookie(response,Constants.EMAIL_COOKIE_NAME,cookieService.getCookieValue(email),Constants.LOGIN_COOKIE_AGE);
+                } catch (RepositoryException e) {
+                    LOG.info("SET SESSION FAIL");
+                }
                 writer.print(Constants.STATUS_SUCCESS_LOGIN);
             }
             } else {

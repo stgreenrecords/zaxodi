@@ -1,4 +1,4 @@
-package portal.core.servlets;
+package portal.core.servlets.auth;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.*;

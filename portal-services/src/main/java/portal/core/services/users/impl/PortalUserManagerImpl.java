@@ -1,5 +1,11 @@
 package portal.core.services.users.impl;
 
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.Hit;
+import com.day.cq.search.result.SearchResult;
+import com.google.gson.JsonObject;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
@@ -11,15 +17,18 @@ import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.value.ValueFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import portal.core.services.product.PortalProduct;
 import portal.core.services.users.PortalUserManager;
 import portal.core.services.users.beans.PortalUser;
 import portal.core.services.users.beans.Seller;
 import portal.core.utils.PortalUtils;
 
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.Value;
 import java.security.Principal;
-import java.util.Date;
+import java.util.*;
 
 @Component
 @Service(PortalUserManager.class)
@@ -29,6 +38,9 @@ public class PortalUserManagerImpl implements PortalUserManager {
 
     @Reference
     private PortalUtils portalUtils;
+
+    @Reference
+    private QueryBuilder queryBuilder;
 
     public boolean addPortalUser(final String email, String pass) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
@@ -120,7 +132,44 @@ public class PortalUserManagerImpl implements PortalUserManager {
     }
 
     public PortalUser getPortalUser(String email) {
-        return null;
+        PortalUser portalUser = new PortalUser();
+        portalUser.setEmail(email);
+        try {
+            Authorizable authorizable = portalUtils.getAdminSession().getUserManager().getAuthorizable(email);
+            Node userNode = portalUtils.getAdminSession().getNode(authorizable.getPath());
+            List<PortalProduct> productList = new ArrayList();
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("path", authorizable.getPath()+"/catalog");
+            map.put("property", "isActive");
+            map.put("property.value", "true");
+            map.put("p.limit", "-1");
+
+            Query query = queryBuilder.createQuery(PredicateGroup.create(map), portalUtils.getAdminSession());
+            SearchResult result = query.getResult();
+
+            for (Hit hit : result.getHits()) {
+                Node searchNode = null;
+                try {
+                    searchNode = hit.getNode();
+                    PortalProduct portalProduct = new PortalProduct();
+                    productList.add(portalProduct);
+                } catch (RepositoryException e) {
+                    LOG.error(e.getMessage());
+                }
+            }
+          portalUser.setProductList(productList);
+        } catch (RepositoryException e) {
+            LOG.error("FAILT TO BUILD USER. Details:" + e.getMessage());
+        }
+        return portalUser;
+    }
+
+    public JsonObject getPortalUserInfoAsJson(String email){
+       PortalUser portalUser = getPortalUser(email);
+        JsonObject jsonUser = new JsonObject();
+        jsonUser.addProperty("name", portalUser.getEmail());
+        jsonUser.addProperty("basketCount",portalUser.getProductList().size());
+        return jsonUser;
     }
 
     public JackrabbitSession getJackrabbitSession() {

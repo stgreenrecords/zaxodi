@@ -1,11 +1,11 @@
 var PORTAL = (function (PORTAL, $) {
 
-    PORTAL.modules.Login = {};
+    PORTAL.modules.BaseComponent = {};
 
-    PORTAL.modules.Login.selfSelector = ".registration-ui";
+    PORTAL.modules.BaseComponent.selfSelector = ".registration-ui";
 
-    PORTAL.modules.Login.init = function ($self) {
-        console.log('Component: "Login"');
+    PORTAL.modules.BaseComponent.init = function ($self) {
+        console.log('Component: "BaseComponent"');
 
         var $messageBlock = $self.find(".messageBlock");
         var typeAction;

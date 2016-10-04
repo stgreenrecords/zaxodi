@@ -92,7 +92,9 @@ public class Constants {
 
     public static final String STATUS_REGISTRATION_FAIL = "registrationFail";
 
-    public static final String AUTH_COOKIE_NAME = "portalAuthorization";
+    public static final String AUTH_COOKIE_NAME = "portal-session-id";
+
+    public static final String EMAIL_COOKIE_NAME = "portal-user";
 
     public static final int LOGIN_COOKIE_AGE = 60 * 60 * 24 * 60;
 

@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import javax.jcr.Repository;
 
 import javax.jcr.Session;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @Component
 @Service(PortalUtils.class)

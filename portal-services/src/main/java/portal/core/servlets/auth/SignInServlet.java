@@ -1,4 +1,4 @@
-package portal.core.servlets;
+package portal.core.servlets.auth;
 
 import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;

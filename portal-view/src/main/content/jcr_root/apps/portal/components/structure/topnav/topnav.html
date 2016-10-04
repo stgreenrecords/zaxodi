@@ -9,6 +9,21 @@
             <sly data-sly-use.authenticationModel="portal.models.AuthenticationModel">
                 <div data-authentication="${authenticationModel.cookie}"></div>
             </sly>
+            <li>
+                <div class="user_item" style="display: none">
+                    <span class="user_name"></span>
+                    <div class="user_menu">
+                        <ul>
+                            <li><a href="#" class="basket"></a></li>
+                            <li><a href="#" class="adver"></a></li>
+                            <li><a href="#" class="my_comment"></a></li>
+                            <li><a href="#" class="settings"></a></li>
+                            <li><a href="#" class="user_home"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="/content/portal/login.html" style="display: none">Вход</a>
+            </li>
         </ul>
         <label for="css-toggle-menu"></label>
     </nav>

@@ -7,6 +7,30 @@ var PORTAL = (function (PORTAL, $) {
     PORTAL.modules.TopNavigation.init = function ($self) {
         console.log('Component: "TopNavigation"');
 
+        var sessionCookie = PORTAL.utils.get_cookie("portal-session-id");
+        var email = PORTAL.utils.get_cookie("portal-user");
+        if (sessionCookie && email && isCookiesValid(sessionCookie, email)){
+
+        } else {
+
+        }
+
+        var isSessionIdValid = function(sessionCookie, email){
+            $.ajax({
+                url: "/services/verifying",
+                type: "POST",
+                data: {
+                    'portal-session-id': sessionCookie,
+                    'portal-user': email
+                },
+                success: function (data) {
+                    if (data) {
+                        return data;
+                    }
+                }
+            });
+        }
+
     }
 
     return PORTAL;
