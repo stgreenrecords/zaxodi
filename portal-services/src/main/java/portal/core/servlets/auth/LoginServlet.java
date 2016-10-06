@@ -67,8 +67,9 @@ public class LoginServlet extends SlingAllMethodsServlet {
                 String uuid = UUID.randomUUID().toString();
                 try {
                     authorizable.setProperty(Constants.AUTH_COOKIE_NAME, ValueFactoryImpl.getInstance().createValue(uuid));
-                    CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME,cookieService.getCookieValue(uuid),Constants.LOGIN_COOKIE_AGE);
-                    CookieService.addCookie(response,Constants.EMAIL_COOKIE_NAME,cookieService.getCookieValue(email),Constants.LOGIN_COOKIE_AGE);
+                    CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME, uuid, Constants.LOGIN_COOKIE_AGE);
+                    CookieService.addCookie(response,Constants.EMAIL_COOKIE_NAME, email, Constants.LOGIN_COOKIE_AGE);
+                    portalUtils.getAdminSession().save();
                 } catch (RepositoryException e) {
                     LOG.info("SET SESSION FAIL");
                 }

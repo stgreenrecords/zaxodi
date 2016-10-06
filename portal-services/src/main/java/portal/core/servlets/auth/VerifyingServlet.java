@@ -16,11 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.data.Constants;
 import portal.core.services.users.PortalUserManager;
+import portal.core.utils.PortalUtils;
 import portal.core.utils.ServerUtil;
 
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.SimpleCredentials;
+import javax.jcr.*;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,6 +31,12 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
 
     @Reference
     private PortalUserManager portalUserManager;
+
+    @Reference
+    private Repository repository;
+
+    @Reference
+    private PortalUtils portalUtils;
 
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
@@ -48,23 +53,19 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
         String sessionID = request.getParameter(Constants.AUTH_COOKIE_NAME);
         String email = request.getParameter(Constants.EMAIL_COOKIE_NAME);
         PrintWriter writer = null;
-        JackrabbitSession jackrabbitSession = (JackrabbitSession) request.getResourceResolver().adaptTo(Session.class);
+        JackrabbitSession jackrabbitSession = portalUtils.getAdminSession();
         if (jackrabbitSession != null){
             try {
                Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(email);
                 if (sessionID.equals(authorizable.getProperty(Constants.AUTH_COOKIE_NAME)[0].getString())){
                     if (!jackrabbitSession.getUserID().equals(email)){
                         User user = request.getResourceResolver().getResource(authorizable.getPath()).adaptTo(User.class);
-                        jackrabbitSession.getRepository().login(user.getCredentials());
+                        repository.login(new SimpleCredentials(email, "123".toCharArray()));
                         LOG.info("USER WAS LOGINED AS " + email);
                     }
                     writer = response.getWriter();
                     writer.print(Boolean.TRUE.toString());
-                } else {
-                    writer = response.getWriter();
-                    writer.print(Boolean.FALSE.toString());
                 }
-
             } catch (RepositoryException e) {
                 LOG.error("FAIL TO GET USER FROM COOKIE. USER: " + email + ". Detail: " + e.getMessage());
             }

@@ -6,10 +6,7 @@
             <sly data-sly-list="${navigationModel.childPages}">
                 <li class="main_top_nav_list_item"><a href="${item.path}.html" class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a></li>
             </sly>
-            <sly data-sly-use.authenticationModel="portal.models.AuthenticationModel">
-                <div data-authentication="${authenticationModel.cookie}"></div>
-            </sly>
-            <li>
+            <li class="main_top_nav_list_item_login">
                 <div class="user_item" style="display: none">
                     <span class="user_name"></span>
                     <div class="user_menu">
@@ -19,10 +16,11 @@
                             <li><a href="#" class="my_comment"></a></li>
                             <li><a href="#" class="settings"></a></li>
                             <li><a href="#" class="user_home"></a></li>
+                            <li><a href="#" class="get_out"></a></li>
                         </ul>
                     </div>
                 </div>
-                <a href="/content/portal/login.html" style="display: none">Вход</a>
+                <a href="/content/portal/login.html" class="login_home" style="display: none">Вход</a>
             </li>
         </ul>
         <label for="css-toggle-menu"></label>

@@ -9,11 +9,6 @@ var PORTAL = (function (PORTAL, $) {
 
         var sessionCookie = PORTAL.utils.get_cookie("portal-session-id");
         var email = PORTAL.utils.get_cookie("portal-user");
-        if (sessionCookie && email && isCookiesValid(sessionCookie, email)){
-
-        } else {
-
-        }
 
         var isSessionIdValid = function(sessionCookie, email){
             $.ajax({
@@ -31,24 +26,14 @@ var PORTAL = (function (PORTAL, $) {
             });
         }
 
+        if (sessionCookie && email && isSessionIdValid(sessionCookie, email)){
+            $self.find(".user_item").css("display","block");
+        } else {
+            $self.find(".login_home").css("display","block");
+        }
+
     }
 
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
-
-
-
-/*
-var authCookie = PORTAL.utils.get_cookie("portalAuthorization");
-
-if (authCookie) {
-    $loginButton.text(authCookie);
-    var $exit = $("<a href='/content/portal.html' class='login-exit'>Выйти</a>").click(function () {
-        PORTAL.utils.set_cookie("portalAuthorization", '', new Date(1));
-    });
-    var $btnSign = $self.find(".btn-sign").append($exit);
-    console.log($btnSign);
-} else {
-    $loginButton.text("Войти").attr("href", "/content/portal/registration.html");
-}*/
