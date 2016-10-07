@@ -4,10 +4,6 @@ import org.apache.felix.scr.annotations.*;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Authorizable;
-import org.apache.jackrabbit.api.security.user.User;
-import org.apache.jackrabbit.oak.spi.security.user.UserIdCredentials;
-import org.apache.jackrabbit.oak.spi.security.user.util.PasswordUtil;
-import org.apache.jackrabbit.oak.spi.security.user.util.UserUtil;
 import org.apache.jackrabbit.util.Base64;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -33,9 +29,6 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
     private PortalUserManager portalUserManager;
 
     @Reference
-    private Repository repository;
-
-    @Reference
     private PortalUtils portalUtils;
 
     @Override
@@ -54,17 +47,13 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
         String email = request.getParameter(Constants.EMAIL_COOKIE_NAME);
         PrintWriter writer = null;
         JackrabbitSession jackrabbitSession = portalUtils.getAdminSession();
-        if (jackrabbitSession != null){
+        if (jackrabbitSession != null) {
             try {
-               Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(email);
-                if (sessionID.equals(authorizable.getProperty(Constants.AUTH_COOKIE_NAME)[0].getString())){
-                    if (!jackrabbitSession.getUserID().equals(email)){
-                        User user = request.getResourceResolver().getResource(authorizable.getPath()).adaptTo(User.class);
-                        repository.login(new SimpleCredentials(email, "123".toCharArray()));
-                        LOG.info("USER WAS LOGINED AS " + email);
-                    }
+                Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(email);
+                if (sessionID.equals(authorizable.getProperty(Constants.AUTH_COOKIE_NAME)[0].getString())) {
+                    LOG.info("USER WAS LOGINED AS " + email);
                     writer = response.getWriter();
-                    writer.print(Boolean.TRUE.toString());
+                    writer.print(portalUserManager.getPortalUserInfoAsJson(email));
                 }
             } catch (RepositoryException e) {
                 LOG.error("FAIL TO GET USER FROM COOKIE. USER: " + email + ". Detail: " + e.getMessage());

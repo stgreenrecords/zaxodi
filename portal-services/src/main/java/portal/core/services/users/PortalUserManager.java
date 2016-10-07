@@ -1,5 +1,6 @@
 package portal.core.services.users;
 
+import com.google.gson.JsonObject;
 import portal.core.services.users.beans.PortalUser;
 import portal.core.services.users.beans.Seller;
 
@@ -25,5 +26,7 @@ public interface PortalUserManager {
     Seller getSeller(String email);
 
     PortalUser getPortalUser(String email);
+
+    public JsonObject getPortalUserInfoAsJson(String email);
 
 }

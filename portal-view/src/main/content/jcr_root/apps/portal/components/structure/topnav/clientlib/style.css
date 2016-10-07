@@ -41,3 +41,17 @@
     }
 }
 
+.account_info{
+    visibility: hidden;
+    position: absolute;
+    cursor: pointer;
+    background-color: white;
+
+}
+
+.account_item:hover + .account_info{
+    z-index: 1000;
+    visibility: visible;
+}
+
+

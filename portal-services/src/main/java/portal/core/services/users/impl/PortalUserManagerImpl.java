@@ -136,15 +136,14 @@ public class PortalUserManagerImpl implements PortalUserManager {
         portalUser.setEmail(email);
         try {
             Authorizable authorizable = portalUtils.getAdminSession().getUserManager().getAuthorizable(email);
-            Node userNode = portalUtils.getAdminSession().getNode(authorizable.getPath());
             List<PortalProduct> productList = new ArrayList();
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("path", authorizable.getPath()+"/catalog");
-            map.put("property", "isActive");
-            map.put("property.value", "true");
-            map.put("p.limit", "-1");
+            Map<String, String> predicates = new HashMap<String, String>();
+            predicates.put("path", authorizable.getPath() + "/catalog");
+            predicates.put("property", "isActive");
+            predicates.put("property.value", "true");
+            predicates.put("p.limit", "-1");
 
-            Query query = queryBuilder.createQuery(PredicateGroup.create(map), portalUtils.getAdminSession());
+            Query query = queryBuilder.createQuery(PredicateGroup.create(predicates), portalUtils.getAdminSession());
             SearchResult result = query.getResult();
 
             for (Hit hit : result.getHits()) {

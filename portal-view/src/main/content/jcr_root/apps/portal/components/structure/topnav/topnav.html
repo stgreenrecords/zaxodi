@@ -4,19 +4,20 @@
             <li class="logo_nav main_top_nav_list_item"><a href="${navigationModel.homePath}.html">
                 <img src="${navigationModel.imagePath}" alt="Logo" width="105" height="67"></a></li>
             <sly data-sly-list="${navigationModel.childPages}">
-                <li class="main_top_nav_list_item"><a href="${item.path}.html" class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a></li>
+                <li class="main_top_nav_list_item"><a href="${item.path}.html"
+                                                      class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a>
+                </li>
             </sly>
             <li class="main_top_nav_list_item_login">
                 <div class="user_item" style="display: none">
-                    <span class="user_name"></span>
                     <div class="user_menu">
-                        <ul>
-                            <li><a href="#" class="basket"></a></li>
-                            <li><a href="#" class="adver"></a></li>
-                            <li><a href="#" class="my_comment"></a></li>
-                            <li><a href="#" class="settings"></a></li>
-                            <li><a href="#" class="user_home"></a></li>
-                            <li><a href="#" class="get_out"></a></li>
+                        <span class="account_item">Мой аккаунт</span>
+                        <ul class="account_info">
+                            <li><a href="#" class="basket">Количество товаром в корзине: <span class="basket_count"></span></a></li>
+                            <li><a href="#" class="adver">Обьявление</a></li>
+                            <li><a href="#" class="my_comment">Мои коментарии</a></li>
+                            <li><a href="#" class="settings">Мои настройки</a></li>
+                            <li><a href="#" class="get_out">Выйти</a></li>
                         </ul>
                     </div>
                 </div>
