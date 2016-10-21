@@ -1,0 +1,46 @@
+/*pixels in one rem/em (1/16)
+@af-default-font-size in rem/em*/
+@af-default-font-size: 0.0625;
+/*default value in browser(1em = 16px)
+@af-default-px-value in px;*/
+@af-default-px-value: 16;
+/*optionts for strong inheritance like !important*/
+@af-strong-value-font-size: false;
+/*@af-line-height-default-value in percent(1 = 100%)*/
+@af-line-height-default-value: 1;
+/*@af-line-height-default-value in pixel*/
+@af-px-line-height-default-value: 22;
+
+.font-size-em(@px-value-size: @af-default-px-value, @ratio-line-height-value: @af-line-height-default-value) {
+	@rem-font-size-value: (@px-value-size * @af-default-font-size);
+	@rem-line-height-value: (@rem-font-size-value * @ratio-line-height-value);
+	font-size: ~"@{rem-font-size-value}rem";
+	line-height: ~"@{rem-line-height-value}rem";
+}
+
+.font-size-inherit(@af-strong: @af-strong-value-font-size) when (@af-strong = false) {
+	font-size: ~"inherit;";
+	line-height: ~"inherit;";
+}
+
+.font-size-inherit(@af-strong: @af-strong-value-font-size) when (@af-strong = true) {
+	font-size: ~"inherit !important;";
+	line-height: ~"inherit !important;";
+}
+
+.font-size-line-height(@px-value-size: @af-default-px-value, @px-line-height-value: @af-px-line-height-default-value){
+	@rem-font-size-value: (@px-value-size * @af-default-font-size);
+	@rem-line-height-value: (@px-line-height-value * @af-default-font-size);
+	font-size: ~"@{rem-font-size-value}rem";
+	line-height: ~"@{rem-line-height-value}rem";
+}
+
+.line-height-px(@px-line-height-value: @af-px-line-height-default-value){
+	@rem-line-height-value: (@px-line-height-value * @af-default-font-size);
+	line-height: ~"@{rem-line-height-value}rem";
+}
+
+.font-size-px(@px-value-size: @af-default-px-value){
+	@rem-font-size-value: (@px-value-size * @af-default-font-size);
+	font-size: ~"@{rem-font-size-value}rem";
+}

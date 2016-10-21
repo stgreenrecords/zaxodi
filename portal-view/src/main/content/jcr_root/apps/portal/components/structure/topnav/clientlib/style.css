@@ -1,6 +1,7 @@
 /***************** NAVIGATION ********************/
 .main_top_nav {
     border-bottom: 1px solid #e6e6e6;
+    height: 75px;
 }
 .main_top_nav .main_top_nav_list{
     display: flex;
@@ -17,15 +18,21 @@
 }
 
 .main_top_nav a{
-    font-family: 'UniSansHeavy';
     text-decoration: none;
-    color: rgb(0, 164, 183);
     display: block;
-    font-size: 20px;
     padding-top:7px;
+    padding-top: 7px;
+    font-size: 14px;
+    line-height: 5rem;
+    font-family: 'oswald-regular',helvetica,sans-serif,arial;
+    position: relative;
+    display: inline-block;
+    padding: 0 14px;
+    text-transform: uppercase;
+    color: #464547;
 }
 .main_top_nav a:hover{
-    color: #6D5959;
+    color: #00BCD4;
 }
 .main_top_nav .main_top_nav_list_item{
     width: 200px;

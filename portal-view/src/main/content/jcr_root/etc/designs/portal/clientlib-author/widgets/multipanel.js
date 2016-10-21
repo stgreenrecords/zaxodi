@@ -169,3 +169,6 @@ CQ.wcm.MultiFieldPanel = CQ.Ext.extend(CQ.Ext.Panel, {
 });
 
 CQ.Ext.reg("multifieldpanel", CQ.wcm.MultiFieldPanel);
+
+
+
