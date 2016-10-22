@@ -7,31 +7,30 @@
 
 #portalCarousel .left-bottom {
     position: absolute;
-    padding-left: 120px;
+    padding-left: 80px;
     bottom: 60px;
-
+    left: 140px;
 }
 
 #portalCarousel .left-top {
     position: absolute;
-    padding-left: 120px;
+    padding-left: 80px;
     top: 60px;
-
+    left: 140px;
 }
 
 #portalCarousel .right-top {
     position: absolute;
-    padding-right: 120px;
+    padding-right: 80px;
     top: 60px;
-    right: 0px;
+    right: 140px;
 }
 
 #portalCarousel .right-bottom {
     position: absolute;
-    padding-right: 120px;
+    padding-right: 80px;
     bottom: 60px;
-    right: 0px;
-    background: rgba(105, 255, 67, 0.76);
+    right: 140px;
 }
 
 #portalCarousel .carousel_item_button {

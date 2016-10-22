@@ -10,6 +10,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
@@ -19,7 +20,6 @@ import portal.core.utils.ServerUtil;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import org.jsoup.nodes.Element;
 
 
 @Component(metatype = true, immediate = true)
@@ -34,7 +34,7 @@ public class PortalMailService {
     private static final String PATH_TO_REGISTRATION_MAIL = "path_to_registration_mail";
 
     @Property
-    private static final String ADDRESS_FROM  = "address_from";
+    private static final String ADDRESS_FROM = "address_from";
 
     @Reference
     private PortalUtils portalUtils;
@@ -52,7 +52,7 @@ public class PortalMailService {
 
     public boolean sendRegistrationMail(String userName) {
         try {
-            Node registrationNode = portalUtils.getAdminSession().getNode(PropertiesUtil.toString(componentContext.getProperties().get(PATH_TO_REGISTRATION_MAIL), StringUtils.EMPTY)+"/jcr:content/par/text");
+            Node registrationNode = portalUtils.getAdminSession().getNode(PropertiesUtil.toString(componentContext.getProperties().get(PATH_TO_REGISTRATION_MAIL), StringUtils.EMPTY) + "/jcr:content/par/text");
             if (registrationNode.hasProperty("text")) {
                 HtmlEmail email = new HtmlEmail();
                 email.setCharset("UTF-8");
@@ -65,8 +65,8 @@ public class PortalMailService {
                 Document document = Jsoup.parse(repairHtml);
                 Elements images = document.getElementsByTag("img");
                 for (Element element : images) {
-                   String imgLink = element.attr("src");
-                    element.attr("src",serverUtil.getDispatcherLink()+imgLink);
+                    String imgLink = element.attr("src");
+                    element.attr("src", serverUtil.getDispatcherLink() + imgLink);
                 }
                 email.setHtmlMsg(document.outerHtml());
                 email.setFrom(PropertiesUtil.toString(componentContext.getProperties().get(ADDRESS_FROM), StringUtils.EMPTY));

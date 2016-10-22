@@ -25,7 +25,6 @@ import portal.core.utils.PortalUtils;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.jcr.Value;
 import java.security.Principal;
 import java.util.*;
@@ -156,18 +155,18 @@ public class PortalUserManagerImpl implements PortalUserManager {
                     LOG.error(e.getMessage());
                 }
             }
-          portalUser.setProductList(productList);
+            portalUser.setProductList(productList);
         } catch (RepositoryException e) {
             LOG.error("FAILT TO BUILD USER. Details:" + e.getMessage());
         }
         return portalUser;
     }
 
-    public JsonObject getPortalUserInfoAsJson(String email){
-       PortalUser portalUser = getPortalUser(email);
+    public JsonObject getPortalUserInfoAsJson(String email) {
+        PortalUser portalUser = getPortalUser(email);
         JsonObject jsonUser = new JsonObject();
         jsonUser.addProperty("name", portalUser.getEmail());
-        jsonUser.addProperty("basketCount",portalUser.getProductList().size());
+        jsonUser.addProperty("basketCount", portalUser.getProductList().size());
         return jsonUser;
     }
 

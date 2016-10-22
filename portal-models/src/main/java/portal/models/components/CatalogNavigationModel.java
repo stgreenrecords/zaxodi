@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Model(adaptables=Resource.class)
+@Model(adaptables = Resource.class)
 public class CatalogNavigationModel extends BaseModel {
 
     List<CatalogSuperCategoriesPageModel> catalogSuperCategoriesPageModelList = new ArrayList();
@@ -19,14 +19,14 @@ public class CatalogNavigationModel extends BaseModel {
         super(resource);
     }
 
-    public List<CatalogSuperCategoriesPageModel> getCatalogMap(){
+    public List<CatalogSuperCategoriesPageModel> getCatalogMap() {
         if (getCatalogRootPage() != null) {
             Iterator<Page> pageIterator = getCatalogRootPage().listChildren();
-            while (pageIterator.hasNext()){
+            while (pageIterator.hasNext()) {
                 catalogSuperCategoriesPageModelList.add(pageIterator.next().getContentResource().adaptTo(CatalogSuperCategoriesPageModel.class));
             }
         }
-       return catalogSuperCategoriesPageModelList;
+        return catalogSuperCategoriesPageModelList;
     }
 
 

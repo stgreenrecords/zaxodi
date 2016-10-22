@@ -4,7 +4,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import portal.models.BaseModel;
 
-@Model(adaptables=Resource.class)
+@Model(adaptables = Resource.class)
 public class ProductModel extends BaseModel {
 
     public ProductModel(Resource resource) {

@@ -1,0 +1,20 @@
+<sly data-sly-use.bestProductsModel="portal.models.components.BestProductsModel">
+    <div class="best-product-block">
+        <H3>Top popular products</H3>
+        <H3>__________________________________________________</H3>
+        <div class="best-product-content">
+            <sly data-sly-list.bestProduct="${bestProductsModel.bestProductsList}">
+                <div class="best-product-item">
+                    <a href="${bestProduct.pagePath}.html">
+                        <span>${bestProduct.brand} ${bestProduct.model}</span>
+
+                        <div class="best-product-item-photo">
+                            <img src="${bestProduct.imgPath}/jcr:content/renditions/cq5dam.thumbnail.140.100.png">
+                        </div>
+                        <div class="best-product-price">${bestProduct.bestPrice}</div>
+                    </a>
+                </div>
+            </sly>
+        </div>
+    </div>
+</sly>

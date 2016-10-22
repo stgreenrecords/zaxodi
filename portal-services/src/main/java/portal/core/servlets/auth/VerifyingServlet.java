@@ -1,6 +1,6 @@
 package portal.core.servlets.auth;
 
-import org.apache.felix.scr.annotations.*;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Authorizable;
@@ -15,7 +15,7 @@ import portal.core.services.users.PortalUserManager;
 import portal.core.utils.PortalUtils;
 import portal.core.utils.ServerUtil;
 
-import javax.jcr.*;
+import javax.jcr.RepositoryException;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;

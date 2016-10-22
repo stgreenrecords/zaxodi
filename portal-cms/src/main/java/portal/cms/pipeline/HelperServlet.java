@@ -2,6 +2,7 @@ package portal.cms.pipeline;
 
 
 import com.day.cq.commons.jcr.JcrUtil;
+import com.day.cq.wcm.api.Page;
 import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -21,6 +22,7 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -35,8 +37,26 @@ public class HelperServlet extends SlingAllMethodsServlet {
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException {
         try {
 
-            NodeIterator catalogNode = request.getResourceResolver().getResource("/content/portal/catalog").adaptTo(Node.class).getNodes();
-            Node topNavNode = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/topnav").adaptTo(Node.class);
+            Page catalogPage = request.getResourceResolver().getResource("/content/portal/catalog").adaptTo(Page.class);
+            Iterator<Page> pageIterator = catalogPage.listChildren();
+            while (pageIterator.hasNext()){
+               Page superCategoryPage = pageIterator.next();
+                Iterator<Page> categoryIterator = superCategoryPage.listChildren();
+                while (categoryIterator.hasNext()){
+                    Page categoryPage = categoryIterator.next();
+                    String categoryName = categoryPage.getName();
+                    Node categoryNode = categoryPage.adaptTo(Node.class).getNode("jcr:content");
+                    String repairedName = categoryName.contains("-") ? categoryName.replaceAll("-"," ") : categoryName;
+                    String firstSymbol = repairedName.substring(0,1);
+                    String finalString = repairedName.replaceFirst(firstSymbol,firstSymbol.toUpperCase());
+                    categoryNode.setProperty("jcr:title", finalString);
+
+                }
+
+            }
+
+
+           /* Node topNavNode = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/topnav").adaptTo(Node.class);
             Node catalogNavigation = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/catalognavigation").adaptTo(Node.class);
             Node columns = request.getResourceResolver().getResource("/apps/portal/templates/catalogproducttemplate/jcr:content/columns").adaptTo(Node.class);
             Node video = request.getResourceResolver().getResource("/apps/portal/templates/catalogproducttemplate/jcr:content/video").adaptTo(Node.class);
@@ -89,7 +109,7 @@ public class HelperServlet extends SlingAllMethodsServlet {
                                     }
                                 }
                             }
-                        }
+                        }*/
 
  /*                       if (!subCategoryNode.getName().equals("jcr:content")){
                             Node jcrContent = subCategoryNode.getNode("jcr:content");
@@ -115,9 +135,9 @@ public class HelperServlet extends SlingAllMethodsServlet {
                             }
 
                         }*/
-                    }
-                }
-            }
+/*                    }
+                }*/
+  //          }
             request.getResourceResolver().commit();
             PrintWriter printWriter = response.getWriter();
             for (String path : stringArrayList) {

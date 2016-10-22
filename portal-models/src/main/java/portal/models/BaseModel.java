@@ -12,6 +12,7 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import portal.core.data.Constants;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -152,6 +153,10 @@ public class BaseModel {
 
     public void setCurrentPage(Page currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public QueryBuilder getQueryBuilder() {
+        return queryBuilder;
     }
 
     public Page getCurrentPage() {

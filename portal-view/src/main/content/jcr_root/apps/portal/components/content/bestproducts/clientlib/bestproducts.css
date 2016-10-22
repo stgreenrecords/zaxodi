@@ -1,0 +1,13 @@
+.best-product-block{
+    padding-top: 40px;
+}
+
+.best-product-block h3{
+    padding-left: 255px;
+    color: #00BCD4;
+    font-family: "oswald-bold";
+}
+.best-product-content{
+    display: flex;
+    justify-content: space-between;
+}

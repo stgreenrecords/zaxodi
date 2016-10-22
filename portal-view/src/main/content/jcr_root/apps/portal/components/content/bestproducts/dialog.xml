@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:Dialog"
+          xtype="dialog">
+    <items
+            jcr:primaryType="cq:Widget"
+            xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <advanced
+                    jcr:primaryType="cq:Widget"
+                    xtype="panel">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <weather
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Погода"
+                            itemId="weather"
+                            name="./weather"
+                            type="checkbox"
+                            xtype="selection"/>
+                    <exchange
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Погода"
+                            itemId="Курсы валют"
+                            name="./exchange"
+                            type="checkbox"
+                            xtype="selection"/>
+                </items>
+            </advanced>
+        </items>
+    </items>
+</jcr:root>

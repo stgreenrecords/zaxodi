@@ -115,7 +115,7 @@
                         <Embed-Transitive>true</Embed-Transitive>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>
-                           portal.core.services.*;
+                            portal.core.services.*;
                         </Export-Package>
                         <Import-Package>
                             *;resolution:=optional

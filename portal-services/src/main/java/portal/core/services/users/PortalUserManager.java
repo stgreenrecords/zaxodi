@@ -4,16 +4,15 @@ import com.google.gson.JsonObject;
 import portal.core.services.users.beans.PortalUser;
 import portal.core.services.users.beans.Seller;
 
-
 import java.util.Date;
 
 public interface PortalUserManager {
 
     boolean addPortalUser(String email, String pass);
 
-    boolean updateSeller(String email, Date birthday, int age , String firstName, String lastName, String phoneNumber, String sex);
+    boolean updateSeller(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber, String sex);
 
-    boolean updateUser(String email, Date birthday, int age , String firstName, String lastName, String phoneNumber);
+    boolean updateUser(String email, Date birthday, int age, String firstName, String lastName, String phoneNumber);
 
     boolean deleteUser(String email);
 

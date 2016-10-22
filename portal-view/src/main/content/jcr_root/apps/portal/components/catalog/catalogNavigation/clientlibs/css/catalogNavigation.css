@@ -160,6 +160,10 @@
         text-align: center;
     }
 
+    .catalog_super_categories_nav_list {
+        margin-left: 58px;
+    }
+
     .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
         display: none;
     }

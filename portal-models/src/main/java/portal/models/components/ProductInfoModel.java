@@ -2,25 +2,25 @@ package portal.models.components;
 
 import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.Page;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import portal.core.data.Constants;
 import portal.models.BaseModel;
-import portal.models.Constants;
 import portal.models.beans.ProductInfoProperty;
+import portal.models.beans.SellerInfo;
+import portal.models.beans.SimplePageBean;
+import portal.models.comparators.SellerComparator;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import java.util.*;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import portal.models.beans.SellerInfo;
-import portal.models.beans.SimplePageBean;
 
 @Model(adaptables = Resource.class)
 public class ProductInfoModel extends BaseModel {
@@ -49,6 +49,18 @@ public class ProductInfoModel extends BaseModel {
         return mainPropertyList;
     }
 
+    public String getBrand() {
+        return getComponentProperties().get(Constants.NODE_PROPERTY_BRAND, String.class);
+    }
+
+    public String getModel() {
+        return getComponentProperties().get(Constants.NODE_PROPERTY_MODEL, String.class);
+    }
+
+    public String getDescription() {
+        return getPageProperties().get(Constants.NODE_PROPERTY_DESCRIPTION, String.class);
+    }
+
     public String getImgPath() {
         Resource image = selfResource.getChild(Constants.COMPONENT_IMAGE_NODE_NAME);
         return image != null ? image.getValueMap().get(Constants.COMPONENT_IMAGE_REFERENCE_PROPERTY, String.class) : StringUtils.EMPTY;
@@ -75,8 +87,12 @@ public class ProductInfoModel extends BaseModel {
                 propertySellerArray = new String[]{(String) sellerProperty};
             }
         }
-
         return parseSellerProperty(propertySellerArray, getSession());
+    }
+
+    public String getBestPrice() {
+        List<SellerInfo> sellerInfoList = getSellerInfo();
+        return sellerInfoList != null ? sellerInfoList.get(0).getPrice() : StringUtils.EMPTY;
     }
 
     public static List<SellerInfo> parseSellerProperty(String[] sellerPropertyArray, Session session) {
@@ -103,6 +119,7 @@ public class ProductInfoModel extends BaseModel {
                 mainPropertyList.add(new SellerInfo(propertyPrice, rating, propertySellerID));
 
             }
+            Collections.sort(mainPropertyList, new SellerComparator());
         } else {
             return null;
         }
@@ -144,12 +161,12 @@ public class ProductInfoModel extends BaseModel {
         return mainPropertyList;
     }
 
-    public List<String> getPhotosList(){
+    public List<String> getPhotosList() {
         List<String> photosList = new ArrayList<String>();
-        String associatedDAMPath = getCurrentPage().getPath().replace("/content","/content/dam");
+        String associatedDAMPath = getCurrentPage().getPath().replace("/content", "/content/dam");
         Resource associatedDAMResource = getResourceResolver().getResource(associatedDAMPath);
-        if (associatedDAMResource != null){
-            for (Resource resource : associatedDAMResource.getChildren()){
+        if (associatedDAMResource != null) {
+            for (Resource resource : associatedDAMResource.getChildren()) {
                 if (!resource.getName().equals(JcrConstants.JCR_CONTENT)) {
                     photosList.add(resource.getPath());
                 }

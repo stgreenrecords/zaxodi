@@ -14,7 +14,10 @@ import portal.core.services.CookieService;
 import portal.core.services.users.PortalUserManager;
 import portal.core.utils.PortalUtils;
 
-import javax.jcr.*;
+import javax.jcr.Repository;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.SimpleCredentials;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,34 +50,34 @@ public class LoginServlet extends SlingAllMethodsServlet {
         boolean validationStatus = false;
         try {
             authorizable = portalUtils.getAdminSession().getUserManager().getAuthorizable(email);
-            validationStatus  = authorizable != null ? authorizable.getProperty("verifiedStatus")[0].getBoolean() : false;
+            validationStatus = authorizable != null ? authorizable.getProperty("verifiedStatus")[0].getBoolean() : false;
         } catch (RepositoryException e) {
-          LOG.error(e.getMessage());
+            LOG.error(e.getMessage());
         }
         if (authorizable != null) {
-            if (validationStatus){
-            Session session = null;
-            try {
-                session = repository.login(new SimpleCredentials(email, pass.toCharArray()));
-            } catch (RepositoryException e) {
-                writer = response.getWriter();
-                writer.print(Constants.STATUS_WRONG_PASS);
-                LOG.info("LOGIN FAIL");
-            }
-            if (session != null) {
-                LOG.info("USER " + session.getUserID() + " success login.");
-                writer = response.getWriter();
-                String uuid = UUID.randomUUID().toString();
+            if (validationStatus) {
+                Session session = null;
                 try {
-                    authorizable.setProperty(Constants.AUTH_COOKIE_NAME, ValueFactoryImpl.getInstance().createValue(uuid));
-                    CookieService.addCookie(response,Constants.AUTH_COOKIE_NAME, uuid, Constants.LOGIN_COOKIE_AGE);
-                    CookieService.addCookie(response,Constants.EMAIL_COOKIE_NAME, email, Constants.LOGIN_COOKIE_AGE);
-                    portalUtils.getAdminSession().save();
+                    session = repository.login(new SimpleCredentials(email, pass.toCharArray()));
                 } catch (RepositoryException e) {
-                    LOG.info("SET SESSION FAIL");
+                    writer = response.getWriter();
+                    writer.print(Constants.STATUS_WRONG_PASS);
+                    LOG.info("LOGIN FAIL");
                 }
-                writer.print(Constants.STATUS_SUCCESS_LOGIN);
-            }
+                if (session != null) {
+                    LOG.info("USER " + session.getUserID() + " success login.");
+                    writer = response.getWriter();
+                    String uuid = UUID.randomUUID().toString();
+                    try {
+                        authorizable.setProperty(Constants.AUTH_COOKIE_NAME, ValueFactoryImpl.getInstance().createValue(uuid));
+                        CookieService.addCookie(response, Constants.AUTH_COOKIE_NAME, uuid, Constants.LOGIN_COOKIE_AGE);
+                        CookieService.addCookie(response, Constants.EMAIL_COOKIE_NAME, email, Constants.LOGIN_COOKIE_AGE);
+                        portalUtils.getAdminSession().save();
+                    } catch (RepositoryException e) {
+                        LOG.info("SET SESSION FAIL");
+                    }
+                    writer.print(Constants.STATUS_SUCCESS_LOGIN);
+                }
             } else {
                 writer = response.getWriter();
                 writer.print(Constants.STATUS_USER_IS_INVALID);

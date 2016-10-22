@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service(CookieService.class)
 public class CookieService {
 
-    public String getCookieValue(String email){
+    public String getCookieValue(String email) {
         String uuid = UUID.randomUUID().toString();
         System.out.println(uuid);
         char[] uuidChars = uuid.toCharArray();
@@ -36,7 +36,7 @@ public class CookieService {
         return finalEncrypt.toString();
     }
 
-    public boolean isCookieValid(){
+    public boolean isCookieValid() {
         return false;
     }
 

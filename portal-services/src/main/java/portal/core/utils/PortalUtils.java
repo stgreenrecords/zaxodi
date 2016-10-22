@@ -1,8 +1,10 @@
 package portal.core.utils;
 
-import org.apache.felix.scr.annotations.*;
+import org.apache.felix.scr.annotations.Activate;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
 import org.apache.jackrabbit.api.JackrabbitSession;
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
@@ -10,12 +12,8 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import javax.jcr.Repository;
-
 import javax.jcr.Session;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 @Component
 @Service(PortalUtils.class)
@@ -40,7 +38,7 @@ public class PortalUtils {
 
 
     public JackrabbitSession getAdminSession() {
-         return (JackrabbitSession) resourceResolver.adaptTo(Session.class);
+        return (JackrabbitSession) resourceResolver.adaptTo(Session.class);
     }
 
 }

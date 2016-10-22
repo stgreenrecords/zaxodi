@@ -5,7 +5,7 @@ import portal.core.services.product.PortalProduct;
 import java.util.Date;
 import java.util.List;
 
-public class PortalUser extends AbstractUser{
+public class PortalUser extends AbstractUser {
 
     private List<Comment> commentList;
 
@@ -15,7 +15,7 @@ public class PortalUser extends AbstractUser{
         super(age, birthday, dateOfRegistration, email, firstName, lastName, phoneNumber, sex);
     }
 
-    public PortalUser(){
+    public PortalUser() {
 
     }
 

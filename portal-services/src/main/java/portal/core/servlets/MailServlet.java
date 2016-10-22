@@ -55,7 +55,7 @@ public class MailServlet extends SlingAllMethodsServlet {
             NewsLetter newsLetter = NewsletterHelper.fromRequest(request, newsletterService);
             newsLetter.setFromAddress(new InternetAddress("administration@portal-gomel.com"));
             Iterator<com.day.cq.security.Authorizable> recipients = newsLetter.getMailingList().members();
-            while (recipients.hasNext()){
+            while (recipients.hasNext()) {
                 LOG.info("TRY SEND LETTER TO : " + recipients.next().getName());
             }
             MailingStatus mailingStatus = newsletterService.sendNewsletter(newsLetter);

@@ -3,8 +3,8 @@ package portal.models.components;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
+import portal.core.data.Constants;
 import portal.models.BaseModel;
-import portal.models.Constants;
 import portal.models.beans.PromoBean;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class PromoModel extends BaseModel {
     }
 
     public Map<String, PromoBean> getPromoBeanMap() {
-        if (promoBeanMap == null){
+        if (promoBeanMap == null) {
             setPromoBeanMap(collectInfo());
         }
         return promoBeanMap;

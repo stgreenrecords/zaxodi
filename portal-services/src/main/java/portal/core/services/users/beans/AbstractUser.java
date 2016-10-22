@@ -24,7 +24,7 @@ abstract public class AbstractUser {
         this.sex = sex;
     }
 
-    public AbstractUser(){
+    public AbstractUser() {
 
     }
 

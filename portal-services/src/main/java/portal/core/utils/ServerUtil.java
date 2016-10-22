@@ -9,8 +9,6 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.osgi.service.component.ComponentContext;
 
-import javax.servlet.http.Cookie;
-
 @Component(metatype = true, immediate = true)
 @Service(ServerUtil.class)
 public class ServerUtil {
@@ -31,19 +29,19 @@ public class ServerUtil {
         this.componentContext = componentContext;
     }
 
-    public String getAuthorLink(){
+    public String getAuthorLink() {
         return PropertiesUtil.toString(componentContext.getProperties().get(AUTHOR_LINK), StringUtils.EMPTY);
     }
 
-    public String getPublishLink(){
+    public String getPublishLink() {
         return PropertiesUtil.toString(componentContext.getProperties().get(PUBLISH_LINK), StringUtils.EMPTY);
     }
 
-    public String getDispatcherLink(){
+    public String getDispatcherLink() {
         return PropertiesUtil.toString(componentContext.getProperties().get(DISPATCHER_LINK), StringUtils.EMPTY);
     }
 
-    public static String getServerInfo(SlingHttpServletRequest request){
+    public static String getServerInfo(SlingHttpServletRequest request) {
         return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     }
 

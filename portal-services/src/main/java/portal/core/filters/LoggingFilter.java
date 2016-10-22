@@ -15,20 +15,14 @@
  */
 package portal.core.filters;
 
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
 import org.apache.felix.scr.annotations.sling.SlingFilter;
 import org.apache.felix.scr.annotations.sling.SlingFilterScope;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.servlet.*;
+import java.io.IOException;
 
 /**
  * Simple servlet filter component that logs incoming requests.
@@ -40,7 +34,7 @@ public class LoggingFilter implements Filter {
 
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response,
-            final FilterChain filterChain) throws IOException, ServletException {
+                         final FilterChain filterChain) throws IOException, ServletException {
 
         final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
         logger.debug("request for {}, with selector {}", slingRequest
@@ -51,9 +45,11 @@ public class LoggingFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) {}
+    public void init(FilterConfig filterConfig) {
+    }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 
 }
