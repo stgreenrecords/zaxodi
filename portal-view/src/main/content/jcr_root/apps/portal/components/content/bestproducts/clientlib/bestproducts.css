@@ -8,6 +8,21 @@
     font-family: "oswald-bold";
 }
 .best-product-content{
+    padding-left: 150px;
+    padding-right: 150px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.best-product-item{
+    text-align: center;
+    font-family: 'oswald-regular';
+    color: black;
+    font-size: 18px;
+    margin: 40px;
+}
+
+.best-product-item span, .best-product-item .best-product-price{
+    color:#607D8B;
 }
