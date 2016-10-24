@@ -2,7 +2,7 @@
     <nav class="main_top_nav">
         <ul class="main_top_nav_list">
             <li class="logo_nav main_top_nav_list_item"><a href="${navigationModel.homePath}.html">
-                <img src="${navigationModel.imagePath}" alt="Logo" width="105" height="67"></a></li>
+                <img src="${navigationModel.imagePath}" alt="Logo"></a></li>
             <sly data-sly-list="${navigationModel.childPages}">
                 <li class="main_top_nav_list_item"><a href="${item.path}.html"
                                                       class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a>

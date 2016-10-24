@@ -11,7 +11,8 @@
 }
 
 .main_top_nav li.logo_nav {
-
+    padding-right: 400px;
+    margin-top: 5px;
 }
 .main_top_nav li.logo_nav a{
     padding: 0;
@@ -49,6 +50,10 @@
 
     .main_top_nav {
         height: 75px;
+    }
+
+    .main_top_nav li.logo_nav{
+        padding-right: 290px;
     }
 }
 

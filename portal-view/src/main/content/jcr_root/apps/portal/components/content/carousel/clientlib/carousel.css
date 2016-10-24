@@ -7,34 +7,38 @@
 
 #portalCarousel .left-bottom {
     position: absolute;
-    padding-left: 80px;
+    padding-right: 40px;
     bottom: 60px;
-    left: 140px;
+    left: 190px;
+    border-radius: 3% 3% 15% 15%;
 }
 
 #portalCarousel .left-top {
     position: absolute;
-    padding-left: 80px;
+    padding-right: 40px;
     top: 60px;
-    left: 140px;
+    left: 190px;
+    border-radius: 3% 3% 15% 15%;
 }
 
 #portalCarousel .right-top {
     position: absolute;
-    padding-right: 80px;
+    padding-right: 40px;
     top: 60px;
-    right: 140px;
+    right: 190px;
+    border-radius: 3% 3% 15% 15%;
 }
 
 #portalCarousel .right-bottom {
     position: absolute;
-    padding-right: 80px;
+    padding-right: 40px;
     bottom: 60px;
-    right: 140px;
+    right: 190px;
+    border-radius: 3% 3% 15% 15%;
 }
 
 #portalCarousel .carousel_item_button {
-    background-color: #a3c644;
+    background-color: #bbea39;
     height: 40px;
 }
 
@@ -44,11 +48,9 @@
 
 #portalCarousel .carousel_item_button .carousel_item_button_link {
     font-size: 20px;
-    font-family: open-sans, sans-serif;
-    font-weight: 700;
-    color: #675F5F;
-    margin-left: 40px;
-    margin-right: 20px;
+    font-family: 'oswald-light';
+    font-weight: 400;
+    color: #504848;
     top:5px;
 }
 

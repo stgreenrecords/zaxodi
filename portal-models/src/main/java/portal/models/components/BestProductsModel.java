@@ -36,7 +36,7 @@ public class BestProductsModel extends BaseModel {
         predicates.put("property.operation", "exists");
         predicates.put("orderby", "@" + Constants.BASKET_PLACED_PROPERTY);
         predicates.put("orderby.sort", "desc");
-        predicates.put("p.limit", "-1");
+        predicates.put("p.limit", "12");
 
         Query query = getQueryBuilder().createQuery(PredicateGroup.create(predicates), resourceResolver.adaptTo(Session.class));
         SearchResult result = query.getResult();
