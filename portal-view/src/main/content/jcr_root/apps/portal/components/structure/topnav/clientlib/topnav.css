@@ -18,6 +18,10 @@
     padding: 0;
 }
 
+.main_top_nav .is_active_page{
+    border-bottom: 4px solid #008ea0;
+}
+
 .main_top_nav a{
     text-decoration: none;
     display: block;
