@@ -2,7 +2,7 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.TopNavigation = {};
 
-    PORTAL.modules.TopNavigation.selfSelector = ".main_top_nav";
+    PORTAL.modules.TopNavigation.selfSelector = ".nav_block";
 
     PORTAL.modules.TopNavigation.init = function ($self) {
         console.log('Component: "TopNavigation"');
@@ -29,7 +29,7 @@ var PORTAL = (function (PORTAL, $) {
 
         var drawLastNavItem = function(data){
             if ( data ){
-               var userNav = $self.find(".user_item");
+                var userNav = $self.find(".user_item");
                 userNav.css("display","block");
                 userNav.find(".basket_count").text(data.basketCount);
             } else {

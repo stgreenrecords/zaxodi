@@ -26,3 +26,25 @@
 .best-product-item span, .best-product-item .best-product-price{
     color:#607D8B;
 }
+
+@media all and (max-width: 1366px) {
+
+    .best-product-content{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+
+}
+
+@media all and (max-width: 776px) {
+
+    .best-product-content{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+
+}
