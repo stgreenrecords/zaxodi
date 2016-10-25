@@ -4,3 +4,8 @@ bootstrap-theme.css
 
 #base=css/photoGallery
 magnific-popup.less
+
+#base=css/jquery-ui
+jquery-ui.min.css
+jquery-ui.structure.min.css
+jquery-ui.theme.min.css

@@ -2,7 +2,6 @@ package portal.core.services.users;
 
 import com.google.gson.JsonObject;
 import portal.core.services.users.beans.PortalUser;
-import portal.core.services.users.beans.Seller;
 
 import java.util.Date;
 
@@ -21,8 +20,6 @@ public interface PortalUserManager {
     void addVerifyStatus(String email);
 
     boolean isVerify(String email);
-
-    Seller getSeller(String email);
 
     PortalUser getPortalUser(String email);
 

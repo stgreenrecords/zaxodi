@@ -7,3 +7,6 @@ jquery.magnific-popup.min.js
 
 #base=js/google
 recaptcha.js
+
+#base=js/jquery-ui
+jquery-ui.min.js

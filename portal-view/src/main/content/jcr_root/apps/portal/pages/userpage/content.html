@@ -1,0 +1,47 @@
+<sly data-sly-use.userModel="portal.models.pages.UserPageModel">
+    <div class="user-page-block">
+        <sly data-sly-test.user="${userModel.portalUser}">
+            <div class="user-info">
+                <div class="user-email">
+                    <label>User email</label>
+                    <input type="text" value="${user.email}" disabled>
+                </div>
+                <div class="first-name">
+                    <label>First Name</label>
+                    <input type="text" value="${user.firstName}">
+                </div>
+                <div class="last-name">
+                    <label>Last Name</label>
+                    <input type="text" value="${user.lastName}">
+                </div>
+                <div class="user-birthday">
+                    <label>Birthday</label>
+                    <input type="text" id="datepicker">
+                </div>
+                <div class="user-phone-number">
+                    <label>Phone number</label>
+                    <input type="text" value="${user.phoneNumber}">
+                </div>
+                <div class="user-sex">
+                    <label class="user-sex-male">Sex</label>
+                    <label>Male</label>
+                    <input type="checkbox" name="sex-male" checked="${user.sex=='male'}">
+                    <label>Female</label>
+                    <input type="checkbox" name="sex-female" checked="${user.sex=='female'}">
+                </div>
+                <div class="user-photo">
+                    <label>Photo</label>
+                    <sly data-sly-test="${user.photoLink}">
+                        <img src="${user.photoLink}" />
+                    </sly>
+                    <input type="file" name="user-photo-upload">
+                </div>
+                <div class="user-submit">
+                    <input type="button" value="Submit" class="user-info-submit">
+                </div>
+            </div>
+            <div></div>
+        </sly>
+    </div>
+</sly>
+<div data-sly-resource="parsys"></div>

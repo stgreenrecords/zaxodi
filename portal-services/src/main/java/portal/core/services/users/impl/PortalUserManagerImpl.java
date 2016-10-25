@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import portal.core.services.product.PortalProduct;
 import portal.core.services.users.PortalUserManager;
 import portal.core.services.users.beans.PortalUser;
-import portal.core.services.users.beans.Seller;
 import portal.core.utils.PortalUtils;
 
 import javax.jcr.Node;
@@ -124,10 +123,6 @@ public class PortalUserManagerImpl implements PortalUserManager {
             LOG.error(e.getMessage());
         }
         return false;
-    }
-
-    public Seller getSeller(String email) {
-        return null;
     }
 
     public PortalUser getPortalUser(String email) {
