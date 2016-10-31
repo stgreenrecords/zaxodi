@@ -99,7 +99,8 @@ var PORTAL = (function (PORTAL, $) {
             dataType: 'json',
             success: function (data) {
                 if (data) {
-                    var arrayProperty = data.properties;
+                    var arrayProperty = data.properties instanceof Array ? data.properties : [data.properties];
+
                     var panel = dialog.findBy(function (comp) {
                         return comp["jcr:primaryType"] == "cq:Panel";
                     }, dialog);

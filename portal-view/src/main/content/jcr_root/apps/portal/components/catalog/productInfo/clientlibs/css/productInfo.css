@@ -4,9 +4,8 @@
 
 .comeBack{
     font-size: 20px;
-    font-weight: 700;
     margin-top: 20px;
-    font-family: Montserrat;
+    font-family: 'oswald-regular';
 }
 
 .comeBack a{
@@ -24,7 +23,7 @@
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 40px;
-    font-family: Reem Kufi;
+    font-family: 'oswald-regular';
     color: #565050;
 }
 
@@ -32,8 +31,7 @@
     margin-left: 300px;
     color : rgba(210, 158, 42, 0.85);
     font-size: 18px;
-    font-family: Reem Kufi;
-    font-weight: 700;
+    font-family: 'oswald-light';
     margin-top: 17px;
 }
 
@@ -64,19 +62,19 @@
 .product-info-property-name , .product-info-property-value{
     font-size: 20px;
     font-weight: 400;
-    font-family: Montserrat;
+    font-family: 'oswald-light';
 }
 
 .product-info-property-value{
-    font-weight: 700;
-    color: #5e614e;
+
+    color: #696969;
 }
 
 .product-info-description{
     font-size: 13px;
     font-weight: 200;
     font-family: inherit;
-    color: #5e614e;
+    color: #696969;
 }
 
 .photo-item img{

@@ -24,10 +24,9 @@
 }
 
 .sortAttrName{
-    font-weight: 700;
     font-size: 16px;
-    color: #000;
-    font-family: Montserrat;
+    color: #6d6161;
+    font-family: 'oswald-regular';
 }
 
 .inputs-storage{
@@ -60,17 +59,16 @@
 }
 
 .item-product-title{
-    width: 70%;
-    background-color: rgba(210, 158, 42, 0.85);
+    width: 100%;
+    background-color: rgba(13, 147, 177, 0.85);
     text-align: center;
 }
 
 .item-product-title a{
     text-decoration: none;
-    font-family: Reem Kufi;
+    font-family: 'oswald-light';
     color: #ffffff;
     font-size: 18px;
-    font-weight: 700;
 }
 
 .item-image{

@@ -97,6 +97,16 @@
                                         key="group"
                                         width="200"
                                         xtype="textfield"/>
+                                <excludeLabel
+                                        jcr:primaryType="cq:Widget"
+                                        text="Exclude from Filter"
+                                        xtype="label"/>
+                                <exclude
+                                        jcr:primaryType="cq:Widget"
+                                        key="exclude"
+                                        width="30"
+                                        type="checkbox"
+                                        xtype="selection"/>
                             </items>
                         </fieldConfig>
                     </properties>

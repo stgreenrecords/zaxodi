@@ -210,7 +210,12 @@ public class ProductListHelper extends SlingAllMethodsServlet {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jsonObject = (JsonObject) jsonParser.parse(jsonSeller);
                 String propertyPrice = jsonObject.has(Constants.NODE_PROPERTY_PRICE) ? jsonObject.get(Constants.NODE_PROPERTY_PRICE).getAsString() : "0";
-                int currentPrice = Integer.parseInt(propertyPrice);
+                int currentPrice = 0;
+                try {
+                    currentPrice = Integer.parseInt(propertyPrice);
+                } catch (NumberFormatException e) {
+                    LOG.error(e.getMessage());
+                }
                 if (currentPrice < minPrice) {
                     minPrice = currentPrice;
                 }

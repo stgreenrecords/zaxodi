@@ -1,3 +1,5 @@
 .video-player{
-    margin: 40px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
 }
