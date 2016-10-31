@@ -17,18 +17,14 @@
         <columns
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="portal/components/structure/column-control"
-                columns="[80,20]">
+                columns="[100]">
             <parsys0
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="wcm/foundation/components/parsys">
-            </parsys0>
-            <parsys1
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="wcm/foundation/components/parsys">
-                <advertising
+                <productinfo
                         jcr:primaryType="nt:unstructured"
-                        sling:resourceType="portal/components/content/advertising"/>
-            </parsys1>
+                        sling:resourceType="portal/components/catalog/productInfo"/>
+            </parsys0>
         </columns>
         <video
                 jcr:primaryType="nt:unstructured"

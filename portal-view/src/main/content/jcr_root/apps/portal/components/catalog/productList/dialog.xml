@@ -26,7 +26,7 @@
                             <items jcr:primaryType="cq:WidgetCollection">
                                 <typeLabel
                                         jcr:primaryType="cq:Widget"
-                                        text="Выберите тип свойства"
+                                        text="Type of property"
                                         xtype="label"/>
                                 <type
                                         jcr:primaryType="cq:Widget"
@@ -38,41 +38,41 @@
                                     <options jcr:primaryType="cq:WidgetCollection">
                                         <simpleText
                                                 jcr:primaryType="nt:unstructured"
-                                                text="Просто Текст"
+                                                text="Simple Text"
                                                 value="simpletext"/>
                                         <numbers
                                                 jcr:primaryType="nt:unstructured"
-                                                text="Числовое значение"
+                                                text="Number"
                                                 value="number"/>
                                         <boolean
                                                 jcr:primaryType="cq:Widget"
-                                                text="Логическое/Числовое"
+                                                text="Number/Boolean"
                                                 value="numberBoolean"/>
                                         <float
                                                 jcr:primaryType="nt:unstructured"
-                                                text="Число с плавающей точкой"
+                                                text="Float"
                                                 value="float"/>
                                         <size
                                                 jcr:primaryType="nt:unstructured"
-                                                text="Размеры"
+                                                text="Size"
                                                 value="size"/>
                                         <intervav
                                                 jcr:primaryType="nt:unstructured"
-                                                text="Интервал"
+                                                text="Interval"
                                                 value="interval"/>
                                         <enum
                                                 jcr:primaryType="cq:Widget"
-                                                text="Перечисления"
+                                                text="Enum"
                                                 value="enum"/>
                                         <attitude
                                                 jcr:primaryType="cq:Widget"
-                                                text="Отношение"
+                                                text="Attitude"
                                                 value="attitude"/>
                                     </options>
                                 </type>
                                 <valueLabel
                                         jcr:primaryType="cq:Widget"
-                                        text="Название свойства"
+                                        text="Title of property"
                                         xtype="label"/>
                                 <value
                                         jcr:primaryType="cq:Widget"
@@ -81,7 +81,7 @@
                                         xtype="textfield"/>
                                 <unitsLabel
                                         jcr:primaryType="cq:Widget"
-                                        text="Единицы измерения"
+                                        text="Units"
                                         xtype="label"/>
                                 <units
                                         jcr:primaryType="cq:Widget"
@@ -104,11 +104,11 @@
             </general>
             <subCategory
                     jcr:primaryType="cq:Panel"
-                    title="Под категория">
+                    title="Subcategory">
                 <items jcr:primaryType="cq:WidgetCollection">
                     <title
                             jcr:primaryType="cq:Widget"
-                            fieldLabel="Названия подкатегории"
+                            fieldLabel="Title of subcategory"
                             name="./subCategory"
                             xtype="textfield"/>
                 </items>

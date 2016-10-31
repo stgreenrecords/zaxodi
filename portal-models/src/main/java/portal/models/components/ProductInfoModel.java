@@ -31,7 +31,7 @@ public class ProductInfoModel extends BaseModel {
 
     public List<ProductInfoProperty> getItemProperties() {
         String resultProperty = getComponentProperties().get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_RESULTS, String.class);
-        return parseResult(resultProperty);
+        return StringUtils.isEmpty(resultProperty) ? null : parseResult(resultProperty);
     }
 
     public static List<ProductInfoProperty> parseResult(String resultProperty) {

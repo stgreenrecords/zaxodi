@@ -20,21 +20,21 @@
                 <items jcr:primaryType="cq:WidgetCollection">
                     <brand
                             jcr:primaryType="cq:Widget"
-                            fieldLabel="Марка(Бренд)"
+                            fieldLabel="Brand"
                             itemID="property"
                             name="./brand"
                             propertyType="simpletext"
                             xtype="textfield"/>
                     <model
                             jcr:primaryType="cq:Widget"
-                            fieldLabel="Модель"
+                            fieldLabel="Model"
                             itemID="property"
                             name="./model"
                             propertyType="simpletext"
                             xtype="textfield"/>
                     <discription
                             jcr:primaryType="cq:Widget"
-                            fieldLabel="Описание"
+                            fieldLabel="Description"
                             name="./discription"
                             propertyType="simpletext"
                             xtype="textarea"/>
@@ -96,7 +96,7 @@
             </imgadvance>
             <seller
                     jcr:primaryType="cq:Widget"
-                    title="Информация о продавце"
+                    title="Seller info"
                     xtype="panel">
                 <items jcr:primaryType="cq:WidgetCollection">
                     <properties
@@ -111,7 +111,7 @@
                             <items jcr:primaryType="cq:WidgetCollection">
                                 <labelSellerID
                                         jcr:primaryType="cq:Widget"
-                                        text="ID Продавца"
+                                        text="Seller ID"
                                         xtype="label"/>
                                 <sellerID
                                         jcr:primaryType="cq:Widget"
@@ -120,7 +120,7 @@
                                         xtype="textfield"/>
                                 <priceLabel
                                         jcr:primaryType="cq:Widget"
-                                        text="Цена"
+                                        text="Price"
                                         xtype="label"/>
                                 <units
                                         jcr:primaryType="cq:Widget"
