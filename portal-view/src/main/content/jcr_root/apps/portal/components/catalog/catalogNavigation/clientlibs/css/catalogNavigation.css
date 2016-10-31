@@ -48,7 +48,7 @@
 .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
     visibility: visible;
     display: flex;
-    width: 89%;
+    width: auto;
     max-width: 80%;
     margin: 0;
     padding: 0;
@@ -57,11 +57,21 @@
 }
 
 .catalog_sub_categories_topic:hover {
-    background: rgba(239, 239, 239, 0.15);
+    background: rgba(33, 174, 206, 0.88);
 }
 
+.catalog_sub_categories_topic:hover .subCategoryTitle_span{
+    color: white;
+}
+
+.catalog_sub_categories_topic:hover .catalog_sub_categories_inner_item a{
+    color: white;
+}
+
+
+
 .catalog_sub_categories_inner_item:hover {
-    background: rgba(35, 98, 177, 0.58);
+    background: rgba(13, 147, 177, 0.85);
 }
 
 .catalog_sub_categories_inner_item:hover a {
@@ -84,9 +94,8 @@
 }
 
 .subCategoryTitle_span {
-    font-family: sans-serif;
-    font-weight: 700;
-    font-size: 14px;
+    font-family: 'oswald-regular';
+    font-size: 15px;
     color: #757171;
     text-align: center;
 
@@ -98,8 +107,8 @@
 
 .catalog_sub_categories_inner_item a {
     color: rgb(107, 107, 107);
-    font-size: 13px;
-    font-family: sans-serif;
+    font-size: 14px;
+    font-family: 'oswald-leght';
 }
 
 .catalog_super_categories_nav_item {
