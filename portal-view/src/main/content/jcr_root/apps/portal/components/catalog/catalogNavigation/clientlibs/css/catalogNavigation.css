@@ -107,7 +107,7 @@
 
 .catalog_sub_categories_inner_item a {
     color: rgb(107, 107, 107);
-    font-size: 14px;
+    font-size: 17px;
     font-family: 'oswald-leght';
 }
 
@@ -129,6 +129,12 @@
     color: white;
 }
 
+.catalog_sub_categories_inner_item{
+    margin-bottom: 2px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #bbbbbb;
+    border-radius: 10%;
+}
 
 @media screen and (max-width: 1260px) {
 
