@@ -26,6 +26,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.portal</groupId>
+            <artifactId>portal-services</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <version>6.1.0</version>

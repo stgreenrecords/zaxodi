@@ -1,29 +1,33 @@
 package portal.cms.pipeline;
 
 
-import com.day.cq.commons.jcr.JcrUtil;
-import com.day.cq.wcm.api.Page;
-import org.apache.felix.scr.annotations.*;
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.Hit;
+import com.day.cq.search.result.SearchResult;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.PersistenceException;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
-import javax.jcr.Value;
+import javax.jcr.Session;
 import javax.servlet.ServletException;
 
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 @SlingServlet(paths = {"/services/helper"})
@@ -33,11 +37,43 @@ public class HelperServlet extends SlingAllMethodsServlet {
 
     List<String> stringArrayList = new ArrayList<String>();
 
+    @Reference
+    private QueryBuilder queryBuilder;
+
+    @Reference
+    private ResourceResolverFactory resolverFactory;
+
+    private ResourceResolver resourceResolver;
+
+
+
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException {
         try {
+            resourceResolver = resolverFactory.getAdministrativeResourceResolver(null);
+            Session session = (JackrabbitSession) resourceResolver.adaptTo(Session.class);
+            List<String> propertiesList = new ArrayList();
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("path", "/content/portal");
+            map.put("property", "sling:resourceType");
+            map.put("property.value", "portal/components/content/advertising");
+            map.put("p.limit", "-1");
 
-            Page catalogPage = request.getResourceResolver().getResource("/content/portal/catalog").adaptTo(Page.class);
+            Query query = queryBuilder.createQuery(PredicateGroup.create(map), session);
+            SearchResult result = query.getResult();
+            for (Hit hit : result.getHits()){
+
+                Node node = hit.getNode();
+                Node parentNode = node.getParent();
+                if (parentNode.getName().equals("parsys1")){
+                    node.remove();
+                    parentNode.remove();
+                }
+
+            }
+            session.save();
+
+           /* Page catalogPage = request.getResourceResolver().getResource("/content/portal/catalog").adaptTo(Page.class);
             Iterator<Page> pageIterator = catalogPage.listChildren();
             while (pageIterator.hasNext()){
                Page superCategoryPage = pageIterator.next();
@@ -53,7 +89,7 @@ public class HelperServlet extends SlingAllMethodsServlet {
 
                 }
 
-            }
+            }*/
 
 
            /* Node topNavNode = request.getResourceResolver().getResource("/apps/portal/templates/catalogcategorytemplate/jcr:content/topnav").adaptTo(Node.class);
@@ -148,6 +184,8 @@ public class HelperServlet extends SlingAllMethodsServlet {
         } catch (PersistenceException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LoginException e) {
             e.printStackTrace();
         }
     }

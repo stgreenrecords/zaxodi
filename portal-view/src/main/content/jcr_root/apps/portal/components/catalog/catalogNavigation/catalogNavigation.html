@@ -5,6 +5,7 @@
                 <sly data-sly-list.supercategory="${catalogNavigationModel.catalogMap}">
                     <li class="catalog_super_categories_nav_item">
                         <a href="${supercategory.pagePath}.html" class="catalog_super_categories_nav_item_link">${supercategory.pageTitle}</a>
+                        <div class="arrow-left"></div>
                         <ul class="catalog_sub_categories_list">
                             <sly data-sly-list.subcategoryMap="${supercategory.catalogCategoryPageModelMap.entrySet}">
                                 <li class="catalog_sub_categories_topic">

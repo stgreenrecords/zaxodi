@@ -89,8 +89,9 @@
 .catalog_sub_categories_topic {
     text-align: center;
     vertical-align: top;
-    border-left: 1px solid #C7C0C0;
+    border-right: 1px solid #C7C0C0;
     background: white;
+    border-bottom: 1px solid #C7C0C0;
 }
 
 .subCategoryTitle_span {
@@ -129,10 +130,20 @@
     color: white;
 }
 
+.catalog_super_categories_nav_item:hover .arrow-left{
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #ffffff;
+    position: relative;
+    left: 160px;
+    bottom: 15px;
+}
+
 .catalog_sub_categories_inner_item{
     margin-bottom: 2px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #bbbbbb;
     border-radius: 10%;
 }
 
