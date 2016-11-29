@@ -1,4 +1,4 @@
-package portal.models.components;
+package portal.models.pages;
 
 import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.Page;
@@ -68,7 +68,7 @@ public class ProductInfoModel extends BaseModel {
 
     public Iterator<SimplePageBean> getParentList() {
         Deque<SimplePageBean> simplePageBeanStack = new ArrayDeque<SimplePageBean>();
-        Page parent = getOwnPage().getParent();
+        Page parent = getOwnPage().getParent().getParent();
         while (!parent.getPath().equals(Constants.CATALOG_ROOT_PAGE_PATH)) {
             simplePageBeanStack.add(new SimplePageBean(parent.getPath(), parent.getTitle()));
             parent = parent.getParent();
@@ -80,7 +80,7 @@ public class ProductInfoModel extends BaseModel {
     public List<SellerInfo> getSellerInfo() {
         String[] propertySellerArray = null;
         Object sellerProperty = getComponentProperties().get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_SELLER);
-        if (sellerProperty != null && sellerProperty.getClass() == new String[]{}.getClass()) {
+        if (sellerProperty != null && sellerProperty.getClass() == String[].class) {
             propertySellerArray = (String[]) sellerProperty;
         } else {
             if (sellerProperty != null && sellerProperty instanceof String) {

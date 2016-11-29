@@ -92,8 +92,9 @@ var PORTAL = (function (PORTAL, $) {
     PORTAL.modules.ProductInfo.loadDialogComponents = function (dialog) {
 
         var currentPagePath = location.href;
-        var parrentPath = currentPagePath.substring(0, currentPagePath.lastIndexOf("/"));
-        var requestedURL = parrentPath + "/jcr:content/columns/parsys0/productlist.json";
+        var brandPage = currentPagePath.substring(0, currentPagePath.lastIndexOf("/"));
+        var categoryPage = brandPage.substring(0, brandPage.lastIndexOf("/"));
+        var requestedURL = categoryPage + "/jcr:content.json";
         $.ajax({
             url: requestedURL,
             dataType: 'json',

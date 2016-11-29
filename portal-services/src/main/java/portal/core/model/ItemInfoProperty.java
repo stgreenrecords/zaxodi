@@ -1,24 +1,25 @@
 package portal.core.model;
 
-/**
- * Created by STUDIO on 06.09.2015.
- */
 public class ItemInfoProperty {
 
     private String propertyName;
     private String propertyValue;
     private String propertyType;
     private String propertyUnits;
+    private String propertyGroup;
+    private boolean propertyExclude;
     private int count;
 
     public ItemInfoProperty() {
     }
 
-    public ItemInfoProperty(String propertyName, String propertyValue, String propertyType, String propertyUnits) {
+    public ItemInfoProperty(String propertyName, String propertyValue, String propertyType, String propertyUnits, String propertyGroup, boolean propertyExclude) {
         this.propertyName = propertyName;
         this.propertyValue = propertyValue;
         this.propertyType = propertyType;
         this.propertyUnits = propertyUnits;
+        this.propertyGroup = propertyGroup;
+        this.propertyExclude = propertyExclude;
     }
 
     public String getPropertyName() {
@@ -51,6 +52,22 @@ public class ItemInfoProperty {
 
     public void setPropertyUnits(String propertyUnits) {
         this.propertyUnits = propertyUnits;
+    }
+
+    public boolean isPropertyExclude() {
+        return propertyExclude;
+    }
+
+    public void setPropertyExclude(boolean propertyExclude) {
+        this.propertyExclude = propertyExclude;
+    }
+
+    public String getPropertyGroup() {
+        return propertyGroup;
+    }
+
+    public void setPropertyGroup(String propertyGroup) {
+        this.propertyGroup = propertyGroup;
     }
 
     public int getCount() {

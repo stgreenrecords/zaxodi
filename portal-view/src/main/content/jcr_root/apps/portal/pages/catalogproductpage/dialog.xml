@@ -23,20 +23,20 @@
                             fieldLabel="Brand"
                             itemID="property"
                             name="./brand"
-                            propertyType="simpletext"
+                            type="simpletext"
                             xtype="textfield"/>
                     <model
                             jcr:primaryType="cq:Widget"
                             fieldLabel="Model"
                             itemID="property"
                             name="./model"
-                            propertyType="simpletext"
+                            type="simpletext"
                             xtype="textfield"/>
                     <discription
                             jcr:primaryType="cq:Widget"
                             fieldLabel="Description"
                             name="./discription"
-                            propertyType="simpletext"
+                            type="simpletext"
                             xtype="textarea"/>
                 </items>
             </generalProperties>

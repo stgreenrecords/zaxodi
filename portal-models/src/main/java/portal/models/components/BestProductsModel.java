@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import portal.core.data.Constants;
 import portal.models.BaseModel;
+import portal.models.pages.ProductInfoModel;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;

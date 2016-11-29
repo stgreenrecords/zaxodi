@@ -3,18 +3,33 @@ package portal.core.model;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Viachaslau_Karnausha on 9/23/2015.
- */
 public class SortParameters {
 
     private String propertyType;
     private Set<String> valueList;
+    private String propertyGroup;
+    private boolean propertyExclude;
     private String units;
     private int count;
 
     public SortParameters() {
         valueList = new HashSet();
+    }
+
+    public boolean isPropertyExclude() {
+        return propertyExclude;
+    }
+
+    public void setPropertyExclude(boolean propertyExclude) {
+        this.propertyExclude = propertyExclude;
+    }
+
+    public String getPropertyGroup() {
+        return propertyGroup;
+    }
+
+    public void setPropertyGroup(String propertyGroup) {
+        this.propertyGroup = propertyGroup;
     }
 
     public String getPropertyType() {

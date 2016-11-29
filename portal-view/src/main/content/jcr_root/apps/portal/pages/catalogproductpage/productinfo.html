@@ -1,4 +1,4 @@
-<sly data-sly-use.productInfoModel="portal.models.components.ProductInfoModel">
+<sly data-sly-use.productInfoModel="portal.models.pages.ProductInfoModel">
 
     <div class="product-info-model">
 
@@ -13,7 +13,7 @@
 
             <div class="general-info">
                <span class="productTitle">
-                    <h4>${currentPage.title}</h4>
+                    <h4>${properties.brand ? properties.brand :currentPage.parent.title} ${properties.model ? properties.model : currentPage.title}</h4>
                 </span>
                 <img alt="image" id="device-header-image" src="${productInfoModel.imgPath}" heigth="121" width="170">
             </div>
