@@ -61,6 +61,8 @@ var PORTAL = (function (PORTAL, $) {
                 var itemValue = itemArray.getValue();
                 var propertyUnits = itemArray.propertyUnits || "";
                 var propertyType = itemArray.propertyType;
+                var propertyGroup = itemArray.propertyGroup;
+                var propertyExclude = itemArray.propertyExclude;
                 if (propertyType == 'numberBoolean') {
                     var value;
                     if (itemValue.match("true")) {
@@ -73,15 +75,28 @@ var PORTAL = (function (PORTAL, $) {
                         itemValue = 'true,0'
                     }
                 }
-                resultArrayProperties.push("{'propertyName':'" + itemName + "','propertyValue':'" + itemValue + "','propertyType':'" + propertyType + "','units':'" + propertyUnits + "'}");
+                resultArrayProperties.push("{" +
+                    "'propertyName':'" + itemName + "'," +
+                    "'propertyValue':'" + itemValue + "'," +
+                    "'propertyType':'" + propertyType + "'," +
+                    "'units':'" + propertyUnits + "'," +
+                    "'propertyGroup':'" + propertyGroup + "'," +
+                    "'propertyExclude':'" + propertyExclude + "'" +
+                    "}");
             }
         });
 
 
         checkboxs.forEach(function (itemArray) {
-            if (!itemArray.checked) {
+            if (itemArray.getValue().length == 0) {
                 ownField = itemArray.ownerCt;
-                resultArrayProperties.push("{'propertyName':'" + ownField.fieldLabel + "','propertyValue':'Off','propertyType':'" + ownField.propertyType + "','units':'" + ownField.propertyUnits + "'}");
+                resultArrayProperties.push("{" +
+                    "'propertyName':'" + ownField.fieldLabel + "'," +
+                    "'propertyValue':'Off','propertyType':'" + ownField.propertyType + "'," +
+                    "'units':'" + ownField.propertyUnits + "'," +
+                    "'propertyGroup':'" + ownField.propertyGroup + "'," +
+                    "'propertyExclude':'" + ownField.propertyExclude + "'" +
+                    "}");
             }
         });
 
@@ -129,9 +144,7 @@ var PORTAL = (function (PORTAL, $) {
                             return comp["name"] == './' + encodeURI(fieldOpions.valueSelection).replace(/\%/g, '') + 'W';
                         }, dialog);
                         if (isExist.length == 0 && isMultiExistH.length == 0 && isMultiExistW.length == 0) {
-
                             field = PORTAL.catalogStorage.properties[fieldOpions.typeSelection].loadDialog(fieldOpions);
-
                             panel[0].insert(2, field);
                         }
                     });

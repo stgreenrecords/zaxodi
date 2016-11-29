@@ -13,10 +13,12 @@ var PORTAL = (function (PORTAL, $) {
                 countParameter: './' + encodeURI(fieldOpions.valueSelection).replace(/\%/g, '') + 'W',
                 itemID: 'property',
                 name: './' + encodeURI(fieldOpions.valueSelection).replace(/\%/g, ''),
-                countPrefix: 'Количество:',
-                booleanPrefix: 'Присутствует:',
+                countPrefix: 'Count:',
+                booleanPrefix: 'Exist:',
                 propertyType: fieldOpions.typeSelection,
                 propertyUnits: fieldOpions.units,
+                propertyGroup: fieldOpions.group,
+                propertyExclude: fieldOpions.exclude.length > 0
             });
         },
 

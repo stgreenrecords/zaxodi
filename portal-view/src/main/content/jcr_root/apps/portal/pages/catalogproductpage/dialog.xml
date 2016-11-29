@@ -3,7 +3,7 @@
           xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
           jcr:primaryType="cq:Dialog"
           height="500"
-          title="Edit Catalog Item Info"
+          title="Edit Catalog Product Info"
           width="800"
           xtype="dialog">
     <listeners

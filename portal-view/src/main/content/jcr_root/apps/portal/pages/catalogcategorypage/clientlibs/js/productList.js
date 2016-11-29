@@ -196,7 +196,7 @@ var PORTAL = (function (PORTAL, $) {
 
             var priceMessage;
             if (item.price) {
-                priceMessage = item.price + " рублей.";
+                priceMessage = item.price + " BYN";
             } else {
                 priceMessage = "Цена не указана.";
             }
@@ -209,7 +209,7 @@ var PORTAL = (function (PORTAL, $) {
         };
 
         var changeCountOfProducts = function (count) {
-            $countOfProducts.text("Всего " + count + " моделей");
+            $countOfProducts.text("Total " + count + " models");
         };
 
         var loadNextPage = function () {

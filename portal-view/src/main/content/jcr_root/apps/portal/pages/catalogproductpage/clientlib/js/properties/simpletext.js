@@ -15,7 +15,9 @@ var PORTAL = (function (PORTAL, $) {
                 fieldLabel: fieldOpions.valueSelection,
                 itemID: 'property',
                 propertyType: fieldOpions.typeSelection,
-                propertyUnits: fieldOpions.units
+                propertyUnits: fieldOpions.units,
+                propertyGroup: fieldOpions.group,
+                propertyExclude: fieldOpions.exclude.length > 0
             });
         },
 

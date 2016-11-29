@@ -70,8 +70,8 @@ public class Constants {
     public static final String STRING_PROPERTY_VALUE = "propertyValue";
     public static final String STRING_PROPERTY_TYPE = "propertyType";
     public static final String STRING_UNITS = "units";
-    public static final String STRING_PROPERTY_GROUP = "group";
-    public static final String STRING_PROPERTY_EXCLUDE = "exclude";
+    public static final String STRING_PROPERTY_GROUP = "propertyGroup";
+    public static final String STRING_PROPERTY_EXCLUDE = "propertyExclude";
 
     public static final String STRING_FILTER_TYPE = "filterType";
     public static final String STRING_FILTER_NAME = "filterName";

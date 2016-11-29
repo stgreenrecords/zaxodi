@@ -15,7 +15,9 @@ var PORTAL = (function (PORTAL, $) {
                 heightSuffix: fieldOpions.units || '',
                 widthSuffix: fieldOpions.units || '',
                 propertyType: fieldOpions.typeSelection,
-                propertyUnits: fieldOpions.units
+                propertyUnits: fieldOpions.units,
+                propertyGroup: fieldOpions.group,
+                propertyExclude: fieldOpions.exclude.length > 0
             });
         },
 
@@ -57,7 +59,7 @@ var PORTAL = (function (PORTAL, $) {
         'isFilterEmpty': function (selectedFilter) {
             var startSelectedValue = $(selectedFilter).find("select.startSelectFilter option:selected").text();
             var endSelectedValue = $(selectedFilter).find("select.endSelectFilter option:selected").text();
-            return (endSelectedValue == "Выбрать" && startSelectedValue == "Выбрать");
+            return (endSelectedValue == "Select" && startSelectedValue == "Select");
         }
 
     }

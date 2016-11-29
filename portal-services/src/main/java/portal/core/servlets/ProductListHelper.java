@@ -67,12 +67,12 @@ public class ProductListHelper extends SlingAllMethodsServlet {
                         if (productPageProperties.containsKey(Constants.PROPERTY_RESULTS)) {
                             JsonObject itemObject = new JsonObject();
                             itemObject.addProperty(Constants.STRING_PATH, productPage.getPath());
-                            if (productPageProperties.containsKey(Constants.NODE_PROPERTY_BRAND)) {
-                                itemObject.addProperty(Constants.NODE_PROPERTY_BRAND, productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class));
-                            }
-                            if (productPageProperties.containsKey(Constants.NODE_PROPERTY_MODEL)) {
-                                itemObject.addProperty(Constants.NODE_PROPERTY_MODEL, productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class));
-                            }
+                            itemObject.addProperty(Constants.NODE_PROPERTY_BRAND,
+                                    productPageProperties.containsKey(Constants.NODE_PROPERTY_BRAND) ?
+                                    productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class) : productPage.getParent().getTitle());
+                            itemObject.addProperty(Constants.NODE_PROPERTY_MODEL,
+                                    productPageProperties.containsKey(Constants.NODE_PROPERTY_MODEL) ?
+                                    productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class) : productPage.getTitle());
                             int price = minimalPriceFromNode(productPageProperties);
                             if (price > 0) {
                                 itemObject.addProperty(Constants.NODE_PROPERTY_PRICE, price);
@@ -144,9 +144,9 @@ public class ProductListHelper extends SlingAllMethodsServlet {
     private void collectFilterPropertiesFromJsonArray(JsonArray array) {
         for (JsonElement jsonElement : array) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            String propertyName = jsonObject.has(Constants.STRING_PROPERTY_NAME) ? jsonObject.get(Constants.STRING_PROPERTY_NAME).getAsString() : null;
-            String propertyValue = jsonObject.has(Constants.STRING_PROPERTY_VALUE) ? jsonObject.get(Constants.STRING_PROPERTY_VALUE).getAsString() : null;
-            String propertyType = jsonObject.has(Constants.STRING_PROPERTY_TYPE) ? jsonObject.get(Constants.STRING_PROPERTY_TYPE).getAsString() : null;
+            String propertyName = jsonObject.get(Constants.STRING_PROPERTY_NAME).getAsString();
+            String propertyValue = jsonObject.get(Constants.STRING_PROPERTY_VALUE).getAsString();
+            String propertyType = jsonObject.get(Constants.STRING_PROPERTY_TYPE).getAsString();
             String propertyUnits = jsonObject.has(Constants.STRING_UNITS) ? jsonObject.get(Constants.STRING_UNITS).getAsString() : null;
             String propertyGroup = jsonObject.has(Constants.STRING_PROPERTY_GROUP) ? jsonObject.get(Constants.STRING_PROPERTY_GROUP).getAsString() : null;
             boolean propertyExclude = jsonObject.has(Constants.STRING_PROPERTY_EXCLUDE) ? jsonObject.get(Constants.STRING_PROPERTY_EXCLUDE).getAsBoolean() : null;

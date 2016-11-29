@@ -13,7 +13,9 @@ var PORTAL = (function (PORTAL, $) {
                 name: './' + encodeURI(fieldOpions.valueSelection).replace(/\%/g, ''),
                 itemID: 'property',
                 propertyType: fieldOpions.typeSelection,
-                propertyUnits: fieldOpions.units
+                propertyUnits: fieldOpions.units,
+                propertyGroup: fieldOpions.group,
+                propertyExclude: fieldOpions.exclude.length > 0
             });
         },
 
