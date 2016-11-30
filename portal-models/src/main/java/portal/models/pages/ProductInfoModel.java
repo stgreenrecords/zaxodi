@@ -40,10 +40,10 @@ public class ProductInfoModel extends BaseModel {
         JsonArray array = (JsonArray) jsonParser.parse(resultProperty);
         for (JsonElement jsonElement : array) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            String propertyName = jsonObject.has(Constants.CATALOG_PRODUCT_INFO_PROPERTY_NAME) ? jsonObject.get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_NAME).getAsString() : "error parse property name";
-            String propertyValue = jsonObject.has(Constants.CATALOG_PRODUCT_INFO_PROPERTY_VALUE) ? jsonObject.get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_VALUE).getAsString() : "error parse property value";
-            String propertyType = jsonObject.has(Constants.CATALOG_PRODUCT_INFO_PROPERTY_TYPE) ? jsonObject.get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_TYPE).getAsString() : "error parse property type";
-            String propertyUnits = jsonObject.has(Constants.CATALOG_PRODUCT_INFO_PROPERTY_INITS) ? jsonObject.get(Constants.CATALOG_PRODUCT_INFO_PROPERTY_INITS).getAsString() : null;
+            String propertyName = jsonObject.has(Constants.STRING_PROPERTY_NAME) ? jsonObject.get(Constants.STRING_PROPERTY_NAME).getAsString() : "error parse property name";
+            String propertyValue = jsonObject.has(Constants.STRING_PROPERTY_VALUE) ? jsonObject.get(Constants.STRING_PROPERTY_VALUE).getAsString() : "error parse property value";
+            String propertyType = jsonObject.has(Constants.STRING_PROPERTY_TYPE) ? jsonObject.get(Constants.STRING_PROPERTY_TYPE).getAsString() : "error parse property type";
+            String propertyUnits = jsonObject.has(Constants.STRING_UNITS) ? jsonObject.get(Constants.STRING_UNITS).getAsString() : null;
             mainPropertyList.add(new ProductInfoProperty(propertyName, propertyValue, propertyType, propertyUnits));
         }
         return mainPropertyList;

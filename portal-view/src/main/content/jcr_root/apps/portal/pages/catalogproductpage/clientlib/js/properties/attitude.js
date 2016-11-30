@@ -25,7 +25,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $attitudeBlock = $(".templates-properties-storage .portal-field-attitude").clone();
-            $attitudeBlock.find(".sortAttrName").text(filterItem.filterName);
+            $attitudeBlock.find(".sortAttrName").text(filterItem.name);
             $attitudeBlock.find(".units").text(filterItem.units);
             sortArrays.startParamArray.forEach(function (startItem) {
                 $attitudeBlock.find(".startSelectFilter").append("<option>"+startItem+"</option>");

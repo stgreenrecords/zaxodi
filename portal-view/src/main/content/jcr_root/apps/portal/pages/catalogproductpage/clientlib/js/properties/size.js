@@ -23,7 +23,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $sizeBlock = $(".templates-properties-storage .portal-field-size").clone();
-            $sizeBlock.find(".sortAttrName").text(filterItem.filterName);
+            $sizeBlock.find(".sortAttrName").text(filterItem.name);
             $sizeBlock.find(".units").text(filterItem.units);
             sortArrays.startParamArray.forEach(function (startItem) {
                 $sizeBlock.find(".startSelectFilter").append("<option>"+startItem+"</option>");

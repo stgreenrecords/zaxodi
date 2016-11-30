@@ -23,7 +23,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $simpletextBlock = $(".templates-properties-storage .portal-field-simpletext").clone();
-            $simpletextBlock.find(".sortAttrName").text(filterItem.filterName);
+            $simpletextBlock.find(".sortAttrName").text(filterItem.name);
             $mainListItem = $simpletextBlock.find(".filter-list-item").clone();
             $simpletextBlock.find(".filter-list-item").remove();
             $innerListItem = $simpletextBlock.find(".full-list-item").clone();

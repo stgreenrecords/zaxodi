@@ -21,7 +21,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $enumBlock = $(".templates-properties-storage .portal-field-enum").clone();
-            $enumBlock.find(".sortAttrName").text(filterItem.filterName);
+            $enumBlock.find(".sortAttrName").text(filterItem.name);
             $mainListItem = $enumBlock.find(".filter-list-item").clone();
             $enumBlock.find(".filter-list-item").remove();
             $innerListItem = $enumBlock.find(".full-list-item").clone();

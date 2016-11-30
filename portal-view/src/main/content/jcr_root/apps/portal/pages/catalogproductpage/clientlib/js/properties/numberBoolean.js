@@ -24,7 +24,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $numberBooleanBlock = $(".templates-properties-storage .portal-field-numberBoolean").clone();
-            $numberBooleanBlock.find(".sortAttrName").text(filterItem.filterName);
+            $numberBooleanBlock.find(".sortAttrName").text(filterItem.name);
             if (filterItem.count && filterItem.count == 1) {
                 $numberBooleanBlock.find(".inputFilter").remove();
             }

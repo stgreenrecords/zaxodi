@@ -10,34 +10,13 @@ public class Constants {
     private Constants() {
     }
 
-    public static final String PATH_SEPARATOR = "/";
-    public static final String QUESTION_MARK = "?";
-    public static final String EQUALS = "=";
     public static final String COMMA = ",";
-    public static final String DOT = ".";
 
     public static final String CHARSET_UTF_8 = "UTF-8";
 
-    public static final String DEFAULT_LANG = "en";
-    public static final Locale DEFAULT_LOCALE = new Locale(DEFAULT_LANG);
-    public static final Pattern LOCALE_PATTERN = Pattern.compile("/[^/]*/[^/]*/(\\w*)(/|\\.html)");
-
-    public static final String PATH_TO_LOCALES = "/etc/languages";
-    public static final String LOCALES_PROPERTY = "languages";
-    public static final String[] EMPTY_STRING_ARRAY = {};
-
-    public static final String LANDING_PAGE_RESOURCE_TYPE = "portal/pages/portal-landing-page";
-    public static final String CQ_SCAFFOLDING_PROP = "jcr:content/cq:scaffolding";
-
-    public static final String CONTENT_PATH = "/content";
 
     public static final String CATALOG_PATH = "/content/portal/catalog";
 
-    public static final String HTML_EXTENSION = ".html";
-
-    public static final String JCR_PRIMARY_TYPE = "jcr:primaryType";
-
-    public static final String PATH_TO_COMPONENT_CATALOG_ITEM_INFO = "jcr:content/columns/parsys0/productinfo";
 
     public static final String PROPERTY_RESULTS = "results";
     public static final String PROPERTY_TRUE = "true";
@@ -66,20 +45,16 @@ public class Constants {
 
     public static final String NODE_IMAGE = "image";
 
-    public static final String STRING_PROPERTY_NAME = "propertyName";
-    public static final String STRING_PROPERTY_VALUE = "propertyValue";
-    public static final String STRING_PROPERTY_TYPE = "propertyType";
+    public static final String STRING_PROPERTY_NAME = "name";
+    public static final String STRING_PROPERTY_VALUE = "value";
+    public static final String STRING_PROPERTY_TYPE = "type";
     public static final String STRING_UNITS = "units";
-    public static final String STRING_PROPERTY_GROUP = "propertyGroup";
-    public static final String STRING_PROPERTY_EXCLUDE = "propertyExclude";
+    public static final String STRING_PROPERTY_GROUP = "group";
+    public static final String STRING_PROPERTY_EXCLUDE = "exclude";
 
-    public static final String STRING_FILTER_TYPE = "filterType";
-    public static final String STRING_FILTER_NAME = "filterName";
     public static final String STRING_FILTER_COUNT = "count";
     public static final String STRING_PATH = "path";
     public static final String STRING_REQUEST_CATEGORY_PATH = "categoryPath";
-
-    public static final String ROOT_PAGE = "/content/portal.html";
 
     public static final String RE_CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify";
 
@@ -133,11 +108,6 @@ public class Constants {
 
     public static final String CATALOG_PRODUCT_INFO_PROPERTY_RESULTS = "results";
     public static final String CATALOG_PRODUCT_INFO_PROPERTY_SELLER = "seller";
-
-    public static final String CATALOG_PRODUCT_INFO_PROPERTY_NAME = "propertyName";
-    public static final String CATALOG_PRODUCT_INFO_PROPERTY_VALUE = "propertyValue";
-    public static final String CATALOG_PRODUCT_INFO_PROPERTY_TYPE = "propertyType";
-    public static final String CATALOG_PRODUCT_INFO_PROPERTY_INITS = "units";
 
     public static final String RESOURCE_TYPE_CQ_PAGE = "cq:Page";
 

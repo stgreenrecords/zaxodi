@@ -25,7 +25,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $intervalBlock = $(".templates-properties-storage .portal-field-interval").clone();
-            $intervalBlock.find(".sortAttrName").text(filterItem.filterName);
+            $intervalBlock.find(".sortAttrName").text(filterItem.name);
             $intervalBlock.find(".units").text(filterItem.units);
             sortArrays.startParamArray.forEach(function (startItem) {
                 $intervalBlock.find(".startSelectFilter").append("<option>"+startItem+"</option>");

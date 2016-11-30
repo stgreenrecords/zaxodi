@@ -20,7 +20,7 @@ var PORTAL = (function (PORTAL, $) {
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {
             var $floatBlock = $(".templates-properties-storage .portal-field-float").clone();
-            $floatBlock.find(".sortAttrName").text(filterItem.filterName);
+            $floatBlock.find(".sortAttrName").text(filterItem.name);
             $floatBlock.find(".units").text(filterItem.units);
             return $floatBlock;
         },

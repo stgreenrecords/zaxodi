@@ -111,8 +111,12 @@ public class ProductListHelper extends SlingAllMethodsServlet {
         for (Map.Entry<String, SortParameters> sortParametersEntry : sortParametersMap.entrySet()) {
             JsonObject filter = new JsonObject();
             String filterType = sortParametersEntry.getValue().getPropertyType();
-            filter.addProperty(Constants.STRING_FILTER_TYPE, filterType);
-            filter.addProperty(Constants.STRING_FILTER_NAME, sortParametersEntry.getKey());
+            String filterGroup = sortParametersEntry.getValue().getPropertyGroup();
+            boolean filterExclude = sortParametersEntry.getValue().isPropertyExclude();
+            filter.addProperty(Constants.STRING_PROPERTY_GROUP, filterGroup);
+            filter.addProperty(Constants.STRING_PROPERTY_EXCLUDE, filterExclude);
+            filter.addProperty(Constants.STRING_PROPERTY_TYPE, filterType);
+            filter.addProperty(Constants.STRING_PROPERTY_NAME, sortParametersEntry.getKey());
             if (filterType.equals(Constants.FILTER_TYPE_ATTITUDE)
                     || filterType.equals(Constants.FILTER_TYPE_INTERVAL)
                     || filterType.equals(Constants.FILTER_TYPE_SIZE)

@@ -65,7 +65,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
 
-                    var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.filterType].
+                    var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.type].
                         filterDraw(filterItem, valueArray, sortArrays);
 
                     $sortPropertiesFilter.append(fieldFromStorage);
@@ -79,16 +79,16 @@ var PORTAL = (function (PORTAL, $) {
         var applyFilter = function (filterItem, fieldFromStorage) {
             filteriedData = [];
             var storageForEachReturnedData = [];
-            if (PORTAL.catalogStorage.properties[filterItem.filterType].isFilterEmpty(fieldFromStorage)) {
-                delete currentFilterItems[filterItem.filterName];
+            if (PORTAL.catalogStorage.properties[filterItem.type].isFilterEmpty(fieldFromStorage)) {
+                delete currentFilterItems[filterItem.name];
             } else {
-                currentFilterItems[filterItem.filterName] = fieldFromStorage;
+                currentFilterItems[filterItem.name] = fieldFromStorage;
             }
             var currentFilterStorageIsEmpty = true;
             for (filter in currentFilterItems) {
                 currentFilterStorageIsEmpty = false;
                 var filterType = currentFilterItems[filter].attr('class').split(" ")[2];
-                storageForEachReturnedData.push(PORTAL.catalogStorage.properties[filterType].doFilter(currentFilterItems[filter], productItems));
+                storageForEachReturnedData.push(PORTAL.catalogStorage.properties[type].doFilter(currentFilterItems[filter], productItems));
             }
             if (storageForEachReturnedData.length != 0) {
                 storageForEachReturnedData[0].forEach(function (product) {
@@ -134,15 +134,15 @@ var PORTAL = (function (PORTAL, $) {
         };
 
         var pagginationDraw = function () {
-            var $currentPage = $("<span class='currentPage'>Страница " + currentPagePosition + " из " + countOfPage + "</span>");
-            var $showAllPages = $("<input class='showAllPages' type='button' value='Показать все' />").click(function () {
+            var $currentPage = $("<span class='currentPage'>Page " + currentPagePosition + " from " + countOfPage + "</span>");
+            var $showAllPages = $("<input class='showAllPages' type='button' value='Show all' />").click(function () {
                 $itemProductList.find(".itemBlock").remove();
                 $itemProductList.find("#paggination").remove();
                 filteriedData.forEach(function (item) {
                     drawItem(item);
                 });
             });
-            var $onFirstPage = $("<input class='onFirstPage' type='button' value='В начало' />").click(function () {
+            var $onFirstPage = $("<input class='onFirstPage' type='button' value='In the beginning' />").click(function () {
                 $itemProductList.find(".itemBlock").remove();
                 $itemProductList.find("#paggination").remove();
                 for (var i = 0; i < COUNT_PRODUCT_ON_PAGE; i++) {
@@ -187,9 +187,9 @@ var PORTAL = (function (PORTAL, $) {
             if (item.properties && item.properties.length > 10) {
                 for (var i = 0; i < 10; i++) {
                     if (i != 9) {
-                        discription += "<span class='discriptionName'>" + item.properties[i].propertyName + "</span> <span class='discriptionValue'>" + item.properties[i].propertyValue + "</span>&nbsp;|&nbsp; ";
+                        discription += "<span class='discriptionName'>" + item.properties[i].name + "</span> <span class='discriptionValue'>" + item.properties[i].value + "</span>&nbsp;|&nbsp; ";
                     } else {
-                        discription += "<span class='discriptionName'>" + item.properties[i].propertyName + "</span> <span class='discriptionValue'>" + item.properties[i].propertyValue + "</span>.";
+                        discription += "<span class='discriptionName'>" + item.properties[i].name + "</span> <span class='discriptionValue'>" + item.properties[i].value + "</span>.";
                     }
                 }
             }

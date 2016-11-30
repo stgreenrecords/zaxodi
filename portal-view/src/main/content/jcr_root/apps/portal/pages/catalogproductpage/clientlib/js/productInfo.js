@@ -76,12 +76,12 @@ var PORTAL = (function (PORTAL, $) {
                     }
                 }
                 resultArrayProperties.push("{" +
-                    "'propertyName':'" + itemName + "'," +
-                    "'propertyValue':'" + itemValue + "'," +
-                    "'propertyType':'" + propertyType + "'," +
+                    "'name':'" + itemName + "'," +
+                    "'value':'" + itemValue + "'," +
+                    "'type':'" + propertyType + "'," +
                     "'units':'" + propertyUnits + "'," +
-                    "'propertyGroup':'" + propertyGroup + "'," +
-                    "'propertyExclude':'" + propertyExclude + "'" +
+                    "'group':'" + propertyGroup + "'," +
+                    "'exclude':'" + propertyExclude + "'" +
                     "}");
             }
         });
@@ -91,11 +91,11 @@ var PORTAL = (function (PORTAL, $) {
             if (itemArray.getValue().length == 0) {
                 ownField = itemArray.ownerCt;
                 resultArrayProperties.push("{" +
-                    "'propertyName':'" + ownField.fieldLabel + "'," +
-                    "'propertyValue':'Off','propertyType':'" + ownField.propertyType + "'," +
+                    "'name':'" + ownField.fieldLabel + "'," +
+                    "'value':'Off','type':'" + ownField.propertyType + "'," +
                     "'units':'" + ownField.propertyUnits + "'," +
-                    "'propertyGroup':'" + ownField.propertyGroup + "'," +
-                    "'propertyExclude':'" + ownField.propertyExclude + "'" +
+                    "'group':'" + ownField.propertyGroup + "'," +
+                    "'exclude':'" + ownField.propertyExclude + "'" +
                     "}");
             }
         });
