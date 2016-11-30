@@ -24,8 +24,8 @@ import portal.core.model.SortParameters;
 import javax.jcr.RepositoryException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component(metatype = true, immediate = true)
@@ -37,7 +37,8 @@ public class ProductListHelper extends SlingAllMethodsServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProductListHelper.class);
 
-    private Map<String, SortParameters> sortParametersMap = new HashMap<String, SortParameters>();
+    //<Group, <FilterName, FilterProperties>>
+    private Map<String, Map<String, SortParameters>> sortParametersMap = new LinkedHashMap<String, Map<String, SortParameters>>();
 
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
@@ -69,10 +70,10 @@ public class ProductListHelper extends SlingAllMethodsServlet {
                             itemObject.addProperty(Constants.STRING_PATH, productPage.getPath());
                             itemObject.addProperty(Constants.NODE_PROPERTY_BRAND,
                                     productPageProperties.containsKey(Constants.NODE_PROPERTY_BRAND) ?
-                                    productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class) : productPage.getParent().getTitle());
+                                            productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class) : productPage.getParent().getTitle());
                             itemObject.addProperty(Constants.NODE_PROPERTY_MODEL,
                                     productPageProperties.containsKey(Constants.NODE_PROPERTY_MODEL) ?
-                                    productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class) : productPage.getTitle());
+                                            productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class) : productPage.getTitle());
                             int price = minimalPriceFromNode(productPageProperties);
                             if (price > 0) {
                                 itemObject.addProperty(Constants.NODE_PROPERTY_PRICE, price);
@@ -108,39 +109,41 @@ public class ProductListHelper extends SlingAllMethodsServlet {
 
     private JsonArray parseSortMap() {
         JsonArray filtersArray = new JsonArray();
-        for (Map.Entry<String, SortParameters> sortParametersEntry : sortParametersMap.entrySet()) {
-            JsonObject filter = new JsonObject();
-            String filterType = sortParametersEntry.getValue().getPropertyType();
-            String filterGroup = sortParametersEntry.getValue().getPropertyGroup();
-            boolean filterExclude = sortParametersEntry.getValue().isPropertyExclude();
-            filter.addProperty(Constants.STRING_PROPERTY_GROUP, filterGroup);
-            filter.addProperty(Constants.STRING_PROPERTY_EXCLUDE, filterExclude);
-            filter.addProperty(Constants.STRING_PROPERTY_TYPE, filterType);
-            filter.addProperty(Constants.STRING_PROPERTY_NAME, sortParametersEntry.getKey());
-            if (filterType.equals(Constants.FILTER_TYPE_ATTITUDE)
-                    || filterType.equals(Constants.FILTER_TYPE_INTERVAL)
-                    || filterType.equals(Constants.FILTER_TYPE_SIZE)
-                    || filterType.equals(Constants.FILTER_TYPE_ENUM)
-                    || filterType.equals(Constants.FILTER_TYPE_SIMPLETEXT)
-                    ) {
-                JsonArray valueListArray = new JsonArray();
-                for (String value : sortParametersEntry.getValue().getValueList()) {
-                    JsonObject valueElement = new JsonObject();
-                    valueElement.addProperty(Constants.JSON_VALUE, value);
-                    valueListArray.add(valueElement);
+        for (Map.Entry<String, Map<String, SortParameters>> groupEntry : sortParametersMap.entrySet()) {
+            JsonObject group = new JsonObject();
+            group.add(groupEntry.getKey(), new JsonArray());
+            for (Map.Entry<String, SortParameters> sortParametersEntry : groupEntry.getValue().entrySet()) {
+                JsonObject filter = new JsonObject();
+                String filterType = sortParametersEntry.getValue().getPropertyType();
+                String filterGroup = sortParametersEntry.getValue().getPropertyGroup();
+                boolean filterExclude = sortParametersEntry.getValue().isPropertyExclude();
+                filter.addProperty(Constants.STRING_PROPERTY_TYPE, filterType);
+                filter.addProperty(Constants.STRING_PROPERTY_NAME, sortParametersEntry.getKey());
+                if (filterType.equals(Constants.FILTER_TYPE_ATTITUDE)
+                        || filterType.equals(Constants.FILTER_TYPE_INTERVAL)
+                        || filterType.equals(Constants.FILTER_TYPE_SIZE)
+                        || filterType.equals(Constants.FILTER_TYPE_ENUM)
+                        || filterType.equals(Constants.FILTER_TYPE_SIMPLETEXT)
+                        ) {
+                    JsonArray valueListArray = new JsonArray();
+                    for (String value : sortParametersEntry.getValue().getValueList()) {
+                        JsonObject valueElement = new JsonObject();
+                        valueElement.addProperty(Constants.JSON_VALUE, value);
+                        valueListArray.add(valueElement);
+                    }
+                    if (valueListArray.size() > 0) {
+                        filter.add(Constants.JSON_VALUES, valueListArray);
+                    }
+                    if (sortParametersEntry.getValue().getUnits() != null && !StringUtils.EMPTY.equals(sortParametersEntry.getValue().getUnits())) {
+                        filter.addProperty(Constants.STRING_UNITS, sortParametersEntry.getValue().getUnits());
+                    }
                 }
-                if (valueListArray.size() > 0) {
-                    filter.add(Constants.JSON_VALUES, valueListArray);
+                if (sortParametersEntry.getValue().getCount() > 0) {
+                    filter.addProperty(Constants.STRING_FILTER_COUNT, sortParametersEntry.getValue().getCount());
                 }
-                if (sortParametersEntry.getValue().getUnits() != null && !StringUtils.EMPTY.equals(sortParametersEntry.getValue().getUnits())) {
-                    filter.addProperty(Constants.STRING_UNITS, sortParametersEntry.getValue().getUnits());
-                }
+                group.get(groupEntry.getKey()).getAsJsonArray().add(filter);
             }
-            if (sortParametersEntry.getValue().getCount() > 0) {
-                filter.addProperty(Constants.STRING_FILTER_COUNT, sortParametersEntry.getValue().getCount());
-            }
-
-            filtersArray.add(filter);
+            filtersArray.add(group);
         }
         return filtersArray;
     }
@@ -152,52 +155,53 @@ public class ProductListHelper extends SlingAllMethodsServlet {
             String propertyValue = jsonObject.get(Constants.STRING_PROPERTY_VALUE).getAsString();
             String propertyType = jsonObject.get(Constants.STRING_PROPERTY_TYPE).getAsString();
             String propertyUnits = jsonObject.has(Constants.STRING_UNITS) ? jsonObject.get(Constants.STRING_UNITS).getAsString() : null;
-            String propertyGroup = jsonObject.has(Constants.STRING_PROPERTY_GROUP) ? jsonObject.get(Constants.STRING_PROPERTY_GROUP).getAsString() : null;
+            String propertyGroup = jsonObject.has(Constants.STRING_PROPERTY_GROUP) ? jsonObject.get(Constants.STRING_PROPERTY_GROUP).getAsString() : StringUtils.EMPTY;
             boolean propertyExclude = jsonObject.has(Constants.STRING_PROPERTY_EXCLUDE) ? jsonObject.get(Constants.STRING_PROPERTY_EXCLUDE).getAsBoolean() : null;
-            ItemInfoProperty itemInfoProperty = new ItemInfoProperty(propertyName, propertyValue, propertyType, propertyUnits, propertyGroup, propertyExclude);
-            if (sortParametersMap.containsKey(itemInfoProperty.getPropertyName())) {
-                if (itemInfoProperty.getPropertyType().equals(Constants.FILTER_TYPE_ENUM)) {
-                    String[] enumArray = itemInfoProperty.getPropertyValue().split(",");
-                    for (String enumItem : enumArray) {
-                        sortParametersMap.get(itemInfoProperty.getPropertyName()).getValueList().add(enumItem);
-                    }
-                } else {
-                    int count = 0;
-                    if (propertyType.equals(Constants.FILTER_TYPE_NUMBER_BOOLEAN)) {
-                        count = propertyValue.contains(Constants.PROPERTY_TRUE) ? Integer.parseInt(propertyValue.split(",")[1]) : 0;
-                        int currentCount = sortParametersMap.get(itemInfoProperty.getPropertyName()).getCount();
-                        if (currentCount == 0 || currentCount < count) {
-                            sortParametersMap.get(itemInfoProperty.getPropertyName()).setCount(count);
-                        }
-                    }
-                    sortParametersMap.get(itemInfoProperty.getPropertyName()).getValueList().add(itemInfoProperty.getPropertyValue());
+            if (!propertyExclude) {
+                ItemInfoProperty itemInfoProperty = new ItemInfoProperty(propertyName, propertyValue, propertyType, propertyUnits, propertyGroup, propertyExclude);
+                if (!sortParametersMap.containsKey(propertyGroup)) {
+                    sortParametersMap.put(propertyGroup, new LinkedHashMap<String, SortParameters>());
                 }
-            } else {
-                if (itemInfoProperty.getPropertyType().equals(Constants.FILTER_TYPE_ENUM)) {
-                    String[] enumArray = itemInfoProperty.getPropertyValue().split(Constants.COMMA);
-                    SortParameters sortParameters = new SortParameters();
-                    sortParameters.setUnits(itemInfoProperty.getPropertyUnits());
-                    sortParameters.setPropertyType(itemInfoProperty.getPropertyType());
-                    sortParameters.setPropertyGroup(itemInfoProperty.getPropertyGroup());
-                    sortParameters.setPropertyExclude(itemInfoProperty.isPropertyExclude());
-                    for (String enumItem : enumArray) {
-                        sortParameters.getValueList().add(enumItem);
-                    }
-                    sortParametersMap.put(itemInfoProperty.getPropertyName(), sortParameters);
-                } else {
-                    SortParameters sortParameters = new SortParameters();
-                    sortParameters.setUnits(itemInfoProperty.getPropertyUnits());
-                    sortParameters.setPropertyType(itemInfoProperty.getPropertyType());
-                    sortParameters.getValueList().add(itemInfoProperty.getPropertyValue());
-                    sortParameters.setPropertyGroup(itemInfoProperty.getPropertyGroup());
-                    sortParameters.setPropertyExclude(itemInfoProperty.isPropertyExclude());
-                    if (propertyType.equals(Constants.FILTER_TYPE_NUMBER_BOOLEAN)) {
-                        int count = propertyValue.contains(Constants.PROPERTY_TRUE) ? Integer.parseInt(propertyValue.split(",")[1]) : 0;
-                        if (count > 0) {
-                            sortParameters.setCount(count);
+                if (sortParametersMap.get(propertyGroup).containsKey(itemInfoProperty.getPropertyName())) {
+                    if (itemInfoProperty.getPropertyType().equals(Constants.FILTER_TYPE_ENUM)) {
+                        String[] enumArray = itemInfoProperty.getPropertyValue().split(",");
+                        for (String enumItem : enumArray) {
+                            sortParametersMap.get(propertyGroup).get(itemInfoProperty.getPropertyName()).getValueList().add(enumItem);
                         }
+                    } else {
+                        int count = 0;
+                        if (propertyType.equals(Constants.FILTER_TYPE_NUMBER_BOOLEAN)) {
+                            count = propertyValue.contains(Constants.PROPERTY_TRUE) ? Integer.parseInt(propertyValue.split(",")[1]) : 0;
+                            int currentCount = sortParametersMap.get(propertyGroup).get(itemInfoProperty.getPropertyName()).getCount();
+                            if (currentCount == 0 || currentCount < count) {
+                                sortParametersMap.get(propertyGroup).get(itemInfoProperty.getPropertyName()).setCount(count);
+                            }
+                        }
+                        sortParametersMap.get(propertyGroup).get(itemInfoProperty.getPropertyName()).getValueList().add(itemInfoProperty.getPropertyValue());
                     }
-                    sortParametersMap.put(itemInfoProperty.getPropertyName(), sortParameters);
+                } else {
+                    if (itemInfoProperty.getPropertyType().equals(Constants.FILTER_TYPE_ENUM)) {
+                        String[] enumArray = itemInfoProperty.getPropertyValue().split(Constants.COMMA);
+                        SortParameters sortParameters = new SortParameters();
+                        sortParameters.setUnits(itemInfoProperty.getPropertyUnits());
+                        sortParameters.setPropertyType(itemInfoProperty.getPropertyType());
+                        for (String enumItem : enumArray) {
+                            sortParameters.getValueList().add(enumItem);
+                        }
+                        sortParametersMap.get(propertyGroup).put(itemInfoProperty.getPropertyName(), sortParameters);
+                    } else {
+                        SortParameters sortParameters = new SortParameters();
+                        sortParameters.setUnits(itemInfoProperty.getPropertyUnits());
+                        sortParameters.setPropertyType(itemInfoProperty.getPropertyType());
+                        sortParameters.getValueList().add(itemInfoProperty.getPropertyValue());
+                        if (propertyType.equals(Constants.FILTER_TYPE_NUMBER_BOOLEAN)) {
+                            int count = propertyValue.contains(Constants.PROPERTY_TRUE) ? Integer.parseInt(propertyValue.split(",")[1]) : 0;
+                            if (count > 0) {
+                                sortParameters.setCount(count);
+                            }
+                        }
+                        sortParametersMap.get(propertyGroup).put(itemInfoProperty.getPropertyName(), sortParameters);
+                    }
                 }
             }
         }

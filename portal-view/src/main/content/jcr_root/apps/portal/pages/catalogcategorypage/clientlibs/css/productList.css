@@ -201,6 +201,24 @@
     padding-left: 30px;
 }
 
+.filter-group{
+    margin-top: 18px;
+}
+
+h3.filter-group-header-name:hover{
+    cursor: pointer;
+}
+
+h3.filter-group-header-name{
+    display: inline;
+    margin-bottom: 25px;
+    margin-left: -18px;
+    font-size: 18px;
+    color: #cc0505;
+    font-family: 'oswald-regular';
+    border-bottom: 4px solid #1ab1d4;
+}
+
 @media screen and (max-width: 1400px){
     .itemProductList{
         width: 900px;

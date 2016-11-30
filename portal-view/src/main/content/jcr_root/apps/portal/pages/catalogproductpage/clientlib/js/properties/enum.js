@@ -64,7 +64,7 @@ var PORTAL = (function (PORTAL, $) {
                 var value = $(this).parent().find(".short-list-item-title").text();
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
-                        if (proterty.propertyName == propertyName && proterty.propertyValue.split(",").includes(value)) {
+                        if (proterty.name == propertyName && proterty.value.split(",").includes(value)) {
                             resultProductList.push(item);
                         }
                     });

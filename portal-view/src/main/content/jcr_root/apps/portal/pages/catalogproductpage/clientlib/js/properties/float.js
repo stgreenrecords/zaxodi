@@ -34,8 +34,8 @@ var PORTAL = (function (PORTAL, $) {
                 var value = $(this).parent().find(".short-list-item-title").text();
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
-                        if (proterty.propertyName == propertyName) {
-                            var value = parseFloat(proterty.propertyValue);
+                        if (proterty.name == propertyName) {
+                            var value = parseFloat(proterty.value);
                             if ( (!startSelectedValue || value >= startSelectedValue) && ( !endSelectedValue || value <= endSelectedValue) ){
                                 resultProductList.push(item);
                             }

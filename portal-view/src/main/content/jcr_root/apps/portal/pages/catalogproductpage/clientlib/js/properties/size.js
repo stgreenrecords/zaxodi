@@ -43,9 +43,9 @@ var PORTAL = (function (PORTAL, $) {
                 var value = $(this).parent().find(".short-list-item-title").text();
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
-                        if (proterty.propertyName == propertyName) {
-                            var startValue = parseFloat(proterty.propertyValue.split(",")[0]);
-                            var endValue = parseFloat(proterty.propertyValue.split(",")[1]);
+                        if (proterty.name == propertyName) {
+                            var startValue = parseFloat(proterty.value.split(",")[0]);
+                            var endValue = parseFloat(proterty.value.split(",")[1]);
                             if ( (!startSelectedValue || startValue >= startSelectedValue) && ( !endSelectedValue || endValue <= endSelectedValue) ){
                                 resultProductList.push(item);
                             }
