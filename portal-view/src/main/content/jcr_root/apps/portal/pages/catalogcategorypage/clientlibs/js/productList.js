@@ -67,20 +67,21 @@ var PORTAL = (function (PORTAL, $) {
                         var filter = filters || "Others";
                         var $groupHeader = $("<h3 class='filter-group-header-name'>"+"⇕ "+filter+"</h3>");
                         $sortPropertiesFilter.append($groupHeader);
+                        var $filterArrayStorage;
                         groupItem[filters].forEach(function (filterItem) {
                             var valueArray = filterItem.values || [];
                             var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
                             var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.type].
                                 filterDraw(filterItem, valueArray, sortArrays);
-                            var $filterArrayStorage = $sortFilterGroupWrapperClone.find(".filter-array-storage").append(fieldFromStorage);
-                            $groupHeader.click(function(){
-                                $filterArrayStorage.toggle("slow");
-                            })
+                            $filterArrayStorage = $sortFilterGroupWrapperClone.find(".filter-array-storage").append(fieldFromStorage);
                             $sortPropertiesFilter.append($sortFilterGroupWrapperClone);
                             fieldFromStorage.change(function () {
                                 applyFilter(filterItem, fieldFromStorage);
                             });
                         });
+                        $groupHeader.click(function(){
+                            $filterArrayStorage.toggle("slow");
+                        })
                     }
                 });
             }
