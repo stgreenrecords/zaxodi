@@ -66,29 +66,41 @@ public class ProductListHelper extends SlingAllMethodsServlet {
                         JsonParser jsonParser = new JsonParser();
                         ValueMap productPageProperties = productPage.getProperties();
                         if (productPageProperties.containsKey(Constants.PROPERTY_RESULTS)) {
-                            JsonObject itemObject = new JsonObject();
-                            itemObject.addProperty(Constants.STRING_PATH, productPage.getPath());
-                            itemObject.addProperty(Constants.NODE_PROPERTY_BRAND,
-                                    productPageProperties.containsKey(Constants.NODE_PROPERTY_BRAND) ?
-                                            productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class) : productPage.getParent().getTitle());
-                            itemObject.addProperty(Constants.NODE_PROPERTY_MODEL,
-                                    productPageProperties.containsKey(Constants.NODE_PROPERTY_MODEL) ?
-                                            productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class) : productPage.getTitle());
+                            JsonObject mainObject = new JsonObject();
+                            mainObject.addProperty(Constants.STRING_PATH, productPage.getPath());
+                            String brand = productPageProperties.containsKey(Constants.NODE_PROPERTY_BRAND) ?
+                                    productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class) : productPage.getParent().getTitle();
+                            String model = productPageProperties.containsKey(Constants.NODE_PROPERTY_MODEL) ?
+                                    productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class) : productPage.getTitle();
+                            mainObject.addProperty(Constants.NODE_PROPERTY_BRAND, brand);
+                            mainObject.addProperty(Constants.NODE_PROPERTY_MODEL, model);
                             int price = minimalPriceFromNode(productPageProperties);
                             if (price > 0) {
-                                itemObject.addProperty(Constants.NODE_PROPERTY_PRICE, price);
+                                mainObject.addProperty(Constants.NODE_PROPERTY_PRICE, price);
                             }
-                            JsonArray array = (JsonArray) jsonParser.parse(productPageProperties.get(Constants.PROPERTY_RESULTS, String.class));
-                            if (array != null) {
-                                itemObject.add(Constants.NODE_PROPERTY_PROPERTIES, array);
-                                itemsArray.add(itemObject);
-                                collectFilterPropertiesFromJsonArray(array);
+                            JsonArray resultArray = (JsonArray) jsonParser.parse(productPageProperties.get(Constants.PROPERTY_RESULTS, String.class));
+                            if (resultArray != null) {
+                                JsonObject brandToResult = new JsonObject();
+                                brandToResult.addProperty(Constants.STRING_PROPERTY_NAME, Constants.NODE_PROPERTY_BRAND);
+                                brandToResult.addProperty(Constants.STRING_PROPERTY_TYPE,Constants.FILTER_TYPE_SIMPLETEXT);
+                                brandToResult.addProperty(Constants.STRING_PROPERTY_EXCLUDE, true);
+                                brandToResult.addProperty(Constants.STRING_PROPERTY_VALUE, brand);
+                                resultArray.add(brandToResult);
+                                JsonObject priceToResult = new JsonObject();
+                                priceToResult.addProperty(Constants.STRING_PROPERTY_NAME, Constants.NODE_PROPERTY_PRICE);
+                                priceToResult.addProperty(Constants.STRING_PROPERTY_TYPE,Constants.FILTER_TYPE_FLOAT);
+                                priceToResult.addProperty(Constants.STRING_PROPERTY_EXCLUDE, true);
+                                priceToResult.addProperty(Constants.STRING_PROPERTY_VALUE, price);
+                                resultArray.add(priceToResult);
+                                mainObject.add(Constants.NODE_PROPERTY_PROPERTIES, resultArray);
+                                itemsArray.add(mainObject);
+                                collectFilterPropertiesFromJsonArray(resultArray);
                             }
                             Resource imageResource = productPage.getContentResource().getChild(Constants.NODE_IMAGE);
                             if (imageResource != null) {
                                 ValueMap imageValueMap = imageResource.getValueMap();
                                 String linkToImage = imageValueMap.containsKey(Constants.IMAGE_PROPERTY_FILE_REFERENCE) ? imageValueMap.get(Constants.IMAGE_PROPERTY_FILE_REFERENCE, String.class) : StringUtils.EMPTY;
-                                itemObject.addProperty(Constants.NODE_IMAGE, linkToImage);
+                                mainObject.addProperty(Constants.NODE_IMAGE, linkToImage);
                             }
                         }
                     }
@@ -156,7 +168,7 @@ public class ProductListHelper extends SlingAllMethodsServlet {
             String propertyType = jsonObject.get(Constants.STRING_PROPERTY_TYPE).getAsString();
             String propertyUnits = jsonObject.has(Constants.STRING_UNITS) ? jsonObject.get(Constants.STRING_UNITS).getAsString() : null;
             String propertyGroup = jsonObject.has(Constants.STRING_PROPERTY_GROUP) ? jsonObject.get(Constants.STRING_PROPERTY_GROUP).getAsString() : StringUtils.EMPTY;
-            boolean propertyExclude = jsonObject.has(Constants.STRING_PROPERTY_EXCLUDE) ? jsonObject.get(Constants.STRING_PROPERTY_EXCLUDE).getAsBoolean() : null;
+            boolean propertyExclude = jsonObject.has(Constants.STRING_PROPERTY_EXCLUDE) ? jsonObject.get(Constants.STRING_PROPERTY_EXCLUDE).getAsBoolean() : true;
             if (!propertyExclude) {
                 ItemInfoProperty itemInfoProperty = new ItemInfoProperty(propertyName, propertyValue, propertyType, propertyUnits, propertyGroup, propertyExclude);
                 if (!sortParametersMap.containsKey(propertyGroup)) {

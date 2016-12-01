@@ -9,10 +9,10 @@ var PORTAL = (function (PORTAL, $) {
         console.log('Component: "ProductList"');
 
         var $filterPrice = $self.find("div#filterPrice").change(function () {
-            doFilter({
-                filterType: "number",
-                filterName: "Price"
-            }, this);
+            applyFilter({
+                type: "number",
+                name: "price"
+            }, $(this));
         });
 
         var $itemProductList = $self.find("div.itemProductList");
@@ -61,11 +61,11 @@ var PORTAL = (function (PORTAL, $) {
         var drawFilters = function () {
             if (filterProperties) {
                 filterProperties.reverse();
-                filterProperties.forEach(function (groupItem){
+                filterProperties.forEach(function (groupItem) {
                     var $sortFilterGroupWrapperClone = $sortFilterGroupWrapper.clone();
                     for (var filters in groupItem) {
                         var filter = filters || "Others";
-                        var $groupHeader = $("<h3 class='filter-group-header-name'>"+"⇕ "+filter+"</h3>");
+                        var $groupHeader = $("<h3 class='filter-group-header-name'>" + "⇕ " + filter + "</h3>");
                         $sortPropertiesFilter.append($groupHeader);
                         var $filterArrayStorage;
                         groupItem[filters].forEach(function (filterItem) {
@@ -79,7 +79,7 @@ var PORTAL = (function (PORTAL, $) {
                                 applyFilter(filterItem, fieldFromStorage);
                             });
                         });
-                        $groupHeader.click(function(){
+                        $groupHeader.click(function () {
                             $filterArrayStorage.toggle("slow");
                         })
                     }
@@ -96,7 +96,7 @@ var PORTAL = (function (PORTAL, $) {
                 currentFilterItems[filterItem.name] = fieldFromStorage;
             }
             var currentFilterStorageIsEmpty = true;
-            for (filter in currentFilterItems) {
+            for (var filter in currentFilterItems) {
                 currentFilterStorageIsEmpty = false;
                 var filterType = currentFilterItems[filter].attr('class').split(" ")[2];
                 storageForEachReturnedData.push(PORTAL.catalogStorage.properties[filterType].doFilter(currentFilterItems[filter], productItems));
@@ -116,12 +116,12 @@ var PORTAL = (function (PORTAL, $) {
             }
             filteriedData = currentFilterStorageIsEmpty ? productItems : filteriedData;
             drawProductList();
-        }
+        };
 
         var drawProductList = function () {
             currentPagePosition = 1;
             $itemProductList.find(".itemBlock").remove();
-            $itemProductList.find("#paggination").remove()
+            $itemProductList.find("#paggination").remove();
             if (filteriedData.length > 0 && filteriedData.length < COUNT_PRODUCT_ON_PAGE) {
                 filteriedData.forEach(function (item) {
                     drawItem(item);
@@ -191,7 +191,7 @@ var PORTAL = (function (PORTAL, $) {
                 $paggination.append($onFirstPage);
             }
 
-        }
+        };
 
         var drawItem = function (item) {
             var discription = " ";
@@ -258,7 +258,7 @@ var PORTAL = (function (PORTAL, $) {
                 scrollTop: 0
             }, "slow");
         };
-    }
+    };
 
     PORTAL.modules.ProductList.splitOnTwoArrayAndSort = function (filterValueArray) {
         var startParamArray = [];
@@ -278,12 +278,11 @@ var PORTAL = (function (PORTAL, $) {
             return firstValue - secondValue;
         }
 
-        var resultSortArrays = {
+        return {
             'startParamArray': startParamArray.sort(compareNumbers),
-            'endParamArray': endParamArray.sort(compareNumbers)
+            "endParamArray": endParamArray.sort(compareNumbers)
         };
-        return resultSortArrays;
-    }
+    };
 
     return PORTAL;
 

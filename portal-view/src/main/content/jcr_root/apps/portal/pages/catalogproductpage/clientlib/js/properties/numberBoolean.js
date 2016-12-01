@@ -61,7 +61,6 @@ var PORTAL = (function (PORTAL, $) {
             var resultProductList = [];
             if (isChecked) {
                 count = count || 1;
-                var value = $(this).parent().find(".short-list-item-title").text();
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
                         if (proterty.name == propertyName) {

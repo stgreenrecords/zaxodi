@@ -29,6 +29,8 @@ public class Constants {
     public static final String FILTER_TYPE_INTERVAL = "interval";
     public static final String FILTER_TYPE_SIZE = "size";
     public static final String FILTER_TYPE_ENUM = "enum";
+    public static final String FILTER_TYPE_NUMBER = "number";
+    public static final String FILTER_TYPE_FLOAT = "float";
     public static final String FILTER_TYPE_NUMBER_BOOLEAN = "numberBoolean";
 
     public static final String NODE_PROPERTY_SELLER = "seller";

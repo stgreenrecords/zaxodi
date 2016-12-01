@@ -31,7 +31,6 @@ var PORTAL = (function (PORTAL, $) {
             var propertyName = selectedFilter.find(".sortAttrName").text();
             var resultProductList = [];
             if (startSelectedValue || endSelectedValue) {
-                var value = $(this).parent().find(".short-list-item-title").text();
                 productList.forEach(function (item, index) {
                     item.properties.forEach(function (proterty) {
                         if (proterty.name == propertyName) {
