@@ -22,14 +22,14 @@
                             jcr:primaryType="cq:Widget"
                             fieldLabel="Brand"
                             itemID="property"
-                            name="./brand"
+                            name="./Brand"
                             type="simpletext"
                             xtype="textfield"/>
                     <model
                             jcr:primaryType="cq:Widget"
                             fieldLabel="Model"
                             itemID="property"
-                            name="./model"
+                            name="./Model"
                             type="simpletext"
                             xtype="textfield"/>
                     <discription
@@ -124,7 +124,7 @@
                                         xtype="label"/>
                                 <units
                                         jcr:primaryType="cq:Widget"
-                                        key="price"
+                                        key="Price"
                                         width="100"
                                         xtype="textfield"/>
                             </items>

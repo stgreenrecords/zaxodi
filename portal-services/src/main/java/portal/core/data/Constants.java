@@ -32,11 +32,10 @@ public class Constants {
     public static final String FILTER_TYPE_NUMBER = "number";
     public static final String FILTER_TYPE_FLOAT = "float";
     public static final String FILTER_TYPE_NUMBER_BOOLEAN = "numberBoolean";
-
     public static final String NODE_PROPERTY_SELLER = "seller";
-    public static final String NODE_PROPERTY_PRICE = "price";
-    public static final String NODE_PROPERTY_BRAND = "brand";
-    public static final String NODE_PROPERTY_MODEL = "model";
+    public static final String NODE_PROPERTY_PRICE = "Price";
+    public static final String NODE_PROPERTY_BRAND = "Brand";
+    public static final String NODE_PROPERTY_MODEL = "Model";
     public static final String NODE_PROPERTY_DESCRIPTION = "discription";
     public static final String NODE_PROPERTY_PROPERTIES = "properties";
 

@@ -169,7 +169,7 @@ public class ProductListHelper extends SlingAllMethodsServlet {
             String propertyUnits = jsonObject.has(Constants.STRING_UNITS) ? jsonObject.get(Constants.STRING_UNITS).getAsString() : null;
             String propertyGroup = jsonObject.has(Constants.STRING_PROPERTY_GROUP) ? jsonObject.get(Constants.STRING_PROPERTY_GROUP).getAsString() : StringUtils.EMPTY;
             boolean propertyExclude = jsonObject.has(Constants.STRING_PROPERTY_EXCLUDE) ? jsonObject.get(Constants.STRING_PROPERTY_EXCLUDE).getAsBoolean() : true;
-            if (!propertyExclude) {
+            if (!propertyExclude || propertyName.equals(Constants.NODE_PROPERTY_BRAND) || propertyName.equals(Constants.NODE_PROPERTY_PRICE)) {
                 ItemInfoProperty itemInfoProperty = new ItemInfoProperty(propertyName, propertyValue, propertyType, propertyUnits, propertyGroup, propertyExclude);
                 if (!sortParametersMap.containsKey(propertyGroup)) {
                     sortParametersMap.put(propertyGroup, new LinkedHashMap<String, SortParameters>());

@@ -69,15 +69,21 @@ var PORTAL = (function (PORTAL, $) {
                         $sortPropertiesFilter.append($groupHeader);
                         var $filterArrayStorage;
                         groupItem[filters].forEach(function (filterItem) {
-                            var valueArray = filterItem.values || [];
-                            var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
-                            var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.type].
-                                filterDraw(filterItem, valueArray, sortArrays);
-                            $filterArrayStorage = $sortFilterGroupWrapperClone.find(".filter-array-storage").append(fieldFromStorage);
-                            $sortPropertiesFilter.append($sortFilterGroupWrapperClone);
-                            fieldFromStorage.change(function () {
-                                applyFilter(filterItem, fieldFromStorage);
-                            });
+                            if (filterItem.name != "Price") {
+                                var valueArray = filterItem.values || [];
+                                var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
+                                var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.type].
+                                    filterDraw(filterItem, valueArray, sortArrays);
+                                $filterArrayStorage = $sortFilterGroupWrapperClone.find(".filter-array-storage").append(fieldFromStorage);
+                                if (filterItem.name == "Brand") {
+                                    $sortPropertiesFilter.find(".filter-array-storage:first").append(fieldFromStorage);
+                                } else {
+                                    $sortPropertiesFilter.append($sortFilterGroupWrapperClone);
+                                }
+                                fieldFromStorage.change(function () {
+                                    applyFilter(filterItem, fieldFromStorage);
+                                });
+                            }
                         });
                         $groupHeader.click(function () {
                             $filterArrayStorage.toggle("slow");
@@ -122,6 +128,7 @@ var PORTAL = (function (PORTAL, $) {
             currentPagePosition = 1;
             $itemProductList.find(".itemBlock").remove();
             $itemProductList.find("#paggination").remove();
+            changeCountOfProducts(filteriedData.length);
             if (filteriedData.length > 0 && filteriedData.length < COUNT_PRODUCT_ON_PAGE) {
                 filteriedData.forEach(function (item) {
                     drawItem(item);
@@ -206,13 +213,13 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             var priceMessage;
-            if (item.price) {
-                priceMessage = item.price + " BYN";
+            if (item.Price) {
+                priceMessage = item.Price + " BYN";
             } else {
                 priceMessage = "Цена не указана.";
             }
             var $itemProduct = $(".template-product-item .itemBlock").clone();
-            $itemProduct.find(".item-product-title a").attr("href", item.path + ".html").text(item.brand + " " + item.model);
+            $itemProduct.find(".item-product-title a").attr("href", item.path + ".html").text(item.Brand + " " + item.Model);
             $itemProduct.find(".itemImage").attr("src", item.image);
             $itemProduct.find(".itemDiscription").append(discription);
             $itemProduct.find(".itemPriceBlock").text(priceMessage);
@@ -220,7 +227,7 @@ var PORTAL = (function (PORTAL, $) {
         };
 
         var changeCountOfProducts = function (count) {
-            $countOfProducts.text("Total " + count + " models");
+            $countOfProducts.text("Total: " + count + " model(s)");
         };
 
         var loadNextPage = function () {

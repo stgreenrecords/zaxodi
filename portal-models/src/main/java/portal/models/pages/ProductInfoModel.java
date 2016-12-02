@@ -103,7 +103,7 @@ public class ProductInfoModel extends BaseModel {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jsonObject = (JsonObject) jsonParser.parse(sellerProperty);
                 String propertySellerID = jsonObject.has("sellerID") ? jsonObject.get("sellerID").getAsString() : "error parse property sellerID";
-                String propertyPrice = jsonObject.has("price") ? jsonObject.get("price").getAsString() : "error parse property price";
+                String propertyPrice = jsonObject.has(Constants.NODE_PROPERTY_PRICE) ? jsonObject.get(Constants.NODE_PROPERTY_PRICE).getAsString() : "error parse property price";
                 propertyList = new ArrayList<String>();
                 propertyList.add(propertySellerID);
                 propertyList.add(propertyPrice);
