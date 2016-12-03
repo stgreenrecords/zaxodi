@@ -4,7 +4,7 @@
     jcr:primaryType="cq:Template"
     jcr:title="PORTAL Catalog Product Page"
     allowedPaths="[/content/portal/catalog(/.*)?]"
-    ranking="{Long}90">
+    ranking="{Long}1">
     <jcr:content
         jcr:primaryType="cq:PageContent"
         sling:resourceType="portal/pages/catalogproductpage">

@@ -76,7 +76,7 @@ public class ProductListHelper extends SlingAllMethodsServlet {
                                     productPageProperties.get(Constants.NODE_PROPERTY_MODEL, String.class) : productPage.getTitle();
                             mainObject.addProperty(Constants.NODE_PROPERTY_BRAND, brand);
                             mainObject.addProperty(Constants.NODE_PROPERTY_MODEL, model);
-                            int price = minimalPriceFromNode(productPageProperties);
+                            float price = minimalPriceFromNode(productPageProperties);
                             if (price > 0) {
                                 mainObject.addProperty(Constants.NODE_PROPERTY_PRICE, price);
                             }
@@ -221,7 +221,7 @@ public class ProductListHelper extends SlingAllMethodsServlet {
         }
     }
 
-    private int minimalPriceFromNode(ValueMap productProperties) throws RepositoryException {
+    private float minimalPriceFromNode(ValueMap productProperties) throws RepositoryException {
         if (productProperties.containsKey(Constants.NODE_PROPERTY_SELLER)) {
             String[] sellerArray = null;
             Object propertySeller = productProperties.get(Constants.NODE_PROPERTY_SELLER);
@@ -230,15 +230,15 @@ public class ProductListHelper extends SlingAllMethodsServlet {
             } else {
                 sellerArray = new String[]{productProperties.get(Constants.NODE_PROPERTY_SELLER, String.class)};
             }
-            int minPrice = 0;
-            int count = 0;
+            float minPrice = 0;
+            float count = 0;
             for (String jsonSeller : sellerArray) {
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jsonObject = (JsonObject) jsonParser.parse(jsonSeller);
                 String propertyPrice = jsonObject.has(Constants.NODE_PROPERTY_PRICE) ? jsonObject.get(Constants.NODE_PROPERTY_PRICE).getAsString() : "0";
-                int currentPrice = 0;
+                float currentPrice = 0;
                 try {
-                    currentPrice = Integer.parseInt(propertyPrice);
+                    currentPrice = Float.parseFloat(propertyPrice);
                 } catch (NumberFormatException e) {
                     LOG.error(e.getMessage());
                 }

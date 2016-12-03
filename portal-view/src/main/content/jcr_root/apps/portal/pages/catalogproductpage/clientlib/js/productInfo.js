@@ -67,11 +67,10 @@ var PORTAL = (function (PORTAL, $) {
                 var propertyType = itemArray.propertyType;
                 var propertyGroup = itemArray.propertyGroup;
                 var propertyExclude = itemArray.propertyExclude;
-                var propertyMicroDescription = itemArray.propertyMicroDescription;
+                var propertyMicroDescription = itemArray.propertyMicroDescription[0];
                 if (propertyMicroDescription){
                     microDescription += PORTAL.catalogStorage.properties[propertyType].microDescriptionView(itemName, itemValue) + ", ";
                 }
-
                 if (propertyType == 'numberBoolean') {
                     var value;
                     if (itemValue.match("true")) {
