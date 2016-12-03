@@ -107,6 +107,16 @@
                                         width="30"
                                         type="checkbox"
                                         xtype="selection"/>
+                                <microDescription
+                                        jcr:primaryType="cq:Widget"
+                                        text="Add to micro description"
+                                        xtype="label"/>
+                                <description
+                                        jcr:primaryType="cq:Widget"
+                                        key="microdescription"
+                                        width="30"
+                                        type="checkbox"
+                                        xtype="selection"/>
                             </items>
                         </fieldConfig>
                     </properties>

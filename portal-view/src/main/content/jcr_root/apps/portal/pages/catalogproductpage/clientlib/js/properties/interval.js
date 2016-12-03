@@ -18,9 +18,14 @@ var PORTAL = (function (PORTAL, $) {
                 widthPrefix: 'From',
                 propertyType: fieldOpions.typeSelection,
                 propertyUnits: fieldOpions.units,
+                propertyMicroDescription: fieldOpions.microdescription,
                 propertyGroup: fieldOpions.group,
                 propertyExclude: fieldOpions.exclude.length > 0
             });
+        },
+
+        'microDescriptionView' : function(name, value){
+            return name + " " + value.replace(",", " - ");
         },
 
         'filterDraw': function filterDraw(filterItem, valueArray, sortArrays) {

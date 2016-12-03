@@ -35,6 +35,7 @@ public class Constants {
     public static final String NODE_PROPERTY_SELLER = "seller";
     public static final String NODE_PROPERTY_PRICE = "Price";
     public static final String NODE_PROPERTY_BRAND = "Brand";
+    public static final String NODE_PROPERTY_MICRO_DESCRIPTION = "microdescription";
     public static final String NODE_PROPERTY_MODEL = "Model";
     public static final String NODE_PROPERTY_DESCRIPTION = "discription";
     public static final String NODE_PROPERTY_PROPERTIES = "properties";

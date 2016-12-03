@@ -201,17 +201,7 @@ var PORTAL = (function (PORTAL, $) {
         };
 
         var drawItem = function (item) {
-            var discription = " ";
-            if (item.properties && item.properties.length > 10) {
-                for (var i = 0; i < 10; i++) {
-                    if (i != 9) {
-                        discription += "<span class='discriptionName'>" + item.properties[i].name + "</span> <span class='discriptionValue'>" + item.properties[i].value + "</span>&nbsp;|&nbsp; ";
-                    } else {
-                        discription += "<span class='discriptionName'>" + item.properties[i].name + "</span> <span class='discriptionValue'>" + item.properties[i].value + "</span>.";
-                    }
-                }
-            }
-
+            var description = "<span class='description'>" + item.microdescription + "</span>";
             var priceMessage;
             if (item.Price) {
                 priceMessage = item.Price + " BYN";
@@ -221,7 +211,7 @@ var PORTAL = (function (PORTAL, $) {
             var $itemProduct = $(".template-product-item .itemBlock").clone();
             $itemProduct.find(".item-product-title a").attr("href", item.path + ".html").text(item.Brand + " " + item.Model);
             $itemProduct.find(".itemImage").attr("src", item.image);
-            $itemProduct.find(".itemDiscription").append(discription);
+            $itemProduct.find(".itemDiscription").append(description);
             $itemProduct.find(".itemPriceBlock").text(priceMessage);
             $itemProductList.append($itemProduct);
         };

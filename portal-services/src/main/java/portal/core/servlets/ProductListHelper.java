@@ -67,6 +67,8 @@ public class ProductListHelper extends SlingAllMethodsServlet {
                         ValueMap productPageProperties = productPage.getProperties();
                         if (productPageProperties.containsKey(Constants.PROPERTY_RESULTS)) {
                             JsonObject mainObject = new JsonObject();
+                            mainObject.addProperty(Constants.NODE_PROPERTY_MICRO_DESCRIPTION, productPageProperties.containsKey(Constants.NODE_PROPERTY_MICRO_DESCRIPTION) ?
+                                    productPageProperties.get(Constants.NODE_PROPERTY_MICRO_DESCRIPTION, String.class) : StringUtils.EMPTY);
                             mainObject.addProperty(Constants.STRING_PATH, productPage.getPath());
                             String brand = productPageProperties.containsKey(Constants.NODE_PROPERTY_BRAND) ?
                                     productPageProperties.get(Constants.NODE_PROPERTY_BRAND, String.class) : productPage.getParent().getTitle();

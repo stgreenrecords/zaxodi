@@ -26,6 +26,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.semantics3</groupId>
+            <artifactId>Sem3Java</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+        <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <version>6.1.0</version>

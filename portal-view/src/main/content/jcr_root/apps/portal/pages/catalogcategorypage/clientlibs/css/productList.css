@@ -85,17 +85,10 @@
     padding-left: 12px;
 }
 
-.itemDiscription span:nth-child(even){
-    font-family: Noto Sans K;
-    font-size: 12px;
-    font-weight: 700;
-    color: #84540c;
-}
-
-.itemDiscription span:nth-child(odd){
-    font-family: Montserrat;
-    font-size: 12px;
-    font-weight: 700;
+.itemDiscription span{
+    font-family: 'oswald-loght';
+    font-size: 14px;
+    color: #808080;
 }
 
 .sortItem{

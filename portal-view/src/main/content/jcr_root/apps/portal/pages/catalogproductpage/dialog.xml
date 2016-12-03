@@ -53,47 +53,18 @@
                     sizeLimit="100"
                     title="Image"
                     xtype="html5smartimage"/>
-            <imgadvance
+            <advance
                     jcr:primaryType="cq:Widget"
-                    title="Advanced Image Properties"
+                    title="Advanced Product Properties"
                     xtype="panel">
                 <items jcr:primaryType="cq:WidgetCollection">
-                    <title
+                    <microdescription
                             jcr:primaryType="cq:Widget"
-                            fieldLabel="Title"
-                            name="./image/jcr:title"
-                            xtype="textfield"/>
-                    <alt
-                            jcr:primaryType="cq:Widget"
-                            fieldDescription="(leave empty to use the title defined above)"
-                            fieldLabel="Alt Text"
-                            name="./image/alt"
-                            xtype="textfield"/>
-                    <linkURL
-                            jcr:primaryType="cq:Widget"
-                            fieldDescription="Drop files or pages from the Content Finder"
-                            fieldLabel="Link to"
-                            name="./image/linkURL"
-                            xtype="pathfield"/>
-                    <description
-                            jcr:primaryType="cq:Widget"
-                            fieldLabel="Description"
-                            name="./image/jcr:description"
+                            fieldLabel="Micro Description"
+                            name="./microdescription"
                             xtype="textarea"/>
-                    <size
-                            jcr:primaryType="cq:Widget"
-                            fieldLabel="Size"
-                            heightParameter="./image/height"
-                            widthParameter="./image/width"
-                            xtype="sizefield"/>
-                    <resType
-                            jcr:primaryType="cq:Widget"
-                            ignoreData="{Boolean}true"
-                            name="./image/sling:resourceType"
-                            value="foundation/components/image"
-                            xtype="hidden"/>
                 </items>
-            </imgadvance>
+            </advance>
             <seller
                     jcr:primaryType="cq:Widget"
                     title="Seller info"
