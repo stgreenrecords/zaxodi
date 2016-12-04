@@ -55,7 +55,7 @@ var PORTAL = (function (PORTAL, $) {
         var microDescriptionFiled = dialog.findBy(function (comp) {
             return comp["name"] == './microdescription';
         }, dialog);
-        var microDescription = "";
+        var microDescription = [];
         var checkboxs = dialog.findBy(function (comp) {
             return comp["paramToSearch"] == 'search';
         }, dialog);
@@ -69,7 +69,7 @@ var PORTAL = (function (PORTAL, $) {
                 var propertyExclude = itemArray.propertyExclude;
                 var propertyMicroDescription = itemArray.propertyMicroDescription[0];
                 if (propertyMicroDescription){
-                    microDescription += PORTAL.catalogStorage.properties[propertyType].microDescriptionView(itemName, itemValue) + ", ";
+                    microDescription.push(PORTAL.catalogStorage.properties[propertyType].microDescriptionView(itemName, itemValue));
                 }
                 if (propertyType == 'numberBoolean') {
                     var value;
@@ -107,8 +107,8 @@ var PORTAL = (function (PORTAL, $) {
             }
         });
 
-        if (microDescription.match(", ")){
-            microDescriptionFiled[0].setValue(microDescription.substring(0, microDescription.length-2));
+        if (microDescription.length > 0){
+            microDescriptionFiled[0].setValue(microDescription.reverse().join(", "));
         }
         resultHidden[0].setValue("[" + resultArrayProperties + "]");
 
