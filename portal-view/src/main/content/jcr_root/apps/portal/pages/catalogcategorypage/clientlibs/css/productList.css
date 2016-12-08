@@ -24,9 +24,10 @@
 }
 
 .sortAttrName{
-    font-size: 16px;
+    font-size: 18px;
     color: #6d6161;
-    font-family: 'oswald-regular';
+    font-family: 'PT Sans Narrow', serif;
+    font-weight: 600;
 }
 
 .inputs-storage{
@@ -206,10 +207,11 @@ h3.filter-group-header-name{
     display: inline;
     margin-bottom: 25px;
     margin-left: -18px;
-    font-size: 18px;
     color: #cc0505;
-    font-family: 'oswald-regular';
     border-bottom: 4px solid #1ab1d4;
+    font-family: 'PT Sans Narrow';
+    font-size: 20px;
+    font-weight: 700;
 }
 
 @media screen and (max-width: 1400px){

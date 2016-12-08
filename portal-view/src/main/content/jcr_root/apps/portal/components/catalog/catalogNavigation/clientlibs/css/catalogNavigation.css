@@ -18,8 +18,8 @@
 }
 
 .catalog_super_categories_nav_item_link {
-    font-family: 'oswald-light',sans-serif,helvetica,arial;
-    font-size: 16px;
+    font-family: 'PT Sans Narrow';
+    font-size: 17px;
     color: #8e8787;
     font-weight: 400;
     vertical-align: -webkit-baseline-middle;
@@ -37,6 +37,7 @@
 }
 
 .catalog_sub_categories_list {
+    min-height: 540px;
     position: absolute;
     top: 98px;
     left: 191px;
@@ -95,10 +96,12 @@
 }
 
 .subCategoryTitle_span {
-    font-family: 'oswald-regular';
-    font-size: 15px;
-    color: #757171;
+    font-family: 'PT Sans Narrow';
+    font-size: 18px;
+    color: #676060;
     text-align: center;
+    font-weight: 700;
+    text-decoration: underline;
 
 }
 
@@ -108,8 +111,8 @@
 
 .catalog_sub_categories_inner_item a {
     color: rgb(107, 107, 107);
-    font-size: 17px;
-    font-family: 'oswald-leght';
+    font-size: 16px;
+    font-family: 'PT Sans Narrow';
 }
 
 .catalog_super_categories_nav_item {
