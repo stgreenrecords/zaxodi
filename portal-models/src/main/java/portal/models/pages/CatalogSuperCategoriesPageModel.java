@@ -21,7 +21,7 @@ public class CatalogSuperCategoriesPageModel extends BaseModel {
         Iterator<Page> superCategoryPageIterator = getOwnPage().listChildren();
         while (superCategoryPageIterator.hasNext()) {
             Page subCategoryPage = superCategoryPageIterator.next();
-            String subCategoryTopic = getPropertyFromResourceType(subCategoryPage.getPath(), Constants.CATALOG_ITEM_LIST_PATH, Constants.SUBCATEGORY_PROPERTY);
+            String subCategoryTopic = subCategoryPage.getContentResource().getValueMap().get(Constants.SUBCATEGORY_PROPERTY, String.class);
             if (!catalogCategoryPageModelMap.containsKey(subCategoryTopic)) {
                 List<CatalogCategoryPageModel> catalogCategoryPageModelList = new ArrayList<CatalogCategoryPageModel>();
                 catalogCategoryPageModelList.add(subCategoryPage.adaptTo(CatalogCategoryPageModel.class));

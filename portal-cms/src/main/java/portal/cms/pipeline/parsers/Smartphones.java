@@ -43,7 +43,7 @@ import java.util.Map;
 @Component(metatype = true, immediate = true)
 @Service
 @Properties({
-        @Property(name = "sling.servlet.paths", value = "/services/pagegerenation/smartphones")
+        @Property(name = "sling.servlet.paths", value = "/services/pagegerenation/smart")
 })
 public class Smartphones extends SlingAllMethodsServlet {
 
