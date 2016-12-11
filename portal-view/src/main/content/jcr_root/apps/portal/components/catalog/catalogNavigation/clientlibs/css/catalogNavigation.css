@@ -49,11 +49,10 @@
 .catalog_super_categories_nav_list > li:hover .catalog_sub_categories_list {
     visibility: visible;
     display: flex;
-    width: auto;
-    max-width: 80%;
+    width: calc(100% - 175px);
     margin: 0;
     padding: 0;
-    padding-left:10px;
+    margin-left: -2px;
     margin-top: -23px;
 }
 
@@ -102,7 +101,7 @@
     text-align: center;
     font-weight: 700;
     text-decoration: underline;
-
+    margin: 10px;
 }
 
 .catalog_sub_categories_list {
