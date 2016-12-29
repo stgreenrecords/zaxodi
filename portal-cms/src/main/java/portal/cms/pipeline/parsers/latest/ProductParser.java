@@ -1,31 +1,25 @@
 package portal.cms.pipeline.parsers.latest;
 
-import com.day.cq.wcm.api.Page;
+
 import com.day.cq.wcm.api.PageManager;
-import com.google.gson.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.*;
-import org.apache.felix.scr.annotations.Properties;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.LoginException;
+import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import portal.cms.pipeline.parsers.latest.beans.ProductItems;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.servlet.ServletException;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component(metatype = true, immediate = true)
 @Service
@@ -43,191 +37,85 @@ public class ProductParser extends SlingAllMethodsServlet {
 
     private PrintWriter printWriter;
 
-
-    String onlinerRequest = "https://catalog.api.onliner.by/search/desktoppc?group=1&page=3";
-
-    Map<String, Set<ProductItems>> mainMap = new LinkedHashMap<>();
-
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         try {
-            resourceResolver = resolverFactory.getAdministrativeResourceResolver(null);
-            pageManager = resourceResolver.adaptTo(PageManager.class);
-            Session session = resourceResolver.adaptTo(Session.class);
-            Node contentNode = session.getNode("/content");
-            Node catalogModelNode = contentNode.addNode("catalogmodel");
-            Page rootPage = pageManager.getPage("/content/portal/catalog");
             printWriter = response.getWriter();
-            System.out.println("=======================START=================");
-            Iterator<Page> superCategoriesIterator = rootPage.listChildren();
-            int totalCount = 0;
-            while (superCategoriesIterator.hasNext()) {
-                Page superCategoryPage = superCategoriesIterator.next();
-                System.out.println("                                                         SUPER CATEGORY: " + superCategoryPage.getTitle());
-                Iterator<Page> categoriesIterator = superCategoryPage.listChildren();
-                Node superCategoryNode = catalogModelNode.addNode(superCategoryPage.getName());
-                while (categoriesIterator.hasNext()) {
-                    Page categoryPage = categoriesIterator.next();
-                    System.out.print("        Category: " + categoryPage.getTitle());
-//printWriter.write(categoryPage.getPath()+"\n");
-                    Set<ProductItems> productItems = getDataFromCategory(categoryPage.getName());
-                    if (productItems != null && productItems.size() > 0) {
-                        System.out.println(". Продуктов в категории: " + productItems.size()+"    ");
-                        totalCount += productItems.size();
-                        Node categoryNode = superCategoryNode.addNode(categoryPage.getName());
-                        int trashhold = 0;
-                        for (ProductItems product : productItems){
-                            Node productNode = categoryNode.addNode(UUID.randomUUID().toString());
-                            productNode.setProperty("imagePath",product.getImagePath());
-                            productNode.setProperty("microdescription",product.getMicroDescription());
-                            productNode.setProperty("htmpPath",product.getPathToProduct());
-                            trashhold++;
-                            if (trashhold > 100){
-                                System.out.println("Save 100 nodes");
-                                session.save();
-                                trashhold = 0;
-                            }
-
-                        }
-                        session.save();
-                        mainMap.put(categoryPage.getName(), productItems);
-
-                        //        productItems.forEach((product) -> printWriter.write(product.toString()));
-                        // printWriter.write(categoryPage.getPath() + "\r\n");
+            resourceResolver = resolverFactory.getAdministrativeResourceResolver(null);
+            Resource videoCamera = resourceResolver.getResource("/content/catalogmodel/electronics/video/e3e70a6e-ecc0-4483-b4c0-4149a1a28854");
+            String pathToHTML = videoCamera.getValueMap().get("htmpPath", String.class);
+            String microDescription = videoCamera.getValueMap().get("microdescription", String.class);
+            String imagePath = videoCamera.getValueMap().get("imagePath", String.class);
+            Document document = Jsoup.connect(pathToHTML).get();
+            Elements listOfProperties = document.select(".product-specs__table tbody");
+            listOfProperties.forEach( propertyGroup -> {
+                String filterGroupName = propertyGroup.select(".product-specs__table-title-inner").first().text();
+                printWriter.write("    Name of group Filter            " + filterGroupName + "\n");
+                propertyGroup.select("tr:not(.product-specs__table-title)").forEach(propertyItem -> {
+                    String propertyName = propertyItem.select(".product-tip__term").first().text();
+                    Elements simpleValue = propertyItem.select("td .value__text");
+                    Elements booleanNO = propertyItem.select("td .i-x");
+                    Elements booleanYES = propertyItem.select(".i-tip");
+                    String rawPropertyValue = simpleValue.size() == 0 ? booleanNO.size() == 0 ? booleanYES.text() : booleanNO.text() : simpleValue.text();
+                    String propertyValue = "";
+                    String propertyType = null;
+                    if ((booleanNO.size() > 0 || booleanYES.size() > 0)) {
+                        propertyType = "numberBoolean";
                     }
-                    System.out.println("");
-                    Thread.sleep(1500);
+                    if (rawPropertyValue.contains(" x ")) {
+                        propertyType = "size";
+                    }
+                    if (rawPropertyValue.split(" \\u2014 ").length > 1) {
+                        propertyType = "interval";
+                    }
+                    if (rawPropertyValue.split("[+-]?([0-9]*[.])?[0-9]+/[+-]?([0-9]*[.])?[0-9]+").length > 1) {
+                        propertyType = "attitude";
+                    }
+                    if (rawPropertyValue.split("\\u002C ").length > 1) {
+                        propertyType = "enum";
+                    }
+                    if (StringUtils.isEmpty(propertyType) && StringUtils.isNotEmpty(rawPropertyValue) && (booleanYES.size() == 0 && booleanNO.size() == 0)) {
+                        String pattern = "[+-]?([0-9]*[.])?[0-9]+";
+                        Pattern floatPattern = Pattern.compile(pattern);
+                        Matcher matcher = floatPattern.matcher(rawPropertyValue);
+                            if (matcher.find()) {
+                                propertyType = "float";
+                            } else {
+                                propertyType = "simpletext";
+                        }
+                    }
+                    printWriter.write("        Property:                     " + propertyName + "        |        " + rawPropertyValue + "\n");
+                });
+            });
+
+
+
+
+
+
+
+
+
+/*            Iterator<Resource> superCategoryIterator = resourceResolver.getResource("/content/catalogmodel").listChildren();
+            while (superCategoryIterator.hasNext()) {
+                Iterator<Resource> categoryIterator = superCategoryIterator.next().listChildren();
+                while (categoryIterator.hasNext()) {
+                    Iterator<Resource> productIterator = categoryIterator.next().listChildren();
+                    while (productIterator.hasNext()) {
+                        Resource productResource = productIterator.next();
+                        String pathToHTML = productResource.getValueMap().get("htmpPath", String.class);
+                        String microDescription = productResource.getValueMap().get("microdescription", String.class);
+                        String imagePath = productResource.getValueMap().get("imagePath", String.class);
+                        printWriter.write(pathToHTML + " " + microDescription + " " + imagePath);
+                        break;
+                    }
+                    break;
                 }
-                session.save();
-            }
-            System.out.println("Всего" + totalCount + " продуктов");
+                break;
+            }*/
+
         } catch (LoginException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (PathNotFoundException e) {
-            e.printStackTrace();
-        } catch (RepositoryException e) {
-            e.printStackTrace();
         }
     }
-
-    private Set<ProductItems> getDataFromCategory(String categoryName) {
-        Set<ProductItems> productItems = new LinkedHashSet<>();
-        try {
-            StringBuilder response = null;
-            JsonParser jsonParser = new JsonParser();
-            for (int i = 1; i < 120; i++) {
-                URL obj = null;
-                obj = new URL("https://catalog.api.onliner.by/search/" + categoryName + "?group=1&page=" + i);
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                con.setRequestMethod("GET");
-                InputStreamReader inputStreamReader = new InputStreamReader(con.getInputStream(), "UTF-8");
-                BufferedReader in = new BufferedReader(inputStreamReader);
-                String inputLine;
-                response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                JsonObject parser = null;
-                try {
-                    parser = jsonParser.parse(response.toString()).getAsJsonObject();
-                } catch (JsonSyntaxException e) {
-                    //     System.out.println("================================PARSE ERROR=========================");
-                    //      System.out.println(response.toString());
-                    //     System.out.println("================================PARSE ERROR=========================");
-                }
-                try {
-                    if (parser != null && parser.has("products")) {
-                        JsonArray jsonArray = null;
-                        try {
-                            jsonArray = parser.get("products").getAsJsonArray();
-                        } catch (Exception e) {
-                            //       System.out.println("================================PARSE ERROR=========================");
-                        }
-                        // System.out.print("Page "+i+"______ ");
-                        //    System.out.print("Number of products: "+ jsonArray.size());
-                        if (jsonArray.size() == 0) break;
-                        //   System.out.print(" ==========");
-                        for (JsonElement jsonElement : jsonArray) {
-                            JsonObject jsonObject = null;
-                            try {
-                                jsonObject = jsonElement.getAsJsonObject();
-                            } catch (Exception e) {
-                                //        System.out.println("================================PARSE ERROR=========================");
-                            }
-                            String productPath = null;
-                            try {
-                                productPath = jsonObject.has("html_url") ? jsonObject.get("html_url").getAsString() : null;
-                            } catch (Exception e) {
-                                //          System.out.println("================================PARSE ERROR=========================");
-                            }
-                            String microdescription = null;
-                            try {
-                                microdescription = jsonObject.has("description") ? jsonObject.get("description").getAsString() : null;
-                            } catch (Exception e) {
-                                //         System.out.println("================================PARSE ERROR=========================");
-                            }
-                            String imagePhotoUrl = null;
-                            try {
-                                JsonObject imageObject = jsonObject.has("images") ? jsonObject.get("images").getAsJsonObject() : null;
-                                imagePhotoUrl = imageObject.get("header").toString();
-                                if (imagePhotoUrl.equals("null")){
-                                    imagePhotoUrl = imageObject.get("icon").toString();
-                                }
-                            } catch (Exception e) {
-                                //       System.out.println("================================PARSE ERROR=========================");
-                            }
-                            if (jsonObject.has("children")) {
-                                for (JsonElement jsonElement1 : jsonObject.get("children").getAsJsonArray()) {
-                                    JsonObject jsonObject1 = null;
-                                    try {
-                                        jsonObject1 = jsonElement1.getAsJsonObject();
-                                    } catch (Exception e) {
-                                        //       System.out.println("================================PARSE ERROR=========================");
-                                    }
-                                    String productPath1 = null;
-                                    try {
-                                        productPath1 = jsonObject1.has("html_url") ? jsonObject1.get("html_url").getAsString() : null;
-                                    } catch (Exception e) {
-                                        //         System.out.println("================================PARSE ERROR=========================");
-                                    }
-                                    String microdescription1 = null;
-                                    try {
-                                        microdescription1 = jsonObject1.has("description") ? jsonObject1.get("description").getAsString() : null;
-                                    } catch (Exception e) {
-                                        //      System.out.println("================================PARSE ERROR=========================");
-                                    }
-                                    String imagePhotoUrl1 = null;
-                                    try {
-                                        JsonObject imageObject1 = jsonObject1.has("images") ? jsonObject1.get("images").getAsJsonObject() : null;
-                                        imagePhotoUrl1 = imageObject1.get("header").toString();
-                                        if (imagePhotoUrl1.equals("null")){
-                                            imagePhotoUrl1 = imageObject1.get("icon").toString();
-                                        }
-                                    } catch (Exception e) {
-                                        //      System.out.println("================================PARSE ERROR=========================");
-                                    }
-                                    if (StringUtils.isNotEmpty(imagePhotoUrl1) && StringUtils.isNotEmpty(microdescription1) && StringUtils.isNotEmpty(productPath1)) {
-                                        productItems.add(new ProductItems(imagePhotoUrl1, microdescription1, productPath1));
-                                    }
-                                }
-                            }
-                            if (StringUtils.isNotEmpty(imagePhotoUrl) && StringUtils.isNotEmpty(microdescription) && StringUtils.isNotEmpty(productPath)) {
-                                productItems.add(new ProductItems(imagePhotoUrl, microdescription, productPath));
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    // e.printStackTrace();
-                }
-                Thread.sleep(1000);
-            }
-            return productItems;
-        } catch (Exception e) {
-            return productItems;
-        }
-    }
-
-
 }
