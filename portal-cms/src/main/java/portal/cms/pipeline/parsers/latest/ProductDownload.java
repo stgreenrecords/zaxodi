@@ -81,9 +81,11 @@ public class ProductDownload extends SlingAllMethodsServlet {
                             productNode.setProperty("imagePath",product.getImagePath());
                             productNode.setProperty("microdescription",product.getMicroDescription());
                             productNode.setProperty("htmpPath",product.getPathToProduct());
+                            productNode.setProperty("productTitle",product.getProductTitle());
+                            productNode.setProperty("productName", product.getProductName());
                             trashhold++;
-                            if (trashhold > 100){
-                                System.out.println("Save 100 nodes");
+                            if (trashhold > 200){
+                                System.out.println("Save 200 nodes");
                                 session.save();
                                 trashhold = 0;
                             }
@@ -96,7 +98,7 @@ public class ProductDownload extends SlingAllMethodsServlet {
                         // printWriter.write(categoryPage.getPath() + "\r\n");
                     }
                     System.out.println("");
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                 }
                 session.save();
             }
@@ -162,6 +164,20 @@ public class ProductDownload extends SlingAllMethodsServlet {
                             } catch (Exception e) {
                                 //          System.out.println("================================PARSE ERROR=========================");
                             }
+
+                            String productTitle = null;
+                            try {
+                                productTitle = jsonObject.has("name") ? jsonObject.get("name").getAsString() : null;
+                            } catch (Exception e) {
+                                //          System.out.println("================================PARSE ERROR=========================");
+                            }
+                            String productName = null;
+                            try {
+                                productName = jsonObject.has("key") ? jsonObject.get("key").getAsString() : null;
+                            } catch (Exception e) {
+                                //          System.out.println("================================PARSE ERROR=========================");
+                            }
+
                             String microdescription = null;
                             try {
                                 microdescription = jsonObject.has("description") ? jsonObject.get("description").getAsString() : null;
@@ -192,6 +208,18 @@ public class ProductDownload extends SlingAllMethodsServlet {
                                     } catch (Exception e) {
                                         //         System.out.println("================================PARSE ERROR=========================");
                                     }
+                                    String productTitle1 = null;
+                                    try {
+                                        productTitle1 = jsonObject1.has("name") ? jsonObject1.get("name").getAsString() : null;
+                                    } catch (Exception e) {
+                                        //          System.out.println("================================PARSE ERROR=========================");
+                                    }
+                                    String productName1 = null;
+                                    try {
+                                        productName1 = jsonObject1.has("key") ? jsonObject1.get("key").getAsString() : null;
+                                    } catch (Exception e) {
+                                        //          System.out.println("================================PARSE ERROR=========================");
+                                    }
                                     String microdescription1 = null;
                                     try {
                                         microdescription1 = jsonObject1.has("description") ? jsonObject1.get("description").getAsString() : null;
@@ -209,19 +237,19 @@ public class ProductDownload extends SlingAllMethodsServlet {
                                         //      System.out.println("================================PARSE ERROR=========================");
                                     }
                                     if (StringUtils.isNotEmpty(imagePhotoUrl1) && StringUtils.isNotEmpty(microdescription1) && StringUtils.isNotEmpty(productPath1)) {
-                                        productItems.add(new ProductItems(imagePhotoUrl1, microdescription1, productPath1));
+                                        productItems.add(new ProductItems(imagePhotoUrl1, microdescription1, productPath1, productName1,productTitle1));
                                     }
                                 }
                             }
                             if (StringUtils.isNotEmpty(imagePhotoUrl) && StringUtils.isNotEmpty(microdescription) && StringUtils.isNotEmpty(productPath)) {
-                                productItems.add(new ProductItems(imagePhotoUrl, microdescription, productPath));
+                                productItems.add(new ProductItems(imagePhotoUrl, microdescription, productPath, productName,productTitle));
                             }
                         }
                     }
                 } catch (Exception e) {
                     // e.printStackTrace();
                 }
-                Thread.sleep(1000);
+                Thread.sleep(900);
             }
             return productItems;
         } catch (Exception e) {

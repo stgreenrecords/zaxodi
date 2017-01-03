@@ -3,7 +3,8 @@
     jcr:description="Template for initial or main page of the site."
     jcr:primaryType="cq:Template"
     jcr:title="PORTAL Catalog Brand Page"
-    allowedPaths="[/content/portal/catalog(/.*)?]"
+    allowedChildren="[/apps/portal/templates/catalogproducttemplate]"
+    allowedParents="[/apps/portal/templates/catalogcategorytemplate]"
     ranking="{Long}2">
     <jcr:content
         jcr:primaryType="cq:PageContent"

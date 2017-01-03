@@ -5,12 +5,32 @@ public class ProductItems {
     private String microDescription;
     private String pathToProduct;
     private String imagePath;
+    private String productName;
+    private String productTitle;
 
 
-    public ProductItems(String imagePath, String microDescription, String pathToProduct) {
+    public ProductItems(String imagePath, String microDescription, String pathToProduct, String productName, String productTitle) {
         this.imagePath = imagePath;
         this.microDescription = microDescription;
         this.pathToProduct = pathToProduct;
+        this.productName = productName;
+        this.productTitle = productTitle;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
     }
 
     public String getImagePath() {

@@ -151,7 +151,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <targetURL>http://${cq.host}:${cq.port}/crx/packmgr/service.jsp</targetURL>
+                            <targetURL>http://${cq.author.host}:${cq.author.port}/crx/packmgr/service.jsp</targetURL>
                             <failOnError>true</failOnError>
                             <failOnMissingEmbed>true</failOnMissingEmbed>
                         </configuration>

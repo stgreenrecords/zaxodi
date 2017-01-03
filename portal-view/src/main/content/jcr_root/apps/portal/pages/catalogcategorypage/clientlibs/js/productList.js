@@ -60,20 +60,21 @@ var PORTAL = (function (PORTAL, $) {
 
         var drawFilters = function () {
             if (filterProperties) {
-                filterProperties.reverse();
                 filterProperties.forEach(function (groupItem) {
                     var $sortFilterGroupWrapperClone = $sortFilterGroupWrapper.clone();
                     for (var filters in groupItem) {
-                        var filter = filters || "Others";
+                        var filter = filters;
                         var $groupHeader = $("<h3 class='filter-group-header-name'>" + "⇕ " + filter + "</h3>");
-                        $sortPropertiesFilter.append($groupHeader);
+                        if (filter){
+                            $sortPropertiesFilter.append($groupHeader);
+                        }
                         var $filterArrayStorage;
                         groupItem[filters].forEach(function (filterItem) {
                             if (filterItem.name != "Price") {
                                 var valueArray = filterItem.values || [];
                                 var sortArrays = PORTAL.modules.ProductList.splitOnTwoArrayAndSort(valueArray);
                                 var fieldFromStorage = PORTAL.catalogStorage.properties[filterItem.type].
-                                    filterDraw(filterItem, valueArray, sortArrays);
+                                filterDraw(filterItem, valueArray, sortArrays);
                                 $filterArrayStorage = $sortFilterGroupWrapperClone.find(".filter-array-storage").append(fieldFromStorage);
                                 if (filterItem.name == "Brand") {
                                     $sortPropertiesFilter.find(".filter-array-storage:first").append(fieldFromStorage);
